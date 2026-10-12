@@ -1,0 +1,191 @@
+<template>
+  <div data-hf-id="hf-q8c9" id="root" data-composition-id="08-closing" data-width="1920" data-height="1080">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: "Be Vietnam Pro", sans-serif;
+      }
+      .c08-bg {
+        position: absolute;
+        inset: 0;
+        background: #FFFFFF;
+      }
+      .c08-stage {
+        position: absolute;
+        inset: 0;
+      }
+      /* atmosphere: concentric hairline rings, faded out above the caption band */
+      .c08-rings {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 896px;
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+      }
+      .c08-ring {
+        position: absolute;
+        left: 50%;
+        top: 475px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(10, 61, 145, 0.2);
+        will-change: transform, opacity;
+      }
+      .c08-ring-a { width: 768px; height: 768px; }
+      .c08-ring-b { width: 1075px; height: 1075px; }
+      .c08-ring-c { width: 1382px; height: 1382px; }
+
+      /* lockup */
+      .c08-lockup {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 44%;
+      }
+      .c08-shield {
+        position: absolute;
+        left: 874px;   /* 960 - 86 */
+        top: 222px;    /* centred at y = 324 */
+        width: 172px;
+        height: 204px;
+        transform-origin: 50% 50%;
+      }
+      .c08-shield svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+      .c08-textblock {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 518px;
+        text-align: center;
+      }
+      .c08-h1 {
+        font-size: 81px;
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        color: #0F172A;
+        margin: 0;
+      }
+      .c08-word {
+        display: inline-block;
+        margin: 0 0.12em;
+        will-change: transform, opacity;
+      }
+      .c08-cta-row { margin-top: 31px; height: 66px; }
+      .c08-cta {
+        display: inline-block;
+        background: #0A3D91;
+        color: #FFFFFF;
+        border-radius: 100px;
+        font-size: 29px;
+        font-weight: 600;
+        line-height: 1.2;
+        padding: 15px 42px;
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+      }
+      .c08-company {
+        margin-top: 27px;
+        font-size: 29px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #475569;
+      }
+    </style>
+
+    <div data-hf-id="hf-haoa" class="c08-bg clip" data-start="0" data-duration="8.856" data-track-index="0"></div>
+
+    <div data-hf-id="hf-2qg2" id="c08-stage" class="c08-stage clip" data-start="0" data-duration="8.856" data-track-index="1">
+      <div data-hf-id="hf-8s1x" class="c08-rings">
+        <div data-hf-id="hf-1oyk" class="c08-ring c08-ring-a" id="c08-ring-a"></div>
+        <div data-hf-id="hf-sneg" class="c08-ring c08-ring-b" id="c08-ring-b"></div>
+        <div data-hf-id="hf-7pn4" class="c08-ring c08-ring-c" id="c08-ring-c"></div>
+      </div>
+
+      <div data-hf-id="hf-qsc2" class="c08-lockup" id="c08-lockup">
+        <div data-hf-id="hf-h4de" class="c08-shield" id="c08-shield">
+          <svg data-hf-id="hf-2wn0" viewBox="0 0 64 76">
+            <path data-hf-id="hf-w3zi" id="c08-shield-path" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" pathLength="1" fill="#0A3D91" fill-opacity="0" stroke="#0A3D91" stroke-width="2.4" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1" />
+            <text data-hf-id="hf-l1fn" id="c08-shield-text" x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#FFFFFF" opacity="0">SEMV</text>
+          </svg>
+        </div>
+
+        <div data-hf-id="hf-p3cc" class="c08-textblock">
+          <h1 data-hf-id="hf-gtwv" class="c08-h1"><span data-hf-id="hf-kktj" class="c08-word">Bảo</span><span data-hf-id="hf-g4qp" class="c08-word">mật</span><span data-hf-id="hf-vf8e" class="c08-word">bắt</span><span data-hf-id="hf-mq2k" class="c08-word">đầu</span><span data-hf-id="hf-r69k" class="c08-word">từ</span><span data-hf-id="hf-kmli" class="c08-word">bạn</span></h1>
+          <div data-hf-id="hf-lnt9" class="c08-cta-row"><span data-hf-id="hf-c3q0" class="c08-cta" id="c08-cta">Có nghi ngờ? Liên hệ IT Part</span></div>
+          <div data-hf-id="hf-kije" class="c08-company" id="c08-company">Sumika Electronic Materials Vietnam Co., Ltd</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var root = document.querySelector('[data-composition-id="08-closing"]');
+        var q = function (s) { return root.querySelector(s); };
+        var qa = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+        var DUR = 8.856;
+        var tl = gsap.timeline({ paused: true });
+
+        // Scene 1 (0.0–1.5s) — rings radiate from the shared centre (center-outward-expansion)
+        var rings = [
+          { el: q("#c08-ring-a"), op: 1 },
+          { el: q("#c08-ring-b"), op: 0.6 },
+          { el: q("#c08-ring-c"), op: 0.35 }
+        ];
+        rings.forEach(function (r, i) {
+          tl.fromTo(r.el,
+            { xPercent: -50, yPercent: -50, scale: 0.35, opacity: 0 },
+            { xPercent: -50, yPercent: -50, scale: 1, opacity: r.op, duration: 1.4, ease: "power3.out" },
+            0.05 + i * 0.08);
+        });
+
+        // Shield: settle in, stroke draws on, then fills solid blue, "SEMV" in white
+        tl.fromTo(q("#c08-shield"), { scale: 0.86, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }, 0);
+        tl.fromTo(q("#c08-shield-path"), { attr: { "stroke-dashoffset": 1 } },
+          { attr: { "stroke-dashoffset": 0 }, duration: 0.85, ease: "power2.inOut" }, 0.05);
+        tl.fromTo(q("#c08-shield-path"), { attr: { "fill-opacity": 0 } },
+          { attr: { "fill-opacity": 1 }, duration: 0.45, ease: "power2.out" }, 0.75);
+        tl.fromTo(q("#c08-shield-text"), { attr: { opacity: 0 } },
+          { attr: { opacity: 1 }, duration: 0.35, ease: "power2.out" }, 1.0);
+
+        // h1 word-by-word, 0.1–1.3s
+        qa(".c08-word").forEach(function (w, i) {
+          tl.fromTo(w, { opacity: 0, y: 18 },
+            { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.1 + i * 0.16);
+        });
+
+        // Life in the hold: near-imperceptible scale-up of the whole lockup
+        tl.fromTo(q("#c08-lockup"), { scale: 1 },
+          { scale: 1.025, duration: DUR - 1.5 - 0.4, ease: "none" }, 1.5);
+
+        // Scene 2 — CTA pill pops on "liên hệ" (4.0s), damped settle
+        tl.fromTo(q("#c08-cta"), { scale: 0, opacity: 0, y: 12 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 4.0);
+
+        // Scene 3 — company line on "Cảm ơn" (6.4s)
+        tl.fromTo(q("#c08-company"), { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 6.4);
+
+        // Final frame only: fade everything to the white canvas over the last 0.4s
+        tl.fromTo(q("#c08-stage"), { opacity: 1 },
+          { opacity: 0, duration: 0.4, ease: "power1.inOut" }, DUR - 0.4);
+
+        window.__timelines["08-closing"] = tl;
+      })();
+    </script>
+  </div>
+</template>

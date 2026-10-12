@@ -1,0 +1,293 @@
+<template id="bp07-template">
+<div data-hf-id="hf-cnh8" id="root" data-composition-id="07-best-practices" data-start="0" data-duration="14.54" data-width="1920" data-height="1080">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #0F172A;
+  }
+  #bp07-bg {
+    position: absolute;
+    inset: 0;
+    background: #FFFFFF;
+  }
+  #bp07-stage {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 45%;
+  }
+  /* slide-header */
+  .bp07-head {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bp07-eyebrow {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0A3D91;
+  }
+  .bp07-pill {
+    display: inline-block;
+    border-radius: 100px;
+    background: rgba(10, 61, 145, 0.08);
+    color: #0A3D91;
+    font-weight: 600;
+    font-size: 25px;
+    padding: 10px 27px;
+    transform-origin: 100% 50%;
+  }
+  .bp07-h2 {
+    position: absolute;
+    left: 96px;
+    top: 150px;
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    white-space: nowrap;
+  }
+  .bp07-word {
+    display: inline-block;
+    margin-right: 0.26em;
+  }
+  .bp07-word:last-child { margin-right: 0; }
+
+  /* grid of 7 habit cards */
+  .bp07-grid {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 340px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 110px;
+    gap: 20px 27px;
+  }
+  .bp07-slot {
+    position: relative;
+    grid-row: 1;
+  }
+  .bp07-ghost {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 1.5px dashed rgba(10, 61, 145, 0.2);
+  }
+  .bp07-card {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: rgba(10, 61, 145, 0.04);
+    border: 1.5px solid rgba(10, 61, 145, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 30px;
+    overflow: hidden;
+  }
+  .bp07-num {
+    position: relative;
+    z-index: 1;
+    width: 60px;
+    height: 60px;
+    flex: none;
+    border-radius: 50%;
+    background: #0A3D91;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 27px;
+    display: grid;
+    place-items: center;
+  }
+  .bp07-ico {
+    position: relative;
+    z-index: 1;
+    width: 54px;
+    height: 54px;
+    flex: none;
+    color: #0A3D91;
+  }
+  .bp07-ico svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .bp07-label {
+    position: relative;
+    z-index: 1;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #0F172A;
+    white-space: nowrap;
+  }
+  .bp07-sweep {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: #0A3D91;
+    transform-origin: 0% 50%;
+  }
+  #bp07-slot7 {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: calc(50% - 13.5px);
+  }
+</style>
+
+<div data-hf-id="hf-iqbb" id="bp07-bg" class="clip" data-start="0" data-duration="14.54" data-track-index="0"></div>
+
+<div data-hf-id="hf-x641" id="bp07-stage">
+  <div data-hf-id="hf-ety4" class="bp07-head">
+    <div data-hf-id="hf-rztk" class="bp07-eyebrow" id="bp07-eyebrow">06 · Biện pháp nâng cao bảo mật</div>
+    <span data-hf-id="hf-4o8u" class="bp07-pill" id="bp07-pill">Làm ngay hôm nay</span>
+  </div>
+  <div data-hf-id="hf-9o12" class="bp07-h2" id="bp07-h2"><span data-hf-id="hf-pdyi" class="bp07-word">7</span><span data-hf-id="hf-czvt" class="bp07-word">thói</span><span data-hf-id="hf-7sa0" class="bp07-word">quen</span><span data-hf-id="hf-o1nv" class="bp07-word">bảo</span><span data-hf-id="hf-a5bp" class="bp07-word">mật</span></div>
+
+  <div data-hf-id="hf-c65a" class="bp07-grid">
+    <!-- 1 -->
+    <div data-hf-id="hf-u3i4" class="bp07-slot" id="bp07-slot1" style="grid-row:1;grid-column:1">
+      <div data-hf-id="hf-amq3" class="bp07-ghost"></div>
+      <div data-hf-id="hf-8q9s" class="bp07-card">
+        <div data-hf-id="hf-l0gd" class="bp07-num">1</div>
+        <div data-hf-id="hf-lwip" class="bp07-ico"><svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><path data-hf-id="hf-79zj" d="M20.5 12a8.5 8.5 0 1 1-2.5-6" /><path data-hf-id="hf-dre9" d="M20 3.5V8h-4.5" /></svg></div>
+        <div data-hf-id="hf-76w6" class="bp07-label">Cập nhật Windows định kỳ</div>
+      </div>
+    </div>
+    <!-- 2 -->
+    <div data-hf-id="hf-6y8u" class="bp07-slot" id="bp07-slot2" style="grid-row:1;grid-column:2">
+      <div data-hf-id="hf-q5m3" class="bp07-ghost"></div>
+      <div data-hf-id="hf-xam0" class="bp07-card">
+        <div data-hf-id="hf-m7dg" class="bp07-num">2</div>
+        <div data-hf-id="hf-7v1x" class="bp07-ico"><svg data-hf-id="hf-1tol" viewBox="0 0 24 24"><path data-hf-id="hf-sk0w" d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1" /><path data-hf-id="hf-rbt1" d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1" /><path data-hf-id="hf-pjyx" d="M3.5 3.5l17 17" /></svg></div>
+        <div data-hf-id="hf-eqsh" class="bp07-label">Không mở link lạ</div>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div data-hf-id="hf-bstp" class="bp07-slot" id="bp07-slot3" style="grid-row:2;grid-column:1">
+      <div data-hf-id="hf-prb2" class="bp07-ghost"></div>
+      <div data-hf-id="hf-w3ox" class="bp07-card">
+        <div data-hf-id="hf-lt2f" class="bp07-num">3</div>
+        <div data-hf-id="hf-91z0" class="bp07-ico"><svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><circle data-hf-id="hf-1uez" cx="7.5" cy="16.5" r="4.5" /><path data-hf-id="hf-cgpf" d="M10.7 13.3 20.5 3.5" /><path data-hf-id="hf-818q" d="M16 8l3 3" /><path data-hf-id="hf-nyqp" d="M18.5 5.5l2 2" /></svg></div>
+        <div data-hf-id="hf-fyw1" class="bp07-label">Không cung cấp mật khẩu, OTP</div>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div data-hf-id="hf-7907" class="bp07-slot" id="bp07-slot4" style="grid-row:2;grid-column:2">
+      <div data-hf-id="hf-pd01" class="bp07-ghost"></div>
+      <div data-hf-id="hf-whzy" class="bp07-card">
+        <div data-hf-id="hf-mzzi" class="bp07-num">4</div>
+        <div data-hf-id="hf-8nnz" class="bp07-ico"><svg data-hf-id="hf-2man" viewBox="0 0 24 24"><rect data-hf-id="hf-13vb" x="3" y="3" width="7" height="7" rx="1.5" /><rect data-hf-id="hf-f2wl" x="14" y="3" width="7" height="7" rx="1.5" /><rect data-hf-id="hf-t3tv" x="3" y="14" width="7" height="7" rx="1.5" /><path data-hf-id="hf-4edz" d="M17.5 13.2 14 14.5v2.6c0 2.2 1.4 3.7 3.5 4.6 2.1-.9 3.5-2.4 3.5-4.6v-2.6z" /></svg></div>
+        <div data-hf-id="hf-isff" class="bp07-label">Không cài app chưa xác thực</div>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div data-hf-id="hf-eame" class="bp07-slot" id="bp07-slot5" style="grid-row:3;grid-column:1">
+      <div data-hf-id="hf-oyp0" class="bp07-ghost"></div>
+      <div data-hf-id="hf-vb2v" class="bp07-card">
+        <div data-hf-id="hf-mloh" class="bp07-num">5</div>
+        <div data-hf-id="hf-9ul2" class="bp07-ico"><svg data-hf-id="hf-3t7q" viewBox="0 0 24 24"><rect data-hf-id="hf-67m7" x="6.5" y="9" width="11" height="13" rx="2" /><path data-hf-id="hf-0pv8" d="M8.5 9V2.5h7V9" /><path data-hf-id="hf-0ww5" d="M10.7 5.2v1.3M13.3 5.2v1.3" /><path data-hf-id="hf-n2gk" d="M12 13v4" /></svg></div>
+        <div data-hf-id="hf-3s0p" class="bp07-label">Không cắm thiết bị lạ</div>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div data-hf-id="hf-nmkc" class="bp07-slot" id="bp07-slot6" style="grid-row:3;grid-column:2">
+      <div data-hf-id="hf-okdz" class="bp07-ghost"></div>
+      <div data-hf-id="hf-vpdw" class="bp07-card">
+        <div data-hf-id="hf-nslk" class="bp07-num">6</div>
+        <div data-hf-id="hf-9ga1" class="bp07-ico"><svg data-hf-id="hf-3ewp" viewBox="0 0 24 24"><rect data-hf-id="hf-5yrg" x="1.5" y="6" width="21" height="12" rx="3" /><path data-hf-id="hf-w5c3" d="M6.5 9.8v4.4M4.6 10.9l3.8 2.2M4.6 13.1l3.8-2.2" /><path data-hf-id="hf-1xo9" d="M12 9.8v4.4M10.1 10.9l3.8 2.2M10.1 13.1l3.8-2.2" /><path data-hf-id="hf-ogan" d="M17.5 9.8v4.4M15.6 10.9l3.8 2.2M15.6 13.1l3.8-2.2" /></svg></div>
+        <div data-hf-id="hf-tlds" class="bp07-label">Mật khẩu mạnh, đổi thường xuyên</div>
+      </div>
+    </div>
+    <!-- 7 -->
+    <div data-hf-id="hf-xcza" class="bp07-slot" id="bp07-slot7" style="grid-row:4">
+      <div data-hf-id="hf-o62y" class="bp07-ghost"></div>
+      <div data-hf-id="hf-x6c9" class="bp07-card" id="bp07-card7">
+        <div data-hf-id="hf-ji76" class="bp07-sweep" id="bp07-sweep"></div>
+        <div data-hf-id="hf-rbre" class="bp07-num" id="bp07-num7">7</div>
+        <div data-hf-id="hf-bew1" class="bp07-ico" id="bp07-ico7"><svg data-hf-id="hf-4lts" viewBox="0 0 24 24"><rect data-hf-id="hf-q14u" x="2" y="3" width="20" height="13" rx="2" /><path data-hf-id="hf-fgem" d="M8 21h8M12 16v5" /><rect data-hf-id="hf-mf8d" x="9" y="9" width="6" height="4.5" rx="1" /><path data-hf-id="hf-rvt9" d="M10.3 9V7.6a1.7 1.7 0 0 1 3.4 0V9" /></svg></div>
+        <div data-hf-id="hf-pxyw" class="bp07-label" id="bp07-label7">Khóa máy khi rời chỗ ngồi</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var FID = "07-best-practices";
+  var $ = function (id) { return document.getElementById("bp07-" + id); };
+  var tl = gsap.timeline({ paused: true });
+
+  // ---- Scene 1 (0.0–2.1s): slide-header -------------------------------
+  tl.fromTo($("eyebrow"), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+  var words = $("h2").getElementsByClassName(FID + "-word");
+  for (var w = 0; w < words.length; w++) {
+    tl.fromTo(words[w], { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.2 + w * 0.09);
+  }
+  // pill pops on "chính bạn"
+  tl.fromTo($("pill"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 1.4);
+
+  // empty 2-col grid region established: ghost slots stagger in
+  var cueTimes = [2.2, 3.4, 4.6, 7.0, 8.7, 10.1, 11.4];
+  for (var g = 0; g < 7; g++) {
+    var ghost = $("slot" + (g + 1)).getElementsByClassName(FID + "-ghost")[0];
+    tl.fromTo(ghost, { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" }, 0.7 + g * 0.08);
+    // the card covers its ghost as it lands
+    tl.to(ghost, { opacity: 0, duration: 0.3, ease: "power1.out" }, cueTimes[g] + 0.25);
+  }
+
+  // ---- Scene 2 (2.2–10.0s) + Scene 3 entrance: grid-card-assemble -------
+  for (var i = 0; i < 7; i++) {
+    var slot = $("slot" + (i + 1));
+    var card = slot.getElementsByClassName(FID + "-card")[0];
+    var num = slot.getElementsByClassName(FID + "-num")[0];
+    var ico = slot.getElementsByClassName(FID + "-ico")[0];
+    var label = slot.getElementsByClassName(FID + "-label")[0];
+    var t = cueTimes[i];
+    tl.fromTo(card, { opacity: 0, y: 36, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, t);
+    tl.fromTo(num, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, t + 0.1);
+    tl.fromTo(ico, { scale: 0.5, rotation: -12, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, t + 0.18);
+    tl.fromTo(label, { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, t + 0.22);
+  }
+
+  // ---- Scene 3 (11.2–12.9s): card 7 floods solid blue on "khóa máy" ----
+  tl.fromTo($("sweep"), { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power2.inOut" }, 11.6);
+  tl.fromTo($("card7"), { borderColor: "rgba(10, 61, 145, 0.2)" }, { borderColor: "rgba(10, 61, 145, 1)", duration: 0.4, ease: "power1.out" }, 11.65);
+  tl.fromTo($("label7"), { color: "#0F172A" }, { color: "#FFFFFF", duration: 0.35, ease: "power1.out" }, 11.75);
+  tl.fromTo($("ico7"), { color: "#0A3D91" }, { color: "#FFFFFF", duration: 0.35, ease: "power1.out" }, 11.75);
+  tl.fromTo($("num7"), { backgroundColor: "#0A3D91", color: "#FFFFFF" }, { backgroundColor: "#FFFFFF", color: "#0A3D91", duration: 0.35, ease: "power1.out" }, 11.75);
+
+
+  // ---- Hold: slow camera push-in under the assemble, quiet in Scene 4 ----
+  tl.fromTo($("stage"), { scale: 1 }, { scale: 1.015, duration: 14.04 - 2.2, ease: "none" }, 2.2);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines[FID] = tl;
+})();
+</script>
+</div>
+</template>

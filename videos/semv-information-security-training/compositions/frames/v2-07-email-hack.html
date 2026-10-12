@@ -1,0 +1,451 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .v2-07-email-hack-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+
+    /* dual side-glow ambient (one per card, same single accent) */
+    .v2-07-email-hack-glow {
+      position: absolute;
+      top: 300px;
+      width: 900px;
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(10, 61, 145, 0.07), rgba(10, 61, 145, 0));
+      pointer-events: none;
+    }
+    #v2-07-email-hack-glow-a { left: 126px; }
+    #v2-07-email-hack-glow-b { left: 894px; }
+
+    /* slide-header */
+    .v2-07-email-hack-header {
+      position: absolute;
+      left: 112px;
+      right: 112px;
+      top: 78px;
+    }
+    .v2-07-email-hack-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .v2-07-email-hack-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.3;
+    }
+    .v2-07-email-hack-pill {
+      display: inline-block;
+      border-radius: 100px;
+      background: rgba(10, 61, 145, 0.08);
+      color: #0A3D91;
+      font-weight: 600;
+      font-size: 28px;
+      padding: 10px 28px;
+      transform-origin: 50% 50%;
+    }
+    .v2-07-email-hack-h2 {
+      margin-top: 14px;
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+
+    /* source label row */
+    .v2-07-email-hack-source {
+      position: absolute;
+      left: 112px;
+      top: 238px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .v2-07-email-hack-source-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0A3D91;
+    }
+    .v2-07-email-hack-source-label svg { width: 44px; height: 44px; flex: none; }
+    .v2-07-email-hack-sep {
+      width: 1.5px;
+      height: 40px;
+      margin: 0 10px;
+      background: rgba(10, 61, 145, 0.2);
+    }
+    .v2-07-email-hack-hook { width: 64px; height: 64px; flex: none; }
+    .v2-07-email-hack-hook path,
+    .v2-07-email-hack-hook rect {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    /* cards — shared perspective parent */
+    .v2-07-email-hack-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 1800px;
+    }
+    .v2-07-email-hack-wrap {
+      position: absolute;
+      top: 338px;
+      width: 800px;
+      height: 520px;
+      transform-origin: 50% 50%;
+    }
+    #v2-07-email-hack-wrap-a { left: 112px; }
+    #v2-07-email-hack-wrap-b { left: 1008px; }
+    .v2-07-email-hack-float {
+      position: absolute;
+      inset: 0;
+    }
+    .v2-07-email-hack-card {
+      position: absolute;
+      inset: 0;
+      padding: 30px 36px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 14px;
+    }
+    .v2-07-email-hack-card-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.35;
+    }
+    .v2-07-email-hack-email {
+      margin-top: 22px;
+      height: 404px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+    .v2-07-email-hack-from {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      height: 52px;
+      font-size: 30px;
+      font-weight: 500;
+      color: #475569;
+    }
+    .v2-07-email-hack-from svg { width: 52px; height: 52px; flex: none; }
+    .v2-07-email-hack-rule {
+      height: 1.5px;
+      background: rgba(10, 61, 145, 0.15);
+      margin: 26px 0 34px;
+    }
+    .v2-07-email-hack-subj-wrap {
+      display: flex;
+      align-items: center;
+      min-width: 660px;
+      height: 54px;
+      white-space: nowrap;
+    }
+    .v2-07-email-hack-subj {
+      font-size: 38px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      white-space: pre;
+    }
+    .v2-07-email-hack-cursor {
+      display: inline-block;
+      width: 4px;
+      height: 44px;
+      margin-left: 6px;
+      background: #0A3D91;
+      border-radius: 2px;
+      opacity: 0;
+    }
+    .v2-07-email-hack-lines { margin-top: 34px; }
+    .v2-07-email-hack-line {
+      height: 14px;
+      border-radius: 6px;
+      background: rgba(10, 61, 145, 0.08);
+      margin-bottom: 18px;
+    }
+
+    /* "Giả mạo" stamp — inner-edge badge */
+    .v2-07-email-hack-stamp {
+      position: absolute;
+      bottom: 52px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 34px;
+      font-weight: 700;
+      color: #dc2626;
+      border: 2px solid rgba(220, 38, 38, 0.5);
+      border-radius: 100px;
+      padding: 10px 28px 10px 22px;
+      background: #FFFFFF;
+      transform-origin: 50% 50%;
+      white-space: nowrap;
+    }
+    .v2-07-email-hack-stamp svg { width: 38px; height: 38px; flex: none; }
+    #v2-07-email-hack-stamp-a { right: -34px; }
+    #v2-07-email-hack-stamp-b { left: -34px; }
+  </style>
+
+  <div id="root" data-composition-id="v2-07-email-hack" data-width="1920" data-height="1080" data-duration="15.452">
+    <div class="v2-07-email-hack-bg clip" data-start="0" data-duration="15.452" data-track-index="0"></div>
+
+    <div class="v2-07-email-hack-glow" id="v2-07-email-hack-glow-a"></div>
+    <div class="v2-07-email-hack-glow" id="v2-07-email-hack-glow-b"></div>
+
+    <!-- slide-header -->
+    <div class="v2-07-email-hack-header">
+      <div class="v2-07-email-hack-head-row">
+        <div class="v2-07-email-hack-eyebrow" id="v2-07-email-hack-eyebrow">PHẦN 4/5 · SỰ CỐ THỰC TẾ</div>
+        <span class="v2-07-email-hack-pill" id="v2-07-email-hack-pill">Email bị hack</span>
+      </div>
+      <div class="v2-07-email-hack-h2" id="v2-07-email-hack-h2">Không phải lý thuyết</div>
+    </div>
+
+    <!-- source label + hooked envelope -->
+    <div class="v2-07-email-hack-source">
+      <div class="v2-07-email-hack-source-label" id="v2-07-email-hack-source-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="3" width="11" height="18" rx="1.5" />
+          <path d="M15 9h4a1 1 0 0 1 1 1v11" />
+          <path d="M3 21h18" />
+          <path d="M7.5 7h1M10.5 7h1M7.5 10.5h1M10.5 10.5h1M7.5 14h1M10.5 14h1" />
+          <path d="M9.5 21v-3" />
+        </svg>
+        <span>Công ty thành viên tập đoàn Sumitomo</span>
+      </div>
+      <div class="v2-07-email-hack-sep" id="v2-07-email-hack-sep"></div>
+      <svg class="v2-07-email-hack-hook" id="v2-07-email-hack-hook" viewBox="0 0 32 32" fill="none" stroke="#0A3D91" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect pathLength="1" x="2.5" y="10" width="19" height="14" rx="2" />
+        <path pathLength="1" d="M3 11.5 12 18l9-6.5" />
+        <path pathLength="1" d="M27 2v13.5a3.5 3.5 0 0 1-7 0V13" />
+        <path pathLength="1" d="M20 13l1.8 2" />
+      </svg>
+    </div>
+
+    <!-- comparison split: two email cards -->
+    <div class="v2-07-email-hack-stage">
+      <!-- Card A -->
+      <div class="v2-07-email-hack-wrap" id="v2-07-email-hack-wrap-a">
+        <div class="v2-07-email-hack-float" id="v2-07-email-hack-float-a">
+          <div class="v2-07-email-hack-card">
+            <div class="v2-07-email-hack-card-eyebrow">TÌNH HUỐNG 1</div>
+            <div class="v2-07-email-hack-email">
+              <div class="v2-07-email-hack-from" id="v2-07-email-hack-from-a">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="M3.5 6.5 12 13l8.5-6.5" />
+                </svg>
+                <span>Từ: “Đối tác kinh doanh”</span>
+              </div>
+              <div class="v2-07-email-hack-rule"></div>
+              <div class="v2-07-email-hack-subj-wrap">
+                <span class="v2-07-email-hack-subj" id="v2-07-email-hack-subj-a"></span><span class="v2-07-email-hack-cursor" id="v2-07-email-hack-cursor-a"></span>
+              </div>
+              <div class="v2-07-email-hack-lines">
+                <div class="v2-07-email-hack-line" style="width: 92%;"></div>
+                <div class="v2-07-email-hack-line" style="width: 74%;"></div>
+                <div class="v2-07-email-hack-line" style="width: 48%;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="v2-07-email-hack-stamp" id="v2-07-email-hack-stamp-a">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.5 2.5 20h19L12 3.5Z" />
+              <path d="M12 10v4.5" />
+              <path d="M12 17.3v.2" />
+            </svg>
+            <span>Giả mạo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card B -->
+      <div class="v2-07-email-hack-wrap" id="v2-07-email-hack-wrap-b">
+        <div class="v2-07-email-hack-float" id="v2-07-email-hack-float-b">
+          <div class="v2-07-email-hack-card">
+            <div class="v2-07-email-hack-card-eyebrow">TÌNH HUỐNG 2</div>
+            <div class="v2-07-email-hack-email">
+              <div class="v2-07-email-hack-from" id="v2-07-email-hack-from-b">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="M3.5 6.5 12 13l8.5-6.5" />
+                </svg>
+                <span>Từ: “Nhân viên tính lương”</span>
+              </div>
+              <div class="v2-07-email-hack-rule"></div>
+              <div class="v2-07-email-hack-subj-wrap">
+                <span class="v2-07-email-hack-subj" id="v2-07-email-hack-subj-b"></span><span class="v2-07-email-hack-cursor" id="v2-07-email-hack-cursor-b"></span>
+              </div>
+              <div class="v2-07-email-hack-lines">
+                <div class="v2-07-email-hack-line" style="width: 88%;"></div>
+                <div class="v2-07-email-hack-line" style="width: 70%;"></div>
+                <div class="v2-07-email-hack-line" style="width: 52%;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="v2-07-email-hack-stamp" id="v2-07-email-hack-stamp-b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.5 2.5 20h19L12 3.5Z" />
+              <path d="M12 10v4.5" />
+              <path d="M12 17.3v.2" />
+            </svg>
+            <span>Giả mạo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var root = document.querySelector('[data-composition-id="v2-07-email-hack"]');
+      var q = function (sel) { return root.querySelector(sel); };
+      var qa = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+
+      var DUR = 14.952;
+      var TILT = 5;
+      var tl = gsap.timeline({ paused: true });
+
+      /* ---------- Scene 1 (0.0–2.8s): slide-header ---------- */
+      tl.fromTo(q("#v2-07-email-hack-eyebrow"), { opacity: 0, y: -18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.1);
+      tl.fromTo(q("#v2-07-email-hack-pill"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 0.35);
+      // h2 slides down into place on "sự cố thực tế"
+      tl.fromTo(q("#v2-07-email-hack-h2"), { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.9);
+
+      /* ---------- Scene 2 (3.0–5.7s): source label, then hooked envelope draws ---------- */
+      tl.fromTo(q("#v2-07-email-hack-source-label"), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 3.0);
+      tl.fromTo(q("#v2-07-email-hack-sep"), { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.35, ease: "power2.out" }, 5.55);
+      var hookParts = qa("#v2-07-email-hack-hook rect, #v2-07-email-hack-hook path");
+      hookParts.forEach(function (p, i) {
+        tl.fromTo(p, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, 5.7 + i * 0.16);
+      });
+
+      /* ---------- Scene 3 (7.2–8.9s): card A — split-tilt entry from the left ---------- */
+      tl.fromTo(q("#v2-07-email-hack-glow-a"), { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power1.out" }, 7.0);
+      tl.fromTo(q("#v2-07-email-hack-wrap-a"),
+        { x: -260, rotationY: 28, scale: 0.85, opacity: 0 },
+        { x: 0, rotationY: TILT, scale: 1, opacity: 1, duration: 0.85, ease: "power3.out" }, 7.2);
+      // stamp A — inner-edge badge pop (the overshoot) on "thanh toán"
+      tl.fromTo(q("#v2-07-email-hack-stamp-a"),
+        { scale: 0, opacity: 0, rotation: -14 },
+        { scale: 1, opacity: 1, rotation: -4, duration: 0.5, ease: "back.out(2)" }, 8.3);
+
+      /* ---------- Scene 4 (9.1–12.8s): card B — mirrored entry from the right ---------- */
+      tl.fromTo(q("#v2-07-email-hack-glow-b"), { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power1.out" }, 8.9);
+      tl.fromTo(q("#v2-07-email-hack-wrap-b"),
+        { x: 260, rotationY: -28, scale: 0.85, opacity: 0 },
+        { x: 0, rotationY: -TILT, scale: 1, opacity: 1, duration: 0.85, ease: "power3.out" }, 9.1);
+      // "Từ:" line on "email nhân viên tính lương"
+      tl.fromTo(q("#v2-07-email-hack-from-b"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 10.0);
+      // stamp B on "chuyển tiền"
+      tl.fromTo(q("#v2-07-email-hack-stamp-b"),
+        { scale: 0, opacity: 0, rotation: 14 },
+        { scale: 1, opacity: 1, rotation: 4, duration: 0.5, ease: "back.out(2)" }, 12.3);
+
+      /* ---------- discrete-text-sequence: both subjects + cursors + idle float ---------- */
+      var SEQ_A = [
+        { t: 0.0, text: "" },
+        { t: 7.55, text: "Y" },
+        { t: 7.62, text: "Yêu" },
+        { t: 7.72, text: "Yêu cầu" },
+        { t: 7.86, text: "Yêu cầu th" },
+        { t: 7.94, text: "Yêu cầu thanh" },
+        { t: 8.08, text: "Yêu cầu thanh toán" },
+        { t: 8.36, text: "Yêu cầu thanh toán chi" },
+        { t: 8.48, text: "Yêu cầu thanh toán chi phí" }
+      ];
+      var SEQ_B = [
+        { t: 0.0, text: "" },
+        { t: 11.4, text: "Đ" },
+        { t: 11.47, text: "Đề" },
+        { t: 11.6, text: "Đề nghị" },
+        { t: 11.75, text: "Đề nghị k" },
+        { t: 11.82, text: "Đề nghị kế" },
+        { t: 11.95, text: "Đề nghị kế toán" },
+        { t: 12.08, text: "Đề nghị kế toán ch" },
+        { t: 12.18, text: "Đề nghị kế toán chuyển" },
+        { t: 12.3, text: "Đề nghị kế toán chuyển tiền" }
+      ];
+      function textAt(seq, time) {
+        for (var i = seq.length - 1; i >= 0; i--) {
+          if (time >= seq[i].t) return seq[i].text;
+        }
+        return "";
+      }
+      // cursor windows: blink only while that subject is being typed (+ short tail)
+      function cursorOn(time, start, end) {
+        if (time < start || time >= end) return "0";
+        return Math.sin((time - start) * Math.PI * 2 / 0.6 + Math.PI / 2) > 0 ? "1" : "0";
+      }
+
+      var subjA = q("#v2-07-email-hack-subj-a");
+      var subjB = q("#v2-07-email-hack-subj-b");
+      var curA = q("#v2-07-email-hack-cursor-a");
+      var curB = q("#v2-07-email-hack-cursor-b");
+      var floatA = q("#v2-07-email-hack-float-a");
+      var floatB = q("#v2-07-email-hack-float-b");
+      var FLOAT_AMP = 4;
+      var FLOAT_PERIOD = 4.2;
+
+      var driver = { t: 0 };
+      tl.fromTo(driver, { t: 0 }, {
+        t: DUR,
+        duration: DUR,
+        ease: "none",
+        onUpdate: function () {
+          var t = driver.t;
+          subjA.textContent = textAt(SEQ_A, t);
+          subjB.textContent = textAt(SEQ_B, t);
+          curA.style.opacity = cursorOn(t, 7.45, 9.0);
+          curB.style.opacity = cursorOn(t, 11.2, 12.9);
+          // phase-opposed idle float (left sin, right sin + PI) — subtle, never synced
+          var ph = t * Math.PI * 2 / FLOAT_PERIOD;
+          floatA.style.transform = "translateY(" + (FLOAT_AMP * Math.sin(ph)).toFixed(2) + "px)";
+          floatB.style.transform = "translateY(" + (FLOAT_AMP * Math.sin(ph + Math.PI)).toFixed(2) + "px)";
+        }
+      }, 0);
+
+      /* ---------- Scene 5 (12.8–14.952s): hold ---------- */
+      tl.set({}, {}, DUR);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["v2-07-email-hack"] = tl;
+    })();
+  </script>
+</template>

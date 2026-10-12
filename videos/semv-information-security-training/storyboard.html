@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEMV Security Storyboard v1</title>
+<style>
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+:root {
+  --bg: #FFFFFF; --primary: #0A3D91; --ink: #0F172A; --muted: #475569; --light: #9A9A9A;
+  --tint: rgba(10,61,145,0.04); --tint2: rgba(10,61,145,0.08); --tint3: rgba(10,61,145,0.15);
+  --border: rgba(10,61,145,0.2); --neg: #dc2626; --pos: #059669;
+  --page: #EEF2F8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--page); color: var(--ink); font-family: "Be Vietnam Pro", system-ui, sans-serif; padding: 40px 32px 64px; }
+header { max-width: 1680px; margin: 0 auto 28px; display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+header h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+header h1 span { color: var(--primary); }
+header p { color: var(--muted); margin-top: 6px; font-size: 15px; max-width: 900px; }
+.tag { background: var(--primary); color: #fff; border-radius: 100px; padding: 8px 18px; font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+.grid { max-width: 1680px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+@media (max-width: 1100px) { .grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+.cell { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 0 rgba(15,23,42,.06); }
+.frame { aspect-ratio: 16 / 9; container-type: inline-size; position: relative; background: var(--bg); overflow: hidden; border-bottom: 1px solid var(--border); }
+.meta { padding: 14px 16px 16px; }
+.lbl { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--primary); text-transform: uppercase; }
+.lbl span:last-child { color: var(--light); }
+.note { font-size: 13px; color: var(--muted); line-height: 1.55; margin-top: 8px; }
+.note b { color: var(--ink); }
+.chip { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 600; color: var(--primary); background: var(--tint2); border-radius: 100px; padding: 4px 10px; }
+
+/* frame-scale atoms (cqw: 1cqw = 19.2px at 1920) */
+.f-pad { position: absolute; inset: 0; padding: 5cqw 5cqw 0; }
+.eyebrow { font-size: 1.15cqw; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--primary); }
+.h1 { font-size: 4.6cqw; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; }
+.h2 { font-size: 3cqw; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; }
+.h3 { font-size: 1.9cqw; font-weight: 600; line-height: 1.25; }
+.body { font-size: 1.6cqw; color: var(--muted); line-height: 1.5; }
+.accent-line { width: 3.2cqw; height: .22cqw; background: var(--primary); border-radius: 2px; }
+.card { background: var(--tint); border: 1.5px solid var(--border); border-radius: 14px; }
+.pill { border-radius: 100px; background: var(--tint2); color: var(--primary); font-weight: 600; font-size: 1.3cqw; padding: .5cqw 1.4cqw; display: inline-block; }
+.ico { width: 3.4cqw; height: 3.4cqw; color: var(--primary); flex: none; }
+.ico svg { width: 100%; height: 100%; }
+.progress { position: absolute; left: 0; bottom: 0; height: .32cqw; background: var(--primary); }
+.captions { position: absolute; left: 50%; transform: translateX(-50%); bottom: 2.6cqw; background: rgba(15,23,42,.82); color: #fff; font-size: 1.55cqw; font-weight: 600; padding: .6cqw 1.6cqw; border-radius: 100px; white-space: nowrap; }
+.captions em { font-style: normal; color: #9CC3FF; }
+.counter { position: absolute; right: 5cqw; top: 5cqw; font-size: 1.1cqw; font-weight: 600; color: var(--light); letter-spacing: .05em; }
+.head { display: flex; justify-content: space-between; align-items: center; }
+.row { display: flex; gap: 1.4cqw; }
+.num { width: 3.2cqw; height: 3.2cqw; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; font-size: 1.5cqw; display: grid; place-items: center; flex: none; }
+.diag { position: absolute; right: 0; top: 0; bottom: 0; width: 38%; background: var(--primary); clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%); }
+.dots { position: absolute; display: grid; grid-template-columns: repeat(3, .6cqw); gap: 1.2cqw; }
+.dots i { width: .6cqw; height: .6cqw; border-radius: 50%; background: rgba(255,255,255,.55); display: block; }
+.ring { position: absolute; border-radius: 50%; border: 1.5px solid var(--border); left: 50%; top: 44%; transform: translate(-50%,-50%); }
+.seam { display: flex; align-items: center; gap: 0; flex-wrap: wrap; padding: 3cqw; font-size: 1.5cqw; }
+.seam .s { background: var(--tint2); border-radius: 8px; padding: .7cqw 1cqw; font-weight: 700; color: var(--primary); }
+.seam .t { color: var(--muted); font-size: 1.15cqw; padding: 0 .8cqw; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Đào tạo bảo mật thông tin <span>· Storyboard v1</span></h1>
+    <p>Video đào tạo cho nhân viên mới SEMV. Thông điệp: <b>“Mỗi nhân viên SEMV là một lớp bảo vệ: tuân thủ chính sách, cảnh giác và báo cáo ngay khi thấy bất thường.”</b> Hình xuyên suốt: tấm khiên SEMV, mở ở frame 02 và khép lại ở frame 08.</p>
+  </div>
+  <div class="tag">1920×1080 · ≈ 1:49 · 8 frames · VO tiếng Việt + phụ đề</div>
+</header>
+
+<div class="grid">
+
+<!-- 01 -->
+<div class="cell" id="frame-01">
+  <div class="frame">
+    <div class="diag"></div>
+    <div class="dots" style="right:6cqw; top:6cqw"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="f-pad" style="display:flex; flex-direction:column; justify-content:center; padding-bottom:6cqw;">
+      <div class="eyebrow" style="margin-bottom:1.2cqw">SEMV · IT Part</div>
+      <div class="accent-line" style="margin-bottom:1.6cqw"></div>
+      <div class="h1" style="max-width:52cqw">Đào tạo bảo mật<br>thông tin</div>
+      <div class="body" style="margin-top:1.4cqw">Dành cho nhân viên mới · Sumika Electronic Materials Vietnam</div>
+    </div>
+    <div style="position:absolute; right:9cqw; top:50%; transform:translateY(-58%); width:16cqw; height:19cqw; color:#fff">
+      <svg viewBox="0 0 64 76" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z"/><rect x="22" y="34" width="20" height="16" rx="2.5"/><path d="M26 34v-5a6 6 0 0 1 12 0v5"/></svg>
+    </div>
+    <div class="progress" style="width:4%"></div>
+    <div class="captions">Chỉ một cú nhấp chuột sai — <em>cả hệ thống</em> có thể dừng lại.</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>01 · Hook & tiêu đề</span><span>0.0–9.4s</span></div>
+    <p class="note"><b>Đầu tiên câu hook xuất hiện từng cụm, trên nền trắng.</b> Câu “Chỉ một cú nhấp chuột sai” hiện lên rồi bị một con trỏ “click” làm vỡ ra. Sau đó dải xanh chéo trượt vào từ phải, mang theo khiên và ổ khóa, và tiêu đề hiện lên. Hình trên là khoảnh khắc chính khi title card đã ổn định.</p>
+    <span class="chip">in: cut · out: crossfade</span>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="cell" id="frame-02">
+  <div class="frame">
+    <div class="f-pad">
+      <div class="head"><div class="eyebrow">01 · Vì sao quan trọng</div><span class="pill">Mục đích chính sách</span></div>
+      <div class="h2" style="margin-top:1cqw">Ba lý do để bảo mật</div>
+    </div>
+    <div style="position:absolute; left:50%; top:56%; transform:translate(-50%,-50%); width:13cqw; height:15.5cqw; color:var(--primary)">
+      <svg viewBox="0 0 64 76" fill="var(--tint2)" stroke="currentColor" stroke-width="2.4"><path d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z"/><text x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="currentColor" stroke="none">SEMV</text></svg>
+    </div>
+    <div class="card" style="position:absolute; left:5cqw; top:40%; width:26cqw; padding:1.4cqw; display:flex; gap:1.2cqw; align-items:center">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+      <div class="h3">Ngăn rò rỉ thông tin</div>
+    </div>
+    <div class="card" style="position:absolute; right:5cqw; top:40%; width:26cqw; padding:1.4cqw; display:flex; gap:1.2cqw; align-items:center">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V10l5 3V10l5 3V10l5 3V5h3v16Z"/></svg></div>
+      <div class="h3">Sản xuất không gián đoạn</div>
+    </div>
+    <div class="card" style="position:absolute; left:50%; transform:translateX(-50%); top:72%; width:28cqw; padding:1.2cqw; display:flex; gap:1.2cqw; align-items:center; justify-content:center">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11 3 15l5 5 4-4M17 11l4 4-5 5-4-4M8 9l4-4 4 4-4 4-4-4Z"/></svg></div>
+      <div class="h3">Giữ niềm tin khách hàng</div>
+    </div>
+    <div class="progress" style="width:14%"></div>
+    <div class="captions">Mỗi nhân viên SEMV chính là <em>một lớp bảo vệ</em>.</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>02 · Vì sao quan trọng</span><span>9.4–22.2s</span></div>
+    <p class="note"><b>Khiên SEMV hiện ra ở giữa trước.</b> Ba thẻ lần lượt bật lên đúng lúc lời đọc nhắc tới. Ở câu cuối, khiên hiện một vòng sáng và mảng tô màu dâng lên, thể hiện ý “một lớp bảo vệ”. Không đổi bố cục ở cuối frame.</p>
+    <span class="chip">in: crossfade · out: push-slide LEFT</span>
+  </div>
+</div>
+
+<!-- 03 -->
+<div class="cell" id="frame-03">
+  <div class="frame">
+    <div class="f-pad">
+      <div class="head"><div class="eyebrow">02 · Kiểm soát truy cập</div><span class="pill">Đổi mật khẩu mỗi 3 tháng</span></div>
+      <div class="h2" style="margin-top:1cqw">Tài khoản của bạn — chỉ của bạn</div>
+    </div>
+    <div style="position:absolute; left:5cqw; top:36%; width:30cqw">
+      <div class="eyebrow" style="color:var(--muted); margin-bottom:1cqw">Cấp độ bảo mật</div>
+      <div class="row" style="gap:1cqw">
+        <div class="card" style="flex:1; padding:1.2cqw; text-align:center"><div class="h2" style="color:var(--primary)">A</div></div>
+        <div class="card" style="flex:1; padding:1.2cqw; text-align:center"><div class="h2" style="color:var(--primary)">B</div></div>
+        <div class="card" style="flex:1; padding:1.2cqw; text-align:center"><div class="h2" style="color:var(--primary)">C</div></div>
+      </div>
+      <div class="body" style="margin-top:1cqw; font-size:1.4cqw">Nhân viên &amp; vendor</div>
+      <div class="card" style="margin-top:1.6cqw; padding:1cqw 1.4cqw; display:flex; gap:1cqw; align-items:center; border-color:rgba(220,38,38,.35); background:rgba(220,38,38,.04)">
+        <div class="ico" style="color:var(--neg); width:2.6cqw; height:2.6cqw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div>
+        <div class="h3" style="font-size:1.6cqw">Không chia sẻ · không cho mượn</div>
+      </div>
+    </div>
+    <div class="card" style="position:absolute; right:5cqw; top:36%; width:48cqw; padding:1.8cqw">
+      <div style="border:1.5px solid var(--border); border-radius:10px; padding:1cqw 1.4cqw; font-size:2.2cqw; font-weight:700; letter-spacing:.2em; color:var(--ink)">S•••••••@7k</div>
+      <div style="height:.9cqw; background:var(--tint2); border-radius:6px; margin:1.2cqw 0"><div style="height:100%; width:100%; background:var(--primary); border-radius:6px"></div></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:.8cqw 2cqw; font-size:1.55cqw; font-weight:500">
+        <div>✓ Chữ thường</div><div>✓ Chữ hoa</div><div>✓ Chữ số</div><div>✓ Ký tự đặc biệt</div><div style="color:var(--primary); font-weight:700">✓ Từ 8 ký tự</div>
+      </div>
+    </div>
+    <div class="progress" style="width:26%"></div>
+    <div class="captions">Mật khẩu phải <em>từ 8 ký tự</em>, gồm chữ thường, chữ hoa…</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>03 · Truy cập & mật khẩu</span><span>22.2–38.4s</span></div>
+    <p class="note"><b>Thang A·B·C xếp vào từ trái sang.</b> Thẻ cấm hiện ra khi lời đọc nói “không chia sẻ”. Ô mật khẩu tự gõ chữ, mỗi điều kiện được tick đúng lúc lời đọc nhắc tới, thanh độ mạnh đầy dần. Pill “3 tháng” bật lên ở câu cuối.</p>
+    <span class="chip">in: push-slide LEFT · out: push-slide LEFT</span>
+  </div>
+</div>
+
+<!-- 04 -->
+<div class="cell" id="frame-04">
+  <div class="frame">
+    <div class="f-pad">
+      <div class="head"><div class="eyebrow">03 · Phòng chống mã độc</div><span class="pill">4 điều cần nhớ</span></div>
+      <div class="h2" style="margin-top:1cqw">Chặn mã độc từ thói quen</div>
+    </div>
+    <div style="position:absolute; left:5cqw; top:38%; width:22cqw; height:30cqw; color:var(--primary)">
+      <svg viewBox="0 0 120 110" fill="none" stroke="currentColor" stroke-width="3"><rect x="6" y="6" width="108" height="72" rx="8" fill="rgba(10,61,145,.04)"/><path d="M44 100h32M60 78v22"/><path d="M60 22 42 29v13c0 12 8 21 18 26 10-5 18-14 18-26V29l-18-7Z" fill="rgba(10,61,145,.12)"/><path d="m52 44 6 6 11-12"/></svg>
+    </div>
+    <div style="position:absolute; right:5cqw; top:34%; width:58cqw; display:grid; grid-template-columns:1fr 1fr; gap:1.2cqw">
+      <div class="card" style="padding:1.3cqw; display:flex; gap:1cqw; align-items:center"><div class="num">1</div><div class="h3" style="font-size:1.6cqw">Cập nhật diệt virus &amp; Windows</div></div>
+      <div class="card" style="padding:1.3cqw; display:flex; gap:1cqw; align-items:center"><div class="num">2</div><div class="h3" style="font-size:1.6cqw">Không dùng phần mềm lạ</div></div>
+      <div class="card" style="padding:1.3cqw; display:flex; gap:1cqw; align-items:center"><div class="num">3</div><div class="h3" style="font-size:1.6cqw">Quét virus trước khi gửi ra ngoài</div></div>
+      <div class="card" style="padding:1.3cqw; display:flex; gap:1cqw; align-items:center; background:var(--primary); border-color:var(--primary)"><div class="num" style="background:#fff; color:var(--primary)">4</div><div class="h3" style="font-size:1.6cqw; color:#fff">Thấy bất thường → báo IT</div></div>
+    </div>
+    <div class="progress" style="width:39%"></div>
+    <div class="captions">…và <em>báo ngay cho bộ phận IT</em> khi thấy điều bất thường.</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>04 · Mã độc</span><span>38.4–51.3s</span></div>
+    <p class="note"><b>Màn hình và khiên dựng lên trước, dấu tick được vẽ ra.</b> Bốn thẻ bật lần lượt theo bốn cụm trong lời đọc. Thẻ số 4 đổi sang nền xanh đặc, vì đây là hành động quan trọng nhất.</p>
+    <span class="chip">in: push-slide LEFT · out: push-slide LEFT</span>
+  </div>
+</div>
+
+<!-- 05 -->
+<div class="cell" id="frame-05">
+  <div class="frame">
+    <div class="f-pad">
+      <div class="head"><div class="eyebrow">04 · Sự cố bảo mật</div><span class="pill">5 loại sự cố</span></div>
+      <div class="h2" style="margin-top:1cqw">Nhận diện — và xử lý theo quy trình</div>
+    </div>
+    <div style="position:absolute; left:5cqw; right:5cqw; top:36%; display:grid; grid-template-columns:repeat(5,1fr); gap:1cqw">
+      <div class="card" style="padding:1.2cqw; text-align:center"><div class="eyebrow" style="font-size:1cqw">01</div><div class="h3" style="font-size:1.5cqw; margin-top:.4cqw">Lỗi dịch vụ</div></div>
+      <div class="card" style="padding:1.2cqw; text-align:center"><div class="eyebrow" style="font-size:1cqw">02</div><div class="h3" style="font-size:1.5cqw; margin-top:.4cqw">Lỗi thông tin</div></div>
+      <div class="card" style="padding:1.2cqw; text-align:center"><div class="eyebrow" style="font-size:1cqw">03</div><div class="h3" style="font-size:1.5cqw; margin-top:.4cqw">Vi phạm an ninh</div></div>
+      <div class="card" style="padding:1.2cqw; text-align:center"><div class="eyebrow" style="font-size:1cqw">04</div><div class="h3" style="font-size:1.5cqw; margin-top:.4cqw">Lỗi bảo mật</div></div>
+      <div class="card" style="padding:1.2cqw; text-align:center"><div class="eyebrow" style="font-size:1cqw">05</div><div class="h3" style="font-size:1.5cqw; margin-top:.4cqw">Sự cố đáng ngờ</div></div>
+    </div>
+    <div style="position:absolute; left:50%; transform:translateX(-50%); top:56%; display:flex; flex-direction:column; align-items:center; gap:.8cqw">
+      <svg style="width:3cqw; height:3cqw; color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v16M5 13l7 7 7-7"/></svg>
+      <span class="pill" style="background:var(--primary); color:#fff; font-size:1.5cqw; padding:.7cqw 2cqw">Xử lý theo quy trình</span>
+    </div>
+    <div style="position:absolute; left:50%; transform:translateX(-50%); top:73%; font-size:1.9cqw; font-weight:700; color:var(--neg); white-space:nowrap">Làm ngơ = thiệt hại nhân lên nhiều lần</div>
+    <div class="progress" style="width:53%"></div>
+    <div class="captions">Nếu bạn <em>vờ như không thấy</em>, thiệt hại có thể tăng lên nhiều lần.</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>05 · Sự cố</span><span>51.3–67.5s</span></div>
+    <p class="note"><b>Năm thẻ rơi vào thành một hàng</b>, mỗi thẻ đúng lúc tên của nó được đọc. Sau đó các thẻ cùng dồn về mũi tên và pill “Xử lý theo quy trình”. Câu cảnh báo màu đỏ phóng to ở cuối frame. Màu đỏ chỉ dùng ở chỗ này.</p>
+    <span class="chip">in: push-slide LEFT · out: crossfade</span>
+  </div>
+</div>
+
+<!-- 06 -->
+<div class="cell" id="frame-06">
+  <div class="frame">
+    <div class="f-pad">
+      <div class="head"><div class="eyebrow">05 · Tình huống thực tế</div><span class="pill">Không phải lý thuyết</span></div>
+      <div class="h2" style="margin-top:1cqw">Lừa đảo email &amp; ransomware</div>
+    </div>
+    <div class="card" style="position:absolute; left:5cqw; top:36%; width:41cqw; padding:1.6cqw">
+      <div class="eyebrow" style="font-size:1cqw">A · Email bị hack — tập đoàn Sumitomo</div>
+      <div style="margin-top:1cqw; background:#fff; border:1.5px solid var(--border); border-radius:10px; padding:1.1cqw 1.3cqw">
+        <div style="font-size:1.3cqw; color:var(--muted)">Từ: “Đối tác kinh doanh”</div>
+        <div style="font-size:1.6cqw; font-weight:700; margin-top:.3cqw">Yêu cầu thanh toán gấp</div>
+        <div style="margin-top:.8cqw; display:inline-block; font-size:1.2cqw; font-weight:700; color:var(--neg); border:1.5px solid rgba(220,38,38,.4); border-radius:100px; padding:.3cqw 1cqw">⚠ Giả mạo</div>
+      </div>
+    </div>
+    <div class="card" style="position:absolute; right:5cqw; top:36%; width:41cqw; padding:1.6cqw">
+      <div class="eyebrow" style="font-size:1cqw">B · Ransomware — Colonial Pipeline (Mỹ)</div>
+      <div style="display:flex; align-items:baseline; gap:1cqw; margin-top:1cqw">
+        <div style="font-size:5cqw; font-weight:800; color:var(--primary); letter-spacing:-0.02em; line-height:1">5 triệu USD</div>
+      </div>
+      <div class="body" style="font-size:1.5cqw; margin-top:.6cqw">≈ 114 tỷ VND tiền chuộc · vận hành vẫn gián đoạn</div>
+    </div>
+    <div class="progress" style="width:72%"></div>
+    <div class="captions">Colonial Pipeline đã phải trả <em>khoảng năm triệu đô la</em>…</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>06 · Ransomware & lừa đảo</span><span>67.5–85.6s</span></div>
+    <p class="note"><b>Thẻ A trượt vào trước.</b> Một email “đối tác” hiện lên, rồi con dấu “Giả mạo” đóng xuống. Tiếp theo thẻ B xuất hiện: các icon file đổi sang ổ khóa, rồi con số đếm từ 0 lên 5 triệu USD và giữ yên 1,5 giây (frame giữ hình có chủ đích). Số liệu lấy từ PDF.</p>
+    <span class="chip">in: crossfade · out: push-slide LEFT</span>
+  </div>
+</div>
+
+<!-- 07 -->
+<div class="cell" id="frame-07">
+  <div class="frame">
+    <div class="f-pad">
+      <div class="head"><div class="eyebrow">06 · Biện pháp nâng cao bảo mật</div><span class="pill">Làm ngay hôm nay</span></div>
+      <div class="h2" style="margin-top:1cqw">7 thói quen bảo mật</div>
+    </div>
+    <div style="position:absolute; left:5cqw; right:5cqw; top:33%; display:grid; grid-template-columns:1fr 1fr; gap:.9cqw 1.4cqw">
+      <div class="card" style="padding:.9cqw 1.2cqw; display:flex; gap:1cqw; align-items:center"><div class="num" style="width:2.6cqw;height:2.6cqw;font-size:1.25cqw">1</div><div class="h3" style="font-size:1.5cqw">Cập nhật Windows định kỳ</div></div>
+      <div class="card" style="padding:.9cqw 1.2cqw; display:flex; gap:1cqw; align-items:center"><div class="num" style="width:2.6cqw;height:2.6cqw;font-size:1.25cqw">2</div><div class="h3" style="font-size:1.5cqw">Không mở link lạ</div></div>
+      <div class="card" style="padding:.9cqw 1.2cqw; display:flex; gap:1cqw; align-items:center"><div class="num" style="width:2.6cqw;height:2.6cqw;font-size:1.25cqw">3</div><div class="h3" style="font-size:1.5cqw">Không cung cấp mật khẩu, OTP</div></div>
+      <div class="card" style="padding:.9cqw 1.2cqw; display:flex; gap:1cqw; align-items:center"><div class="num" style="width:2.6cqw;height:2.6cqw;font-size:1.25cqw">4</div><div class="h3" style="font-size:1.5cqw">Không cài app chưa xác thực</div></div>
+      <div class="card" style="padding:.9cqw 1.2cqw; display:flex; gap:1cqw; align-items:center"><div class="num" style="width:2.6cqw;height:2.6cqw;font-size:1.25cqw">5</div><div class="h3" style="font-size:1.5cqw">Không cắm thiết bị lạ</div></div>
+      <div class="card" style="padding:.9cqw 1.2cqw; display:flex; gap:1cqw; align-items:center"><div class="num" style="width:2.6cqw;height:2.6cqw;font-size:1.25cqw">6</div><div class="h3" style="font-size:1.5cqw">Mật khẩu mạnh, đổi thường xuyên</div></div>
+      <div class="card" style="padding:.9cqw 1.2cqw; display:flex; gap:1cqw; align-items:center; grid-column:1 / span 2; justify-self:center; width:50%; background:var(--primary); border-color:var(--primary)"><div class="num" style="width:2.6cqw;height:2.6cqw;font-size:1.25cqw;background:#fff;color:var(--primary)">7</div><div class="h3" style="font-size:1.5cqw;color:#fff">Khóa máy khi rời chỗ ngồi</div></div>
+    </div>
+    <div class="progress" style="width:86%"></div>
+    <div class="captions">…và luôn <em>khóa máy</em> khi rời chỗ ngồi.</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>07 · 7 biện pháp</span><span>85.6–99.6s</span></div>
+    <p class="note"><b>Bảy thẻ tự xếp thành lưới</b> từ trên xuống, mỗi thẻ bật lên đúng cụm lời đọc của nó, kèm icon nét mảnh. Thẻ số 7 (khóa máy) đổi sang nền xanh đặc để khép danh sách. Mỗi thẻ có một icon, được thêm ở bước dựng.</p>
+    <span class="chip">in: push-slide LEFT · out: crossfade</span>
+  </div>
+</div>
+
+<!-- 08 -->
+<div class="cell" id="frame-08">
+  <div class="frame">
+    <div class="ring" style="width:40cqw; height:40cqw"></div>
+    <div class="ring" style="width:56cqw; height:56cqw; opacity:.6"></div>
+    <div class="ring" style="width:72cqw; height:72cqw; opacity:.35"></div>
+    <div style="position:absolute; left:50%; top:30%; transform:translate(-50%,-50%); width:9cqw; height:10.7cqw; color:var(--primary)">
+      <svg viewBox="0 0 64 76" fill="var(--primary)" stroke="currentColor" stroke-width="2.4"><path d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z"/><text x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#fff" stroke="none">SEMV</text></svg>
+    </div>
+    <div style="position:absolute; left:0; right:0; top:48%; text-align:center">
+      <div class="h1" style="font-size:4.2cqw">Bảo mật bắt đầu từ bạn</div>
+      <div style="margin-top:1.6cqw"><span class="pill" style="background:var(--primary); color:#fff; font-size:1.5cqw; padding:.8cqw 2.2cqw">Có nghi ngờ? Liên hệ IT Part</span></div>
+      <div class="body" style="margin-top:1.4cqw; font-size:1.4cqw">Sumika Electronic Materials Vietnam Co., Ltd</div>
+    </div>
+    <div class="progress" style="width:100%"></div>
+    <div class="captions">Cảm ơn bạn đã tham gia.</div>
+  </div>
+  <div class="meta">
+    <div class="lbl"><span>08 · Kết thúc</span><span>99.6–108.5s</span></div>
+    <p class="note"><b>Gọi lại hình ảnh ở frame 02:</b> khiên SEMV tô đầy màu xanh, các vòng tròn đồng tâm lan ra. Câu chốt hiện lên, sau đó pill CTA bật ra. Hình giữ yên cho tới hết, thanh tiến trình chạm 100%.</p>
+    <span class="chip">in: crossfade · out: end</span>
+  </div>
+</div>
+
+<!-- seam map -->
+<div class="cell">
+  <div class="frame">
+    <div class="seam">
+      <div style="width:100%; margin-bottom:1.6cqw" class="eyebrow">Seam map · hướng chuyển: sang trái</div>
+      <span class="s">01</span><span class="t">crossfade</span><span class="s">02</span><span class="t">push ←</span><span class="s">03</span><span class="t">push ←</span><span class="s">04</span><span class="t">push ←</span><span class="s">05</span>
+      <span class="t">crossfade</span><span class="s">06</span><span class="t">push ←</span><span class="s">07</span><span class="t">crossfade</span><span class="s">08</span>
+      <div style="width:100%; margin-top:2cqw" class="body">Dùng push-slide trái cho các phần nội dung nối tiếp nhau. Dùng crossfade khi mở đầu, khi vào phần bằng chứng và khi kết thúc.</div>
+    </div>
+  </div>
+  <div class="meta"><div class="lbl"><span>Seam map</span><span>8 frames · ≈108.5s</span></div></div>
+</div>
+
+<!-- tokens -->
+<div class="cell">
+  <div class="frame">
+    <div class="f-pad" style="padding-top:3cqw">
+      <div class="eyebrow">Tokens · blue-professional (SEMV remix)</div>
+      <div class="row" style="margin-top:1.4cqw; gap:1cqw">
+        <div style="flex:1"><div style="height:5cqw; background:#FFFFFF; border:1px solid var(--border); border-radius:10px"></div><div class="body" style="font-size:1.1cqw">bg #FFFFFF</div></div>
+        <div style="flex:1"><div style="height:5cqw; background:#0A3D91; border-radius:10px"></div><div class="body" style="font-size:1.1cqw">primary #0A3D91</div></div>
+        <div style="flex:1"><div style="height:5cqw; background:#0F172A; border-radius:10px"></div><div class="body" style="font-size:1.1cqw">ink #0F172A</div></div>
+        <div style="flex:1"><div style="height:5cqw; background:#475569; border-radius:10px"></div><div class="body" style="font-size:1.1cqw">muted #475569</div></div>
+        <div style="flex:1"><div style="height:5cqw; background:#dc2626; border-radius:10px"></div><div class="body" style="font-size:1.1cqw">cảnh báo (chỉ F05–06)</div></div>
+      </div>
+      <div style="margin-top:1.6cqw; font-size:2.4cqw; font-weight:800">Be Vietnam Pro <span style="font-weight:400; color:var(--muted); font-size:1.6cqw">· 400–800 · đầy đủ dấu tiếng Việt</span></div>
+      <div class="body" style="margin-top:1cqw; font-size:1.3cqw"><b style="color:var(--ink)">Không dùng:</b> glow, drop shadow, logo Samsung, emoji, số liệu tự bịa. Tránh <b style="color:var(--ink)">slideshow</b> (frame nào cũng là một thẻ mới đứng yên) và <b style="color:var(--ink)">screensaver</b> (chuyển động không mang ý nghĩa).</div>
+    </div>
+  </div>
+  <div class="meta"><div class="lbl"><span>Tokens & bans</span><span>frame.md</span></div></div>
+</div>
+
+</div>
+</body>
+</html>

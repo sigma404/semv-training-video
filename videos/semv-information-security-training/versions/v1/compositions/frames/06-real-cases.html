@@ -1,0 +1,394 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .r06-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+
+    /* slide-header */
+    .r06-header {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      top: 96px;
+    }
+    .r06-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .r06-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.3;
+    }
+    .r06-pill {
+      display: inline-block;
+      border-radius: 100px;
+      background: rgba(10, 61, 145, 0.08);
+      color: #0A3D91;
+      font-weight: 600;
+      font-size: 28px;
+      padding: 10px 28px;
+      transform-origin: 50% 50%;
+    }
+    .r06-h2 {
+      margin-top: 18px;
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+
+    /* cards */
+    .r06-card {
+      position: absolute;
+      top: 316px;
+      width: 840px;
+      height: 530px;
+      padding: 36px 40px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 14px;
+    }
+    #r06-card-a { left: 96px; }
+    #r06-card-b { right: 96px; }
+    .r06-card-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.35;
+      min-height: 33px;
+    }
+
+    /* card A — email */
+    .r06-email {
+      margin-top: 28px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 12px;
+      padding: 30px 34px 34px;
+      position: relative;
+      height: 400px;
+    }
+    .r06-from {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 30px;
+      font-weight: 500;
+      color: #475569;
+    }
+    .r06-from svg { width: 52px; height: 52px; flex: none; }
+    .r06-rule {
+      height: 1.5px;
+      background: rgba(10, 61, 145, 0.15);
+      margin: 30px 0 44px;
+    }
+    .r06-subj-label {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9A9A9A;
+    }
+    .r06-subj-wrap {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      min-width: 680px;
+      height: 60px;
+      white-space: nowrap;
+    }
+    .r06-subj {
+      font-size: 46px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      white-space: pre;
+    }
+    .r06-cursor {
+      display: inline-block;
+      width: 4px;
+      height: 50px;
+      margin-left: 6px;
+      background: #0A3D91;
+      border-radius: 2px;
+    }
+    .r06-stamp {
+      position: absolute;
+      right: 34px;
+      bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 34px;
+      font-weight: 700;
+      color: #dc2626;
+      border: 2px solid rgba(220, 38, 38, 0.5);
+      border-radius: 100px;
+      padding: 10px 28px 10px 22px;
+      background: #FFFFFF;
+      transform-origin: 50% 50%;
+    }
+    .r06-stamp svg { width: 38px; height: 38px; flex: none; }
+
+    /* card B — ransomware */
+    .r06-files {
+      margin-top: 26px;
+      display: flex;
+      gap: 40px;
+      height: 96px;
+      transform-origin: 0% 0%;
+    }
+    .r06-slot {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      perspective: 600px;
+      transform-origin: 50% 50%;
+    }
+    .r06-slot svg {
+      position: absolute;
+      inset: 0;
+      width: 96px;
+      height: 96px;
+      backface-visibility: hidden;
+    }
+    .r06-counter-block {
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      top: 196px;
+    }
+    .r06-counter-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 26px;
+      width: 760px;
+      height: 190px;
+    }
+    .r06-counter {
+      display: inline-block;
+      font-size: 200px;
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: #0A3D91;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum" 1;
+      min-width: 1ch;
+      transform-origin: 0% 85%;
+    }
+    .r06-suffix {
+      display: inline-block;
+      font-size: 80px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #0A3D91;
+    }
+    .r06-sub {
+      margin-top: 22px;
+      font-size: 31px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: #475569;
+    }
+    .r06-sub b { color: #0F172A; font-weight: 700; }
+  </style>
+
+  <div data-hf-id="hf-2cu3" id="root" data-composition-id="06-real-cases" data-width="1920" data-height="1080" data-duration="18.62">
+    <div data-hf-id="hf-8t3p" class="r06-bg clip" data-start="0" data-duration="18.62" data-track-index="0"></div>
+
+    <!-- slide-header -->
+    <div data-hf-id="hf-wub2" class="r06-header">
+      <div data-hf-id="hf-06s0" class="r06-head-row">
+        <div data-hf-id="hf-da6i" class="r06-eyebrow" id="r06-eyebrow">05 · Tình huống thực tế</div>
+        <span data-hf-id="hf-qfqd" class="r06-pill" id="r06-pill">Không phải lý thuyết</span>
+      </div>
+      <div data-hf-id="hf-5x4g" class="r06-h2" id="r06-h2">Lừa đảo email &amp; ransomware</div>
+    </div>
+
+    <!-- Card A — spoofed email -->
+    <div data-hf-id="hf-pkrc" class="r06-card" id="r06-card-a">
+      <div data-hf-id="hf-n8ot" class="r06-card-eyebrow" id="r06-a-eyebrow">A · Email bị hack — Tập đoàn Sumitomo</div>
+      <div data-hf-id="hf-oghw" class="r06-email" id="r06-email">
+        <div data-hf-id="hf-wm5p" class="r06-from">
+          <svg data-hf-id="hf-cefi" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <rect data-hf-id="hf-uwav" x="3" y="5" width="18" height="14" rx="2" />
+            <path data-hf-id="hf-t2z2" d="M3.5 6.5 12 13l8.5-6.5" />
+          </svg>
+          <span data-hf-id="hf-97hb">Từ: “Đối tác kinh doanh”</span>
+        </div>
+        <div data-hf-id="hf-b0bb" class="r06-rule"></div>
+        <div data-hf-id="hf-2dvi" class="r06-subj-wrap">
+          <span data-hf-id="hf-s4lf" class="r06-subj" id="r06-subj"></span><span data-hf-id="hf-dj4z" class="r06-cursor" id="r06-cursor"></span>
+        </div>
+        <div data-hf-id="hf-9bve" class="r06-stamp" id="r06-stamp">
+          <svg data-hf-id="hf-8mq0" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path data-hf-id="hf-yq8q" d="M12 3.5 2.5 20h19L12 3.5Z" />
+            <path data-hf-id="hf-gfzk" d="M12 10v4.5" />
+            <path data-hf-id="hf-wrvr" d="M12 17.3v.2" />
+          </svg>
+          <span data-hf-id="hf-ft2p">Giả mạo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card B — ransomware -->
+    <div data-hf-id="hf-y8n7" class="r06-card" id="r06-card-b">
+      <div data-hf-id="hf-az4k" class="r06-card-eyebrow" id="r06-b-eyebrow">B · Ransomware — Colonial Pipeline (Mỹ)</div>
+      <div data-hf-id="hf-yl8i" class="r06-files" id="r06-files">
+        <div data-hf-id="hf-92y5" class="r06-slot">
+          <svg data-hf-id="hf-y3pv" class="r06-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-igg3" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-4box" d="M14 3v5h5" /><path data-hf-id="hf-k8n0" d="M9 13h6M9 16.5h6" /></svg>
+          <svg data-hf-id="hf-puly" class="r06-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-ekjk" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-3rve" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-p4yh" d="M12 14.5v2.5" /></svg>
+        </div>
+        <div data-hf-id="hf-ff8h" class="r06-slot">
+          <svg data-hf-id="hf-ihmb" class="r06-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-owub" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-hyjp" d="M14 3v5h5" /><path data-hf-id="hf-mz3o" d="M9 13h6M9 16.5h6" /></svg>
+          <svg data-hf-id="hf-o1wa" class="r06-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-59iw" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-3hfi" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-i7n1" d="M12 14.5v2.5" /></svg>
+        </div>
+        <div data-hf-id="hf-gm5k" class="r06-slot">
+          <svg data-hf-id="hf-i3ba" class="r06-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-oija" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-j5gs" d="M14 3v5h5" /><path data-hf-id="hf-ls6l" d="M9 13h6M9 16.5h6" /></svg>
+          <svg data-hf-id="hf-og7b" class="r06-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-42lt" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-3vqj" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-jek4" d="M12 14.5v2.5" /></svg>
+        </div>
+        <div data-hf-id="hf-g7uj" class="r06-slot">
+          <svg data-hf-id="hf-hp09" class="r06-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-o489" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-ir5r" d="M14 3v5h5" /><path data-hf-id="hf-m6hm" d="M9 13h6M9 16.5h6" /></svg>
+          <svg data-hf-id="hf-ouic" class="r06-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-4gwu" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-4a1k" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-j093" d="M12 14.5v2.5" /></svg>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-vvzn" class="r06-counter-block">
+        <div data-hf-id="hf-82km" class="r06-counter-wrap" id="r06-counter-wrap">
+          <span data-hf-id="hf-lolv" class="r06-counter" id="r06-counter">0</span><span data-hf-id="hf-mojw" class="r06-suffix" id="r06-suffix">triệu USD</span>
+        </div>
+        <div data-hf-id="hf-n58t" class="r06-sub" id="r06-sub"><b data-hf-id="hf-s9xa">≈ 114 tỷ VND</b> tiền chuộc · vận hành vẫn gián đoạn</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var root = document.querySelector('[data-composition-id="06-real-cases"]');
+      var q = function (sel) { return root.querySelector(sel); };
+      var qa = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* ---------- Scene 1 (0.0–2.2s): slide-header + pill ---------- */
+      tl.fromTo(q("#r06-eyebrow"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+      tl.fromTo(q("#r06-h2"), { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+      // pill pops on "lý thuyết" (spring-pop, smooth settle)
+      tl.fromTo(q("#r06-pill"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.9);
+
+      /* ---------- Scene 2 (2.3–6.4s): card A + email row + eyebrow ---------- */
+      tl.fromTo(q("#r06-card-a"), { x: -140, opacity: 0 }, { x: 0, opacity: 1, duration: 0.75, ease: "power3.out" }, 2.3);
+      tl.fromTo(q("#r06-email"), { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 3.4);
+      tl.fromTo(q("#r06-a-eyebrow"), { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 5.4);
+
+      /* ---------- Scene 3 (6.6–8.6s): subject types (discrete-text-sequence) + stamp ---------- */
+      var subjEl = q("#r06-subj");
+      var cursorEl = q("#r06-cursor");
+      var T0 = 6.6;
+      var SEQUENCE = [
+        { t: 0.0, text: "" },
+        { t: T0 + 0.00, text: "Y" },
+        { t: T0 + 0.08, text: "Yêu" },
+        { t: T0 + 0.18, text: "Yêu c" },
+        { t: T0 + 0.28, text: "Yêu cầu" },
+        { t: T0 + 0.62, text: "Yêu cầu th" },
+        { t: T0 + 0.74, text: "Yêu cầu thanh" },
+        { t: T0 + 1.08, text: "Yêu cầu thanh t" },
+        { t: T0 + 1.18, text: "Yêu cầu thanh toán" },
+        { t: T0 + 1.50, text: "Yêu cầu thanh toán g" },
+        { t: T0 + 1.60, text: "Yêu cầu thanh toán gấp" }
+      ];
+      SEQUENCE.forEach(function (s) {
+        tl.set(subjEl, { textContent: s.text }, s.t);
+      });
+      // cursor: hidden until typing, deterministic square-wave blink, gone after the stamp
+      tl.set(cursorEl, { opacity: 0 }, 0);
+      var BLINK_HALF = 0.3;
+      var on = true;
+      for (var bt = T0; bt < 8.9; bt += BLINK_HALF) {
+        tl.set(cursorEl, { opacity: on ? 1 : 0 }, bt);
+        on = !on;
+      }
+      tl.set(cursorEl, { opacity: 0 }, 8.9);
+
+      // "Giả mạo" stamp lands on "thanh toán" — spring-pop, damped (power3.out, no overshoot)
+      tl.fromTo(q("#r06-stamp"),
+        { scale: 0, opacity: 0, rotation: -10 },
+        { scale: 1, opacity: 1, rotation: -4, duration: 0.55, ease: "power3.out" }, 8.0);
+
+      /* ---------- Scene 4 (9.3–12.0s): card B + files flip to locks ---------- */
+      tl.fromTo(q("#r06-card-b"), { x: 140, opacity: 0 }, { x: 0, opacity: 1, duration: 0.75, ease: "power3.out" }, 9.6);
+      // the file row starts lower (centred in the card body); Scene 5 shrinks it upward
+      var slots = qa(".r06-slot");
+      slots.forEach(function (slot, i) {
+        tl.fromTo(slot, { scale: 0, opacity: 0, y: 20 }, { scale: 1, opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 9.85 + i * 0.06);
+      });
+      var files = qa(".r06-file");
+      var locks = qa(".r06-lock");
+      files.forEach(function (f, i) {
+        var at = 10.3 + i * 0.32;
+        tl.fromTo(f, { rotationY: 0, opacity: 1 }, { rotationY: 90, opacity: 0, duration: 0.2, ease: "power2.in" }, at);
+        tl.fromTo(locks[i], { rotationY: -90, opacity: 0 }, { rotationY: 0, opacity: 1, duration: 0.28, ease: "power2.out" }, at + 0.2);
+      });
+
+      /* ---------- Scene 5 (12.3–16.2s): eyebrow, row shrinks up, count-up, sub-line ---------- */
+      tl.fromTo(q("#r06-b-eyebrow"), { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 12.3);
+      tl.fromTo(q("#r06-files"), { y: 110, scale: 1 }, { y: 0, scale: 0.62, duration: 0.8, ease: "power3.inOut" }, 12.6);
+
+      // counting-dynamic-scale: 0 → 5, value + scale share timing and ease
+      var counterEl = q("#r06-counter");
+      var COUNT_AT = 14.0;
+      var COUNT_DUR = 1.0;
+      var COUNT_EASE = "power3.out";
+      var state = { value: 0 };
+      tl.fromTo(q("#r06-counter-wrap"), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, COUNT_AT);
+      tl.fromTo(state, { value: 0 }, {
+        value: 5,
+        duration: COUNT_DUR,
+        ease: COUNT_EASE,
+        onUpdate: function () { counterEl.textContent = String(Math.round(state.value)); }
+      }, COUNT_AT);
+      tl.fromTo(counterEl, { scale: 0.5 }, { scale: 1, duration: COUNT_DUR, ease: COUNT_EASE }, COUNT_AT);
+      // suffix gets its own beat after the count lands
+      tl.fromTo(q("#r06-suffix"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.5)" }, COUNT_AT + COUNT_DUR);
+      // sub-line on "tương đương"
+      tl.fromTo(q("#r06-sub"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 15.6);
+
+      /* ---------- Scene 6 (16.2–18.12s): deliberate hold ---------- */
+      tl.set({}, {}, 18.12);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["06-real-cases"] = tl;
+    })();
+  </script>
+</template>

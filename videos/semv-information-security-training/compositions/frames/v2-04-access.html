@@ -1,0 +1,391 @@
+<template id="v2-04-access-template">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+  #root {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #0F172A;
+  }
+  #root * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #v2-04-access-bg { position: absolute; inset: 0; background: #FFFFFF; }
+  #v2-04-access-world { position: absolute; inset: 0; }
+
+  /* ---------- slide-header ---------- */
+  #v2-04-access-head {
+    position: absolute; left: 96px; right: 96px; top: 52px; height: 52px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  #v2-04-access-eyebrow-wrap { display: flex; align-items: center; gap: 18px; }
+  #v2-04-access-accent { width: 60px; height: 4px; border-radius: 2px; background: #0A3D91; transform-origin: left center; }
+  #v2-04-access-eyebrow {
+    font-size: 24px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #0A3D91;
+  }
+  #v2-04-access-tag {
+    border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91;
+    font-weight: 600; font-size: 24px; padding: 9px 26px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  #v2-04-access-tag svg { width: 26px; height: 26px; }
+  #v2-04-access-h2 {
+    position: absolute; left: 96px; top: 112px;
+    font-size: 56px; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em;
+    color: #0F172A;
+  }
+
+  /* ---------- two columns (shared perspective parent) ---------- */
+  #v2-04-access-stage {
+    position: absolute; left: 96px; right: 96px; top: 222px; height: 612px;
+    perspective: 1800px;
+  }
+  .v2-04-access-wing { position: absolute; top: 0; width: 848px; height: 612px; }
+  #v2-04-access-wingL { left: 0; transform-origin: 0% 50%; }
+  #v2-04-access-wingR { right: 0; transform-origin: 100% 50%; }
+  .v2-04-access-card {
+    position: relative; width: 100%; height: 100%;
+    background: rgba(10, 61, 145, 0.04);
+    border: 1.5px solid rgba(10, 61, 145, 0.2);
+    border-radius: 14px;
+    padding: 58px 40px 32px;
+  }
+  .v2-04-access-badge {
+    position: absolute; top: -27px;
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 9px 26px 9px 20px; border-radius: 100px;
+    background: #EBF0F6; border: 1.5px solid rgba(10, 61, 145, 0.2);
+    color: #0A3D91; font-size: 26px; font-weight: 700; white-space: nowrap;
+  }
+  .v2-04-access-badge svg { width: 30px; height: 30px; flex: none; }
+  #v2-04-access-badgeL { right: 36px; transform-origin: 50% 50%; }
+  #v2-04-access-badgeR { left: 36px; transform-origin: 50% 50%; }
+
+  /* ---------- left: admin ---------- */
+  #v2-04-access-adm-line { font-size: 32px; font-weight: 600; line-height: 1.25; color: #0F172A; }
+  #v2-04-access-levels { display: flex; gap: 20px; margin-top: 32px; }
+  .v2-04-access-level {
+    flex: 1; height: 186px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(10, 61, 145, 0.2);
+    border-radius: 12px;
+  }
+  .v2-04-access-level b {
+    display: block; font-size: 88px; font-weight: 700; line-height: 1;
+    letter-spacing: -0.02em; color: #0A3D91;
+  }
+  .v2-04-access-level i {
+    display: block; width: 44px; height: 4px; border-radius: 2px; background: rgba(10, 61, 145, 0.25);
+  }
+  #v2-04-access-who {
+    margin-top: 30px; font-size: 30px; font-weight: 600; color: #0F172A;
+    display: flex; align-items: center; gap: 14px;
+  }
+  #v2-04-access-who svg { width: 36px; height: 36px; color: #0A3D91; flex: none; }
+  #v2-04-access-adm-sub {
+    margin-top: 26px; padding: 16px 22px;
+    border-left: 4px solid #0A3D91; border-radius: 12px;
+    background: rgba(10, 61, 145, 0.08);
+    font-size: 24px; font-weight: 400; line-height: 1.5; color: #475569;
+  }
+
+  /* ---------- right: user ---------- */
+  .v2-04-access-ban {
+    display: flex; align-items: center; gap: 16px;
+    height: 58px; padding: 0 22px;
+    border: 1.5px solid rgba(220, 38, 38, 0.35);
+    background: rgba(220, 38, 38, 0.04);
+    border-radius: 10px;
+    font-size: 26px; font-weight: 600; color: #0F172A;
+  }
+  .v2-04-access-ban + .v2-04-access-ban { margin-top: 10px; }
+  .v2-04-access-ban svg { width: 34px; height: 34px; flex: none; }
+  .v2-04-access-ban svg circle, .v2-04-access-ban svg path {
+    fill: none; stroke: #dc2626; stroke-width: 2.2; stroke-linecap: round;
+  }
+  #v2-04-access-rot {
+    margin-top: 16px;
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 10px 26px 10px 20px; border-radius: 100px;
+    background: rgba(10, 61, 145, 0.08); color: #0A3D91;
+    font-size: 26px; font-weight: 700;
+    transform-origin: 0% 50%;
+  }
+  #v2-04-access-rot svg { width: 30px; height: 30px; flex: none; }
+
+  #v2-04-access-pw { margin-top: 20px; }
+  #v2-04-access-input {
+    background: #FFFFFF;
+    border: 1.5px solid rgba(10, 61, 145, 0.2); border-radius: 10px;
+    height: 76px; padding: 0 24px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  #v2-04-access-input > svg { width: 32px; height: 32px; color: #0A3D91; flex: none; }
+  #v2-04-access-typed-wrap {
+    display: inline-flex; align-items: center; white-space: nowrap;
+    min-width: 520px;
+    font-size: 40px; font-weight: 700; letter-spacing: 0.18em; color: #0F172A;
+  }
+  #v2-04-access-caret {
+    display: inline-block; width: 4px; height: 46px; background: #0A3D91;
+    border-radius: 2px; margin-left: 2px;
+  }
+  #v2-04-access-meter { margin-top: 16px; display: flex; align-items: center; gap: 20px; }
+  #v2-04-access-meter-label {
+    font-size: 24px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #475569; white-space: nowrap;
+  }
+  #v2-04-access-track {
+    flex: 1; height: 16px; background: rgba(10, 61, 145, 0.08); border-radius: 6px; overflow: hidden;
+  }
+  #v2-04-access-fill {
+    display: block; width: 100%; height: 100%; background: #0A3D91; border-radius: 6px;
+    transform-origin: left center;
+  }
+  #v2-04-access-criteria {
+    margin-top: 18px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px;
+  }
+  .v2-04-access-crit {
+    display: flex; align-items: center; gap: 14px; height: 40px;
+    font-size: 28px; font-weight: 500; color: #9A9A9A;
+  }
+  .v2-04-access-tick { width: 34px; height: 34px; flex: none; position: relative; }
+  .v2-04-access-tick svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .v2-04-access-ring { fill: none; stroke: rgba(10, 61, 145, 0.25); stroke-width: 1.5; }
+  .v2-04-access-dot { fill: #0A3D91; }
+  .v2-04-access-check { fill: none; stroke: #FFFFFF; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+
+<div id="root" data-composition-id="v2-04-access" data-start="0" data-duration="22.7" data-width="1920" data-height="1080">
+
+  <div id="v2-04-access-bg" class="clip" data-start="0" data-duration="22.7" data-track-index="0"></div>
+
+  <div id="v2-04-access-world" class="clip" data-start="0" data-duration="22.7" data-track-index="1">
+
+    <!-- slide-header -->
+    <div id="v2-04-access-head">
+      <div id="v2-04-access-eyebrow-wrap">
+        <div id="v2-04-access-accent"></div>
+        <div id="v2-04-access-eyebrow">PHẦN 3/5 · ÁP DỤNG VÀ TUÂN THỦ</div>
+      </div>
+      <div id="v2-04-access-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /></svg>
+        <span>Kiểm soát truy cập</span>
+      </div>
+    </div>
+    <div id="v2-04-access-h2">Kiểm soát truy cập</div>
+
+    <div id="v2-04-access-stage">
+
+      <!-- LEFT: Quản trị viên (entry layer → float layer → card) -->
+      <div id="v2-04-access-wingL" class="v2-04-access-wing">
+        <div id="v2-04-access-floatL" class="v2-04-access-card">
+          <div id="v2-04-access-badgeL" class="v2-04-access-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
+            <span>Quản trị viên</span>
+          </div>
+
+          <div id="v2-04-access-adm-line">Phân quyền theo cấp độ bảo mật</div>
+          <div id="v2-04-access-levels">
+            <div class="v2-04-access-level" id="v2-04-access-lvA"><b>A</b><i></i></div>
+            <div class="v2-04-access-level" id="v2-04-access-lvB"><b>B</b><i></i></div>
+            <div class="v2-04-access-level" id="v2-04-access-lvC"><b>C</b><i></i></div>
+          </div>
+          <div id="v2-04-access-who">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5" /><circle cx="17" cy="9" r="2.6" /><path d="M17.5 14.6c2.3.3 3.7 2 4 4.4" /></svg>
+            <span>Nhân viên &amp; vendor</span>
+          </div>
+          <div id="v2-04-access-adm-sub">Yêu cầu đổi mật khẩu thường xuyên, kể cả khi ID dùng liên tục</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Người dùng (focal) -->
+      <div id="v2-04-access-wingR" class="v2-04-access-wing">
+        <div id="v2-04-access-floatR" class="v2-04-access-card">
+          <div id="v2-04-access-badgeR" class="v2-04-access-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4.5 21c.7-4.2 3.6-6.5 7.5-6.5s6.8 2.3 7.5 6.5" /></svg>
+            <span>Người dùng</span>
+          </div>
+
+          <div class="v2-04-access-ban" id="v2-04-access-ban1">
+            <svg viewBox="0 0 24 24"><circle class="v2-04-access-ban-ring" cx="12" cy="12" r="9.5" /><path class="v2-04-access-ban-slash" d="M5.3 5.3 L18.7 18.7" /></svg>
+            <span>Không chia sẻ tài khoản</span>
+          </div>
+          <div class="v2-04-access-ban" id="v2-04-access-ban2">
+            <svg viewBox="0 0 24 24"><circle class="v2-04-access-ban-ring" cx="12" cy="12" r="9.5" /><path class="v2-04-access-ban-slash" d="M5.3 5.3 L18.7 18.7" /></svg>
+            <span>Không cho mượn tài khoản</span>
+          </div>
+
+          <div id="v2-04-access-rot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2" /><path d="M3 9.5h18" /><path d="M8 2.5v4" /><path d="M16 2.5v4" /></svg>
+            <span>Đổi mật khẩu 3 tháng / lần</span>
+          </div>
+
+          <div id="v2-04-access-pw">
+            <div id="v2-04-access-input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2" /><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /></svg>
+              <div id="v2-04-access-typed-wrap"><span id="v2-04-access-typed"></span><span id="v2-04-access-caret"></span></div>
+            </div>
+            <div id="v2-04-access-meter">
+              <span id="v2-04-access-meter-label">Độ mạnh</span>
+              <div id="v2-04-access-track"><div id="v2-04-access-fill"></div></div>
+            </div>
+            <div id="v2-04-access-criteria">
+              <div class="v2-04-access-crit" id="v2-04-access-c1"><div class="v2-04-access-tick"><svg viewBox="0 0 24 24"><circle class="v2-04-access-ring" cx="12" cy="12" r="11" /><circle class="v2-04-access-dot" cx="12" cy="12" r="11.5" /><path class="v2-04-access-check" d="M7 12.4 L10.4 15.8 L17.2 8.6" /></svg></div><span>Từ 8 ký tự</span></div>
+              <div class="v2-04-access-crit" id="v2-04-access-c2"><div class="v2-04-access-tick"><svg viewBox="0 0 24 24"><circle class="v2-04-access-ring" cx="12" cy="12" r="11" /><circle class="v2-04-access-dot" cx="12" cy="12" r="11.5" /><path class="v2-04-access-check" d="M7 12.4 L10.4 15.8 L17.2 8.6" /></svg></div><span>Chữ thường</span></div>
+              <div class="v2-04-access-crit" id="v2-04-access-c3"><div class="v2-04-access-tick"><svg viewBox="0 0 24 24"><circle class="v2-04-access-ring" cx="12" cy="12" r="11" /><circle class="v2-04-access-dot" cx="12" cy="12" r="11.5" /><path class="v2-04-access-check" d="M7 12.4 L10.4 15.8 L17.2 8.6" /></svg></div><span>Chữ hoa</span></div>
+              <div class="v2-04-access-crit" id="v2-04-access-c4"><div class="v2-04-access-tick"><svg viewBox="0 0 24 24"><circle class="v2-04-access-ring" cx="12" cy="12" r="11" /><circle class="v2-04-access-dot" cx="12" cy="12" r="11.5" /><path class="v2-04-access-check" d="M7 12.4 L10.4 15.8 L17.2 8.6" /></svg></div><span>Chữ số</span></div>
+              <div class="v2-04-access-crit" id="v2-04-access-c5"><div class="v2-04-access-tick"><svg viewBox="0 0 24 24"><circle class="v2-04-access-ring" cx="12" cy="12" r="11" /><circle class="v2-04-access-dot" cx="12" cy="12" r="11.5" /><path class="v2-04-access-check" d="M7 12.4 L10.4 15.8 L17.2 8.6" /></svg></div><span>Ký tự đặc biệt</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var FID = "v2-04-access";
+  var DUR = 22.2;
+  var root = document.querySelector('[data-composition-id="' + FID + '"]');
+  var $ = function (s) { return root.querySelector(s); };
+  var $$ = function (s) { return root.querySelectorAll(s); };
+  var P = "#v2-04-access-";
+
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+
+  // ---------- Scene 1 (0.0–4.6s): slide-header; h2 on "kiểm soát truy cập" (3.2s) ----------
+  tl.fromTo($(P + "accent"), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.05);
+  tl.fromTo($(P + "eyebrow"), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, 0.1);
+  tl.fromTo($(P + "tag"), { opacity: 0, y: -12, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, 0.3);
+  tl.fromTo($(P + "h2"), { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 3.2);
+
+  // ---------- comparison-split signature: mirrored wings, gentle tilt that flattens ----------
+  // Scene 2: left card from the left (5.0s)
+  tl.fromTo($(P + "wingL"),
+    { opacity: 0, x: -280, rotationY: 9, scale: 0.9 },
+    { opacity: 1, x: 0, rotationY: 0, scale: 1, duration: 1.0, ease: "expo.out" }, 5.0);
+  tl.fromTo($(P + "badgeL"), { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(2.2)" }, 5.35);
+  tl.fromTo($(P + "adm-line"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 5.7);
+  [["lvA", 6.9], ["lvB", 7.4], ["lvC", 8.0]].forEach(function (l) {
+    tl.fromTo($(P + l[0]), { opacity: 0, y: 30, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, l[1]);
+  });
+  tl.fromTo($(P + "who"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 9.2);
+  tl.fromTo($(P + "adm-sub"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 9.6);
+
+  // Scene 3: right card from the right (10.7s) + ban rows
+  tl.fromTo($(P + "wingR"),
+    { opacity: 0, x: 280, rotationY: -9, scale: 0.9 },
+    { opacity: 1, x: 0, rotationY: 0, scale: 1, duration: 1.0, ease: "expo.out" }, 10.7);
+  tl.fromTo($(P + "badgeR"), { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(2.2)" }, 11.0);
+
+  [["ban1", 11.1], ["ban2", 12.2]].forEach(function (b) {
+    var row = $(P + b[0]);
+    var ring = row.querySelector(".v2-04-access-ban-ring");
+    var slash = row.querySelector(".v2-04-access-ban-slash");
+    var rLen = ring.getTotalLength ? ring.getTotalLength() : 60;
+    var sLen = slash.getTotalLength ? slash.getTotalLength() : 19;
+    tl.fromTo(row, { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, b[1]);
+    tl.fromTo(ring, { strokeDasharray: rLen, strokeDashoffset: rLen }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, b[1] + 0.1);
+    tl.fromTo(slash, { strokeDasharray: sLen, strokeDashoffset: sLen }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, b[1] + 0.45);
+  });
+
+  // ---------- Scene 4 (13.6–15.4s): rotation pill pops on "đổi mật khẩu" (13.8s) ----------
+  tl.fromTo($(P + "rot"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 13.8);
+
+  // ---------- Scene 5 (15.5–20.2s): password field types, ticks + stepped strength fill ----------
+  tl.fromTo($(P + "input"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 15.1);
+  tl.fromTo($(P + "meter"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 15.2);
+  tl.fromTo($$(".v2-04-access-crit"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out", stagger: 0.04 }, 15.25);
+
+  // discrete-text-sequence typing
+  var typedEl = $(P + "typed");
+  var caretEl = $(P + "caret");
+  var PASS = "S•••••••@7k";
+  var TYPE_START = 15.5, KEY_GAP = 0.09;
+  var SEQ = [{ t: 0, text: "" }];
+  for (var i = 1; i <= PASS.length; i++) SEQ.push({ t: TYPE_START + i * KEY_GAP, text: PASS.slice(0, i) });
+  var TYPE_END = TYPE_START + PASS.length * KEY_GAP;
+  function textAt(t) {
+    for (var k = SEQ.length - 1; k >= 0; k--) if (t >= SEQ[k].t) return SEQ[k].text;
+    return "";
+  }
+  var driver = { t: 0 };
+  tl.fromTo(driver, { t: 0 }, {
+    t: DUR, duration: DUR, ease: "none",
+    onUpdate: function () { typedEl.textContent = textAt(driver.t); }
+  }, 0);
+
+  // caret: deterministic sin square wave, solid while typing
+  var CARET_START = 15.1;
+  var BLINK_DUR = DUR - CARET_START;
+  var CYCLES = Math.round(BLINK_DUR / 0.7);
+  var blink = { p: 0 };
+  tl.fromTo(blink, { p: 0 }, {
+    p: Math.PI * 2 * CYCLES, duration: BLINK_DUR, ease: "none",
+    onUpdate: function () {
+      var t = CARET_START + (blink.p / (Math.PI * 2 * CYCLES)) * BLINK_DUR;
+      var typing = t < TYPE_END + 0.1;
+      caretEl.style.opacity = (typing || Math.cos(blink.p) > 0) ? "1" : "0";
+    }
+  }, CARET_START);
+
+  // ticks on their spoken cues, strength fill steps up with each (100% at 19.9s)
+  var fill = $(P + "fill");
+  tl.set(fill, { scaleX: 0 }, 0);
+  var ticks = [
+    ["c1", 15.7, 0.2, 0.4],
+    ["c2", 17.1, 0.4, 0.4],
+    ["c3", 17.9, 0.6, 0.4],
+    ["c4", 18.6, 0.8, 0.4],
+    ["c5", 19.7, 1.0, 0.2]
+  ];
+  var prev = 0;
+  ticks.forEach(function (tk) {
+    var row = $(P + tk[0]);
+    var dot = row.querySelector(".v2-04-access-dot");
+    var chk = row.querySelector(".v2-04-access-check");
+    var cLen = chk.getTotalLength ? chk.getTotalLength() : 16;
+    var at = tk[1];
+    tl.fromTo(dot, { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, transformOrigin: "50% 50%", duration: 0.3, ease: "back.out(2)" }, at - 0.05);
+    tl.fromTo(chk, { strokeDasharray: cLen, strokeDashoffset: cLen }, { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, at + 0.08);
+    tl.fromTo(row.querySelector("span"), { color: "#9A9A9A" }, { color: "#0F172A", duration: 0.3, ease: "power1.out" }, at);
+    tl.fromTo(fill, { scaleX: prev }, { scaleX: tk[2], duration: tk[3], ease: "power2.out", immediateRender: false }, at);
+    prev = tk[2];
+  });
+
+  // ---------- low-amplitude phase-opposed idle float (left sin, right sin+π) ----------
+  var floatL = $(P + "floatL"), floatR = $(P + "floatR");
+  var fl = { p: 0 };
+  var F_START = 6.0, F_DUR = DUR - F_START;
+  tl.fromTo(fl, { p: 0 }, {
+    p: F_DUR * 1.6, duration: F_DUR, ease: "none",
+    onUpdate: function () {
+      var ramp = Math.min(1, fl.p / 1.6);
+      gsap.set(floatL, { y: 3 * ramp * Math.sin(fl.p) });
+      var rp = Math.max(0, fl.p - 1.6 * (11.7 - F_START));
+      var rRamp = Math.min(1, rp / 1.6);
+      gsap.set(floatR, { y: 3 * rRamp * Math.sin(fl.p + Math.PI) });
+    }
+  }, F_START);
+
+  // ---------- Scene 6 (20.2–22.2s): hold ----------
+  tl.set({}, {}, DUR);
+
+  window.__timelines[FID] = tl;
+})();
+</script>
+</template>

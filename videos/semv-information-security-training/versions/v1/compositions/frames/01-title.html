@@ -1,0 +1,295 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .f01-title-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+
+    /* ---------- Scenes 1–2: hook ---------- */
+    .f01-title-hook {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      top: 300px;
+      text-align: center;
+      font-size: 80px;
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+    .f01-title-line { display: block; white-space: nowrap; }
+    .f01-title-w {
+      display: inline-block;
+      margin: 0 0.12em;
+      position: relative;
+    }
+    .f01-title-hl {
+      display: inline-block;
+      position: relative;
+      margin: 0 0.12em;
+      isolation: isolate;
+    }
+    .f01-title-hl .f01-title-w { margin: 0 0.06em; }
+    .f01-title-hl-bg {
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      top: 48%;
+      bottom: 4%;
+      background: rgba(10, 61, 145, 0.15);
+      border-radius: 10px;
+      z-index: -1;
+      transform-origin: 0% 50%;
+    }
+    /* cursor + ripple live inside the "sai" word so they track its layout */
+    .f01-title-cursor {
+      position: absolute;
+      left: 58%;
+      top: 62%;
+      width: 54px;
+      height: 66px;
+      transform-origin: 0% 0%;
+      z-index: 2;
+    }
+    .f01-title-cursor svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .f01-title-ripple {
+      position: absolute;
+      left: 58%;
+      top: 62%;
+      width: 110px;
+      height: 110px;
+      margin-left: -55px;
+      margin-top: -55px;
+      border-radius: 50%;
+      border: 3px solid #0A3D91;
+      z-index: 1;
+    }
+
+    /* ---------- Scene 3+: atmosphere ---------- */
+    .f01-title-diag {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 730px;
+      background: #0A3D91;
+      clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+    }
+    .f01-title-dots {
+      position: absolute;
+      right: 115px;
+      top: 115px;
+      display: grid;
+      grid-template-columns: repeat(3, 12px);
+      gap: 23px;
+    }
+    .f01-title-dots i {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.55);
+    }
+    .f01-title-shield {
+      position: absolute;
+      right: 173px;
+      top: 328px;
+      width: 307px;
+      height: 365px;
+      color: #FFFFFF;
+    }
+    .f01-title-shield svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .f01-title-shield path,
+    .f01-title-shield rect {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    /* ---------- Scene 4: cover title ---------- */
+    .f01-title-cover {
+      position: absolute;
+      left: 96px;
+      top: 0;
+      width: 1000px;
+      height: 965px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .f01-title-eyebrow {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      margin-bottom: 23px;
+    }
+    .f01-title-accent {
+      width: 60px;
+      height: 4px;
+      border-radius: 2px;
+      background: #0A3D91;
+      margin-bottom: 31px;
+      transform-origin: 0% 50%;
+    }
+    .f01-title-h1 {
+      font-size: 88px;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+    .f01-title-h1 .f01-title-tw {
+      display: inline-block;
+      margin-right: 0.22em;
+    }
+    .f01-title-sub {
+      margin-top: 27px;
+      font-size: 31px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #475569;
+    }
+  </style>
+
+  <div data-hf-id="hf-n1lm" id="root" data-composition-id="01-title" data-width="1920" data-height="1080" data-duration="9.86">
+    <div data-hf-id="hf-k4br" class="f01-title-bg clip" data-start="0" data-duration="9.86" data-track-index="0"></div>
+
+    <!-- atmosphere (Scene 3) -->
+    <div data-hf-id="hf-aqm2" class="f01-title-diag" id="f01-title-diag"></div>
+    <div data-hf-id="hf-4u4a" class="f01-title-dots" id="f01-title-dots">
+      <i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i><i data-hf-id="hf-ylp6"></i><i data-hf-id="hf-0l8b"></i><i data-hf-id="hf-0zjc"></i><i data-hf-id="hf-zsm9"></i><i data-hf-id="hf-06xa"></i><i data-hf-id="hf-26gf"></i>
+    </div>
+    <div data-hf-id="hf-n8e6" class="f01-title-shield" id="f01-title-shield">
+      <svg data-hf-id="hf-2wn0" viewBox="0 0 64 76">
+        <path data-hf-id="hf-dan1" id="f01-title-shield-body" pathLength="1" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+        <rect data-hf-id="hf-hyzw" id="f01-title-lock-body" pathLength="1" x="22" y="34" width="20" height="16" rx="2.5" />
+        <path data-hf-id="hf-mel7" id="f01-title-lock-shackle" pathLength="1" d="M26 34v-5a6 6 0 0 1 12 0v5" />
+      </svg>
+    </div>
+
+    <!-- hook (Scenes 1–2) -->
+    <div data-hf-id="hf-h7aa" class="f01-title-hook" id="f01-title-hook">
+      <span data-hf-id="hf-p9vw" class="f01-title-line">
+        <span data-hf-id="hf-rr4p" class="f01-title-w f01-title-h1w f01-title-x">Chỉ</span><span data-hf-id="hf-hw09" class="f01-title-w f01-title-h1w f01-title-x">một</span><span data-hf-id="hf-syok" class="f01-title-w f01-title-h1w f01-title-x">cú</span><span data-hf-id="hf-z5e2" class="f01-title-w f01-title-h1w f01-title-x">nhấp</span><span data-hf-id="hf-sqrc" class="f01-title-w f01-title-h1w f01-title-x">chuột</span><span data-hf-id="hf-mtgo" class="f01-title-w f01-title-h1w f01-title-x" id="f01-title-sai">sai<span data-hf-id="hf-z38r" class="f01-title-ripple" id="f01-title-ripple"></span><span data-hf-id="hf-i8y3" class="f01-title-cursor" id="f01-title-cursor"><svg data-hf-id="hf-rx6i" viewBox="0 0 24 30"><path data-hf-id="hf-j73d" d="M2 2 L2 24 L8 18.5 L12 27.5 L15.6 26 L11.8 17.2 L19.5 17.2 Z" fill="#FFFFFF" stroke="#0A3D91" stroke-width="1.6" stroke-linejoin="round" /></svg></span></span>
+      </span>
+      <span data-hf-id="hf-hxlw" class="f01-title-line">
+        <span data-hf-id="hf-0yic" class="f01-title-w f01-title-h2w f01-title-x">—</span><span data-hf-id="hf-gg3a" class="f01-title-w f01-title-h2w f01-title-x">cả</span><span data-hf-id="hf-y4lh" class="f01-title-w f01-title-h2w f01-title-x">hệ</span><span data-hf-id="hf-7xd8" class="f01-title-w f01-title-h2w f01-title-x">thống</span><span data-hf-id="hf-lyfa" class="f01-title-w f01-title-h2w f01-title-x">có</span><span data-hf-id="hf-7iol" class="f01-title-w f01-title-h2w f01-title-x">thể</span><span data-hf-id="hf-m4da" class="f01-title-hl f01-title-x" id="f01-title-hl"><span data-hf-id="hf-y3t5" class="f01-title-hl-bg" id="f01-title-hl-bg"></span><span data-hf-id="hf-i23b" class="f01-title-w f01-title-h2w">dừng</span><span data-hf-id="hf-vk55" class="f01-title-w f01-title-h2w">lại.</span></span>
+      </span>
+    </div>
+
+    <!-- cover title (Scene 4) -->
+    <div data-hf-id="hf-w1p8" class="f01-title-cover">
+      <div data-hf-id="hf-jpo2" class="f01-title-eyebrow" id="f01-title-eyebrow">SEMV · IT Part</div>
+      <div data-hf-id="hf-boji" class="f01-title-accent" id="f01-title-accent"></div>
+      <div data-hf-id="hf-7f42" class="f01-title-h1">
+        <span data-hf-id="hf-nugy" class="f01-title-tw">Đào</span><span data-hf-id="hf-c8n3" class="f01-title-tw">tạo</span><span data-hf-id="hf-hlv7" class="f01-title-tw">bảo</span><span data-hf-id="hf-77l9" class="f01-title-tw">mật</span><br data-hf-id="hf-x5px"><span data-hf-id="hf-7c1c" class="f01-title-tw">thông</span><span data-hf-id="hf-z3bo" class="f01-title-tw">tin</span>
+      </div>
+      <div data-hf-id="hf-u8zp" class="f01-title-sub" id="f01-title-sub">Dành cho nhân viên mới · Sumika Electronic Materials Vietnam</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="01-title"]');
+      var q = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+      var tl = gsap.timeline({ paused: true });
+
+      // ---- Scene 1 (0.0–1.5s): line 1 per-word staggered reveal ----
+      var line1 = q(".f01-title-h1w");
+      var t1 = [0.05, 0.2, 0.35, 0.52, 0.68, 0.86];
+      line1.forEach(function (w, i) {
+        tl.fromTo(w, { opacity: 0, y: 28, filter: "blur(8px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, ease: "power3.out" }, t1[i]);
+      });
+
+      // cursor glides in, clicks "sai" at 1.1s, one bounded ripple
+      tl.fromTo("#f01-title-cursor", { opacity: 0, x: 260, y: 170 },
+        { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power3.out" }, 0.45);
+      tl.fromTo("#f01-title-cursor", { scale: 1 },
+        { scale: 0.82, duration: 0.08, ease: "power2.in" }, 1.08);
+      tl.to("#f01-title-cursor", { scale: 1, duration: 0.22, ease: "back.out(2)" }, 1.16);
+      tl.fromTo("#f01-title-ripple", { opacity: 0.7, scale: 0.15 },
+        { opacity: 0, scale: 1.6, duration: 0.6, ease: "power2.out" }, 1.1);
+      tl.fromTo("#f01-title-sai", { scale: 1 },
+        { scale: 0.94, duration: 0.08, ease: "power2.in" }, 1.1);
+      tl.to("#f01-title-sai", { scale: 1, duration: 0.3, ease: "back.out(2.5)" }, 1.18);
+
+      // ---- Scene 2 (1.6–3.4s): line 2 per-word reveal + highlight sweep on "dừng lại" ----
+      var line2 = q(".f01-title-h2w");
+      var t2 = [1.6, 1.75, 1.9, 2.05, 2.25, 2.4, 2.6, 2.75];
+      line2.forEach(function (w, i) {
+        tl.fromTo(w, { opacity: 0, y: 28, filter: "blur(8px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, ease: "power3.out" }, t2[i]);
+      });
+      tl.fromTo("#f01-title-hl-bg", { scaleX: 0 },
+        { scaleX: 1, duration: 0.45, ease: "power2.inOut" }, 2.9);
+      tl.to("#f01-title-cursor", { opacity: 0, duration: 0.3, ease: "power1.out" }, 1.9);
+
+      // ---- Scene 3 (3.6–5.4s): waterfall cut-the-curve leftward; diagonal sweeps in from the right ----
+      var exitTokens = q(".f01-title-x");
+      var EXIT0 = 3.6;
+      exitTokens.forEach(function (w, i) {
+        var s = EXIT0 + i * 0.022;
+        tl.to(w, { x: -230, duration: 0.34, ease: "power4.in" }, s);
+        tl.to(w, { opacity: 0, duration: 0.18, ease: "power1.in" }, s + 0.12);
+      });
+      // panel enters mid-flight at matched leftward velocity (mirrored power4.out)
+      tl.fromTo("#f01-title-diag", { x: 460, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.55, ease: "power4.out" }, 3.82);
+      tl.fromTo(q(".f01-title-dots i"), { opacity: 0, scale: 0 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", stagger: 0.04 }, 4.2);
+      // shield + lock self-draw (svg-path-draw)
+      tl.to("#f01-title-shield-body", { strokeDashoffset: 0, duration: 0.75, ease: "power2.out" }, 4.35);
+      tl.to("#f01-title-lock-body", { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, 4.9);
+      tl.to("#f01-title-lock-shackle", { strokeDashoffset: 0, duration: 0.32, ease: "power2.out" }, 5.24);
+
+      // ---- Scene 4 (5.4–7.8s): cover title ----
+      tl.fromTo("#f01-title-eyebrow", { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 5.5);
+      tl.fromTo("#f01-title-accent", { scaleX: 0 },
+        { scaleX: 1, duration: 0.4, ease: "power3.out" }, 5.55);
+      var titleWords = q(".f01-title-tw");
+      var t4 = [5.8, 6.0, 6.2, 6.4, 6.65, 6.9];
+      titleWords.forEach(function (w, i) {
+        tl.fromTo(w, { opacity: 0, y: 34, filter: "blur(8px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out" }, t4[i]);
+      });
+      tl.fromTo("#f01-title-sub", { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.4);
+
+      // ---- Scene 5 (7.8–9.36s): hold; very light settle on the shield ----
+      tl.fromTo("#f01-title-shield", { y: 0 },
+        { y: -6, duration: 1.5, ease: "sine.inOut" }, 7.8);
+
+      // pad to full duration
+      tl.set({}, {}, 9.36);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["01-title"] = tl;
+    })();
+  </script>
+</template>

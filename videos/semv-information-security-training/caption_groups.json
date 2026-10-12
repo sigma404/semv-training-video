@@ -1,0 +1,1303 @@
+{
+  "total_duration_s": 108.504,
+  "width": 1920,
+  "height": 1080,
+  "groups": [
+    {
+      "id": "caption-group-0",
+      "frame": 1,
+      "start": 0.129,
+      "end": 1.657,
+      "text": "Chỉ một cú nhấp chuột sai,",
+      "words": [
+        {
+          "id": "caption-word-0-0",
+          "text": "Chỉ một",
+          "start": 0.129,
+          "end": 0.497
+        },
+        {
+          "id": "caption-word-0-1",
+          "text": "cú nhấp",
+          "start": 0.497,
+          "end": 0.918
+        },
+        {
+          "id": "caption-word-0-2",
+          "text": "chuột sai,",
+          "start": 0.918,
+          "end": 1.537
+        }
+      ]
+    },
+    {
+      "id": "caption-group-1",
+      "frame": 1,
+      "start": 1.734,
+      "end": 3.578,
+      "text": "cả hệ thống có thể dừng lại.",
+      "words": [
+        {
+          "id": "caption-word-1-0",
+          "text": "cả hệ thống",
+          "start": 1.734,
+          "end": 2.418
+        },
+        {
+          "id": "caption-word-1-1",
+          "text": "có thể dừng",
+          "start": 2.418,
+          "end": 3.103
+        },
+        {
+          "id": "caption-word-1-2",
+          "text": "lại.",
+          "start": 3.103,
+          "end": 3.458
+        }
+      ]
+    },
+    {
+      "id": "caption-group-2",
+      "frame": 1,
+      "start": 4.368,
+      "end": 8.58,
+      "text": "Chào mừng bạn đến với khóa đào tạo bảo mật thông tin của SEMV.",
+      "words": [
+        {
+          "id": "caption-word-2-0",
+          "text": "Chào mừng bạn đến",
+          "start": 4.368,
+          "end": 5.224
+        },
+        {
+          "id": "caption-word-2-1",
+          "text": "với khóa đào tạo",
+          "start": 5.224,
+          "end": 6.21
+        },
+        {
+          "id": "caption-word-2-2",
+          "text": "bảo mật thông tin",
+          "start": 6.211,
+          "end": 7.118
+        },
+        {
+          "id": "caption-word-2-3",
+          "text": "của SEMV.",
+          "start": 7.118,
+          "end": 8.46
+        }
+      ]
+    },
+    {
+      "id": "caption-group-3",
+      "frame": 2,
+      "start": 9.489,
+      "end": 11.912,
+      "text": "Chính sách bảo mật tồn tại vì ba lý do,",
+      "words": [
+        {
+          "id": "caption-word-3-0",
+          "text": "Chính sách bảo mật",
+          "start": 9.489,
+          "end": 10.265
+        },
+        {
+          "id": "caption-word-3-1",
+          "text": "tồn tại vì ba",
+          "start": 10.265,
+          "end": 11.186
+        },
+        {
+          "id": "caption-word-3-2",
+          "text": "lý do,",
+          "start": 11.186,
+          "end": 11.792
+        }
+      ]
+    },
+    {
+      "id": "caption-group-4",
+      "frame": 2,
+      "start": 12.042,
+      "end": 13.398,
+      "text": "ngăn rò rỉ thông tin,",
+      "words": [
+        {
+          "id": "caption-word-4-0",
+          "text": "ngăn rò",
+          "start": 12.042,
+          "end": 12.502
+        },
+        {
+          "id": "caption-word-4-1",
+          "text": "rỉ thông",
+          "start": 12.502,
+          "end": 12.923
+        },
+        {
+          "id": "caption-word-4-2",
+          "text": "tin,",
+          "start": 12.923,
+          "end": 13.278
+        }
+      ]
+    },
+    {
+      "id": "caption-group-5",
+      "frame": 2,
+      "start": 13.515,
+      "end": 15.425,
+      "text": "giữ cho sản xuất không bị gián đoạn,",
+      "words": [
+        {
+          "id": "caption-word-5-0",
+          "text": "giữ cho sản",
+          "start": 13.515,
+          "end": 14.094
+        },
+        {
+          "id": "caption-word-5-1",
+          "text": "xuất không bị",
+          "start": 14.094,
+          "end": 14.699
+        },
+        {
+          "id": "caption-word-5-2",
+          "text": "gián đoạn,",
+          "start": 14.699,
+          "end": 15.305
+        }
+      ]
+    },
+    {
+      "id": "caption-group-6",
+      "frame": 2,
+      "start": 15.502,
+      "end": 17.267,
+      "text": "và giữ niềm tin của khách hàng.",
+      "words": [
+        {
+          "id": "caption-word-6-0",
+          "text": "và giữ niềm",
+          "start": 15.502,
+          "end": 16.134
+        },
+        {
+          "id": "caption-word-6-1",
+          "text": "tin của khách",
+          "start": 16.134,
+          "end": 16.805
+        },
+        {
+          "id": "caption-word-6-2",
+          "text": "hàng.",
+          "start": 16.805,
+          "end": 17.147
+        }
+      ]
+    },
+    {
+      "id": "caption-group-7",
+      "frame": 2,
+      "start": 18.057,
+      "end": 21.427,
+      "text": "Mỗi nhân viên SEMV chính là một lớp bảo vệ.",
+      "words": [
+        {
+          "id": "caption-word-7-0",
+          "text": "Mỗi nhân viên SEMV",
+          "start": 18.057,
+          "end": 19.781
+        },
+        {
+          "id": "caption-word-7-1",
+          "text": "chính là một lớp",
+          "start": 19.781,
+          "end": 20.742
+        },
+        {
+          "id": "caption-word-7-2",
+          "text": "bảo vệ.",
+          "start": 20.742,
+          "end": 21.307
+        }
+      ]
+    },
+    {
+      "id": "caption-group-8",
+      "frame": 3,
+      "start": 22.342,
+      "end": 24.909,
+      "text": "Quyền truy cập được cấp theo cấp độ bảo mật A,",
+      "words": [
+        {
+          "id": "caption-word-8-0",
+          "text": "Quyền truy cập được",
+          "start": 22.342,
+          "end": 23.118
+        },
+        {
+          "id": "caption-word-8-1",
+          "text": "cấp theo cấp độ",
+          "start": 23.118,
+          "end": 23.974
+        },
+        {
+          "id": "caption-word-8-2",
+          "text": "bảo mật A,",
+          "start": 23.974,
+          "end": 24.789
+        }
+      ]
+    },
+    {
+      "id": "caption-group-9",
+      "frame": 3,
+      "start": 25.026,
+      "end": 25.515,
+      "text": "B,",
+      "words": [
+        {
+          "id": "caption-word-9-0",
+          "text": "B,",
+          "start": 25.026,
+          "end": 25.395
+        }
+      ]
+    },
+    {
+      "id": "caption-group-10",
+      "frame": 3,
+      "start": 25.605,
+      "end": 25.947,
+      "text": "C.",
+      "words": [
+        {
+          "id": "caption-word-10-0",
+          "text": "C.",
+          "start": 25.605,
+          "end": 25.947
+        }
+      ]
+    },
+    {
+      "id": "caption-group-11",
+      "frame": 3,
+      "start": 25.947,
+      "end": 27.554,
+      "text": "Tài khoản là của riêng bạn,",
+      "words": [
+        {
+          "id": "caption-word-11-0",
+          "text": "Tài khoản",
+          "start": 25.947,
+          "end": 26.408
+        },
+        {
+          "id": "caption-word-11-1",
+          "text": "là của",
+          "start": 26.408,
+          "end": 26.855
+        },
+        {
+          "id": "caption-word-11-2",
+          "text": "riêng bạn,",
+          "start": 26.855,
+          "end": 27.434
+        }
+      ]
+    },
+    {
+      "id": "caption-group-12",
+      "frame": 3,
+      "start": 27.645,
+      "end": 28.607,
+      "text": "không chia sẻ,",
+      "words": [
+        {
+          "id": "caption-word-12-0",
+          "text": "không chia",
+          "start": 27.645,
+          "end": 28.026
+        },
+        {
+          "id": "caption-word-12-1",
+          "text": "sẻ,",
+          "start": 28.026,
+          "end": 28.487
+        }
+      ]
+    },
+    {
+      "id": "caption-group-13",
+      "frame": 3,
+      "start": 28.645,
+      "end": 29.515,
+      "text": "không cho mượn.",
+      "words": [
+        {
+          "id": "caption-word-13-0",
+          "text": "không cho",
+          "start": 28.645,
+          "end": 29.039
+        },
+        {
+          "id": "caption-word-13-1",
+          "text": "mượn.",
+          "start": 29.039,
+          "end": 29.395
+        }
+      ]
+    },
+    {
+      "id": "caption-group-14",
+      "frame": 3,
+      "start": 30.305,
+      "end": 32.123,
+      "text": "Mật khẩu phải từ 8 ký tự,",
+      "words": [
+        {
+          "id": "caption-word-14-0",
+          "text": "Mật khẩu phải",
+          "start": 30.305,
+          "end": 30.963
+        },
+        {
+          "id": "caption-word-14-1",
+          "text": "từ 8 ký",
+          "start": 30.963,
+          "end": 31.621
+        },
+        {
+          "id": "caption-word-14-2",
+          "text": "tự,",
+          "start": 31.621,
+          "end": 32.003
+        }
+      ]
+    },
+    {
+      "id": "caption-group-15",
+      "frame": 3,
+      "start": 32.266,
+      "end": 33.228,
+      "text": "gồm chữ thường,",
+      "words": [
+        {
+          "id": "caption-word-15-0",
+          "text": "gồm chữ",
+          "start": 32.266,
+          "end": 32.713
+        },
+        {
+          "id": "caption-word-15-1",
+          "text": "thường,",
+          "start": 32.713,
+          "end": 33.108
+        }
+      ]
+    },
+    {
+      "id": "caption-group-16",
+      "frame": 3,
+      "start": 33.305,
+      "end": 34.044,
+      "text": "chữ hoa,",
+      "words": [
+        {
+          "id": "caption-word-16-0",
+          "text": "chữ hoa,",
+          "start": 33.305,
+          "end": 33.924
+        }
+      ]
+    },
+    {
+      "id": "caption-group-17",
+      "frame": 3,
+      "start": 34.121,
+      "end": 35.675,
+      "text": "số và ký tự đặc biệt,",
+      "words": [
+        {
+          "id": "caption-word-17-0",
+          "text": "số và",
+          "start": 34.121,
+          "end": 34.621
+        },
+        {
+          "id": "caption-word-17-1",
+          "text": "ký tự",
+          "start": 34.621,
+          "end": 35.095
+        },
+        {
+          "id": "caption-word-17-2",
+          "text": "đặc biệt,",
+          "start": 35.095,
+          "end": 35.555
+        }
+      ]
+    },
+    {
+      "id": "caption-group-18",
+      "frame": 3,
+      "start": 35.792,
+      "end": 37.662,
+      "text": "và đổi định kỳ ba tháng một lần.",
+      "words": [
+        {
+          "id": "caption-word-18-0",
+          "text": "và đổi định",
+          "start": 35.792,
+          "end": 36.384
+        },
+        {
+          "id": "caption-word-18-1",
+          "text": "kỳ ba tháng",
+          "start": 36.384,
+          "end": 37.055
+        },
+        {
+          "id": "caption-word-18-2",
+          "text": "một lần.",
+          "start": 37.055,
+          "end": 37.542
+        }
+      ]
+    },
+    {
+      "id": "caption-group-19",
+      "frame": 4,
+      "start": 38.553,
+      "end": 39.344,
+      "text": "Với mã độc,",
+      "words": [
+        {
+          "id": "caption-word-19-0",
+          "text": "Với mã",
+          "start": 38.553,
+          "end": 38.948
+        },
+        {
+          "id": "caption-word-19-1",
+          "text": "độc,",
+          "start": 38.948,
+          "end": 39.224
+        }
+      ]
+    },
+    {
+      "id": "caption-group-20",
+      "frame": 4,
+      "start": 39.421,
+      "end": 40.541,
+      "text": "hãy nhớ bốn điều,",
+      "words": [
+        {
+          "id": "caption-word-20-0",
+          "text": "hãy nhớ",
+          "start": 39.421,
+          "end": 39.869
+        },
+        {
+          "id": "caption-word-20-1",
+          "text": "bốn điều,",
+          "start": 39.869,
+          "end": 40.421
+        }
+      ]
+    },
+    {
+      "id": "caption-group-21",
+      "frame": 4,
+      "start": 40.685,
+      "end": 43.449,
+      "text": "cập nhật phần mềm diệt virus và Windows định kỳ,",
+      "words": [
+        {
+          "id": "caption-word-21-0",
+          "text": "cập nhật phần mềm",
+          "start": 40.685,
+          "end": 41.408
+        },
+        {
+          "id": "caption-word-21-1",
+          "text": "diệt virus và Windows",
+          "start": 41.408,
+          "end": 42.75
+        },
+        {
+          "id": "caption-word-21-2",
+          "text": "định kỳ,",
+          "start": 42.75,
+          "end": 43.329
+        }
+      ]
+    },
+    {
+      "id": "caption-group-22",
+      "frame": 4,
+      "start": 43.579,
+      "end": 45.357,
+      "text": "không dùng chương trình không rõ nguồn gốc,",
+      "words": [
+        {
+          "id": "caption-word-22-0",
+          "text": "không dùng chương",
+          "start": 43.579,
+          "end": 44.132
+        },
+        {
+          "id": "caption-word-22-1",
+          "text": "trình không rõ",
+          "start": 44.132,
+          "end": 44.763
+        },
+        {
+          "id": "caption-word-22-2",
+          "text": "nguồn gốc,",
+          "start": 44.763,
+          "end": 45.237
+        }
+      ]
+    },
+    {
+      "id": "caption-group-23",
+      "frame": 4,
+      "start": 45.461,
+      "end": 47.778,
+      "text": "quét virus trước khi gửi dữ liệu ra ngoài,",
+      "words": [
+        {
+          "id": "caption-word-23-0",
+          "text": "quét virus trước",
+          "start": 45.461,
+          "end": 46.25
+        },
+        {
+          "id": "caption-word-23-1",
+          "text": "khi gửi dữ",
+          "start": 46.25,
+          "end": 46.829
+        },
+        {
+          "id": "caption-word-23-2",
+          "text": "liệu ra ngoài,",
+          "start": 46.829,
+          "end": 47.658
+        }
+      ]
+    },
+    {
+      "id": "caption-group-24",
+      "frame": 4,
+      "start": 47.908,
+      "end": 50.555,
+      "text": "và báo ngay cho bộ phận IT khi thấy điều bất thường.",
+      "words": [
+        {
+          "id": "caption-word-24-0",
+          "text": "và báo ngay cho",
+          "start": 47.908,
+          "end": 48.684
+        },
+        {
+          "id": "caption-word-24-1",
+          "text": "bộ phận IT khi",
+          "start": 48.685,
+          "end": 49.487
+        },
+        {
+          "id": "caption-word-24-2",
+          "text": "thấy điều bất thường.",
+          "start": 49.487,
+          "end": 50.435
+        }
+      ]
+    },
+    {
+      "id": "caption-group-25",
+      "frame": 5,
+      "start": 51.465,
+      "end": 53.335,
+      "text": "Sự cố bảo mật có năm loại,",
+      "words": [
+        {
+          "id": "caption-word-25-0",
+          "text": "Sự cố bảo",
+          "start": 51.465,
+          "end": 52.162
+        },
+        {
+          "id": "caption-word-25-1",
+          "text": "mật có năm",
+          "start": 52.162,
+          "end": 52.847
+        },
+        {
+          "id": "caption-word-25-2",
+          "text": "loại,",
+          "start": 52.847,
+          "end": 53.215
+        }
+      ]
+    },
+    {
+      "id": "caption-group-26",
+      "frame": 5,
+      "start": 53.425,
+      "end": 54.348,
+      "text": "lỗi dịch vụ,",
+      "words": [
+        {
+          "id": "caption-word-26-0",
+          "text": "lỗi dịch",
+          "start": 53.425,
+          "end": 53.847
+        },
+        {
+          "id": "caption-word-26-1",
+          "text": "vụ,",
+          "start": 53.847,
+          "end": 54.228
+        }
+      ]
+    },
+    {
+      "id": "caption-group-27",
+      "frame": 5,
+      "start": 54.425,
+      "end": 55.335,
+      "text": "lỗi thông tin,",
+      "words": [
+        {
+          "id": "caption-word-27-0",
+          "text": "lỗi thông",
+          "start": 54.425,
+          "end": 54.873
+        },
+        {
+          "id": "caption-word-27-1",
+          "text": "tin,",
+          "start": 54.873,
+          "end": 55.215
+        }
+      ]
+    },
+    {
+      "id": "caption-group-28",
+      "frame": 5,
+      "start": 55.439,
+      "end": 56.519,
+      "text": "vi phạm an ninh,",
+      "words": [
+        {
+          "id": "caption-word-28-0",
+          "text": "vi phạm",
+          "start": 55.439,
+          "end": 55.912
+        },
+        {
+          "id": "caption-word-28-1",
+          "text": "an ninh,",
+          "start": 55.912,
+          "end": 56.399
+        }
+      ]
+    },
+    {
+      "id": "caption-group-29",
+      "frame": 5,
+      "start": 56.597,
+      "end": 57.427,
+      "text": "lỗi bảo mật,",
+      "words": [
+        {
+          "id": "caption-word-29-0",
+          "text": "lỗi bảo",
+          "start": 56.597,
+          "end": 57.031
+        },
+        {
+          "id": "caption-word-29-1",
+          "text": "mật,",
+          "start": 57.031,
+          "end": 57.307
+        }
+      ]
+    },
+    {
+      "id": "caption-group-30",
+      "frame": 5,
+      "start": 57.531,
+      "end": 58.993,
+      "text": "và sự cố đáng ngờ.",
+      "words": [
+        {
+          "id": "caption-word-30-0",
+          "text": "và sự",
+          "start": 57.531,
+          "end": 58.004
+        },
+        {
+          "id": "caption-word-30-1",
+          "text": "cố đáng",
+          "start": 58.004,
+          "end": 58.491
+        },
+        {
+          "id": "caption-word-30-2",
+          "text": "ngờ.",
+          "start": 58.491,
+          "end": 58.873
+        }
+      ]
+    },
+    {
+      "id": "caption-group-31",
+      "frame": 5,
+      "start": 59.783,
+      "end": 62.153,
+      "text": "Loại nào cũng phải xử lý theo quy trình.",
+      "words": [
+        {
+          "id": "caption-word-31-0",
+          "text": "Loại nào cũng",
+          "start": 59.783,
+          "end": 60.494
+        },
+        {
+          "id": "caption-word-31-1",
+          "text": "phải xử lý",
+          "start": 60.494,
+          "end": 61.204
+        },
+        {
+          "id": "caption-word-31-2",
+          "text": "theo quy trình.",
+          "start": 61.204,
+          "end": 62.033
+        }
+      ]
+    },
+    {
+      "id": "caption-group-32",
+      "frame": 5,
+      "start": 62.954,
+      "end": 64.588,
+      "text": "Nếu bạn vờ như không thấy,",
+      "words": [
+        {
+          "id": "caption-word-32-0",
+          "text": "Nếu bạn",
+          "start": 62.954,
+          "end": 63.402
+        },
+        {
+          "id": "caption-word-32-1",
+          "text": "vờ như",
+          "start": 63.402,
+          "end": 63.849
+        },
+        {
+          "id": "caption-word-32-2",
+          "text": "không thấy,",
+          "start": 63.849,
+          "end": 64.468
+        }
+      ]
+    },
+    {
+      "id": "caption-group-33",
+      "frame": 5,
+      "start": 64.678,
+      "end": 66.706,
+      "text": "thiệt hại có thể tăng lên nhiều lần.",
+      "words": [
+        {
+          "id": "caption-word-33-0",
+          "text": "thiệt hại có",
+          "start": 64.678,
+          "end": 65.283
+        },
+        {
+          "id": "caption-word-33-1",
+          "text": "thể tăng lên",
+          "start": 65.283,
+          "end": 66.007
+        },
+        {
+          "id": "caption-word-33-2",
+          "text": "nhiều lần.",
+          "start": 66.007,
+          "end": 66.586
+        }
+      ]
+    },
+    {
+      "id": "caption-group-34",
+      "frame": 6,
+      "start": 67.63,
+      "end": 69.04,
+      "text": "Đây không phải lý thuyết.",
+      "words": [
+        {
+          "id": "caption-word-34-0",
+          "text": "Đây không",
+          "start": 67.63,
+          "end": 68.117
+        },
+        {
+          "id": "caption-word-34-1",
+          "text": "phải lý",
+          "start": 68.117,
+          "end": 68.617
+        },
+        {
+          "id": "caption-word-34-2",
+          "text": "thuyết.",
+          "start": 68.617,
+          "end": 68.92
+        }
+      ]
+    },
+    {
+      "id": "caption-group-35",
+      "frame": 6,
+      "start": 69.817,
+      "end": 73.924,
+      "text": "Hacker đã xâm nhập email của các công ty thành viên tập đoàn Sumitomo,",
+      "words": [
+        {
+          "id": "caption-word-35-0",
+          "text": "Hacker đã xâm nhập",
+          "start": 69.817,
+          "end": 70.87
+        },
+        {
+          "id": "caption-word-35-1",
+          "text": "email của các công",
+          "start": 70.87,
+          "end": 71.856
+        },
+        {
+          "id": "caption-word-35-2",
+          "text": "ty thành viên tập",
+          "start": 71.856,
+          "end": 72.685
+        },
+        {
+          "id": "caption-word-35-3",
+          "text": "đoàn Sumitomo,",
+          "start": 72.685,
+          "end": 73.804
+        }
+      ]
+    },
+    {
+      "id": "caption-group-36",
+      "frame": 6,
+      "start": 74.041,
+      "end": 76.016,
+      "text": "giả làm đối tác để đòi thanh toán.",
+      "words": [
+        {
+          "id": "caption-word-36-0",
+          "text": "giả làm đối",
+          "start": 74.041,
+          "end": 74.646
+        },
+        {
+          "id": "caption-word-36-1",
+          "text": "tác để đòi",
+          "start": 74.646,
+          "end": 75.343
+        },
+        {
+          "id": "caption-word-36-2",
+          "text": "thanh toán.",
+          "start": 75.343,
+          "end": 75.896
+        }
+      ]
+    },
+    {
+      "id": "caption-group-37",
+      "frame": 6,
+      "start": 76.817,
+      "end": 79.621,
+      "text": "Còn ransomware mã hóa dữ liệu rồi đòi tiền chuộc,",
+      "words": [
+        {
+          "id": "caption-word-37-0",
+          "text": "Còn ransomware mã hóa",
+          "start": 76.817,
+          "end": 78.12
+        },
+        {
+          "id": "caption-word-37-1",
+          "text": "dữ liệu rồi đòi",
+          "start": 78.12,
+          "end": 79.001
+        },
+        {
+          "id": "caption-word-37-2",
+          "text": "tiền chuộc,",
+          "start": 79.001,
+          "end": 79.501
+        }
+      ]
+    },
+    {
+      "id": "caption-group-38",
+      "frame": 6,
+      "start": 79.764,
+      "end": 83.003,
+      "text": "Colonial Pipeline đã phải trả khoảng năm triệu đô la,",
+      "words": [
+        {
+          "id": "caption-word-38-0",
+          "text": "Colonial Pipeline đã phải",
+          "start": 79.764,
+          "end": 81.449
+        },
+        {
+          "id": "caption-word-38-1",
+          "text": "trả khoảng năm triệu",
+          "start": 81.449,
+          "end": 82.343
+        },
+        {
+          "id": "caption-word-38-2",
+          "text": "đô la,",
+          "start": 82.343,
+          "end": 82.883
+        }
+      ]
+    },
+    {
+      "id": "caption-group-39",
+      "frame": 6,
+      "start": 83.093,
+      "end": 84.832,
+      "text": "tương đương 114 tỷ đồng.",
+      "words": [
+        {
+          "id": "caption-word-39-0",
+          "text": "tương đương",
+          "start": 83.093,
+          "end": 83.448
+        },
+        {
+          "id": "caption-word-39-1",
+          "text": "114 tỷ đồng.",
+          "start": 83.449,
+          "end": 84.712
+        }
+      ]
+    },
+    {
+      "id": "caption-group-40",
+      "frame": 7,
+      "start": 85.737,
+      "end": 87.686,
+      "text": "Bảy thói quen để bảo vệ chính bạn,",
+      "words": [
+        {
+          "id": "caption-word-40-0",
+          "text": "Bảy thói quen",
+          "start": 85.737,
+          "end": 86.421
+        },
+        {
+          "id": "caption-word-40-1",
+          "text": "để bảo vệ",
+          "start": 86.421,
+          "end": 87
+        },
+        {
+          "id": "caption-word-40-2",
+          "text": "chính bạn,",
+          "start": 87,
+          "end": 87.566
+        }
+      ]
+    },
+    {
+      "id": "caption-group-41",
+      "frame": 7,
+      "start": 87.829,
+      "end": 88.923,
+      "text": "cập nhật Windows,",
+      "words": [
+        {
+          "id": "caption-word-41-0",
+          "text": "cập nhật",
+          "start": 87.829,
+          "end": 88.25
+        },
+        {
+          "id": "caption-word-41-1",
+          "text": "Windows,",
+          "start": 88.25,
+          "end": 88.803
+        }
+      ]
+    },
+    {
+      "id": "caption-group-42",
+      "frame": 7,
+      "start": 89.026,
+      "end": 90.094,
+      "text": "không mở link lạ,",
+      "words": [
+        {
+          "id": "caption-word-42-0",
+          "text": "không mở",
+          "start": 89.026,
+          "end": 89.408
+        },
+        {
+          "id": "caption-word-42-1",
+          "text": "link lạ,",
+          "start": 89.408,
+          "end": 89.974
+        }
+      ]
+    },
+    {
+      "id": "caption-group-43",
+      "frame": 7,
+      "start": 90.197,
+      "end": 92.502,
+      "text": "không cung cấp mật khẩu hay mã OTP,",
+      "words": [
+        {
+          "id": "caption-word-43-0",
+          "text": "không cung cấp",
+          "start": 90.197,
+          "end": 90.75
+        },
+        {
+          "id": "caption-word-43-1",
+          "text": "mật khẩu hay",
+          "start": 90.75,
+          "end": 91.395
+        },
+        {
+          "id": "caption-word-43-2",
+          "text": "mã OTP,",
+          "start": 91.395,
+          "end": 92.382
+        }
+      ]
+    },
+    {
+      "id": "caption-group-44",
+      "frame": 7,
+      "start": 92.619,
+      "end": 94.212,
+      "text": "không cài ứng dụng chưa xác thực,",
+      "words": [
+        {
+          "id": "caption-word-44-0",
+          "text": "không cài ứng",
+          "start": 92.619,
+          "end": 93.184
+        },
+        {
+          "id": "caption-word-44-1",
+          "text": "dụng chưa xác",
+          "start": 93.184,
+          "end": 93.868
+        },
+        {
+          "id": "caption-word-44-2",
+          "text": "thực,",
+          "start": 93.869,
+          "end": 94.092
+        }
+      ]
+    },
+    {
+      "id": "caption-group-45",
+      "frame": 7,
+      "start": 94.342,
+      "end": 95.62,
+      "text": "không cắm thiết bị lạ,",
+      "words": [
+        {
+          "id": "caption-word-45-0",
+          "text": "không cắm",
+          "start": 94.342,
+          "end": 94.763
+        },
+        {
+          "id": "caption-word-45-1",
+          "text": "thiết bị",
+          "start": 94.763,
+          "end": 95.105
+        },
+        {
+          "id": "caption-word-45-2",
+          "text": "lạ,",
+          "start": 95.105,
+          "end": 95.5
+        }
+      ]
+    },
+    {
+      "id": "caption-group-46",
+      "frame": 7,
+      "start": 95.697,
+      "end": 96.752,
+      "text": "đặt mật khẩu mạnh,",
+      "words": [
+        {
+          "id": "caption-word-46-0",
+          "text": "đặt mật",
+          "start": 95.697,
+          "end": 96.079
+        },
+        {
+          "id": "caption-word-46-1",
+          "text": "khẩu mạnh,",
+          "start": 96.079,
+          "end": 96.632
+        }
+      ]
+    },
+    {
+      "id": "caption-group-47",
+      "frame": 7,
+      "start": 96.855,
+      "end": 98.87,
+      "text": "và luôn khóa máy khi rời chỗ ngồi.",
+      "words": [
+        {
+          "id": "caption-word-47-0",
+          "text": "và luôn khóa",
+          "start": 96.855,
+          "end": 97.408
+        },
+        {
+          "id": "caption-word-47-1",
+          "text": "máy khi rời",
+          "start": 97.408,
+          "end": 98.184
+        },
+        {
+          "id": "caption-word-47-2",
+          "text": "chỗ ngồi.",
+          "start": 98.184,
+          "end": 98.75
+        }
+      ]
+    },
+    {
+      "id": "caption-group-48",
+      "frame": 8,
+      "start": 99.79,
+      "end": 101.423,
+      "text": "Bảo mật bắt đầu từ bạn.",
+      "words": [
+        {
+          "id": "caption-word-48-0",
+          "text": "Bảo mật",
+          "start": 99.79,
+          "end": 100.237
+        },
+        {
+          "id": "caption-word-48-1",
+          "text": "bắt đầu",
+          "start": 100.237,
+          "end": 100.724
+        },
+        {
+          "id": "caption-word-48-2",
+          "text": "từ bạn.",
+          "start": 100.724,
+          "end": 101.303
+        }
+      ]
+    },
+    {
+      "id": "caption-group-49",
+      "frame": 8,
+      "start": 102.214,
+      "end": 103.36,
+      "text": "Khi có nghi ngờ,",
+      "words": [
+        {
+          "id": "caption-word-49-0",
+          "text": "Khi có",
+          "start": 102.214,
+          "end": 102.595
+        },
+        {
+          "id": "caption-word-49-1",
+          "text": "nghi ngờ,",
+          "start": 102.595,
+          "end": 103.24
+        }
+      ]
+    },
+    {
+      "id": "caption-group-50",
+      "frame": 8,
+      "start": 103.437,
+      "end": 105.294,
+      "text": "hãy liên hệ ngay bộ phận IT.",
+      "words": [
+        {
+          "id": "caption-word-50-0",
+          "text": "hãy liên hệ",
+          "start": 103.437,
+          "end": 104.122
+        },
+        {
+          "id": "caption-word-50-1",
+          "text": "ngay bộ phận",
+          "start": 104.122,
+          "end": 104.964
+        },
+        {
+          "id": "caption-word-50-2",
+          "text": "IT.",
+          "start": 104.964,
+          "end": 105.174
+        }
+      ]
+    },
+    {
+      "id": "caption-group-51",
+      "frame": 8,
+      "start": 106.095,
+      "end": 107.742,
+      "text": "Cảm ơn bạn đã tham gia.",
+      "words": [
+        {
+          "id": "caption-word-51-0",
+          "text": "Cảm ơn",
+          "start": 106.095,
+          "end": 106.503
+        },
+        {
+          "id": "caption-word-51-1",
+          "text": "bạn đã",
+          "start": 106.503,
+          "end": 107.003
+        },
+        {
+          "id": "caption-word-51-2",
+          "text": "tham gia.",
+          "start": 107.003,
+          "end": 107.622
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1404 @@
+{
+  "bgm": null,
+  "bgm_pending": false,
+  "voices": [
+    {
+      "frame": 1,
+      "path": "assets/voice-v2/01.mp3",
+      "duration_s": 12.44,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Chỉ một",
+          "start": 0.129,
+          "end": 0.511
+        },
+        {
+          "id": "w2",
+          "text": "cú nhấp",
+          "start": 0.511,
+          "end": 0.932
+        },
+        {
+          "id": "w4",
+          "text": "chuột sai,",
+          "start": 0.932,
+          "end": 1.563
+        },
+        {
+          "id": "w6",
+          "text": "cả hệ thống",
+          "start": 1.761,
+          "end": 2.445
+        },
+        {
+          "id": "w9",
+          "text": "có thể dừng",
+          "start": 2.445,
+          "end": 3.129
+        },
+        {
+          "id": "w12",
+          "text": "lại.",
+          "start": 3.129,
+          "end": 3.484
+        },
+        {
+          "id": "w13",
+          "text": "Đây là khóa đào",
+          "start": 4.408,
+          "end": 5.158
+        },
+        {
+          "id": "w17",
+          "text": "tạo bảo mật thông",
+          "start": 5.158,
+          "end": 6.013
+        },
+        {
+          "id": "w21",
+          "text": "tin dành cho nhân",
+          "start": 6.013,
+          "end": 6.842
+        },
+        {
+          "id": "w25",
+          "text": "viên mới SEMV,",
+          "start": 6.842,
+          "end": 8.474
+        },
+        {
+          "id": "w28",
+          "text": "gồm năm",
+          "start": 8.724,
+          "end": 9.21
+        },
+        {
+          "id": "w30",
+          "text": "phần.",
+          "start": 9.211,
+          "end": 9.553
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "path": "assets/voice-v2/02.mp3",
+      "duration_s": 18.704,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Phần một,",
+          "start": 0.129,
+          "end": 0.603
+        },
+        {
+          "id": "w2",
+          "text": "chính sách",
+          "start": 0.839,
+          "end": 1.287
+        },
+        {
+          "id": "w4",
+          "text": "bảo mật",
+          "start": 1.287,
+          "end": 1.774
+        },
+        {
+          "id": "w6",
+          "text": "là gì.",
+          "start": 1.774,
+          "end": 2.3
+        },
+        {
+          "id": "w8",
+          "text": "Đó là",
+          "start": 3.211,
+          "end": 3.618
+        },
+        {
+          "id": "w10",
+          "text": "tiêu chuẩn",
+          "start": 3.618,
+          "end": 4.066
+        },
+        {
+          "id": "w12",
+          "text": "chung,",
+          "start": 4.066,
+          "end": 4.408
+        },
+        {
+          "id": "w13",
+          "text": "quy định cách bảo",
+          "start": 4.645,
+          "end": 5.434
+        },
+        {
+          "id": "w17",
+          "text": "đảm an ninh cho",
+          "start": 5.434,
+          "end": 6.276
+        },
+        {
+          "id": "w21",
+          "text": "hệ thống thông tin.",
+          "start": 6.276,
+          "end": 7.276
+        },
+        {
+          "id": "w25",
+          "text": "Ba nguyên",
+          "start": 8.197,
+          "end": 8.592
+        },
+        {
+          "id": "w27",
+          "text": "tắc cốt",
+          "start": 8.592,
+          "end": 8.974
+        },
+        {
+          "id": "w29",
+          "text": "lõi,",
+          "start": 8.974,
+          "end": 9.408
+        },
+        {
+          "id": "w30",
+          "text": "cải tiến",
+          "start": 9.605,
+          "end": 10.039
+        },
+        {
+          "id": "w32",
+          "text": "bảo mật",
+          "start": 10.039,
+          "end": 10.447
+        },
+        {
+          "id": "w34",
+          "text": "liên tục,",
+          "start": 10.447,
+          "end": 10.921
+        },
+        {
+          "id": "w36",
+          "text": "mỗi người hoàn",
+          "start": 11.171,
+          "end": 11.776
+        },
+        {
+          "id": "w39",
+          "text": "thành trách nhiệm",
+          "start": 11.776,
+          "end": 12.395
+        },
+        {
+          "id": "w42",
+          "text": "theo vai trò,",
+          "start": 12.395,
+          "end": 13.21
+        },
+        {
+          "id": "w45",
+          "text": "và đánh giá rủi",
+          "start": 13.434,
+          "end": 14.329
+        },
+        {
+          "id": "w49",
+          "text": "ro qua các mối",
+          "start": 14.329,
+          "end": 15.263
+        },
+        {
+          "id": "w53",
+          "text": "đe dọa.",
+          "start": 15.263,
+          "end": 15.803
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "path": "assets/voice-v2/03.mp3",
+      "duration_s": 14.912,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Phần hai,",
+          "start": 0.129,
+          "end": 0.774
+        },
+        {
+          "id": "w2",
+          "text": "bối cảnh.",
+          "start": 0.958,
+          "end": 1.655
+        },
+        {
+          "id": "w4",
+          "text": "Chính sách giúp ngăn",
+          "start": 2.566,
+          "end": 3.329
+        },
+        {
+          "id": "w8",
+          "text": "thiệt hại do rò",
+          "start": 3.329,
+          "end": 4.224
+        },
+        {
+          "id": "w12",
+          "text": "rỉ thông tin,",
+          "start": 4.224,
+          "end": 4.987
+        },
+        {
+          "id": "w15",
+          "text": "giữ sản",
+          "start": 5.224,
+          "end": 5.618
+        },
+        {
+          "id": "w17",
+          "text": "xuất,",
+          "start": 5.618,
+          "end": 5.868
+        },
+        {
+          "id": "w18",
+          "text": "kinh doanh",
+          "start": 6.092,
+          "end": 6.5
+        },
+        {
+          "id": "w20",
+          "text": "không gián",
+          "start": 6.5,
+          "end": 6.934
+        },
+        {
+          "id": "w22",
+          "text": "đoạn,",
+          "start": 6.934,
+          "end": 7.289
+        },
+        {
+          "id": "w23",
+          "text": "giữ niềm",
+          "start": 7.513,
+          "end": 7.947
+        },
+        {
+          "id": "w25",
+          "text": "tin khách",
+          "start": 7.947,
+          "end": 8.329
+        },
+        {
+          "id": "w27",
+          "text": "hàng,",
+          "start": 8.329,
+          "end": 8.724
+        },
+        {
+          "id": "w28",
+          "text": "và giúp mỗi người",
+          "start": 8.974,
+          "end": 9.724
+        },
+        {
+          "id": "w32",
+          "text": "hiểu tầm quan trọng",
+          "start": 9.724,
+          "end": 10.632
+        },
+        {
+          "id": "w36",
+          "text": "của bảo mật để",
+          "start": 10.632,
+          "end": 11.434
+        },
+        {
+          "id": "w40",
+          "text": "tuân thủ.",
+          "start": 11.434,
+          "end": 12.026
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "path": "assets/voice-v2/04.mp3",
+      "duration_s": 22.2,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Phần ba,",
+          "start": 0.129,
+          "end": 0.734
+        },
+        {
+          "id": "w2",
+          "text": "áp dụng",
+          "start": 0.945,
+          "end": 1.418
+        },
+        {
+          "id": "w4",
+          "text": "và tuân",
+          "start": 1.418,
+          "end": 1.866
+        },
+        {
+          "id": "w6",
+          "text": "thủ,",
+          "start": 1.866,
+          "end": 2.274
+        },
+        {
+          "id": "w7",
+          "text": "bắt đầu với",
+          "start": 2.471,
+          "end": 3.182
+        },
+        {
+          "id": "w10",
+          "text": "kiểm soát truy",
+          "start": 3.182,
+          "end": 3.866
+        },
+        {
+          "id": "w13",
+          "text": "cập.",
+          "start": 3.866,
+          "end": 4.116
+        },
+        {
+          "id": "w14",
+          "text": "Quản trị viên",
+          "start": 5.039,
+          "end": 5.684
+        },
+        {
+          "id": "w17",
+          "text": "phân quyền theo",
+          "start": 5.684,
+          "end": 6.368
+        },
+        {
+          "id": "w20",
+          "text": "cấp độ A,",
+          "start": 6.368,
+          "end": 7.263
+        },
+        {
+          "id": "w23",
+          "text": "B,",
+          "start": 7.447,
+          "end": 7.829
+        },
+        {
+          "id": "w24",
+          "text": "C cho",
+          "start": 8.026,
+          "end": 8.421
+        },
+        {
+          "id": "w26",
+          "text": "nhân viên",
+          "start": 8.421,
+          "end": 8.934
+        },
+        {
+          "id": "w28",
+          "text": "và vendor.",
+          "start": 8.934,
+          "end": 9.789
+        },
+        {
+          "id": "w30",
+          "text": "Người dùng",
+          "start": 10.697,
+          "end": 11.118
+        },
+        {
+          "id": "w32",
+          "text": "không chia",
+          "start": 11.118,
+          "end": 11.5
+        },
+        {
+          "id": "w34",
+          "text": "sẻ,",
+          "start": 11.5,
+          "end": 11.974
+        },
+        {
+          "id": "w35",
+          "text": "không cho",
+          "start": 12.158,
+          "end": 12.5
+        },
+        {
+          "id": "w37",
+          "text": "mượn tài",
+          "start": 12.5,
+          "end": 12.947
+        },
+        {
+          "id": "w39",
+          "text": "khoản,",
+          "start": 12.947,
+          "end": 13.368
+        },
+        {
+          "id": "w40",
+          "text": "và đổi mật",
+          "start": 13.605,
+          "end": 14.171
+        },
+        {
+          "id": "w43",
+          "text": "khẩu ba tháng",
+          "start": 14.171,
+          "end": 14.803
+        },
+        {
+          "id": "w46",
+          "text": "một lần,",
+          "start": 14.803,
+          "end": 15.329
+        },
+        {
+          "id": "w48",
+          "text": "từ 8",
+          "start": 15.526,
+          "end": 15.96
+        },
+        {
+          "id": "w50",
+          "text": "ký tự,",
+          "start": 15.961,
+          "end": 16.553
+        },
+        {
+          "id": "w52",
+          "text": "gồm chữ",
+          "start": 16.816,
+          "end": 17.276
+        },
+        {
+          "id": "w54",
+          "text": "thường,",
+          "start": 17.276,
+          "end": 17.684
+        },
+        {
+          "id": "w55",
+          "text": "chữ hoa,",
+          "start": 17.868,
+          "end": 18.474
+        },
+        {
+          "id": "w57",
+          "text": "số và",
+          "start": 18.645,
+          "end": 19.171
+        },
+        {
+          "id": "w59",
+          "text": "ký tự",
+          "start": 19.171,
+          "end": 19.658
+        },
+        {
+          "id": "w61",
+          "text": "đặc biệt.",
+          "start": 19.658,
+          "end": 20.105
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "path": "assets/voice-v2/05.mp3",
+      "duration_s": 18.936,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Với mã",
+          "start": 0.129,
+          "end": 0.537
+        },
+        {
+          "id": "w2",
+          "text": "độc,",
+          "start": 0.537,
+          "end": 0.813
+        },
+        {
+          "id": "w3",
+          "text": "quản trị viên cài",
+          "start": 1.05,
+          "end": 1.932
+        },
+        {
+          "id": "w7",
+          "text": "phần mềm phòng chống",
+          "start": 1.932,
+          "end": 2.918
+        },
+        {
+          "id": "w11",
+          "text": "và hướng dẫn người",
+          "start": 2.918,
+          "end": 3.826
+        },
+        {
+          "id": "w15",
+          "text": "dùng.",
+          "start": 3.826,
+          "end": 4.142
+        },
+        {
+          "id": "w16",
+          "text": "Bạn cần cập",
+          "start": 5.066,
+          "end": 5.697
+        },
+        {
+          "id": "w19",
+          "text": "nhật diệt virus",
+          "start": 5.697,
+          "end": 6.513
+        },
+        {
+          "id": "w22",
+          "text": "và Windows,",
+          "start": 6.513,
+          "end": 7.421
+        },
+        {
+          "id": "w24",
+          "text": "không dùng phần",
+          "start": 7.697,
+          "end": 8.263
+        },
+        {
+          "id": "w27",
+          "text": "mềm không rõ",
+          "start": 8.263,
+          "end": 8.895
+        },
+        {
+          "id": "w30",
+          "text": "nguồn,",
+          "start": 8.895,
+          "end": 9.276
+        },
+        {
+          "id": "w31",
+          "text": "quét virus trước",
+          "start": 9.5,
+          "end": 10.289
+        },
+        {
+          "id": "w34",
+          "text": "khi gửi dữ",
+          "start": 10.289,
+          "end": 10.895
+        },
+        {
+          "id": "w37",
+          "text": "liệu ra ngoài,",
+          "start": 10.895,
+          "end": 11.75
+        },
+        {
+          "id": "w40",
+          "text": "và báo IT",
+          "start": 12,
+          "end": 12.579
+        },
+        {
+          "id": "w43",
+          "text": "ngay khi thấy",
+          "start": 12.579,
+          "end": 13.237
+        },
+        {
+          "id": "w46",
+          "text": "bất thường.",
+          "start": 13.237,
+          "end": 13.763
+        },
+        {
+          "id": "w48",
+          "text": "Làm ngơ,",
+          "start": 14.671,
+          "end": 15.303
+        },
+        {
+          "id": "w50",
+          "text": "thiệt hại",
+          "start": 15.5,
+          "end": 15.987
+        },
+        {
+          "id": "w52",
+          "text": "sẽ nhân",
+          "start": 15.987,
+          "end": 16.526
+        },
+        {
+          "id": "w54",
+          "text": "lên.",
+          "start": 16.526,
+          "end": 16.855
+        }
+      ]
+    },
+    {
+      "frame": 6,
+      "path": "assets/voice-v2/06.mp3",
+      "duration_s": 23.024,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Sự cố bảo",
+          "start": 0.129,
+          "end": 0.813
+        },
+        {
+          "id": "w3",
+          "text": "mật có năm",
+          "start": 0.813,
+          "end": 1.445
+        },
+        {
+          "id": "w6",
+          "text": "loại,",
+          "start": 1.445,
+          "end": 1.813
+        },
+        {
+          "id": "w7",
+          "text": "lỗi dịch",
+          "start": 2.011,
+          "end": 2.418
+        },
+        {
+          "id": "w9",
+          "text": "vụ,",
+          "start": 2.418,
+          "end": 2.787
+        },
+        {
+          "id": "w10",
+          "text": "do hỏng phần",
+          "start": 3.037,
+          "end": 3.616
+        },
+        {
+          "id": "w13",
+          "text": "cứng hay phần",
+          "start": 3.616,
+          "end": 4.234
+        },
+        {
+          "id": "w16",
+          "text": "mềm,",
+          "start": 4.234,
+          "end": 4.589
+        },
+        {
+          "id": "w17",
+          "text": "lỗi thông",
+          "start": 4.787,
+          "end": 5.234
+        },
+        {
+          "id": "w19",
+          "text": "tin,",
+          "start": 5.234,
+          "end": 5.576
+        },
+        {
+          "id": "w20",
+          "text": "khi dữ",
+          "start": 5.787,
+          "end": 6.129
+        },
+        {
+          "id": "w22",
+          "text": "liệu bị",
+          "start": 6.129,
+          "end": 6.589
+        },
+        {
+          "id": "w24",
+          "text": "rò rỉ,",
+          "start": 6.589,
+          "end": 7.221
+        },
+        {
+          "id": "w26",
+          "text": "sửa đổi,",
+          "start": 7.392,
+          "end": 8.063
+        },
+        {
+          "id": "w28",
+          "text": "phá hủy,",
+          "start": 8.261,
+          "end": 8.905
+        },
+        {
+          "id": "w30",
+          "text": "vi phạm",
+          "start": 9.103,
+          "end": 9.563
+        },
+        {
+          "id": "w32",
+          "text": "an ninh,",
+          "start": 9.563,
+          "end": 10.05
+        },
+        {
+          "id": "w34",
+          "text": "như truy cập trái",
+          "start": 10.287,
+          "end": 11.011
+        },
+        {
+          "id": "w38",
+          "text": "phép hay bị hack",
+          "start": 11.011,
+          "end": 11.866
+        },
+        {
+          "id": "w42",
+          "text": "mật khẩu,",
+          "start": 11.866,
+          "end": 12.471
+        },
+        {
+          "id": "w44",
+          "text": "lỗi bảo",
+          "start": 12.642,
+          "end": 13.05
+        },
+        {
+          "id": "w46",
+          "text": "mật,",
+          "start": 13.05,
+          "end": 13.313
+        },
+        {
+          "id": "w47",
+          "text": "khi tường lửa hay",
+          "start": 13.55,
+          "end": 14.366
+        },
+        {
+          "id": "w51",
+          "text": "biện pháp bảo vệ",
+          "start": 14.366,
+          "end": 15.234
+        },
+        {
+          "id": "w55",
+          "text": "không đủ,",
+          "start": 15.234,
+          "end": 15.839
+        },
+        {
+          "id": "w57",
+          "text": "và sự",
+          "start": 16.011,
+          "end": 16.445
+        },
+        {
+          "id": "w59",
+          "text": "cố đáng",
+          "start": 16.445,
+          "end": 16.918
+        },
+        {
+          "id": "w61",
+          "text": "ngờ.",
+          "start": 16.918,
+          "end": 17.274
+        },
+        {
+          "id": "w62",
+          "text": "Tất cả phải",
+          "start": 18.197,
+          "end": 18.816
+        },
+        {
+          "id": "w65",
+          "text": "xử lý theo",
+          "start": 18.816,
+          "end": 19.566
+        },
+        {
+          "id": "w68",
+          "text": "quy trình.",
+          "start": 19.566,
+          "end": 20.145
+        }
+      ]
+    },
+    {
+      "frame": 7,
+      "path": "assets/voice-v2/07.mp3",
+      "duration_s": 14.952,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Phần bốn,",
+          "start": 0.129,
+          "end": 0.734
+        },
+        {
+          "id": "w2",
+          "text": "sự cố",
+          "start": 0.892,
+          "end": 1.471
+        },
+        {
+          "id": "w4",
+          "text": "thực tế.",
+          "start": 1.471,
+          "end": 2.089
+        },
+        {
+          "id": "w6",
+          "text": "Tại các công",
+          "start": 3.013,
+          "end": 3.605
+        },
+        {
+          "id": "w9",
+          "text": "ty thành viên",
+          "start": 3.605,
+          "end": 4.21
+        },
+        {
+          "id": "w12",
+          "text": "tập đoàn Sumitomo,",
+          "start": 4.211,
+          "end": 5.526
+        },
+        {
+          "id": "w15",
+          "text": "hacker chiếm",
+          "start": 5.737,
+          "end": 6.421
+        },
+        {
+          "id": "w17",
+          "text": "email,",
+          "start": 6.421,
+          "end": 6.921
+        },
+        {
+          "id": "w18",
+          "text": "giả làm đối",
+          "start": 7.158,
+          "end": 7.737
+        },
+        {
+          "id": "w21",
+          "text": "tác để đòi",
+          "start": 7.737,
+          "end": 8.329
+        },
+        {
+          "id": "w24",
+          "text": "thanh toán,",
+          "start": 8.329,
+          "end": 8.908
+        },
+        {
+          "id": "w26",
+          "text": "thậm chí đột nhập",
+          "start": 9.132,
+          "end": 9.96
+        },
+        {
+          "id": "w30",
+          "text": "email nhân viên tính",
+          "start": 9.961,
+          "end": 10.842
+        },
+        {
+          "id": "w34",
+          "text": "lương rồi yêu cầu",
+          "start": 10.842,
+          "end": 11.803
+        },
+        {
+          "id": "w38",
+          "text": "kế toán chuyển tiền.",
+          "start": 11.803,
+          "end": 12.855
+        }
+      ]
+    },
+    {
+      "frame": 8,
+      "path": "assets/voice-v2/08.mp3",
+      "duration_s": 16.2,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Ransomware mã hóa dữ",
+          "start": 0.129,
+          "end": 1.484
+        },
+        {
+          "id": "w4",
+          "text": "liệu trên máy tính",
+          "start": 1.484,
+          "end": 2.458
+        },
+        {
+          "id": "w8",
+          "text": "và server rồi đòi",
+          "start": 2.458,
+          "end": 3.682
+        },
+        {
+          "id": "w12",
+          "text": "tiền chuộc.",
+          "start": 3.682,
+          "end": 4.208
+        },
+        {
+          "id": "w14",
+          "text": "Colonial Pipeline,",
+          "start": 5.132,
+          "end": 6.487
+        },
+        {
+          "id": "w16",
+          "text": "công ty đường",
+          "start": 6.724,
+          "end": 7.316
+        },
+        {
+          "id": "w19",
+          "text": "ống dầu lớn",
+          "start": 7.316,
+          "end": 7.921
+        },
+        {
+          "id": "w22",
+          "text": "nhất nước Mỹ,",
+          "start": 7.921,
+          "end": 8.711
+        },
+        {
+          "id": "w25",
+          "text": "đã trả khoảng",
+          "start": 8.908,
+          "end": 9.5
+        },
+        {
+          "id": "w28",
+          "text": "năm triệu đô",
+          "start": 9.5,
+          "end": 10.105
+        },
+        {
+          "id": "w31",
+          "text": "la,",
+          "start": 10.105,
+          "end": 10.487
+        },
+        {
+          "id": "w32",
+          "text": "tương đương",
+          "start": 10.684,
+          "end": 11.039
+        },
+        {
+          "id": "w34",
+          "text": "114 tỷ đồng,",
+          "start": 11.039,
+          "end": 12.276
+        },
+        {
+          "id": "w35",
+          "text": "mà vận hành",
+          "start": 12.5,
+          "end": 13.158
+        },
+        {
+          "id": "w38",
+          "text": "vẫn bị gián",
+          "start": 13.158,
+          "end": 13.789
+        },
+        {
+          "id": "w41",
+          "text": "đoạn.",
+          "start": 13.789,
+          "end": 14.118
+        }
+      ]
+    },
+    {
+      "frame": 9,
+      "path": "assets/voice-v2/09.mp3",
+      "duration_s": 12.872,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Còn lừa đảo",
+          "start": 0.142,
+          "end": 0.682
+        },
+        {
+          "id": "w3",
+          "text": "tài chính đến",
+          "start": 0.682,
+          "end": 1.353
+        },
+        {
+          "id": "w6",
+          "text": "qua email,",
+          "start": 1.353,
+          "end": 2.103
+        },
+        {
+          "id": "w8",
+          "text": "tin nhắn,",
+          "start": 2.3,
+          "end": 2.839
+        },
+        {
+          "id": "w10",
+          "text": "cuộc gọi,",
+          "start": 3.024,
+          "end": 3.629
+        },
+        {
+          "id": "w12",
+          "text": "website giả",
+          "start": 3.839,
+          "end": 4.563
+        },
+        {
+          "id": "w14",
+          "text": "và mạng",
+          "start": 4.563,
+          "end": 4.971
+        },
+        {
+          "id": "w16",
+          "text": "xã hội,",
+          "start": 4.971,
+          "end": 5.537
+        },
+        {
+          "id": "w18",
+          "text": "kẻ gian mạo",
+          "start": 5.734,
+          "end": 6.326
+        },
+        {
+          "id": "w21",
+          "text": "danh cơ quan",
+          "start": 6.326,
+          "end": 6.918
+        },
+        {
+          "id": "w24",
+          "text": "chức năng,",
+          "start": 6.918,
+          "end": 7.432
+        },
+        {
+          "id": "w26",
+          "text": "người thân hay đối",
+          "start": 7.695,
+          "end": 8.484
+        },
+        {
+          "id": "w30",
+          "text": "tác để yêu cầu",
+          "start": 8.484,
+          "end": 9.379
+        },
+        {
+          "id": "w34",
+          "text": "chuyển khoản.",
+          "start": 9.379,
+          "end": 9.984
+        }
+      ]
+    },
+    {
+      "frame": 10,
+      "path": "assets/voice-v2/10.mp3",
+      "duration_s": 16.28,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Phần năm,",
+          "start": 0.129,
+          "end": 0.682
+        },
+        {
+          "id": "w2",
+          "text": "bảy biện",
+          "start": 0.892,
+          "end": 1.313
+        },
+        {
+          "id": "w4",
+          "text": "pháp,",
+          "start": 1.313,
+          "end": 1.629
+        },
+        {
+          "id": "w5",
+          "text": "cập nhật",
+          "start": 1.853,
+          "end": 2.287
+        },
+        {
+          "id": "w7",
+          "text": "Windows,",
+          "start": 2.287,
+          "end": 2.839
+        },
+        {
+          "id": "w8",
+          "text": "không mở",
+          "start": 3.063,
+          "end": 3.458
+        },
+        {
+          "id": "w10",
+          "text": "link lạ,",
+          "start": 3.458,
+          "end": 4.011
+        },
+        {
+          "id": "w12",
+          "text": "không cung cấp thông",
+          "start": 4.234,
+          "end": 4.997
+        },
+        {
+          "id": "w16",
+          "text": "tin cá nhân hay",
+          "start": 4.997,
+          "end": 5.8
+        },
+        {
+          "id": "w20",
+          "text": "mã OTP,",
+          "start": 5.8,
+          "end": 6.774
+        },
+        {
+          "id": "w22",
+          "text": "không cài ứng",
+          "start": 7.011,
+          "end": 7.563
+        },
+        {
+          "id": "w25",
+          "text": "dụng chưa xác",
+          "start": 7.563,
+          "end": 8.247
+        },
+        {
+          "id": "w28",
+          "text": "thực,",
+          "start": 8.247,
+          "end": 8.471
+        },
+        {
+          "id": "w29",
+          "text": "không cắm",
+          "start": 8.721,
+          "end": 9.155
+        },
+        {
+          "id": "w31",
+          "text": "thiết bị",
+          "start": 9.155,
+          "end": 9.511
+        },
+        {
+          "id": "w33",
+          "text": "lạ,",
+          "start": 9.511,
+          "end": 9.892
+        },
+        {
+          "id": "w34",
+          "text": "đổi mật",
+          "start": 10.089,
+          "end": 10.497
+        },
+        {
+          "id": "w36",
+          "text": "khẩu mạnh",
+          "start": 10.497,
+          "end": 10.932
+        },
+        {
+          "id": "w38",
+          "text": "thường xuyên,",
+          "start": 10.932,
+          "end": 11.537
+        },
+        {
+          "id": "w40",
+          "text": "và khóa",
+          "start": 11.747,
+          "end": 12.155
+        },
+        {
+          "id": "w42",
+          "text": "máy khi",
+          "start": 12.155,
+          "end": 12.734
+        },
+        {
+          "id": "w44",
+          "text": "rời chỗ.",
+          "start": 12.734,
+          "end": 13.379
+        }
+      ]
+    },
+    {
+      "frame": 11,
+      "path": "assets/voice-v2/11.mp3",
+      "duration_s": 16.452,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Bảo mật",
+          "start": 0.142,
+          "end": 0.589
+        },
+        {
+          "id": "w2",
+          "text": "bắt đầu",
+          "start": 0.589,
+          "end": 1.076
+        },
+        {
+          "id": "w4",
+          "text": "từ bạn.",
+          "start": 1.076,
+          "end": 1.655
+        },
+        {
+          "id": "w6",
+          "text": "Khi có",
+          "start": 2.566,
+          "end": 2.947
+        },
+        {
+          "id": "w8",
+          "text": "nghi ngờ,",
+          "start": 2.947,
+          "end": 3.592
+        },
+        {
+          "id": "w10",
+          "text": "hãy liên hệ",
+          "start": 3.789,
+          "end": 4.474
+        },
+        {
+          "id": "w13",
+          "text": "ngay bộ phận",
+          "start": 4.474,
+          "end": 5.316
+        },
+        {
+          "id": "w16",
+          "text": "IT.",
+          "start": 5.316,
+          "end": 5.513
+        },
+        {
+          "id": "w17",
+          "text": "Cảm ơn",
+          "start": 6.434,
+          "end": 6.842
+        },
+        {
+          "id": "w19",
+          "text": "bạn đã",
+          "start": 6.842,
+          "end": 7.342
+        },
+        {
+          "id": "w21",
+          "text": "lắng nghe.",
+          "start": 7.342,
+          "end": 7.974
+        },
+        {
+          "id": "w23",
+          "text": "Chào mừng",
+          "start": 8.895,
+          "end": 9.263
+        },
+        {
+          "id": "w25",
+          "text": "bạn gia",
+          "start": 9.263,
+          "end": 9.671
+        },
+        {
+          "id": "w27",
+          "text": "nhập SEMV,",
+          "start": 9.671,
+          "end": 10.868
+        },
+        {
+          "id": "w29",
+          "text": "hy vọng chúng ta",
+          "start": 11.132,
+          "end": 11.974
+        },
+        {
+          "id": "w33",
+          "text": "sẽ cùng đồng hành",
+          "start": 11.974,
+          "end": 12.803
+        },
+        {
+          "id": "w37",
+          "text": "trên chặng đường sắp",
+          "start": 12.803,
+          "end": 13.671
+        },
+        {
+          "id": "w41",
+          "text": "tới.",
+          "start": 13.671,
+          "end": 14.053
+        }
+      ]
+    }
+  ],
+  "sfx": []
+}

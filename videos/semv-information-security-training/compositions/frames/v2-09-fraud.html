@@ -1,0 +1,358 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .v2-09-fraud-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+
+    /* slide-header */
+    .v2-09-fraud-header {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      top: 96px;
+      z-index: 4;
+    }
+    .v2-09-fraud-headrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .v2-09-fraud-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.3;
+    }
+    .v2-09-fraud-tag {
+      display: inline-block;
+      border-radius: 100px;
+      background: rgba(10, 61, 145, 0.08);
+      color: #0A3D91;
+      font-weight: 600;
+      font-size: 28px;
+      padding: 10px 28px;
+    }
+    .v2-09-fraud-h2 {
+      margin-top: 18px;
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+
+    /* connectors */
+    .v2-09-fraud-links {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      z-index: 1;
+      overflow: visible;
+    }
+    .v2-09-fraud-link {
+      fill: none;
+      stroke: rgba(10, 61, 145, 0.45);
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    /* left column: channel pills */
+    .v2-09-fraud-chan {
+      position: absolute;
+      left: 96px;
+      width: 400px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 30px 0 22px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 100px;
+      z-index: 2;
+    }
+    .v2-09-fraud-chan-ico {
+      width: 52px;
+      height: 52px;
+      flex: none;
+      border-radius: 50%;
+      background: rgba(10, 61, 145, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0A3D91;
+    }
+    .v2-09-fraud-chan-ico svg { width: 30px; height: 30px; display: block; }
+    .v2-09-fraud-chan-label {
+      font-size: 34px;
+      font-weight: 600;
+      color: #0F172A;
+      white-space: nowrap;
+    }
+
+    /* middle column: impersonation panel */
+    .v2-09-fraud-panel {
+      position: absolute;
+      left: 700px;
+      top: 300px;
+      width: 520px;
+      height: 540px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 14px;
+      z-index: 2;
+    }
+    .v2-09-fraud-panel-eyebrow {
+      position: absolute;
+      left: 24px;
+      top: 26px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #dc2626;
+    }
+    .v2-09-fraud-panel-eyebrow svg { width: 32px; height: 32px; flex: none; }
+    .v2-09-fraud-mask {
+      position: absolute;
+      left: 24px;
+      width: 472px;
+      height: 126px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 0 26px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 12px;
+    }
+    .v2-09-fraud-mask-ico {
+      width: 60px;
+      height: 60px;
+      flex: none;
+      color: #0A3D91;
+    }
+    .v2-09-fraud-mask-ico svg { width: 100%; height: 100%; display: block; }
+    .v2-09-fraud-mask-label {
+      font-size: 36px;
+      font-weight: 600;
+      color: #0F172A;
+      white-space: nowrap;
+    }
+
+    /* right: the core card */
+    .v2-09-fraud-core {
+      position: absolute;
+      left: 1340px;
+      top: 370px;
+      width: 484px;
+      height: 400px;
+      padding: 40px 40px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 14px;
+      z-index: 2;
+    }
+    .v2-09-fraud-core-icons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #0A3D91;
+    }
+    .v2-09-fraud-core-icons svg { display: block; }
+    .v2-09-fraud-core-title {
+      margin-top: 26px;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+    .v2-09-fraud-stamp {
+      position: absolute;
+      right: 36px;
+      bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #dc2626;
+      border: 3px solid #dc2626;
+      border-radius: 100px;
+      padding: 8px 28px 8px 22px;
+      background: #FFFFFF;
+      transform-origin: 50% 50%;
+    }
+    .v2-09-fraud-stamp svg { width: 38px; height: 38px; flex: none; }
+  </style>
+
+  <div id="root" data-composition-id="v2-09-fraud" data-start="0" data-duration="13.372" data-width="1920" data-height="1080">
+    <div class="v2-09-fraud-bg clip" data-start="0" data-duration="13.372" data-track-index="0"></div>
+
+    <!-- connectors (left → middle, middle → right) -->
+    <svg class="v2-09-fraud-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <path id="v2-09-fraud-l1" class="v2-09-fraud-link v2-09-fraud-inlink" d="M 496 362 C 610 362, 590 570, 700 570" />
+      <path id="v2-09-fraud-l2" class="v2-09-fraud-link v2-09-fraud-inlink" d="M 496 468 C 610 468, 590 570, 700 570" />
+      <path id="v2-09-fraud-l3" class="v2-09-fraud-link v2-09-fraud-inlink" d="M 496 574 C 600 574, 600 570, 700 570" />
+      <path id="v2-09-fraud-l4" class="v2-09-fraud-link v2-09-fraud-inlink" d="M 496 680 C 610 680, 590 570, 700 570" />
+      <path id="v2-09-fraud-l5" class="v2-09-fraud-link v2-09-fraud-inlink" d="M 496 786 C 610 786, 590 570, 700 570" />
+      <path id="v2-09-fraud-l6" class="v2-09-fraud-link" d="M 1220 570 L 1340 570" />
+    </svg>
+
+    <!-- slide-header -->
+    <div class="v2-09-fraud-header">
+      <div class="v2-09-fraud-headrow">
+        <div class="v2-09-fraud-eyebrow" id="v2-09-fraud-eyebrow">PHẦN 4/5 · SỰ CỐ THỰC TẾ</div>
+        <span class="v2-09-fraud-tag" id="v2-09-fraud-tag">Lừa đảo tài chính</span>
+      </div>
+      <div class="v2-09-fraud-h2" id="v2-09-fraud-h2">Lừa đảo tài chính, ngân hàng</div>
+    </div>
+
+    <!-- left: 5 channel pills -->
+    <div class="v2-09-fraud-chan" id="v2-09-fraud-c1" style="top: 320px;">
+      <div class="v2-09-fraud-chan-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3.5 6.5 12 13l8.5-6.5" /></svg></div>
+      <div class="v2-09-fraud-chan-label">Email</div>
+    </div>
+    <div class="v2-09-fraud-chan" id="v2-09-fraud-c2" style="top: 426px;">
+      <div class="v2-09-fraud-chan-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12Z" /><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" /></svg></div>
+      <div class="v2-09-fraud-chan-label">Tin nhắn</div>
+    </div>
+    <div class="v2-09-fraud-chan" id="v2-09-fraud-c3" style="top: 532px;">
+      <div class="v2-09-fraud-chan-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z" /></svg></div>
+      <div class="v2-09-fraud-chan-label">Cuộc gọi</div>
+    </div>
+    <div class="v2-09-fraud-chan" id="v2-09-fraud-c4" style="top: 638px;">
+      <div class="v2-09-fraud-chan-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2" /><path d="M2.5 8.5h19" /><path d="M5.5 6.3h.01M8 6.3h.01" /><path d="M12 11.5v3.5M12 17.3v.2" /></svg></div>
+      <div class="v2-09-fraud-chan-label">Website giả</div>
+    </div>
+    <div class="v2-09-fraud-chan" id="v2-09-fraud-c5" style="top: 744px;">
+      <div class="v2-09-fraud-chan-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4" /></svg></div>
+      <div class="v2-09-fraud-chan-label">Mạng xã hội</div>
+    </div>
+
+    <!-- middle: impersonation panel -->
+    <div class="v2-09-fraud-panel" id="v2-09-fraud-panel">
+      <div class="v2-09-fraud-panel-eyebrow" id="v2-09-fraud-mask-eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6c3-1.3 6-1.3 9 0 3-1.3 6-1.3 9 0v5c0 5-4 9-9 9s-9-4-9-9Z" /><path d="M7 10.5c.8-.6 1.8-.6 2.6 0M14.4 10.5c.8-.6 1.8-.6 2.6 0" /><path d="M9 15.5c1.8 1.2 4.2 1.2 6 0" /></svg>
+        <span>MẠO DANH</span>
+      </div>
+      <div class="v2-09-fraud-mask" id="v2-09-fraud-m1" style="top: 88px;">
+        <div class="v2-09-fraud-mask-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5" /><path d="M4 9.5h16" /><path d="M6 12v6M10 12v6M14 12v6M18 12v6" /><path d="M3 20.5h18" /></svg></div>
+        <div class="v2-09-fraud-mask-label">Cơ quan chức năng</div>
+      </div>
+      <div class="v2-09-fraud-mask" id="v2-09-fraud-m2" style="top: 238px;">
+        <div class="v2-09-fraud-mask-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8" /></svg></div>
+        <div class="v2-09-fraud-mask-label">Người thân</div>
+      </div>
+      <div class="v2-09-fraud-mask" id="v2-09-fraud-m3" style="top: 388px;">
+        <div class="v2-09-fraud-mask-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path d="m21 3 1 11h-2" /><path d="M3 3 2 14l6.47 6.47a1 1 0 1 0 3-3" /><path d="M3 4h8" /></svg></div>
+        <div class="v2-09-fraud-mask-label">Đối tác</div>
+      </div>
+    </div>
+
+    <!-- right: core card -->
+    <div class="v2-09-fraud-core" id="v2-09-fraud-core">
+      <div class="v2-09-fraud-core-icons">
+        <svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /><path d="M6 15h4" /></svg>
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15" /><path d="m13 6 6 6-6 6" /></svg>
+      </div>
+      <div class="v2-09-fraud-core-title">Yêu cầu<br />chuyển khoản</div>
+      <div class="v2-09-fraud-stamp" id="v2-09-fraud-stamp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.5 20h19L12 3.5Z" /><path d="M12 10v4.5" /><path d="M12 17.3v.2" /></svg>
+        <span>Lừa đảo</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var root = document.querySelector('[data-composition-id="v2-09-fraud"]');
+      var q = function (sel) { return root.querySelector(sel); };
+      var qa = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* svg-path-draw setup: measured lengths */
+      function prepDraw(el, fallback) {
+        var len = fallback;
+        try { var m = el.getTotalLength(); if (m && isFinite(m) && m > 0) len = m; } catch (e) {}
+        len = len * 1.05;
+        el.style.strokeDasharray = String(len);
+        el.style.strokeDashoffset = String(len);
+        return len;
+      }
+      var inLinks = qa(".v2-09-fraud-inlink");
+      inLinks.forEach(function (p) { prepDraw(p, 320); });
+      var outLink = q("#v2-09-fraud-l6");
+      prepDraw(outLink, 120);
+
+      /* Scene 1 (0.0–1.4s): slide-header */
+      tl.fromTo(q("#v2-09-fraud-eyebrow"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+      tl.fromTo(q("#v2-09-fraud-tag"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.15);
+      tl.fromTo(q("#v2-09-fraud-h2"), { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.3);
+
+      /* Scene 2 (1.6–5.5s): channel pills spring-pop on each spoken channel */
+      var chanTimes = [1.6, 2.3, 3.0, 3.8, 4.8];
+      chanTimes.forEach(function (t, i) {
+        var el = q("#v2-09-fraud-c" + (i + 1));
+        tl.fromTo(el, { opacity: 0, scale: 0.4, x: -40 }, { opacity: 1, scale: 1, x: 0, duration: 0.55, ease: "back.out(1.7)" }, t);
+      });
+
+      /* Scene 3 (5.7–8.6s): connectors converge on the middle column; masks reveal */
+      inLinks.forEach(function (p, i) {
+        tl.to(p, { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 5.7 + i * 0.08);
+      });
+      tl.fromTo(q("#v2-09-fraud-panel"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 6.0);
+      tl.fromTo(q("#v2-09-fraud-mask-eyebrow"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 6.2);
+      var maskTimes = [6.5, 7.7, 8.3];
+      maskTimes.forEach(function (t, i) {
+        var el = q("#v2-09-fraud-m" + (i + 1));
+        tl.fromTo(el, { opacity: 0, scale: 0.6, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, t);
+      });
+
+      /* Scene 4 (8.7–10.0s): link to the core card, card lands, red stamp */
+      tl.to(outLink, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 8.7);
+      tl.fromTo(q("#v2-09-fraud-core"), { opacity: 0, x: 60, scale: 0.92 }, { opacity: 1, x: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 9.0);
+      tl.fromTo(q("#v2-09-fraud-stamp"),
+        { opacity: 0, scale: 1.8, rotation: -14 },
+        { opacity: 1, scale: 1, rotation: -6, duration: 0.4, ease: "power3.out" }, 9.6);
+      tl.to(q("#v2-09-fraud-core"), { borderColor: "rgba(220, 38, 38, 0.45)", duration: 0.4, ease: "power1.out" }, 9.7);
+
+      /* Scene 5 (10.0–12.872s): hold */
+      tl.set({}, {}, 12.872);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["v2-09-fraud"] = tl;
+    })();
+  </script>
+</template>

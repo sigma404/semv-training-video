@@ -1,0 +1,237 @@
+◆  Checking semv-information-security-training
+[hyperframes] browserGpuMode probe → hardware (WebGL renderer vendor="Google Inc. (Intel)" renderer="ANGLE (Intel, Intel(R) UHD Graphics 770 (0x00004680) Direct3D11 vs_5_0 ps_5_0, D3D11)")
+
+Lint
+  ⚠ nested_structure_needs_subcomposition: <div id="el-progress"> is a timeline element that contains nested <div id="el-progress-fill">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\index.html #el-progress t=0s
+    Fix: Move <div id="el-progress"> and its contents into a sub-composition file and mount it with data-composition-src.
+  ⚠ caption_track_kind_missing: <div id="el-captions"> looks like captions but is not marked as such, so the timeline cannot group it on the caption track.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\index.html #el-captions t=0s
+    Fix: Add data-track-kind="captions" to <div id="el-captions">.
+  ⚠ studio_missing_editable_id: <div class="f01-title-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\01-title.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  ⚠ overlapping_gsap_tweens: GSAP tweens overlap on "#f01-title-cursor" for scale between 1.16s and 1.16s.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\01-title.html #f01-title-cursor t=0s
+    Fix: Shorten the earlier tween, move the later tween, or add `overwrite: "auto"`.
+  ⚠ overlapping_gsap_tweens: GSAP tweens overlap on "#f01-title-sai" for scale between 1.18s and 1.18s.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\01-title.html #f01-title-sai t=0s
+    Fix: Shorten the earlier tween, move the later tween, or add `overwrite: "auto"`.
+  ⚠ gsap_repeated_fromto_without_baseline: 2 tl.fromTo() calls target "#f01-title-cursor" with no stable baseline. The last-authored fromTo "from" values become the element's resting state for any seek before the first tween actually runs, because GSAP applies fromTo from-values at authoring time (immediateRender), not at tween position.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\01-title.html #f01-title-cursor t=0s
+    Fix: Add `immediateRender: false` to every fromTo except the earliest-positioned one (at 0.45s), so pre-first-tween seeks keep its "from" values. A hiding `tl.set(..., 0)` baseline trips gsap_timeline_set_initial_hide, and a `gsap.set` authored before the fromTo calls is overwritten by them.
+  ⚠ negative_z_index: `z-index: -1` paints the element behind its nearest stacking context's own content. With no stacking-context ancestor that context is the composition root itself, so an opaque background there hides it entirely: in the DOM, laid out, and absent from the picture. A transparent root leaves it visible. Siblings at `z-index: 0` or above are unaffected.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\01-title.html .f01-title-hl-bg t=0s
+    Fix: Give the element's parent a stacking context - `isolation: isolate` is the cheapest, and `transform`, `filter`, `opacity` below 1, `contain: paint` and `will-change` all work too. The negative-z child then paints above that parent's background and renders normally. Or express paint order through DOM order - an earlier sibling paints behind a later one - and raise the elements that should sit in front rather than lowering this one.
+  ⚠ id_requires_css_escape: id="02-why-bg" starts with a digit, so the common selector `#02-why-bg` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-bg t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-links" starts with a digit, so the common selector `#02-why-links` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-links t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-link-leak" starts with a digit, so the common selector `#02-why-link-leak` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-link-leak t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-link-prod" starts with a digit, so the common selector `#02-why-link-prod` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-link-prod t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-link-trust" starts with a digit, so the common selector `#02-why-link-trust` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-link-trust t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-ring" starts with a digit, so the common selector `#02-why-ring` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-ring t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-header" starts with a digit, so the common selector `#02-why-header` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-header t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-headrow" starts with a digit, so the common selector `#02-why-headrow` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-headrow t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-eyebrow" starts with a digit, so the common selector `#02-why-eyebrow` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-eyebrow t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-pill" starts with a digit, so the common selector `#02-why-pill` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-pill t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-title" starts with a digit, so the common selector `#02-why-title` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-title t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-card-leak" starts with a digit, so the common selector `#02-why-card-leak` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-card-leak t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-card-prod" starts with a digit, so the common selector `#02-why-card-prod` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-card-prod t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-card-trust" starts with a digit, so the common selector `#02-why-card-trust` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-card-trust t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-shield" starts with a digit, so the common selector `#02-why-shield` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-shield t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-shieldclip" starts with a digit, so the common selector `#02-why-shieldclip` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-shieldclip t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-riseclip" starts with a digit, so the common selector `#02-why-riseclip` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-riseclip t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-rise-mask" starts with a digit, so the common selector `#02-why-rise-mask` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-rise-mask t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-body" starts with a digit, so the common selector `#02-why-body` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-body t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-rise" starts with a digit, so the common selector `#02-why-rise` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-rise t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-mark" starts with a digit, so the common selector `#02-why-mark` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-mark t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-mark-white" starts with a digit, so the common selector `#02-why-mark-white` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-mark-white t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="02-why-outline" starts with a digit, so the common selector `#02-why-outline` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html #02-why-outline t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-bg"]" sets inset through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-bg"] t=0s
+    Fix: Use `#\30 2-why-bg` instead; id specificity beats any selector built only from classes.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-header"]" sets left/right/top through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-header"] t=0s
+    Fix: Use `#\30 2-why-header` instead; id specificity beats any selector built only from classes.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-links"]" sets left/top through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-links"] t=0s
+    Fix: Use `#\30 2-why-links` instead; id specificity beats any selector built only from classes.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-ring"]" sets left/top through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-ring"] t=0s
+    Fix: Use `#\30 2-why-ring` instead; id specificity beats any selector built only from classes.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-card-leak"]" sets left/top through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-card-leak"] t=0s
+    Fix: Use `#\30 2-why-card-leak` instead; id specificity beats any selector built only from classes.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-card-prod"]" sets left/top through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-card-prod"] t=0s
+    Fix: Use `#\30 2-why-card-prod` instead; id specificity beats any selector built only from classes.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-card-trust"]" sets left/top through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-card-trust"] t=0s
+    Fix: Use `#\30 2-why-card-trust` instead; id specificity beats any selector built only from classes.
+  ⚠ id_override_reduced_specificity: Selector "[id="02-why-shield"]" sets left/top through [id=...] or :where(#id), which has class-level or zero specificity, so a compound class rule (e.g. ".parent .row") on the same element can silently win over this override.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\02-why.html [id="02-why-shield"] t=0s
+    Fix: Use `#\30 2-why-shield` instead; id specificity beats any selector built only from classes.
+  ⚠ id_requires_css_escape: id="05-incidents-bg" starts with a digit, so the common selector `#05-incidents-bg` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-bg t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-world" starts with a digit, so the common selector `#05-incidents-world` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-world t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-head" starts with a digit, so the common selector `#05-incidents-head` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-head t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-eyebrow" starts with a digit, so the common selector `#05-incidents-eyebrow` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-eyebrow t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-tag" starts with a digit, so the common selector `#05-incidents-tag` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-tag t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-h2" starts with a digit, so the common selector `#05-incidents-h2` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-h2 t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-links" starts with a digit, so the common selector `#05-incidents-links` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-links t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-strip" starts with a digit, so the common selector `#05-incidents-strip` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-strip t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-pillrow" starts with a digit, so the common selector `#05-incidents-pillrow` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-pillrow t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-pill" starts with a digit, so the common selector `#05-incidents-pill` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-pill t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-warnrow" starts with a digit, so the common selector `#05-incidents-warnrow` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-warnrow t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-warn" starts with a digit, so the common selector `#05-incidents-warn` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-warn t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ id_requires_css_escape: id="05-incidents-many" starts with a digit, so the common selector `#05-incidents-many` throws a SyntaxError in querySelector().
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\05-incidents.html #05-incidents-many t=0s
+    Fix: Rename the id to start with a letter (recommended), or build selectors with `#${CSS.escape(id)}` at runtime.
+  ⚠ studio_missing_editable_id: <div class="r06-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\06-real-cases.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  ⚠ studio_missing_editable_id: <div class="c08-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\08-closing.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  ⚠ studio_missing_editable_id: <div class="v2-01-intro-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-01-intro.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  ⚠ overlapping_gsap_tweens: GSAP tweens overlap on "#v2-01-intro-cursor" for scale between 1.16s and 1.16s.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-01-intro.html #v2-01-intro-cursor t=0s
+    Fix: Shorten the earlier tween, move the later tween, or add `overwrite: "auto"`.
+  ⚠ overlapping_gsap_tweens: GSAP tweens overlap on "#v2-01-intro-sai" for scale between 1.18s and 1.18s.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-01-intro.html #v2-01-intro-sai t=0s
+    Fix: Shorten the earlier tween, move the later tween, or add `overwrite: "auto"`.
+  ⚠ gsap_timeline_set_initial_hide: Initial hidden state for "#v2-01-intro-diag, #v2-01-intro-eyebrow, #v2-01-intro-sub" is set via tl.set(...) at position 0 inside the paused timeline. A zero-duration set at 0 does not render while the playhead sits exactly at 0, so frame 0 shows the un-hidden state.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-01-intro.html #v2-01-intro-diag, #v2-01-intro-eyebrow, #v2-01-intro-sub t=0s
+    Fix: Use gsap.set(...) (immediate, outside the timeline) for initial states, or author the hidden state directly in CSS/attributes.
+  ⚠ gsap_timeline_set_initial_hide: Initial hidden state for "#v2-01-intro-cursor" is set via tl.set(...) at position 0 inside the paused timeline. A zero-duration set at 0 does not render while the playhead sits exactly at 0, so frame 0 shows the un-hidden state.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-01-intro.html #v2-01-intro-cursor t=0s
+    Fix: Use gsap.set(...) (immediate, outside the timeline) for initial states, or author the hidden state directly in CSS/attributes.
+  ⚠ gsap_timeline_set_initial_hide: Initial hidden state for "#v2-01-intro-ripple" is set via tl.set(...) at position 0 inside the paused timeline. A zero-duration set at 0 does not render while the playhead sits exactly at 0, so frame 0 shows the un-hidden state.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-01-intro.html #v2-01-intro-ripple t=0s
+    Fix: Use gsap.set(...) (immediate, outside the timeline) for initial states, or author the hidden state directly in CSS/attributes.
+  ⚠ negative_z_index: `z-index: -1` paints the element behind its nearest stacking context's own content. With no stacking-context ancestor that context is the composition root itself, so an opaque background there hides it entirely: in the DOM, laid out, and absent from the picture. A transparent root leaves it visible. Siblings at `z-index: 0` or above are unaffected.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-01-intro.html .v2-01-intro-hl-bg t=0s
+    Fix: Give the element's parent a stacking context - `isolation: isolate` is the cheapest, and `transform`, `filter`, `opacity` below 1, `contain: paint` and `will-change` all work too. The negative-z child then paints above that parent's background and renders normally. Or express paint order through DOM order - an earlier sibling paints behind a later one - and raise the elements that should sit in front rather than lowering this one.
+  ⚠ gsap_repeated_fromto_without_baseline: 2 tl.fromTo() calls target "dwell/hold" with no stable baseline. The last-authored fromTo "from" values become the element's resting state for any seek before the first tween actually runs, because GSAP applies fromTo from-values at authoring time (immediateRender), not at tween position.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-04-access.html dwell/hold t=0s
+    Fix: Add `immediateRender: false` to every fromTo except the earliest-positioned one (at 0s), so pre-first-tween seeks keep its "from" values. A hiding `tl.set(..., 0)` baseline trips gsap_timeline_set_initial_hide, and a `gsap.set` authored before the fromTo calls is overwritten by them.
+  ⚠ studio_missing_editable_id: <div class="v2-07-email-hack-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-07-email-hack.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  ⚠ studio_missing_editable_id: <div class="v2-08-ransomware-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-08-ransomware.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  ⚠ studio_missing_editable_id: <div class="v2-09-fraud-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-09-fraud.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  ⚠ studio_missing_editable_id: <div class="v2-11-closing-bg" data-start="0" data-track-index="0"> has no id, so Studio cannot use a stable edit target for its timeline and canvas controls.
+    D:\Programming\semv-training-video\videos\semv-information-security-training\compositions\frames\v2-11-closing.html [data-composition-id] t=0s
+    Fix: Add a stable, human-readable id such as id="hero-title" or id="scene-1-card" to every timeline-visible element you want agents or Studio to edit.
+  0 error(s), 65 warning(s), 0 info(s)
+
+Runtime
+  ◇ 0 errors, 0 warnings
+
+Layout
+  ℹ t=31.162s container_overflow #v2-02-definition-stage inside #el-v2-02-definition > div:nth-of-type(1) overflowed left 19.2px, right 19.2px, top 8.64px, bottom 12.96px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=38.705s content_overlap #v2-03-context-card-trust > div:nth-of-type(2) inside #v2-03-context-mark > text:nth-of-type(1) "Giữ niềm tin khách hàng" — Two text blocks overlap and may render unreadable.
+        Fix: Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.
+  ℹ t=72.711s container_overflow #v2-05-malware-stage inside #el-v2-05-malware > div:nth-of-type(1) overflowed left 4.51px, right 4.51px, top 2.28px, bottom 2.79px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=93.486s container_overflow #v2-06-incidents-world inside #el-v2-06-incidents > div:nth-of-type(1) overflowed left 3.94px, right 3.94px, bottom 2.46px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=110.498s content_overlap #v2-06-incidents-eyebrow inside #v2-07-email-hack-eyebrow "PHẦN 3/5 · ÁP DỤNG VÀ TUÂN THỦ" — Two text blocks overlap and may render unreadable.
+        Fix: Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.
+  ℹ t=154.509s content_overlap #v2-09-fraud-eyebrow inside #v2-10-best-practices-eyebrow "PHẦN 4/5 · SỰ CỐ THỰC TẾ" — Two text blocks overlap and may render unreadable.
+        Fix: Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.
+  ℹ t=176.585s container_overflow #v2-11-closing-ring-b inside div.v2-11-closing-rings overflowed top 62.5px, bottom 116.5px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=176.585s container_overflow #v2-11-closing-ring-c inside div.v2-11-closing-rings overflowed top 216px, bottom 270px — Element extends outside a clipping layout container.
+        Fix: Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.
+  ℹ t=176.585s panel_out_of_canvas #v2-11-closing-ring-b inside #root overflowed top 62.5px — Painted panel extends outside the composition canvas.
+        Fix: Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.
+  ℹ t=176.585s panel_out_of_canvas #v2-11-closing-ring-c inside #root overflowed top 216px, bottom 86px — Painted panel extends outside the composition canvas.
+        Fix: Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.
+  0 error(s), 0 warning(s), 10 info(s)
+
+Motion
+  ◇ 0 errors, 0 warnings
+
+Contrast
+  ◇ 63/63 text checks pass WCAG AA
+
+Snapshots
+  ◇ disabled
+
+◇  Check passed

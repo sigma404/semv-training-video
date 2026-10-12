@@ -1,0 +1,220 @@
+<template id="05-incidents-template">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+#root {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #0F172A;
+}
+#root * { box-sizing: border-box; margin: 0; padding: 0; }
+
+#\30 5-incidents-bg {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  background: #FFFFFF;
+}
+
+#\30 5-incidents-world {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  transform-origin: 960px 520px;
+}
+
+/* slide-header */
+#\30 5-incidents-head {
+  position: absolute; left: 96px; right: 96px; top: 96px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+#\30 5-incidents-eyebrow {
+  font-size: 22px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #0A3D91;
+}
+#\30 5-incidents-tag {
+  border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91;
+  font-weight: 600; font-size: 25px; padding: 10px 27px; display: inline-block;
+}
+#\30 5-incidents-h2 {
+  position: absolute; left: 96px; top: 168px;
+  font-size: 58px; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #0F172A;
+}
+
+/* card strip */
+#\30 5-incidents-strip {
+  position: absolute; left: 96px; top: 372px; width: 1728px; height: 140px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 19.2px;
+}
+.\30 5-incidents-card {
+  --dof: 0px;
+  filter: blur(var(--dof));
+  will-change: filter;
+  height: 140px;
+  background: rgba(10, 61, 145, 0.04);
+  border: 1.5px solid rgba(10, 61, 145, 0.2);
+  border-radius: 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 8px;
+}
+.\30 5-incidents-num {
+  font-size: 22px; font-weight: 700; letter-spacing: 0.08em; color: #0A3D91;
+}
+.\30 5-incidents-label {
+  font-size: 31px; font-weight: 600; line-height: 1.2; color: #0F172A;
+}
+
+/* connectors + arrow */
+#\30 5-incidents-links {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  overflow: visible;
+}
+#\30 5-incidents-links path {
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+}
+.\30 5-incidents-link { stroke: rgba(10, 61, 145, 0.45); stroke-width: 2; }
+.\30 5-incidents-arrow { stroke: #0A3D91; stroke-width: 4; }
+
+/* process pill */
+#\30 5-incidents-pillrow {
+  position: absolute; left: 0; right: 0; top: 660px;
+  display: flex; justify-content: center;
+}
+#\30 5-incidents-pill {
+  border-radius: 100px; background: #0A3D91; color: #FFFFFF;
+  font-weight: 600; font-size: 31px; padding: 14px 42px; display: inline-block;
+}
+
+/* warning line */
+#\30 5-incidents-warnrow {
+  position: absolute; left: 0; right: 0; top: 776px; height: 84px;
+  display: flex; justify-content: center; align-items: baseline;
+}
+#\30 5-incidents-warn {
+  display: flex; align-items: baseline; white-space: nowrap;
+  font-size: 38px; font-weight: 700; color: #dc2626; letter-spacing: -0.01em;
+}
+#\30 5-incidents-many {
+  display: inline-block;
+  font-size: 58px; font-weight: 800; letter-spacing: -0.02em;
+  margin-left: 12px;
+  transform-origin: 0% 80%;
+}
+</style>
+
+<div data-hf-id="hf-sjlm" id="root" data-composition-id="05-incidents" data-start="0" data-duration="16.652" data-width="1920" data-height="1080">
+  <div data-hf-id="hf-fh89" id="05-incidents-bg" class="clip" data-start="0" data-duration="16.652" data-track-index="0"></div>
+
+  <div data-hf-id="hf-oagp" id="05-incidents-world">
+    <div data-hf-id="hf-u2up" id="05-incidents-head">
+      <div data-hf-id="hf-zb7r" id="05-incidents-eyebrow">04 · Sự cố bảo mật</div>
+      <span data-hf-id="hf-qau4" id="05-incidents-tag">5 loại sự cố</span>
+    </div>
+    <div data-hf-id="hf-2z5v" id="05-incidents-h2">Nhận diện — và xử lý theo quy trình</div>
+
+    <svg data-hf-id="hf-1fwh" id="05-incidents-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <path data-hf-id="hf-zjb4" class="05-incidents-link" d="M 261.1 514 C 261.1 572, 960 548, 960 600" />
+      <path data-hf-id="hf-3mca" class="05-incidents-link" d="M 610.6 514 C 610.6 568, 960 556, 960 600" />
+      <path data-hf-id="hf-qtec" class="05-incidents-link" d="M 960 514 L 960 600" />
+      <path data-hf-id="hf-prjy" class="05-incidents-link" d="M 1309.4 514 C 1309.4 568, 960 556, 960 600" />
+      <path data-hf-id="hf-256w" class="05-incidents-link" d="M 1658.9 514 C 1658.9 572, 960 548, 960 600" />
+      <path data-hf-id="hf-j57z" class="05-incidents-arrow" d="M 960 600 L 960 644" />
+      <path data-hf-id="hf-4fnc" class="05-incidents-arrow" d="M 944 628 L 960 645 L 976 628" />
+    </svg>
+
+    <div data-hf-id="hf-h457" id="05-incidents-strip">
+      <div data-hf-id="hf-h6ba" class="05-incidents-card"><div data-hf-id="hf-5wuv" class="05-incidents-num">01</div><div data-hf-id="hf-42at" class="05-incidents-label">Lỗi dịch vụ</div></div>
+      <div data-hf-id="hf-xi8q" class="05-incidents-card"><div data-hf-id="hf-5iju" class="05-incidents-num">02</div><div data-hf-id="hf-1wzm" class="05-incidents-label">Lỗi thông tin</div></div>
+      <div data-hf-id="hf-xwjr" class="05-incidents-card"><div data-hf-id="hf-548t" class="05-incidents-num">03</div><div data-hf-id="hf-3bqh" class="05-incidents-label">Vi phạm an ninh</div></div>
+      <div data-hf-id="hf-yaus" class="05-incidents-card"><div data-hf-id="hf-byd4" class="05-incidents-num">04</div><div data-hf-id="hf-vxeo" class="05-incidents-label">Lỗi bảo mật</div></div>
+      <div data-hf-id="hf-yp5t" class="05-incidents-card"><div data-hf-id="hf-bk23" class="05-incidents-num">05</div><div data-hf-id="hf-i19t" class="05-incidents-label">Sự cố đáng ngờ</div></div>
+    </div>
+
+    <div data-hf-id="hf-w4oy" id="05-incidents-pillrow">
+      <span data-hf-id="hf-2le0" id="05-incidents-pill">Xử lý theo quy trình</span>
+    </div>
+
+    <div data-hf-id="hf-j11x" id="05-incidents-warnrow">
+      <div data-hf-id="hf-gfb1" id="05-incidents-warn">Làm ngơ = thiệt hại nhân lên<span data-hf-id="hf-szn3" id="05-incidents-many">nhiều lần</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.querySelector('[data-composition-id="05-incidents"]');
+  var byId = function (id) { return root.querySelector('[id="' + id + '"]'); };
+  var byCls = function (c) { return Array.prototype.slice.call(root.querySelectorAll('[class~="' + c + '"]')); };
+
+  var world = byId("05-incidents-world");
+  var eyebrow = byId("05-incidents-eyebrow");
+  var tag = byId("05-incidents-tag");
+  var h2 = byId("05-incidents-h2");
+  var cards = byCls("05-incidents-card");
+  var links = byCls("05-incidents-link");
+  var arrows = byCls("05-incidents-arrow");
+  var pill = byId("05-incidents-pill");
+  var warn = byId("05-incidents-warn");
+  var many = byId("05-incidents-many");
+
+  // svg-path-draw setup: measured lengths
+  links.concat(arrows).forEach(function (p) {
+    var len = 0;
+    try { len = p.getTotalLength(); } catch (e) { len = 0; }
+    if (!len) len = 800;
+    len = len * 1.05;
+    p.style.strokeDasharray = len + "";
+    p.style.strokeDashoffset = len + "";
+  });
+
+  var tl = gsap.timeline({ paused: true });
+
+  // Underlying slow camera push across the whole shot
+  tl.fromTo(world, { scale: 1 }, { scale: 1.025, duration: 16.152, ease: "none" }, 0);
+
+  // Scene 1 — slide-header
+  tl.fromTo(eyebrow, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.05);
+  tl.fromTo(h2, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+  tl.fromTo(tag, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, 1.3);
+
+  // Scene 2 — grid-card-assemble: each card drops into its slot on its spoken name
+  var cardTimes = [2.1, 3.1, 4.1, 5.3, 6.4];
+  cards.forEach(function (c, i) {
+    tl.fromTo(c,
+      { opacity: 0, y: -70, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: "power3.out" },
+      cardTimes[i]);
+  });
+
+  // Scene 3 — connectors converge into the arrow, then the process pill
+  links.forEach(function (p, i) {
+    tl.to(p, { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 8.4 + i * 0.12);
+  });
+  tl.to(arrows[0], { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 9.2);
+  tl.to(arrows[1], { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, 9.45);
+  tl.fromTo(pill, { opacity: 0, scale: 0.7, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(1.7)" }, 10.1);
+
+  // Scene 4 — depth-of-field: strip defocuses + dims, warning appears
+  cards.forEach(function (c) {
+    tl.to(c, { "--dof": "1px", opacity: 0.6, duration: 0.9, ease: "power2.inOut" }, 12.1);
+  });
+  tl.to(links, { opacity: 0.5, duration: 0.9, ease: "power2.inOut" }, 12.1);
+
+  // warning line: "nhiều lần" holds at the line's size (scale 38/58) until its own beat
+  var START_SCALE = 38 / 58;
+  tl.set(many, { scale: START_SCALE }, 0);
+  tl.fromTo(warn, { opacity: 0, y: 18, x: 50 }, { opacity: 1, y: 0, x: 50, duration: 0.6, ease: "power3.out" }, 13.3);
+
+  // Scene 5 — counting-dynamic-scale (scale part only): "nhiều lần" grows to its static size
+  tl.fromTo(many, { scale: START_SCALE }, { scale: 1, duration: 1.4, ease: "power3.out" }, 14.7);
+  tl.fromTo(warn, { x: 50 }, { x: 0, duration: 1.4, ease: "power3.out", immediateRender: false }, 14.7);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["05-incidents"] = tl;
+})();
+</script>
+</template>

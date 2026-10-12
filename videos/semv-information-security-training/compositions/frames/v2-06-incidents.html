@@ -1,0 +1,249 @@
+<template id="v2-06-incidents-template">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+#root {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #0F172A;
+}
+#root * { box-sizing: border-box; margin: 0; padding: 0; }
+
+#v2-06-incidents-bg {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  background: #FFFFFF;
+}
+
+#v2-06-incidents-world {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  transform-origin: 960px 480px;
+}
+
+/* slide-header */
+#v2-06-incidents-head {
+  position: absolute; left: 96px; right: 96px; top: 84px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+#v2-06-incidents-eyebrow {
+  font-size: 22px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #0A3D91;
+}
+#v2-06-incidents-tag {
+  border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91;
+  font-weight: 600; font-size: 25px; padding: 10px 27px; display: inline-block;
+}
+#v2-06-incidents-h2 {
+  position: absolute; left: 96px; top: 146px;
+  font-size: 54px; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #0F172A;
+}
+
+/* table */
+#v2-06-incidents-table {
+  position: absolute; left: 96px; top: 238px; width: 1728px;
+}
+.v2-06-incidents-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr 1fr;
+  column-gap: 36px;
+  align-items: center;
+  padding: 0 32px;
+}
+#v2-06-incidents-thead {
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background: rgba(10, 61, 145, 0.08);
+}
+.v2-06-incidents-th {
+  font-size: 20px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #475569;
+}
+.v2-06-incidents-row {
+  height: 80px;
+  margin-bottom: 8px;
+  background: rgba(10, 61, 145, 0.04);
+  border: 1.5px solid rgba(10, 61, 145, 0.2);
+  border-radius: 12px;
+}
+.v2-06-incidents-name {
+  display: flex; align-items: baseline; gap: 16px; white-space: nowrap;
+}
+.v2-06-incidents-num {
+  font-size: 24px; font-weight: 700; letter-spacing: 0.04em; color: #0A3D91;
+}
+.v2-06-incidents-label {
+  font-size: 28px; font-weight: 700; letter-spacing: -0.01em; color: #0F172A;
+}
+.v2-06-incidents-desc {
+  font-size: 24px; font-weight: 400; line-height: 1.25; color: #475569;
+}
+.v2-06-incidents-cause {
+  font-size: 24px; font-weight: 500; line-height: 1.25; color: #0F172A;
+  padding-left: 20px;
+  border-left: 2px solid rgba(10, 61, 145, 0.2);
+}
+.v2-06-incidents-cause-empty {
+  height: 30px;
+  display: flex; align-items: center;
+}
+#v2-06-incidents-dash {
+  width: 56px; height: 2px; border-radius: 2px;
+  background: rgba(10, 61, 145, 0.35);
+  transform-origin: 0% 50%;
+}
+
+/* arrow */
+#v2-06-incidents-links {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  overflow: visible;
+}
+#v2-06-incidents-links path {
+  fill: none; stroke: #0A3D91; stroke-width: 4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* process pill */
+#v2-06-incidents-pillrow {
+  position: absolute; left: 0; right: 0; top: 780px;
+  display: flex; justify-content: center;
+}
+#v2-06-incidents-pill {
+  border-radius: 100px; background: #0A3D91; color: #FFFFFF;
+  font-weight: 600; font-size: 31px; padding: 12px 42px; display: inline-block;
+}
+</style>
+
+<div id="root" data-composition-id="v2-06-incidents" data-start="0" data-duration="23.524" data-width="1920" data-height="1080">
+  <div id="v2-06-incidents-bg" class="clip" data-start="0" data-duration="23.524" data-track-index="0"></div>
+
+  <div id="v2-06-incidents-world">
+    <div id="v2-06-incidents-head">
+      <div id="v2-06-incidents-eyebrow">PHẦN 3/5 · ÁP DỤNG VÀ TUÂN THỦ</div>
+      <span id="v2-06-incidents-tag">5 loại sự cố</span>
+    </div>
+    <div id="v2-06-incidents-h2">Phân loại sự cố bảo mật</div>
+
+    <div id="v2-06-incidents-table">
+      <div id="v2-06-incidents-thead" class="v2-06-incidents-grid">
+        <div class="v2-06-incidents-th">Phân loại</div>
+        <div class="v2-06-incidents-th">Nội dung</div>
+        <div class="v2-06-incidents-th" style="padding-left:22px">Nguyên nhân</div>
+      </div>
+
+      <div class="v2-06-incidents-row v2-06-incidents-grid">
+        <div class="v2-06-incidents-name"><span class="v2-06-incidents-num">01</span><span class="v2-06-incidents-label">Lỗi dịch vụ</span></div>
+        <div class="v2-06-incidents-desc">Ứng dụng, dịch vụ không chạy bình thường</div>
+        <div class="v2-06-incidents-cause">Lỗi phần cứng / phần mềm</div>
+      </div>
+      <div class="v2-06-incidents-row v2-06-incidents-grid">
+        <div class="v2-06-incidents-name"><span class="v2-06-incidents-num">02</span><span class="v2-06-incidents-label">Lỗi thông tin</span></div>
+        <div class="v2-06-incidents-desc">Tính xác thực của thông tin bị nghi vấn</div>
+        <div class="v2-06-incidents-cause">Rò rỉ, thay đổi, phá hủy thông tin</div>
+      </div>
+      <div class="v2-06-incidents-row v2-06-incidents-grid">
+        <div class="v2-06-incidents-name"><span class="v2-06-incidents-num">03</span><span class="v2-06-incidents-label">Vi phạm an ninh</span></div>
+        <div class="v2-06-incidents-desc">Cố ý vi phạm biện pháp bảo mật</div>
+        <div class="v2-06-incidents-cause">Truy cập trái phép, nhiễm virus, bị hack mật khẩu</div>
+      </div>
+      <div class="v2-06-incidents-row v2-06-incidents-grid">
+        <div class="v2-06-incidents-name"><span class="v2-06-incidents-num">04</span><span class="v2-06-incidents-label">Lỗi bảo mật</span></div>
+        <div class="v2-06-incidents-desc">Biện pháp bảo mật không áp dụng hoặc không hiệu quả</div>
+        <div class="v2-06-incidents-cause">Cài tường lửa không đầy đủ, xử lý key sai</div>
+      </div>
+      <div class="v2-06-incidents-row v2-06-incidents-grid">
+        <div class="v2-06-incidents-name"><span class="v2-06-incidents-num">05</span><span class="v2-06-incidents-label">Sự cố đáng ngờ</span></div>
+        <div class="v2-06-incidents-desc">Nghi ngờ xuất hiện sự cố từ mục 1 đến 4</div>
+        <div class="v2-06-incidents-cause v2-06-incidents-cause-empty"><div id="v2-06-incidents-dash"></div></div>
+      </div>
+    </div>
+
+    <svg id="v2-06-incidents-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <path class="v2-06-incidents-arrow" d="M 960 726 L 960 772" />
+      <path class="v2-06-incidents-arrow" d="M 944 756 L 960 773 L 976 756" />
+    </svg>
+
+    <div id="v2-06-incidents-pillrow">
+      <span id="v2-06-incidents-pill">Xử lý theo quy trình</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.querySelector('[data-composition-id="v2-06-incidents"]');
+  var byId = function (id) { return root.querySelector('[id="' + id + '"]'); };
+  var byCls = function (c, scope) { return Array.prototype.slice.call((scope || root).querySelectorAll('[class~="' + c + '"]')); };
+
+  var world = byId("v2-06-incidents-world");
+  var eyebrow = byId("v2-06-incidents-eyebrow");
+  var tag = byId("v2-06-incidents-tag");
+  var h2 = byId("v2-06-incidents-h2");
+  var thead = byId("v2-06-incidents-thead");
+  var rows = byCls("v2-06-incidents-row");
+  var arrows = byCls("v2-06-incidents-arrow");
+  var dash = byId("v2-06-incidents-dash");
+  var pill = byId("v2-06-incidents-pill");
+
+  // svg-path-draw setup: measured lengths
+  arrows.forEach(function (p) {
+    var len = 0;
+    try { len = p.getTotalLength(); } catch (e) { len = 0; }
+    if (!len) len = 120;
+    len = len * 1.05;
+    p.style.strokeDasharray = len + "";
+    p.style.strokeDashoffset = len + "";
+  });
+
+  var tl = gsap.timeline({ paused: true });
+
+  // Slow camera push underneath the whole shot
+  tl.fromTo(world, { scale: 1 }, { scale: 1.015, duration: 23.024, ease: "none" }, 0);
+
+  // Scene 1 — slide-header + table header row
+  tl.fromTo(eyebrow, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.05);
+  tl.fromTo(h2, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+  tl.fromTo(tag, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, 1.2);
+  tl.fromTo(thead, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.2);
+
+  // Scenes 2–6 — grid-card-assemble on rows: card + name, then content, then cause
+  var cues = [
+    { row: 2.0, desc: 2.2, cause: 3.0 },
+    { row: 4.8, desc: 5.0, cause: 5.8 },
+    { row: 9.1, desc: 9.3, cause: 10.3 },
+    { row: 12.6, desc: 12.8, cause: 13.6 },
+    { row: 16.0, desc: 16.3, cause: null }
+  ];
+  rows.forEach(function (r, i) {
+    var c = cues[i];
+    var name = byCls("v2-06-incidents-name", r)[0];
+    var desc = byCls("v2-06-incidents-desc", r)[0];
+    var cause = byCls("v2-06-incidents-cause", r)[0];
+    tl.fromTo(r, { opacity: 0, y: 28, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" }, c.row);
+    tl.fromTo(name, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, c.row + 0.05);
+    tl.fromTo(desc, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, c.desc);
+    if (c.cause !== null) {
+      tl.fromTo(cause, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, c.cause);
+    } else {
+      tl.fromTo(cause, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 16.8);
+      tl.fromTo(dash, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 16.8);
+    }
+  });
+
+  // Scene 7 — arrow draws down from the table, then the process pill pops
+  tl.to(arrows[0], { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 18.2);
+  tl.to(arrows[1], { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 18.58);
+  tl.fromTo(pill, { opacity: 0, scale: 0.7, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(1.7)" }, 19.6);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["v2-06-incidents"] = tl;
+})();
+</script>
+</template>

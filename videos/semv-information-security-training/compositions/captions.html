@@ -1,0 +1,228 @@
+<template id="captions-template" data-composition-id="captions" data-width="1920" data-height="1080">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+
+<style data-brand-tokens>
+      @font-face { font-family: 'Be Vietnam Pro'; src: url('assets/fonts/be-vietnam-pro-400-normal.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: block; }
+      @font-face { font-family: 'Be Vietnam Pro'; src: url('assets/fonts/be-vietnam-pro-500-normal.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: block; }
+      @font-face { font-family: 'Be Vietnam Pro'; src: url('assets/fonts/be-vietnam-pro-600-normal.ttf') format('truetype'); font-weight: 600; font-style: normal; font-display: block; }
+      @font-face { font-family: 'Be Vietnam Pro'; src: url('assets/fonts/be-vietnam-pro-700-normal.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: block; }
+      @font-face { font-family: 'Be Vietnam Pro'; src: url('assets/fonts/be-vietnam-pro-800-normal.ttf') format('truetype'); font-weight: 800; font-style: normal; font-display: block; }
+      :root {
+      --bg: #FFFFFF;
+      --primary: #0A3D91;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-light: #9A9A9A;
+      --accent-light: rgba(10, 61, 145, 0.08);
+      --accent-medium: rgba(10, 61, 145, 0.15);
+      --border: rgba(10, 61, 145, 0.2);
+      --card-bg: rgba(10, 61, 145, 0.04);
+      --positive: #059669;
+      --negative: #dc2626;
+      --cap-ink: #0F172A;
+      --cap-canvas: #FFFFFF;
+      --cap-accent: #0A3D91;
+      --cap-accent-2: #475569;
+      --font-display: "Be Vietnam Pro", system-ui, serif;
+      --font-body: "Be Vietnam Pro", system-ui, sans-serif;
+      --cap-band-top: 900px;
+      --cap-band-height: 180px;
+      }
+    </style>
+
+<style>
+  #captions-root {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .caption-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+  }
+  /* the keep-out band, from captionBand(H) — frame content stays above it */
+  .caption-stage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--cap-band-top, 900px);
+    height: var(--cap-band-height, 180px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .caption-group {
+    /* every group is absolutely stacked over the SAME band — exactly one shown at a
+       time via opacity. Must be absolute: in-flow groups would lay out side-by-side. */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+  }
+
+  /* THE tinted card — 4% cobalt fill, 1.5px 20%-cobalt border, soft 14px corners,
+     NO shadow (the tinted card does the lift; cast depth is forbidden) */
+  .caption-pill {
+    max-width: 78%;
+    padding: 20px 44px 24px;
+    background: color-mix(in srgb, var(--cap-accent, #1e2bfa) 4%, var(--cap-canvas, #fdfae7));
+    border: 1.5px solid color-mix(in srgb, var(--cap-accent, #1e2bfa) 20%, transparent);
+    border-radius: 14px;
+  }
+  .caption-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.1em 0.06em;
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(40px, 4.4vw, 58px);
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+  }
+
+  /* upcoming — muted gray, no chip */
+  .caption-word {
+    display: inline-block;
+    padding: 0 0.1em;
+    border-radius: 0.32em;
+    color: color-mix(in srgb, var(--cap-ink, #111111) 52%, var(--cap-canvas, #fdfae7));
+  }
+  /* current word — THE solid cobalt chip (the single-accent gesture; pill-rounded
+     fill, NO shadow), cream reading on top */
+  .caption-word.is-active {
+    color: var(--cap-canvas, #fdfae7);
+    background: var(--cap-accent, #1e2bfa);
+    box-shadow: none;
+  }
+  /* already spoken — solid near-black ink, chip cleared */
+  .caption-word.is-spoken {
+    color: var(--cap-ink, #111111);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* optional per-word accents (dormant until a word-classer tags them) */
+  /* brand / key term — cobalt, the system's one accent on a key word */
+  .caption-word.cap-brand {
+    color: var(--cap-accent, #1e2bfa);
+  }
+  /* numerals / data — cobalt 700, the figure voice */
+  .caption-word.cap-num {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--cap-accent, #1e2bfa);
+  }
+  /* emphasis — a directional-red hairline underline (inline only, never a fill) */
+  .caption-word.cap-cta {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--cap-accent-2, #dc2626);
+    text-underline-offset: 0.1em;
+  }
+
+  @media (max-aspect-ratio: 9/16) {
+    .caption-pill {
+      max-width: 92%;
+    }
+    .caption-line {
+      font-size: clamp(34px, 5.4vw, 48px);
+    }
+  }
+</style>
+
+<div
+  id="captions-root"
+  data-composition-id="captions"
+  data-timeline-locked
+  data-start="0"
+  data-duration="186.972"
+  data-fps="30"
+  data-width="1920"
+  data-height="1080"
+>
+  <div class="caption-layer" aria-hidden="true">
+    <div id="caption-stage" class="caption-stage"></div>
+  </div>
+</div>
+
+<script>
+  // captions.mjs injects the engine's scene-aware groups + real duration here.
+  var GROUPS = [{"id":"caption-group-0","frame":1,"start":0.129,"end":1.683,"text":"Chỉ một cú nhấp chuột sai,","words":[{"id":"caption-word-0-0","text":"Chỉ một","start":0.129,"end":0.511},{"id":"caption-word-0-1","text":"cú nhấp","start":0.511,"end":0.932},{"id":"caption-word-0-2","text":"chuột sai,","start":0.932,"end":1.563}]},{"id":"caption-group-1","frame":1,"start":1.761,"end":3.604,"text":"cả hệ thống có thể dừng lại.","words":[{"id":"caption-word-1-0","text":"cả hệ thống","start":1.761,"end":2.445},{"id":"caption-word-1-1","text":"có thể dừng","start":2.445,"end":3.129},{"id":"caption-word-1-2","text":"lại.","start":3.129,"end":3.484}]},{"id":"caption-group-2","frame":1,"start":4.408,"end":8.594,"text":"Đây là khóa đào tạo bảo mật thông tin dành cho nhân viên mới SEMV,","words":[{"id":"caption-word-2-0","text":"Đây là khóa đào","start":4.408,"end":5.158},{"id":"caption-word-2-1","text":"tạo bảo mật thông","start":5.158,"end":6.013},{"id":"caption-word-2-2","text":"tin dành cho nhân","start":6.013,"end":6.842},{"id":"caption-word-2-3","text":"viên mới SEMV,","start":6.842,"end":8.474}]},{"id":"caption-group-3","frame":1,"start":8.724,"end":9.673,"text":"gồm năm phần.","words":[{"id":"caption-word-3-0","text":"gồm năm","start":8.724,"end":9.21},{"id":"caption-word-3-1","text":"phần.","start":9.211,"end":9.553}]},{"id":"caption-group-4","frame":2,"start":12.569,"end":13.163,"text":"Phần một,","words":[{"id":"caption-word-4-0","text":"Phần một,","start":12.569,"end":13.043}]},{"id":"caption-group-5","frame":2,"start":13.279,"end":14.86,"text":"chính sách bảo mật là gì.","words":[{"id":"caption-word-5-0","text":"chính sách","start":13.279,"end":13.727},{"id":"caption-word-5-1","text":"bảo mật","start":13.727,"end":14.214},{"id":"caption-word-5-2","text":"là gì.","start":14.214,"end":14.74}]},{"id":"caption-group-6","frame":2,"start":15.651,"end":16.968,"text":"Đó là tiêu chuẩn chung,","words":[{"id":"caption-word-6-0","text":"Đó là","start":15.651,"end":16.058},{"id":"caption-word-6-1","text":"tiêu chuẩn","start":16.058,"end":16.506},{"id":"caption-word-6-2","text":"chung,","start":16.506,"end":16.848}]},{"id":"caption-group-7","frame":2,"start":17.085,"end":19.836,"text":"quy định cách bảo đảm an ninh cho hệ thống thông tin.","words":[{"id":"caption-word-7-0","text":"quy định cách bảo","start":17.085,"end":17.874},{"id":"caption-word-7-1","text":"đảm an ninh cho","start":17.874,"end":18.716},{"id":"caption-word-7-2","text":"hệ thống thông tin.","start":18.716,"end":19.716}]},{"id":"caption-group-8","frame":2,"start":20.637,"end":21.968,"text":"Ba nguyên tắc cốt lõi,","words":[{"id":"caption-word-8-0","text":"Ba nguyên","start":20.637,"end":21.032},{"id":"caption-word-8-1","text":"tắc cốt","start":21.032,"end":21.414},{"id":"caption-word-8-2","text":"lõi,","start":21.414,"end":21.848}]},{"id":"caption-group-9","frame":2,"start":22.045,"end":23.481,"text":"cải tiến bảo mật liên tục,","words":[{"id":"caption-word-9-0","text":"cải tiến","start":22.045,"end":22.479},{"id":"caption-word-9-1","text":"bảo mật","start":22.479,"end":22.887},{"id":"caption-word-9-2","text":"liên tục,","start":22.887,"end":23.361}]},{"id":"caption-group-10","frame":2,"start":23.611,"end":25.77,"text":"mỗi người hoàn thành trách nhiệm theo vai trò,","words":[{"id":"caption-word-10-0","text":"mỗi người hoàn","start":23.611,"end":24.216},{"id":"caption-word-10-1","text":"thành trách nhiệm","start":24.216,"end":24.835},{"id":"caption-word-10-2","text":"theo vai trò,","start":24.835,"end":25.65}]},{"id":"caption-group-11","frame":2,"start":25.874,"end":28.363,"text":"và đánh giá rủi ro qua các mối đe dọa.","words":[{"id":"caption-word-11-0","text":"và đánh giá rủi","start":25.874,"end":26.769},{"id":"caption-word-11-1","text":"ro qua các mối","start":26.769,"end":27.703},{"id":"caption-word-11-2","text":"đe dọa.","start":27.703,"end":28.243}]},{"id":"caption-group-12","frame":3,"start":31.273,"end":32.038,"text":"Phần hai,","words":[{"id":"caption-word-12-0","text":"Phần hai,","start":31.273,"end":31.918}]},{"id":"caption-group-13","frame":3,"start":32.102,"end":32.919,"text":"bối cảnh.","words":[{"id":"caption-word-13-0","text":"bối cảnh.","start":32.102,"end":32.799}]},{"id":"caption-group-14","frame":3,"start":33.71,"end":36.251,"text":"Chính sách giúp ngăn thiệt hại do rò rỉ thông tin,","words":[{"id":"caption-word-14-0","text":"Chính sách giúp ngăn","start":33.71,"end":34.473},{"id":"caption-word-14-1","text":"thiệt hại do rò","start":34.473,"end":35.368},{"id":"caption-word-14-2","text":"rỉ thông tin,","start":35.368,"end":36.131}]},{"id":"caption-group-15","frame":3,"start":36.368,"end":37.132,"text":"giữ sản xuất,","words":[{"id":"caption-word-15-0","text":"giữ sản","start":36.368,"end":36.762},{"id":"caption-word-15-1","text":"xuất,","start":36.762,"end":37.012}]},{"id":"caption-group-16","frame":3,"start":37.236,"end":38.553,"text":"kinh doanh không gián đoạn,","words":[{"id":"caption-word-16-0","text":"kinh doanh","start":37.236,"end":37.644},{"id":"caption-word-16-1","text":"không gián","start":37.644,"end":38.078},{"id":"caption-word-16-2","text":"đoạn,","start":38.078,"end":38.433}]},{"id":"caption-group-17","frame":3,"start":38.657,"end":39.988,"text":"giữ niềm tin khách hàng,","words":[{"id":"caption-word-17-0","text":"giữ niềm","start":38.657,"end":39.091},{"id":"caption-word-17-1","text":"tin khách","start":39.091,"end":39.473},{"id":"caption-word-17-2","text":"hàng,","start":39.473,"end":39.868}]},{"id":"caption-group-18","frame":3,"start":40.118,"end":43.29,"text":"và giúp mỗi người hiểu tầm quan trọng của bảo mật để tuân thủ.","words":[{"id":"caption-word-18-0","text":"và giúp mỗi người","start":40.118,"end":40.868},{"id":"caption-word-18-1","text":"hiểu tầm quan trọng","start":40.868,"end":41.776},{"id":"caption-word-18-2","text":"của bảo mật để","start":41.776,"end":42.578},{"id":"caption-word-18-3","text":"tuân thủ.","start":42.578,"end":43.17}]},{"id":"caption-group-19","frame":4,"start":46.185,"end":46.91,"text":"Phần ba,","words":[{"id":"caption-word-19-0","text":"Phần ba,","start":46.185,"end":46.79}]},{"id":"caption-group-20","frame":4,"start":47.001,"end":48.45,"text":"áp dụng và tuân thủ,","words":[{"id":"caption-word-20-0","text":"áp dụng","start":47.001,"end":47.474},{"id":"caption-word-20-1","text":"và tuân","start":47.474,"end":47.922},{"id":"caption-word-20-2","text":"thủ,","start":47.922,"end":48.33}]},{"id":"caption-group-21","frame":4,"start":48.527,"end":50.292,"text":"bắt đầu với kiểm soát truy cập.","words":[{"id":"caption-word-21-0","text":"bắt đầu với","start":48.527,"end":49.238},{"id":"caption-word-21-1","text":"kiểm soát truy","start":49.238,"end":49.922},{"id":"caption-word-21-2","text":"cập.","start":49.922,"end":50.172}]},{"id":"caption-group-22","frame":4,"start":51.095,"end":53.439,"text":"Quản trị viên phân quyền theo cấp độ A,","words":[{"id":"caption-word-22-0","text":"Quản trị viên","start":51.095,"end":51.74},{"id":"caption-word-22-1","text":"phân quyền theo","start":51.74,"end":52.424},{"id":"caption-word-22-2","text":"cấp độ A,","start":52.424,"end":53.319}]},{"id":"caption-group-23","frame":4,"start":53.503,"end":54.005,"text":"B,","words":[{"id":"caption-word-23-0","text":"B,","start":53.503,"end":53.885}]},{"id":"caption-group-24","frame":4,"start":54.082,"end":55.965,"text":"C cho nhân viên và vendor.","words":[{"id":"caption-word-24-0","text":"C cho","start":54.082,"end":54.477},{"id":"caption-word-24-1","text":"nhân viên","start":54.477,"end":54.99},{"id":"caption-word-24-2","text":"và vendor.","start":54.99,"end":55.845}]},{"id":"caption-group-25","frame":4,"start":56.753,"end":58.15,"text":"Người dùng không chia sẻ,","words":[{"id":"caption-word-25-0","text":"Người dùng","start":56.753,"end":57.174},{"id":"caption-word-25-1","text":"không chia","start":57.174,"end":57.556},{"id":"caption-word-25-2","text":"sẻ,","start":57.556,"end":58.03}]},{"id":"caption-group-26","frame":4,"start":58.214,"end":59.544,"text":"không cho mượn tài khoản,","words":[{"id":"caption-word-26-0","text":"không cho","start":58.214,"end":58.556},{"id":"caption-word-26-1","text":"mượn tài","start":58.556,"end":59.003},{"id":"caption-word-26-2","text":"khoản,","start":59.003,"end":59.424}]},{"id":"caption-group-27","frame":4,"start":59.661,"end":61.505,"text":"và đổi mật khẩu ba tháng một lần,","words":[{"id":"caption-word-27-0","text":"và đổi mật","start":59.661,"end":60.227},{"id":"caption-word-27-1","text":"khẩu ba tháng","start":60.227,"end":60.859},{"id":"caption-word-27-2","text":"một lần,","start":60.859,"end":61.385}]},{"id":"caption-group-28","frame":4,"start":61.582,"end":62.729,"text":"từ 8 ký tự,","words":[{"id":"caption-word-28-0","text":"từ 8","start":61.582,"end":62.016},{"id":"caption-word-28-1","text":"ký tự,","start":62.017,"end":62.609}]},{"id":"caption-group-29","frame":4,"start":62.872,"end":63.86,"text":"gồm chữ thường,","words":[{"id":"caption-word-29-0","text":"gồm chữ","start":62.872,"end":63.332},{"id":"caption-word-29-1","text":"thường,","start":63.332,"end":63.74}]},{"id":"caption-group-30","frame":4,"start":63.924,"end":64.65,"text":"chữ hoa,","words":[{"id":"caption-word-30-0","text":"chữ hoa,","start":63.924,"end":64.53}]},{"id":"caption-group-31","frame":4,"start":64.701,"end":66.281,"text":"số và ký tự đặc biệt.","words":[{"id":"caption-word-31-0","text":"số và","start":64.701,"end":65.227},{"id":"caption-word-31-1","text":"ký tự","start":65.227,"end":65.714},{"id":"caption-word-31-2","text":"đặc biệt.","start":65.714,"end":66.161}]},{"id":"caption-group-32","frame":5,"start":68.385,"end":69.189,"text":"Với mã độc,","words":[{"id":"caption-word-32-0","text":"Với mã","start":68.385,"end":68.793},{"id":"caption-word-32-1","text":"độc,","start":68.793,"end":69.069}]},{"id":"caption-group-33","frame":5,"start":69.306,"end":72.518,"text":"quản trị viên cài phần mềm phòng chống và hướng dẫn người dùng.","words":[{"id":"caption-word-33-0","text":"quản trị viên cài","start":69.306,"end":70.188},{"id":"caption-word-33-1","text":"phần mềm phòng chống","start":70.188,"end":71.174},{"id":"caption-word-33-2","text":"và hướng dẫn người","start":71.174,"end":72.082},{"id":"caption-word-33-3","text":"dùng.","start":72.082,"end":72.398}]},{"id":"caption-group-34","frame":5,"start":73.322,"end":75.797,"text":"Bạn cần cập nhật diệt virus và Windows,","words":[{"id":"caption-word-34-0","text":"Bạn cần cập","start":73.322,"end":73.953},{"id":"caption-word-34-1","text":"nhật diệt virus","start":73.953,"end":74.769},{"id":"caption-word-34-2","text":"và Windows,","start":74.769,"end":75.677}]},{"id":"caption-group-35","frame":5,"start":75.953,"end":77.652,"text":"không dùng phần mềm không rõ nguồn,","words":[{"id":"caption-word-35-0","text":"không dùng phần","start":75.953,"end":76.519},{"id":"caption-word-35-1","text":"mềm không rõ","start":76.519,"end":77.151},{"id":"caption-word-35-2","text":"nguồn,","start":77.151,"end":77.532}]},{"id":"caption-group-36","frame":5,"start":77.756,"end":80.126,"text":"quét virus trước khi gửi dữ liệu ra ngoài,","words":[{"id":"caption-word-36-0","text":"quét virus trước","start":77.756,"end":78.545},{"id":"caption-word-36-1","text":"khi gửi dữ","start":78.545,"end":79.151},{"id":"caption-word-36-2","text":"liệu ra ngoài,","start":79.151,"end":80.006}]},{"id":"caption-group-37","frame":5,"start":80.256,"end":82.139,"text":"và báo IT ngay khi thấy bất thường.","words":[{"id":"caption-word-37-0","text":"và báo IT","start":80.256,"end":80.835},{"id":"caption-word-37-1","text":"ngay khi thấy","start":80.835,"end":81.493},{"id":"caption-word-37-2","text":"bất thường.","start":81.493,"end":82.019}]},{"id":"caption-group-38","frame":5,"start":82.927,"end":83.679,"text":"Làm ngơ,","words":[{"id":"caption-word-38-0","text":"Làm ngơ,","start":82.927,"end":83.559}]},{"id":"caption-group-39","frame":5,"start":83.756,"end":85.231,"text":"thiệt hại sẽ nhân lên.","words":[{"id":"caption-word-39-0","text":"thiệt hại","start":83.756,"end":84.243},{"id":"caption-word-39-1","text":"sẽ nhân","start":84.243,"end":84.782},{"id":"caption-word-39-2","text":"lên.","start":84.782,"end":85.111}]},{"id":"caption-group-40","frame":6,"start":87.321,"end":89.125,"text":"Sự cố bảo mật có năm loại,","words":[{"id":"caption-word-40-0","text":"Sự cố bảo","start":87.321,"end":88.005},{"id":"caption-word-40-1","text":"mật có năm","start":88.005,"end":88.637},{"id":"caption-word-40-2","text":"loại,","start":88.637,"end":89.005}]},{"id":"caption-group-41","frame":6,"start":89.203,"end":90.099,"text":"lỗi dịch vụ,","words":[{"id":"caption-word-41-0","text":"lỗi dịch","start":89.203,"end":89.61},{"id":"caption-word-41-1","text":"vụ,","start":89.61,"end":89.979}]},{"id":"caption-group-42","frame":6,"start":90.229,"end":91.901,"text":"do hỏng phần cứng hay phần mềm,","words":[{"id":"caption-word-42-0","text":"do hỏng phần","start":90.229,"end":90.808},{"id":"caption-word-42-1","text":"cứng hay phần","start":90.808,"end":91.426},{"id":"caption-word-42-2","text":"mềm,","start":91.426,"end":91.781}]},{"id":"caption-group-43","frame":6,"start":91.979,"end":92.888,"text":"lỗi thông tin,","words":[{"id":"caption-word-43-0","text":"lỗi thông","start":91.979,"end":92.426},{"id":"caption-word-43-1","text":"tin,","start":92.426,"end":92.768}]},{"id":"caption-group-44","frame":6,"start":92.979,"end":94.533,"text":"khi dữ liệu bị rò rỉ,","words":[{"id":"caption-word-44-0","text":"khi dữ","start":92.979,"end":93.321},{"id":"caption-word-44-1","text":"liệu bị","start":93.321,"end":93.781},{"id":"caption-word-44-2","text":"rò rỉ,","start":93.781,"end":94.413}]},{"id":"caption-group-45","frame":6,"start":94.584,"end":95.375,"text":"sửa đổi,","words":[{"id":"caption-word-45-0","text":"sửa đổi,","start":94.584,"end":95.255}]},{"id":"caption-group-46","frame":6,"start":95.453,"end":96.217,"text":"phá hủy,","words":[{"id":"caption-word-46-0","text":"phá hủy,","start":95.453,"end":96.097}]},{"id":"caption-group-47","frame":6,"start":96.295,"end":97.362,"text":"vi phạm an ninh,","words":[{"id":"caption-word-47-0","text":"vi phạm","start":96.295,"end":96.755},{"id":"caption-word-47-1","text":"an ninh,","start":96.755,"end":97.242}]},{"id":"caption-group-48","frame":6,"start":97.479,"end":99.783,"text":"như truy cập trái phép hay bị hack mật khẩu,","words":[{"id":"caption-word-48-0","text":"như truy cập trái","start":97.479,"end":98.203},{"id":"caption-word-48-1","text":"phép hay bị hack","start":98.203,"end":99.058},{"id":"caption-word-48-2","text":"mật khẩu,","start":99.058,"end":99.663}]},{"id":"caption-group-49","frame":6,"start":99.834,"end":100.625,"text":"lỗi bảo mật,","words":[{"id":"caption-word-49-0","text":"lỗi bảo","start":99.834,"end":100.242},{"id":"caption-word-49-1","text":"mật,","start":100.242,"end":100.505}]},{"id":"caption-group-50","frame":6,"start":100.742,"end":103.151,"text":"khi tường lửa hay biện pháp bảo vệ không đủ,","words":[{"id":"caption-word-50-0","text":"khi tường lửa hay","start":100.742,"end":101.558},{"id":"caption-word-50-1","text":"biện pháp bảo vệ","start":101.558,"end":102.426},{"id":"caption-word-50-2","text":"không đủ,","start":102.426,"end":103.031}]},{"id":"caption-group-51","frame":6,"start":103.203,"end":104.586,"text":"và sự cố đáng ngờ.","words":[{"id":"caption-word-51-0","text":"và sự","start":103.203,"end":103.637},{"id":"caption-word-51-1","text":"cố đáng","start":103.637,"end":104.11},{"id":"caption-word-51-2","text":"ngờ.","start":104.11,"end":104.466}]},{"id":"caption-group-52","frame":6,"start":105.389,"end":107.457,"text":"Tất cả phải xử lý theo quy trình.","words":[{"id":"caption-word-52-0","text":"Tất cả phải","start":105.389,"end":106.008},{"id":"caption-word-52-1","text":"xử lý theo","start":106.008,"end":106.758},{"id":"caption-word-52-2","text":"quy trình.","start":106.758,"end":107.337}]},{"id":"caption-group-53","frame":7,"start":110.345,"end":111.07,"text":"Phần bốn,","words":[{"id":"caption-word-53-0","text":"Phần bốn,","start":110.345,"end":110.95}]},{"id":"caption-group-54","frame":7,"start":111.108,"end":112.425,"text":"sự cố thực tế.","words":[{"id":"caption-word-54-0","text":"sự cố","start":111.108,"end":111.687},{"id":"caption-word-54-1","text":"thực tế.","start":111.687,"end":112.305}]},{"id":"caption-group-55","frame":7,"start":113.229,"end":115.862,"text":"Tại các công ty thành viên tập đoàn Sumitomo,","words":[{"id":"caption-word-55-0","text":"Tại các công","start":113.229,"end":113.821},{"id":"caption-word-55-1","text":"ty thành viên","start":113.821,"end":114.426},{"id":"caption-word-55-2","text":"tập đoàn Sumitomo,","start":114.427,"end":115.742}]},{"id":"caption-group-56","frame":7,"start":115.953,"end":117.257,"text":"hacker chiếm email,","words":[{"id":"caption-word-56-0","text":"hacker chiếm","start":115.953,"end":116.637},{"id":"caption-word-56-1","text":"email,","start":116.637,"end":117.137}]},{"id":"caption-group-57","frame":7,"start":117.374,"end":119.244,"text":"giả làm đối tác để đòi thanh toán,","words":[{"id":"caption-word-57-0","text":"giả làm đối","start":117.374,"end":117.953},{"id":"caption-word-57-1","text":"tác để đòi","start":117.953,"end":118.545},{"id":"caption-word-57-2","text":"thanh toán,","start":118.545,"end":119.124}]},{"id":"caption-group-58","frame":7,"start":119.348,"end":123.191,"text":"thậm chí đột nhập email nhân viên tính lương rồi yêu cầu kế toán chuyển tiền.","words":[{"id":"caption-word-58-0","text":"thậm chí đột nhập","start":119.348,"end":120.176},{"id":"caption-word-58-1","text":"email nhân viên tính","start":120.177,"end":121.058},{"id":"caption-word-58-2","text":"lương rồi yêu cầu","start":121.058,"end":122.019},{"id":"caption-word-58-3","text":"kế toán chuyển tiền.","start":122.019,"end":123.071}]},{"id":"caption-group-59","frame":8,"start":125.297,"end":129.496,"text":"Ransomware mã hóa dữ liệu trên máy tính và server rồi đòi tiền chuộc.","words":[{"id":"caption-word-59-0","text":"Ransomware mã hóa dữ","start":125.297,"end":126.652},{"id":"caption-word-59-1","text":"liệu trên máy tính","start":126.652,"end":127.626},{"id":"caption-word-59-2","text":"và server rồi đòi","start":127.626,"end":128.85},{"id":"caption-word-59-3","text":"tiền chuộc.","start":128.85,"end":129.376}]},{"id":"caption-group-60","frame":8,"start":130.3,"end":131.775,"text":"Colonial Pipeline,","words":[{"id":"caption-word-60-0","text":"Colonial Pipeline,","start":130.3,"end":131.655}]},{"id":"caption-group-61","frame":8,"start":131.892,"end":133.999,"text":"công ty đường ống dầu lớn nhất nước Mỹ,","words":[{"id":"caption-word-61-0","text":"công ty đường","start":131.892,"end":132.484},{"id":"caption-word-61-1","text":"ống dầu lớn","start":132.484,"end":133.089},{"id":"caption-word-61-2","text":"nhất nước Mỹ,","start":133.089,"end":133.879}]},{"id":"caption-group-62","frame":8,"start":134.076,"end":135.775,"text":"đã trả khoảng năm triệu đô la,","words":[{"id":"caption-word-62-0","text":"đã trả khoảng","start":134.076,"end":134.668},{"id":"caption-word-62-1","text":"năm triệu đô","start":134.668,"end":135.273},{"id":"caption-word-62-2","text":"la,","start":135.273,"end":135.655}]},{"id":"caption-group-63","frame":8,"start":135.852,"end":137.564,"text":"tương đương 114 tỷ đồng,","words":[{"id":"caption-word-63-0","text":"tương đương","start":135.852,"end":136.207},{"id":"caption-word-63-1","text":"114 tỷ đồng,","start":136.207,"end":137.444}]},{"id":"caption-group-64","frame":8,"start":137.668,"end":139.406,"text":"mà vận hành vẫn bị gián đoạn.","words":[{"id":"caption-word-64-0","text":"mà vận hành","start":137.668,"end":138.326},{"id":"caption-word-64-1","text":"vẫn bị gián","start":138.326,"end":138.957},{"id":"caption-word-64-2","text":"đoạn.","start":138.957,"end":139.286}]},{"id":"caption-group-65","frame":9,"start":141.51,"end":143.591,"text":"Còn lừa đảo tài chính đến qua email,","words":[{"id":"caption-word-65-0","text":"Còn lừa đảo","start":141.51,"end":142.05},{"id":"caption-word-65-1","text":"tài chính đến","start":142.05,"end":142.721},{"id":"caption-word-65-2","text":"qua email,","start":142.721,"end":143.471}]},{"id":"caption-group-66","frame":9,"start":143.668,"end":144.327,"text":"tin nhắn,","words":[{"id":"caption-word-66-0","text":"tin nhắn,","start":143.668,"end":144.207}]},{"id":"caption-group-67","frame":9,"start":144.392,"end":145.117,"text":"cuộc gọi,","words":[{"id":"caption-word-67-0","text":"cuộc gọi,","start":144.392,"end":144.997}]},{"id":"caption-group-68","frame":9,"start":145.207,"end":147.025,"text":"website giả và mạng xã hội,","words":[{"id":"caption-word-68-0","text":"website giả","start":145.207,"end":145.931},{"id":"caption-word-68-1","text":"và mạng","start":145.931,"end":146.339},{"id":"caption-word-68-2","text":"xã hội,","start":146.339,"end":146.905}]},{"id":"caption-group-69","frame":9,"start":147.102,"end":148.92,"text":"kẻ gian mạo danh cơ quan chức năng,","words":[{"id":"caption-word-69-0","text":"kẻ gian mạo","start":147.102,"end":147.694},{"id":"caption-word-69-1","text":"danh cơ quan","start":147.694,"end":148.286},{"id":"caption-word-69-2","text":"chức năng,","start":148.286,"end":148.8}]},{"id":"caption-group-70","frame":9,"start":149.063,"end":151.472,"text":"người thân hay đối tác để yêu cầu chuyển khoản.","words":[{"id":"caption-word-70-0","text":"người thân hay đối","start":149.063,"end":149.852},{"id":"caption-word-70-1","text":"tác để yêu cầu","start":149.852,"end":150.747},{"id":"caption-word-70-2","text":"chuyển khoản.","start":150.747,"end":151.352}]},{"id":"caption-group-71","frame":10,"start":154.369,"end":155.042,"text":"Phần năm,","words":[{"id":"caption-word-71-0","text":"Phần năm,","start":154.369,"end":154.922}]},{"id":"caption-group-72","frame":10,"start":155.132,"end":155.989,"text":"bảy biện pháp,","words":[{"id":"caption-word-72-0","text":"bảy biện","start":155.132,"end":155.553},{"id":"caption-word-72-1","text":"pháp,","start":155.553,"end":155.869}]},{"id":"caption-group-73","frame":10,"start":156.093,"end":157.199,"text":"cập nhật Windows,","words":[{"id":"caption-word-73-0","text":"cập nhật","start":156.093,"end":156.527},{"id":"caption-word-73-1","text":"Windows,","start":156.527,"end":157.079}]},{"id":"caption-group-74","frame":10,"start":157.303,"end":158.371,"text":"không mở link lạ,","words":[{"id":"caption-word-74-0","text":"không mở","start":157.303,"end":157.698},{"id":"caption-word-74-1","text":"link lạ,","start":157.698,"end":158.251}]},{"id":"caption-group-75","frame":10,"start":158.474,"end":161.134,"text":"không cung cấp thông tin cá nhân hay mã OTP,","words":[{"id":"caption-word-75-0","text":"không cung cấp thông","start":158.474,"end":159.237},{"id":"caption-word-75-1","text":"tin cá nhân hay","start":159.237,"end":160.04},{"id":"caption-word-75-2","text":"mã OTP,","start":160.04,"end":161.014}]},{"id":"caption-group-76","frame":10,"start":161.251,"end":162.831,"text":"không cài ứng dụng chưa xác thực,","words":[{"id":"caption-word-76-0","text":"không cài ứng","start":161.251,"end":161.803},{"id":"caption-word-76-1","text":"dụng chưa xác","start":161.803,"end":162.487},{"id":"caption-word-76-2","text":"thực,","start":162.487,"end":162.711}]},{"id":"caption-group-77","frame":10,"start":162.961,"end":164.252,"text":"không cắm thiết bị lạ,","words":[{"id":"caption-word-77-0","text":"không cắm","start":162.961,"end":163.395},{"id":"caption-word-77-1","text":"thiết bị","start":163.395,"end":163.751},{"id":"caption-word-77-2","text":"lạ,","start":163.751,"end":164.132}]},{"id":"caption-group-78","frame":10,"start":164.329,"end":165.897,"text":"đổi mật khẩu mạnh thường xuyên,","words":[{"id":"caption-word-78-0","text":"đổi mật","start":164.329,"end":164.737},{"id":"caption-word-78-1","text":"khẩu mạnh","start":164.737,"end":165.172},{"id":"caption-word-78-2","text":"thường xuyên,","start":165.172,"end":165.777}]},{"id":"caption-group-79","frame":10,"start":165.987,"end":167.739,"text":"và khóa máy khi rời chỗ.","words":[{"id":"caption-word-79-0","text":"và khóa","start":165.987,"end":166.395},{"id":"caption-word-79-1","text":"máy khi","start":166.395,"end":166.974},{"id":"caption-word-79-2","text":"rời chỗ.","start":166.974,"end":167.619}]},{"id":"caption-group-80","frame":11,"start":170.662,"end":172.295,"text":"Bảo mật bắt đầu từ bạn.","words":[{"id":"caption-word-80-0","text":"Bảo mật","start":170.662,"end":171.109},{"id":"caption-word-80-1","text":"bắt đầu","start":171.109,"end":171.596},{"id":"caption-word-80-2","text":"từ bạn.","start":171.596,"end":172.175}]},{"id":"caption-group-81","frame":11,"start":173.086,"end":174.232,"text":"Khi có nghi ngờ,","words":[{"id":"caption-word-81-0","text":"Khi có","start":173.086,"end":173.467},{"id":"caption-word-81-1","text":"nghi ngờ,","start":173.467,"end":174.112}]},{"id":"caption-group-82","frame":11,"start":174.309,"end":176.153,"text":"hãy liên hệ ngay bộ phận IT.","words":[{"id":"caption-word-82-0","text":"hãy liên hệ","start":174.309,"end":174.994},{"id":"caption-word-82-1","text":"ngay bộ phận","start":174.994,"end":175.836},{"id":"caption-word-82-2","text":"IT.","start":175.836,"end":176.033}]},{"id":"caption-group-83","frame":11,"start":176.954,"end":178.614,"text":"Cảm ơn bạn đã lắng nghe.","words":[{"id":"caption-word-83-0","text":"Cảm ơn","start":176.954,"end":177.362},{"id":"caption-word-83-1","text":"bạn đã","start":177.362,"end":177.862},{"id":"caption-word-83-2","text":"lắng nghe.","start":177.862,"end":178.494}]},{"id":"caption-group-84","frame":11,"start":179.415,"end":181.508,"text":"Chào mừng bạn gia nhập SEMV,","words":[{"id":"caption-word-84-0","text":"Chào mừng","start":179.415,"end":179.783},{"id":"caption-word-84-1","text":"bạn gia","start":179.783,"end":180.191},{"id":"caption-word-84-2","text":"nhập SEMV,","start":180.191,"end":181.388}]},{"id":"caption-group-85","frame":11,"start":181.652,"end":184.693,"text":"hy vọng chúng ta sẽ cùng đồng hành trên chặng đường sắp tới.","words":[{"id":"caption-word-85-0","text":"hy vọng chúng ta","start":181.652,"end":182.494},{"id":"caption-word-85-1","text":"sẽ cùng đồng hành","start":182.494,"end":183.323},{"id":"caption-word-85-2","text":"trên chặng đường sắp","start":183.323,"end":184.191},{"id":"caption-word-85-3","text":"tới.","start":184.191,"end":184.573}]}];
+  var DURATION = 186.972;
+
+  (function () {
+    var stage = document.getElementById("caption-stage");
+
+    // build DOM: one .caption-group per group, .caption-word per word
+    GROUPS.forEach(function (group, g) {
+      var groupEl = document.createElement("div");
+      groupEl.className = "caption-group";
+      groupEl.id = "caption-group-" + g;
+      var pill = document.createElement("div");
+      pill.className = "caption-pill";
+      var line = document.createElement("div");
+      line.className = "caption-line";
+      (group.words || []).forEach(function (w, i) {
+        var span = document.createElement("span");
+        span.className = "caption-word";
+        span.id = "caption-word-" + g + "-" + i;
+        span.textContent = String(w.text);
+        line.appendChild(span);
+      });
+      pill.appendChild(line);
+      groupEl.appendChild(pill);
+      stage.appendChild(groupEl);
+    });
+
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+
+    GROUPS.forEach(function (group, g) {
+      var groupEl = document.getElementById("caption-group-" + g);
+      var words = group.words || [];
+      var next = GROUPS[g + 1];
+      var isLast = g === GROUPS.length - 1;
+      var start = Math.max(0, Number(group.start));
+      var end = isLast ? DURATION : Math.min(Number(next.start), Number(group.end) + 0.3);
+      if (end <= start) end = start + 0.01;
+
+      // group on/off — exactly one group visible at a time
+      tl.set(groupEl, { opacity: 1 }, start);
+      tl.set(groupEl, { opacity: 0 }, end);
+
+      // 3-state karaoke via className SETS — seek-safe (gsap.set applies on the
+      // engine's frame-by-frame seek; .call callbacks would NOT fire).
+      words.forEach(function (w, i) {
+        var el = document.getElementById("caption-word-" + g + "-" + i);
+        var at = Math.max(start, Number(w.start));
+        tl.set(el, { className: "caption-word" }, start); // upcoming (also resets on reverse-seek)
+        tl.set(el, { className: "caption-word is-active" }, at); // current
+        tl.fromTo(el, { scale: 0.985 }, { scale: 1, duration: 0.18, ease: "power1.out" }, at);
+        if (i + 1 < words.length) {
+          var nextAt = Math.max(start, Number(words[i + 1].start));
+          tl.set(el, { className: "caption-word is-spoken" }, nextAt); // demote when next activates
+        }
+      });
+      if (words.length) {
+        var lastEl = document.getElementById("caption-word-" + g + "-" + (words.length - 1));
+        var lastSpoken = Math.min(end, Number(words[words.length - 1].end) + 0.1);
+        tl.set(lastEl, { className: "caption-word is-spoken" }, lastSpoken);
+      }
+    });
+
+    // full-span anchor so the sub-comp timeline spans the whole video
+    tl.to({}, { duration: DURATION }, 0);
+    window.__timelines["captions"] = tl;
+  })();
+</script>
+
+<style>
+  .caption-line { line-height: 1.1 !important; }
+</style>
+</template>

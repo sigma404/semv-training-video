@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="186.972"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="el-v2-01-intro"
+        class="scene"
+        data-composition-id="v2-01-intro"
+        data-composition-src="compositions/frames/v2-01-intro.html"
+        data-start="0"
+        data-duration="12.94"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-v2-01-intro-voice"
+        src="assets/voice-v2/01.mp3"
+        data-start="0"
+        data-duration="12.44"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-02-definition"
+        class="scene"
+        data-composition-id="v2-02-definition"
+        data-composition-src="compositions/frames/v2-02-definition.html"
+        data-start="12.44"
+        data-duration="19.204"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-v2-02-definition-voice"
+        src="assets/voice-v2/02.mp3"
+        data-start="12.44"
+        data-duration="18.704"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-03-context"
+        class="scene"
+        data-composition-id="v2-03-context"
+        data-composition-src="compositions/frames/v2-03-context.html"
+        data-start="31.144"
+        data-duration="15.412"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-v2-03-context-voice"
+        src="assets/voice-v2/03.mp3"
+        data-start="31.144"
+        data-duration="14.912"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-04-access"
+        class="scene"
+        data-composition-id="v2-04-access"
+        data-composition-src="compositions/frames/v2-04-access.html"
+        data-start="46.056"
+        data-duration="22.7"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-v2-04-access-voice"
+        src="assets/voice-v2/04.mp3"
+        data-start="46.056"
+        data-duration="22.2"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-05-malware"
+        class="scene"
+        data-composition-id="v2-05-malware"
+        data-composition-src="compositions/frames/v2-05-malware.html"
+        data-start="68.256"
+        data-duration="19.436"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-v2-05-malware-voice"
+        src="assets/voice-v2/05.mp3"
+        data-start="68.256"
+        data-duration="18.936"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-06-incidents"
+        class="scene"
+        data-composition-id="v2-06-incidents"
+        data-composition-src="compositions/frames/v2-06-incidents.html"
+        data-start="87.19200000000001"
+        data-duration="23.524"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-v2-06-incidents-voice"
+        src="assets/voice-v2/06.mp3"
+        data-start="87.19200000000001"
+        data-duration="23.024"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-07-email-hack"
+        class="scene"
+        data-composition-id="v2-07-email-hack"
+        data-composition-src="compositions/frames/v2-07-email-hack.html"
+        data-start="110.21600000000001"
+        data-duration="15.452"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-v2-07-email-hack-voice"
+        src="assets/voice-v2/07.mp3"
+        data-start="110.21600000000001"
+        data-duration="14.952"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-08-ransomware"
+        class="scene"
+        data-composition-id="v2-08-ransomware"
+        data-composition-src="compositions/frames/v2-08-ransomware.html"
+        data-start="125.168"
+        data-duration="16.7"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-v2-08-ransomware-voice"
+        src="assets/voice-v2/08.mp3"
+        data-start="125.168"
+        data-duration="16.2"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-09-fraud"
+        class="scene"
+        data-composition-id="v2-09-fraud"
+        data-composition-src="compositions/frames/v2-09-fraud.html"
+        data-start="141.368"
+        data-duration="13.372"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-v2-09-fraud-voice"
+        src="assets/voice-v2/09.mp3"
+        data-start="141.368"
+        data-duration="12.872"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-10-best-practices"
+        class="scene"
+        data-composition-id="v2-10-best-practices"
+        data-composition-src="compositions/frames/v2-10-best-practices.html"
+        data-start="154.24"
+        data-duration="16.78"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-v2-10-best-practices-voice"
+        src="assets/voice-v2/10.mp3"
+        data-start="154.24"
+        data-duration="16.28"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-v2-11-closing"
+        class="scene"
+        data-composition-id="v2-11-closing"
+        data-composition-src="compositions/frames/v2-11-closing.html"
+        data-start="170.52"
+        data-duration="16.452"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-v2-11-closing-voice"
+        src="assets/voice-v2/11.mp3"
+        data-start="170.52"
+        data-duration="16.452"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <!-- captions -->
+      <div
+        id="el-captions"
+        class="scene"
+        data-composition-id="captions"
+        data-composition-src="compositions/captions.html"
+        data-start="0"
+        data-duration="186.972"
+        data-track-index="2"
+      ></div>
+
+      <!-- progress bar (added by .hyperframes/add-progress-bar.mjs) -->
+      <div
+        id="el-progress"
+        class="clip"
+        data-start="0"
+        data-duration="186.972"
+        data-track-index="3"
+        style="position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: rgba(10, 61, 145, 0.12); z-index: 50"
+      >
+        <div id="el-progress-fill" style="width: 100%; height: 100%; background: #0A3D91; transform-origin: 0 50%"></div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-v2-01-intro", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 12.44);
+        tl.fromTo("#el-v2-02-definition", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 12.44);
+        tl.addLabel("hf:transition:v2-01-intro:v2-02-definition:crossfade", 12.44);
+        tl.to("#el-v2-02-definition", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 31.144);
+        tl.fromTo("#el-v2-03-context", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 31.144);
+        tl.addLabel("hf:transition:v2-02-definition:v2-03-context:crossfade", 31.144);
+        tl.to("#el-v2-03-context", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 46.056);
+        tl.fromTo("#el-v2-04-access", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 46.056);
+        tl.addLabel("hf:transition:v2-03-context:v2-04-access:push-slide", 46.056);
+        tl.to("#el-v2-04-access", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 68.256);
+        tl.fromTo("#el-v2-05-malware", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 68.256);
+        tl.addLabel("hf:transition:v2-04-access:v2-05-malware:push-slide", 68.256);
+        tl.to("#el-v2-05-malware", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 87.192);
+        tl.fromTo("#el-v2-06-incidents", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 87.192);
+        tl.addLabel("hf:transition:v2-05-malware:v2-06-incidents:push-slide", 87.192);
+        tl.to("#el-v2-06-incidents", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 110.216);
+        tl.fromTo("#el-v2-07-email-hack", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 110.216);
+        tl.addLabel("hf:transition:v2-06-incidents:v2-07-email-hack:crossfade", 110.216);
+        tl.to("#el-v2-07-email-hack", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 125.168);
+        tl.fromTo("#el-v2-08-ransomware", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 125.168);
+        tl.addLabel("hf:transition:v2-07-email-hack:v2-08-ransomware:push-slide", 125.168);
+        tl.to("#el-v2-08-ransomware", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 141.368);
+        tl.fromTo("#el-v2-09-fraud", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 141.368);
+        tl.addLabel("hf:transition:v2-08-ransomware:v2-09-fraud:push-slide", 141.368);
+        tl.to("#el-v2-09-fraud", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 154.24);
+        tl.fromTo("#el-v2-10-best-practices", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 154.24);
+        tl.addLabel("hf:transition:v2-09-fraud:v2-10-best-practices:crossfade", 154.24);
+        tl.to("#el-v2-10-best-practices", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 170.52);
+        tl.fromTo("#el-v2-11-closing", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 170.52);
+        tl.addLabel("hf:transition:v2-10-best-practices:v2-11-closing:crossfade", 170.52);
+        tl.fromTo("#el-progress-fill", { scaleX: 0 }, { scaleX: 1, duration: 186.972, ease: "none" }, 0); // progress bar
+        tl.to({}, { duration: 186.972 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "internal-training",
+      "confirmed_in": [
+        "semv-information-security-training"
+      ],
+      "updated_at": "2026-10-12T03:56:19.785Z"
+    },
+    "aspect": {
+      "value": "1920x1080",
+      "confirmed_in": [
+        "semv-information-security-training"
+      ],
+      "updated_at": "2026-10-12T03:56:19.902Z"
+    },
+    "language": {
+      "value": "vi",
+      "confirmed_in": [
+        "semv-information-security-training"
+      ],
+      "updated_at": "2026-10-12T03:56:20.041Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "semv-information-security-training"
+      ],
+      "updated_at": "2026-10-12T03:56:20.184Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "semv-information-security-training"
+      ],
+      "updated_at": "2026-10-12T03:56:20.329Z"
+    },
+    "style_preset.faceless-explainer": {
+      "value": "blue-professional",
+      "confirmed_in": [
+        "semv-information-security-training"
+      ],
+      "updated_at": "2026-10-12T03:57:59.434Z"
+    }
+  },
+  "sightings": {}
+}

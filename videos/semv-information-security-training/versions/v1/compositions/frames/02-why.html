@@ -1,0 +1,289 @@
+<template>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #0F172A;
+  }
+
+  /* full-bleed ground: white + 5% blue hairline grid */
+  [id="02-why-bg"] {
+    position: absolute;
+    inset: 0;
+    background-color: #FFFFFF;
+    background-image:
+      linear-gradient(to right, rgba(10, 61, 145, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 61, 145, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: 0 0;
+    z-index: 0;
+  }
+
+  /* slide-header */
+  [id="02-why-header"] {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 96px;
+    z-index: 4;
+  }
+  [id="02-why-headrow"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  [id="02-why-eyebrow"] {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0A3D91;
+  }
+  [id="02-why-pill"] {
+    display: inline-block;
+    border-radius: 100px;
+    background: rgba(10, 61, 145, 0.08);
+    color: #0A3D91;
+    font-weight: 600;
+    font-size: 25px;
+    padding: 10px 27px;
+  }
+  [id="02-why-title"] {
+    margin-top: 19px;
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    white-space: nowrap;
+  }
+  [class~="02-why-word"] {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  /* connectors */
+  [id="02-why-links"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 1;
+    overflow: visible;
+  }
+  [class~="02-why-link"] {
+    fill: none;
+    stroke: rgba(10, 61, 145, 0.45);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  /* protective ring (scene 6) */
+  [id="02-why-ring"] {
+    position: absolute;
+    left: 770px;
+    top: 415px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    border: 2px solid #0A3D91;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  /* purpose cards */
+  [class~="02-why-card"] {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 28px;
+    background: rgba(10, 61, 145, 0.04);
+    border: 1.5px solid rgba(10, 61, 145, 0.2);
+    border-radius: 14px;
+    box-sizing: border-box;
+    z-index: 2;
+    will-change: transform, opacity;
+  }
+  [id="02-why-card-leak"] { left: 96px; top: 426px; width: 540px; height: 132px; }
+  [id="02-why-card-prod"] { left: 1284px; top: 426px; width: 540px; height: 132px; }
+  [id="02-why-card-trust"] { left: 650px; top: 772px; width: 620px; height: 112px; justify-content: center; }
+  [class~="02-why-ico"] {
+    width: 64px;
+    height: 64px;
+    flex: none;
+    color: #0A3D91;
+  }
+  [class~="02-why-ico"] svg { width: 100%; height: 100%; display: block; }
+  [class~="02-why-label"] {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #0F172A;
+  }
+
+  /* hero shield */
+  [id="02-why-shield"] {
+    position: absolute;
+    left: 835px;
+    top: 456px;
+    width: 250px;
+    height: 298px;
+    z-index: 3;
+    will-change: transform;
+  }
+  [id="02-why-shield"] svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  [id="02-why-outline"] {
+    fill: none;
+    stroke: #0A3D91;
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+</style>
+
+<div data-hf-id="hf-horl" id="root" data-composition-id="02-why" data-start="0" data-duration="13.34" data-width="1920" data-height="1080">
+
+  <div data-hf-id="hf-8xts" id="02-why-bg" class="clip" data-start="0" data-duration="13.34" data-track-index="0"></div>
+
+  <svg data-hf-id="hf-ke0d" id="02-why-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+    <path data-hf-id="hf-vxjj" id="02-why-link-leak" class="02-why-link" d="M 636 492 L 856 538" />
+    <path data-hf-id="hf-pl5p" id="02-why-link-prod" class="02-why-link" d="M 1284 492 L 1064 538" />
+    <path data-hf-id="hf-fpku" id="02-why-link-trust" class="02-why-link" d="M 960 772 L 960 744" />
+  </svg>
+
+  <div data-hf-id="hf-2se1" id="02-why-ring"></div>
+
+  <div data-hf-id="hf-twsg" id="02-why-header">
+    <div data-hf-id="hf-h73f" id="02-why-headrow">
+      <div data-hf-id="hf-krdw" id="02-why-eyebrow">01 · Vì sao quan trọng</div>
+      <span data-hf-id="hf-grjq" id="02-why-pill">Mục đích chính sách</span>
+    </div>
+    <div data-hf-id="hf-dm63" id="02-why-title"><span data-hf-id="hf-mom2" class="02-why-word">Ba</span> <span data-hf-id="hf-7e78" class="02-why-word">lý</span> <span data-hf-id="hf-pvwi" class="02-why-word">do</span> <span data-hf-id="hf-71bn" class="02-why-word">để</span> <span data-hf-id="hf-smxt" class="02-why-word">bảo</span> <span data-hf-id="hf-x0nb" class="02-why-word">mật</span></div>
+  </div>
+
+  <div data-hf-id="hf-8nhy" id="02-why-card-leak" class="02-why-card">
+    <div data-hf-id="hf-8owv" class="02-why-ico"><svg data-hf-id="hf-h0hq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-8aqh" x="4" y="10" width="16" height="11" rx="2" /><path data-hf-id="hf-apke" d="M8 10V7a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-p4yh" d="M12 14.5v2.5" /></svg></div>
+    <div data-hf-id="hf-nw8l" class="02-why-label">Ngăn rò rỉ thông tin</div>
+  </div>
+
+  <div data-hf-id="hf-p4ig" id="02-why-card-prod" class="02-why-card">
+    <div data-hf-id="hf-srrz" class="02-why-ico"><svg data-hf-id="hf-pmle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-lpb7" d="M3 21V10l5 3V10l5 3V10l5 3V4h3v17Z" /><path data-hf-id="hf-paag" d="M7 17h2M12 17h2M17 17h1" /></svg></div>
+    <div data-hf-id="hf-miwc" class="02-why-label">Sản xuất không gián đoạn</div>
+  </div>
+
+  <div data-hf-id="hf-xfaj" id="02-why-card-trust" class="02-why-card">
+    <div data-hf-id="hf-sdgy" class="02-why-ico"><svg data-hf-id="hf-q0wf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-n7s6" d="m11 17 2 2a1 1 0 1 0 3-3" /><path data-hf-id="hf-mdcx" d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path data-hf-id="hf-z3rp" d="m21 3 1 11h-2" /><path data-hf-id="hf-5tx9" d="M3 3 2 14l6.47 6.47a1 1 0 1 0 3-3" /><path data-hf-id="hf-4aha" d="M3 4h8" /></svg></div>
+    <div data-hf-id="hf-04ev" class="02-why-label">Giữ niềm tin khách hàng</div>
+  </div>
+
+  <div data-hf-id="hf-r4y8" id="02-why-shield">
+    <svg data-hf-id="hf-1i60" viewBox="0 0 64 76" xmlns="http://www.w3.org/2000/svg">
+      <defs data-hf-id="hf-mh0t">
+        <clippath data-hf-id="hf-d48m" id="02-why-shieldclip">
+          <path data-hf-id="hf-kw1t" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+        </clippath>
+        <clippath data-hf-id="hf-tg6e" id="02-why-riseclip">
+          <rect data-hf-id="hf-1hsd" id="02-why-rise-mask" x="0" y="76" width="64" height="80" />
+        </clippath>
+      </defs>
+      <!-- tint body -->
+      <path data-hf-id="hf-49qk" id="02-why-body" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" fill="rgba(10,61,145,0.08)" fill-opacity="0" />
+      <!-- rising blue fill (scene 5) -->
+      <g data-hf-id="hf-p14q" clip-path="url(#02-why-shieldclip)">
+        <rect data-hf-id="hf-l457" id="02-why-rise" x="0" y="76" width="64" height="80" fill="#0A3D91" />
+      </g>
+      <!-- wordmark: blue base -->
+      <g data-hf-id="hf-2y12" id="02-why-mark">
+        <text data-hf-id="hf-y1zs" x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#0A3D91">SEMV</text>
+        <rect data-hf-id="hf-4goi" x="27" y="48.5" width="10" height="1.1" rx="0.5" fill="#0A3D91" />
+      </g>
+      <!-- wordmark: white copy revealed where the fill has passed -->
+      <g data-hf-id="hf-djov" id="02-why-mark-white" clip-path="url(#02-why-riseclip)">
+        <text data-hf-id="hf-hg5q" x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#FFFFFF">SEMV</text>
+        <rect data-hf-id="hf-0v3s" x="27" y="48.5" width="10" height="1.1" rx="0.5" fill="#FFFFFF" />
+      </g>
+      <!-- outline (svg-path-draw) -->
+      <path data-hf-id="hf-y0g5" id="02-why-outline" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+    </svg>
+  </div>
+</div>
+
+<script>
+  (function () {
+    window.__timelines = window.__timelines || {};
+    var byId = function (id) { return document.getElementById(id); };
+    var tl = gsap.timeline({ paused: true });
+
+    /* --- draw setup (measured lengths) --- */
+    function prepDraw(el, fallback) {
+      var len = fallback;
+      try { var m = el.getTotalLength(); if (m && isFinite(m) && m > 0) len = m; } catch (e) {}
+      len = len * 1.05;
+      el.style.strokeDasharray = String(len);
+      el.style.strokeDashoffset = String(len);
+      return len;
+    }
+    var outline = byId("02-why-outline");
+    var linkLeak = byId("02-why-link-leak");
+    var linkProd = byId("02-why-link-prod");
+    var linkTrust = byId("02-why-link-trust");
+    prepDraw(outline, 200);
+    prepDraw(linkLeak, Math.hypot(220, 46));
+    prepDraw(linkProd, Math.hypot(220, 46));
+    prepDraw(linkTrust, 28);
+
+    /* --- Scene 1 (0.0–2.4s): slide-header + shield outline draws --- */
+    tl.fromTo("#root [id='02-why-eyebrow']", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+    tl.fromTo("#root [id='02-why-pill']", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.25);
+    tl.fromTo("#root [class~='02-why-word']", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.08 }, 0.35);
+
+    // hero present early: faint tinted body, then the outline traces on "ba lý do"
+    tl.fromTo(byId("02-why-body"), { attr: { "fill-opacity": 0 } }, { attr: { "fill-opacity": 1 }, duration: 0.6, ease: "power1.out" }, 0.3);
+    tl.to(outline, { strokeDashoffset: 0, duration: 1.0, ease: "power2.out" }, 1.4);
+    tl.fromTo(byId("02-why-mark"), { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.5, ease: "power1.out" }, 2.1);
+
+    /* --- Scenes 2–4: cards burst out of the shield centre (center-outward-expansion) --- */
+    // offsets = shield centre (960,605) minus each card's landed centre
+    var cards = [
+      { el: byId("02-why-card-leak"),  dx: 594,  dy: 113,  at: 2.7, link: linkLeak },
+      { el: byId("02-why-card-prod"),  dx: -594, dy: 113,  at: 4.2, link: linkProd },
+      { el: byId("02-why-card-trust"), dx: 0,    dy: -223, at: 6.1, link: linkTrust }
+    ];
+    cards.forEach(function (c) {
+      tl.fromTo(c.el,
+        { x: c.dx, y: c.dy, scale: 0.6, opacity: 0 },
+        { x: 0, y: 0, scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" },
+        c.at);
+      // hairline draws from the card back to the shield
+      tl.to(c.link, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, c.at + 0.7);
+    });
+
+    /* --- Scene 5 (8.7–11.0s): blue fill rises inside the shield; SEMV turns white --- */
+    var rise = [byId("02-why-rise"), byId("02-why-rise-mask")];
+    tl.fromTo(rise, { attr: { y: 76 } }, { attr: { y: -2 }, duration: 1.9, ease: "power1.inOut" }, 8.7);
+
+    /* --- Scene 6 (10.9–12.84s): one finite concentric ring, then hold --- */
+    var shield = byId("02-why-shield");
+    tl.to(shield, { scale: 1.04, duration: 0.2, ease: "power2.out" }, 10.9);
+    tl.to(shield, { scale: 1, duration: 0.6, ease: "power2.out" }, 11.1);
+    var ring = byId("02-why-ring");
+    tl.fromTo(ring, { scale: 0.68, opacity: 0 }, { scale: 0.74, opacity: 0.9, duration: 0.15, ease: "none", immediateRender: false }, 10.9);
+    tl.to(ring, { scale: 1, opacity: 0.3, duration: 1.3, ease: "power2.out" }, 11.05);
+
+    window.__timelines["02-why"] = tl;
+  })();
+</script>
+</template>

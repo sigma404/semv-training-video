@@ -1,0 +1,303 @@
+<template>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #0F172A;
+  }
+
+  /* full-bleed ground: white + 5% blue hairline grid */
+  #v2-03-context-bg {
+    position: absolute;
+    inset: 0;
+    background-color: #FFFFFF;
+    background-image:
+      linear-gradient(to right, rgba(10, 61, 145, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 61, 145, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    z-index: 0;
+  }
+
+  /* slide-header */
+  #v2-03-context-header {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 84px;
+    z-index: 4;
+  }
+  #v2-03-context-headrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #v2-03-context-eyebrow {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0A3D91;
+  }
+  #v2-03-context-tag {
+    display: inline-block;
+    border-radius: 100px;
+    background: rgba(10, 61, 145, 0.08);
+    color: #0A3D91;
+    font-weight: 600;
+    font-size: 25px;
+    padding: 10px 27px;
+  }
+  #v2-03-context-title {
+    margin-top: 16px;
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    white-space: nowrap;
+  }
+  .v2-03-context-word {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  /* connectors */
+  #v2-03-context-links {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 1;
+    overflow: visible;
+  }
+  .v2-03-context-link {
+    fill: none;
+    stroke: rgba(10, 61, 145, 0.45);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  /* purpose cards */
+  .v2-03-context-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 30px;
+    width: 620px;
+    height: 150px;
+    background: rgba(10, 61, 145, 0.04);
+    border: 1.5px solid rgba(10, 61, 145, 0.2);
+    border-radius: 14px;
+    box-sizing: border-box;
+    z-index: 2;
+    will-change: transform, opacity;
+  }
+  #v2-03-context-card-leak  { left: 96px;   top: 270px; }
+  #v2-03-context-card-prod  { left: 1204px; top: 270px; }
+  #v2-03-context-card-trust { left: 96px;   top: 560px; }
+  #v2-03-context-card-aware { left: 1204px; top: 560px; }
+  .v2-03-context-ico {
+    width: 64px;
+    height: 64px;
+    flex: none;
+    color: #0A3D91;
+  }
+  .v2-03-context-ico svg { width: 100%; height: 100%; display: block; }
+  .v2-03-context-label {
+    font-size: 33px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #0F172A;
+  }
+
+  /* hero shield */
+  #v2-03-context-shield {
+    position: absolute;
+    left: 845px;
+    top: 383px;
+    width: 230px;
+    height: 274px;
+    z-index: 3;
+    will-change: transform;
+  }
+  #v2-03-context-shield svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  #v2-03-context-outline {
+    fill: none;
+    stroke: #0A3D91;
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  /* payoff pill */
+  #v2-03-context-payoff {
+    position: absolute;
+    left: 560px;
+    top: 732px;
+    width: 800px;
+    height: 80px;
+    border-radius: 100px;
+    background: #0A3D91;
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    z-index: 4;
+    will-change: transform, opacity;
+  }
+</style>
+
+<div id="root" data-composition-id="v2-03-context" data-start="0" data-duration="15.412" data-width="1920" data-height="1080">
+
+  <div id="v2-03-context-bg" class="clip" data-start="0" data-duration="15.412" data-track-index="0"></div>
+
+  <svg id="v2-03-context-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+    <path id="v2-03-context-link-leak"  class="v2-03-context-link" d="M 716 345 L 872 440" />
+    <path id="v2-03-context-link-prod"  class="v2-03-context-link" d="M 1204 345 L 1048 440" />
+    <path id="v2-03-context-link-trust" class="v2-03-context-link" d="M 716 635 L 900 600" />
+    <path id="v2-03-context-link-aware" class="v2-03-context-link" d="M 1204 635 L 1020 600" />
+  </svg>
+
+  <div id="v2-03-context-header">
+    <div id="v2-03-context-headrow">
+      <div id="v2-03-context-eyebrow">PHẦN 2/5 · BỐI CẢNH</div>
+      <span id="v2-03-context-tag">Mục đích áp dụng</span>
+    </div>
+    <div id="v2-03-context-title"><span class="v2-03-context-word">Vì</span> <span class="v2-03-context-word">sao</span> <span class="v2-03-context-word">cần</span> <span class="v2-03-context-word">chính</span> <span class="v2-03-context-word">sách</span> <span class="v2-03-context-word">bảo</span> <span class="v2-03-context-word">mật?</span></div>
+  </div>
+
+  <div id="v2-03-context-card-leak" class="v2-03-context-card">
+    <div class="v2-03-context-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /><path d="M12 14.5v2.5" /></svg></div>
+    <div class="v2-03-context-label">Ngăn thiệt hại do rò rỉ thông tin</div>
+  </div>
+
+  <div id="v2-03-context-card-prod" class="v2-03-context-card">
+    <div class="v2-03-context-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l5 3V10l5 3V10l5 3V4h3v17Z" /><path d="M7 17h2M12 17h2M17 17h1" /></svg></div>
+    <div class="v2-03-context-label">Sản xuất, kinh doanh không gián đoạn</div>
+  </div>
+
+  <div id="v2-03-context-card-trust" class="v2-03-context-card">
+    <div class="v2-03-context-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.790 5.790 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path d="m21 3 1 11h-2" /><path d="M3 3 2 14l6.47 6.47a1 1 0 1 0 3-3" /><path d="M3 4h8" /></svg></div>
+    <div class="v2-03-context-label">Giữ niềm tin khách hàng</div>
+  </div>
+
+  <div id="v2-03-context-card-aware" class="v2-03-context-card">
+    <div class="v2-03-context-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6" /><path d="M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.55 1.1 1.2 1.1 2.2h5c0-1 .4-1.65 1.1-2.2A6 6 0 0 0 12 3Z" /></svg></div>
+    <div class="v2-03-context-label">Hiểu tầm quan trọng của bảo mật</div>
+  </div>
+
+  <div id="v2-03-context-shield">
+    <svg viewBox="0 0 64 76" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="v2-03-context-shieldclip">
+          <path d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+        </clipPath>
+        <clipPath id="v2-03-context-riseclip">
+          <rect id="v2-03-context-rise-mask" x="0" y="76" width="64" height="80" />
+        </clipPath>
+      </defs>
+      <path id="v2-03-context-body" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" fill="rgba(10,61,145,0.08)" fill-opacity="0" />
+      <g clip-path="url(#v2-03-context-shieldclip)">
+        <rect id="v2-03-context-rise" x="0" y="76" width="64" height="80" fill="#0A3D91" />
+      </g>
+      <g id="v2-03-context-mark">
+        <text x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#0A3D91">SEMV</text>
+        <rect x="27" y="48.5" width="10" height="1.1" rx="0.5" fill="#0A3D91" />
+      </g>
+      <g id="v2-03-context-mark-white" clip-path="url(#v2-03-context-riseclip)">
+        <text x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#FFFFFF">SEMV</text>
+        <rect x="27" y="48.5" width="10" height="1.1" rx="0.5" fill="#FFFFFF" />
+      </g>
+      <path id="v2-03-context-outline" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+    </svg>
+  </div>
+
+  <div id="v2-03-context-payoff">Tuân thủ quy định · tăng cường bảo mật</div>
+</div>
+
+<script>
+  (function () {
+    window.__timelines = window.__timelines || {};
+    var byId = function (id) { return document.getElementById(id); };
+    var tl = gsap.timeline({ paused: true });
+
+    /* --- draw setup (measured lengths) --- */
+    function prepDraw(el, fallback) {
+      var len = fallback;
+      try { var m = el.getTotalLength(); if (m && isFinite(m) && m > 0) len = m; } catch (e) {}
+      len = len * 1.05;
+      el.style.strokeDasharray = String(len);
+      el.style.strokeDashoffset = String(len);
+      return len;
+    }
+    var outline = byId("v2-03-context-outline");
+    var links = {
+      leak: byId("v2-03-context-link-leak"),
+      prod: byId("v2-03-context-link-prod"),
+      trust: byId("v2-03-context-link-trust"),
+      aware: byId("v2-03-context-link-aware")
+    };
+    prepDraw(outline, 200);
+    prepDraw(links.leak, Math.hypot(156, 95));
+    prepDraw(links.prod, Math.hypot(156, 95));
+    prepDraw(links.trust, Math.hypot(184, 35));
+    prepDraw(links.aware, Math.hypot(184, 35));
+
+    /* --- Scene 1 (0.0–2.4s): slide-header + shield outline draws on "bối cảnh" --- */
+    tl.fromTo("#v2-03-context-eyebrow", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+    tl.fromTo("#v2-03-context-tag", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.25);
+    tl.fromTo(".v2-03-context-word", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.07 }, 0.35);
+
+    tl.fromTo(byId("v2-03-context-body"), { attr: { "fill-opacity": 0 } }, { attr: { "fill-opacity": 1 }, duration: 0.6, ease: "power1.out" }, 0.3);
+    tl.to(outline, { strokeDashoffset: 0, duration: 1.0, ease: "power2.out" }, 1.0);
+    tl.fromTo(byId("v2-03-context-mark"), { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.5, ease: "power1.out" }, 1.8);
+
+    /* --- Scenes 2–5: cards burst out of the shield centre to the 4 corners (center-outward-expansion) --- */
+    // offsets = shield centre (960,520) minus each card's landed centre
+    var cards = [
+      { el: byId("v2-03-context-card-leak"),  dx: 554,  dy: 175,  at: 3.1, link: links.leak },
+      { el: byId("v2-03-context-card-prod"),  dx: -554, dy: 175,  at: 5.2, link: links.prod },
+      { el: byId("v2-03-context-card-trust"), dx: 554,  dy: -115, at: 7.5, link: links.trust },
+      { el: byId("v2-03-context-card-aware"), dx: -554, dy: -115, at: 9.0, link: links.aware }
+    ];
+    cards.forEach(function (c) {
+      tl.fromTo(c.el,
+        { x: c.dx, y: c.dy, scale: 0.6, opacity: 0 },
+        { x: 0, y: 0, scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" },
+        c.at);
+      tl.to(c.link, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, c.at + 0.7);
+    });
+
+    /* --- Scene 6 (11.4–14.912s): blue fill rises in the shield, SEMV turns white; payoff pill pops --- */
+    var rise = [byId("v2-03-context-rise"), byId("v2-03-context-rise-mask")];
+    tl.fromTo(rise, { attr: { y: 76 } }, { attr: { y: -2 }, duration: 1.6, ease: "power1.inOut" }, 11.4);
+
+    var shield = byId("v2-03-context-shield");
+    tl.to(shield, { scale: 1.04, duration: 0.2, ease: "power2.out" }, 12.9);
+    tl.to(shield, { scale: 1, duration: 0.6, ease: "power2.out" }, 13.1);
+
+    tl.fromTo(byId("v2-03-context-payoff"),
+      { opacity: 0, y: 24, scale: 0.85 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "back.out(1.6)" },
+      12.2);
+
+    window.__timelines["v2-03-context"] = tl;
+  })();
+</script>
+</template>

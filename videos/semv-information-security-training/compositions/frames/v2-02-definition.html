@@ -1,0 +1,300 @@
+<template>
+  <div id="root" data-composition-id="v2-02-definition" data-start="0" data-width="1920" data-height="1080" data-duration="19.204">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: "Be Vietnam Pro", sans-serif;
+        color: #0F172A;
+      }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      #v2-02-definition-bg {
+        position: absolute;
+        inset: 0;
+        background: #FFFFFF;
+      }
+
+      #v2-02-definition-stage {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 40%;
+      }
+
+      /* ---------- slide-header ---------- */
+      .v2-02-definition-head {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 84px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #v2-02-definition-eyebrow {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0A3D91;
+      }
+      #v2-02-definition-pill {
+        display: inline-block;
+        border-radius: 100px;
+        background: rgba(10, 61, 145, 0.08);
+        color: #0A3D91;
+        font-weight: 600;
+        font-size: 28px;
+        padding: 10px 30px;
+      }
+      #v2-02-definition-h2 {
+        position: absolute;
+        left: 96px;
+        top: 140px;
+        font-size: 60px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #0F172A;
+        white-space: nowrap;
+      }
+      .v2-02-definition-word {
+        display: inline-block;
+      }
+
+      /* ---------- definition card (split-highlight, focal) ---------- */
+      #v2-02-definition-def {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 262px;
+        height: 206px;
+        background: rgba(10, 61, 145, 0.08);
+        border-left: 4px solid #0A3D91;
+        border-radius: 12px;
+        padding: 0 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 14px;
+      }
+      #v2-02-definition-def-l1 {
+        font-size: 52px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #0F172A;
+      }
+      #v2-02-definition-def-l2 {
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #475569;
+      }
+
+      /* ---------- principles label ---------- */
+      #v2-02-definition-label {
+        position: absolute;
+        left: 96px;
+        top: 510px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #475569;
+      }
+      #v2-02-definition-label-rule {
+        width: 60px;
+        height: 4px;
+        border-radius: 2px;
+        background: #0A3D91;
+      }
+
+      /* ---------- triptych ---------- */
+      #v2-02-definition-grid {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 566px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 28px;
+      }
+      .v2-02-definition-card {
+        position: relative;
+        height: 290px;
+        background: rgba(10, 61, 145, 0.04);
+        border: 1.5px solid rgba(10, 61, 145, 0.2);
+        border-radius: 14px;
+        padding: 36px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .v2-02-definition-ico {
+        width: 80px;
+        height: 80px;
+        color: #0A3D91;
+      }
+      .v2-02-definition-ico svg { width: 100%; height: 100%; display: block; overflow: visible; }
+      .v2-02-definition-ico path, .v2-02-definition-ico circle {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .v2-02-definition-num {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #0A3D91;
+        opacity: 0.55;
+      }
+      .v2-02-definition-name {
+        font-size: 38px;
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        color: #0F172A;
+      }
+    </style>
+
+    <!-- full-bleed ground on its own clip -->
+    <div id="v2-02-definition-bg" class="clip" data-start="0" data-duration="19.204" data-track-index="0"></div>
+
+    <div id="v2-02-definition-stage" class="clip" data-start="0" data-duration="19.204" data-track-index="1">
+      <!-- slide-header -->
+      <div class="v2-02-definition-head">
+        <div id="v2-02-definition-eyebrow">PHẦN 1/5 · ĐỊNH NGHĨA</div>
+        <span id="v2-02-definition-pill">Chính sách bảo mật</span>
+      </div>
+      <div id="v2-02-definition-h2"><span class="v2-02-definition-word">Chính</span> <span class="v2-02-definition-word">sách</span> <span class="v2-02-definition-word">bảo</span> <span class="v2-02-definition-word">mật</span> <span class="v2-02-definition-word">là</span> <span class="v2-02-definition-word">gì?</span></div>
+
+      <!-- definition card -->
+      <div id="v2-02-definition-def">
+        <div id="v2-02-definition-def-l1">Tiêu chuẩn chung về hệ thống thông tin</div>
+        <div id="v2-02-definition-def-l2">Quy định cách bảo đảm an ninh cho hệ thống thông tin</div>
+      </div>
+
+      <!-- principles label -->
+      <div id="v2-02-definition-label"><span id="v2-02-definition-label-rule"></span><span>BA NGUYÊN TẮC CỐT LÕI</span></div>
+
+      <!-- triptych -->
+      <div id="v2-02-definition-grid">
+        <div class="v2-02-definition-card" id="v2-02-definition-card1">
+          <div class="v2-02-definition-num">01</div>
+          <div class="v2-02-definition-ico" id="v2-02-definition-ico1">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+              <path d="M21 3v5h-5" />
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+              <path d="M8 16H3v5" />
+            </svg>
+          </div>
+          <div class="v2-02-definition-name">Cải tiến bảo mật<br />liên tục</div>
+        </div>
+        <div class="v2-02-definition-card" id="v2-02-definition-card2">
+          <div class="v2-02-definition-num">02</div>
+          <div class="v2-02-definition-ico" id="v2-02-definition-ico2">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="9" cy="7" r="4" />
+              <path d="M2 21v-1a6 6 0 0 1 6-6h3" />
+              <path d="M17.5 11.5l4 1.5v2.6c0 2.5-1.7 4.3-4 5.1-2.3-.8-4-2.6-4-5.1V13Z" />
+              <path d="M15.9 16.2l1.2 1.2 2.1-2.3" />
+            </svg>
+          </div>
+          <div class="v2-02-definition-name">Hoàn thành trách nhiệm<br />theo vai trò</div>
+        </div>
+        <div class="v2-02-definition-card" id="v2-02-definition-card3">
+          <div class="v2-02-definition-num">03</div>
+          <div class="v2-02-definition-ico" id="v2-02-definition-ico3">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3.5 21.5 20h-19Z" />
+              <path d="M12 10v4.5" />
+              <path d="M12 17.4v.2" />
+            </svg>
+          </div>
+          <div class="v2-02-definition-name">Đánh giá rủi ro<br />qua mối đe dọa</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var root = document.querySelector('[data-composition-id="v2-02-definition"]');
+        function $(sel) { return root.querySelector(sel); }
+        function $$(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+
+        var DURATION = 18.704;
+        var tl = gsap.timeline({ paused: true });
+
+        // ---- svg-path-draw setup: measured lengths ----
+        function prep(el) {
+          var len = 0;
+          try { len = el.getTotalLength(); } catch (e) { len = 0; }
+          if (!len || !isFinite(len)) len = 60;
+          len = len * 1.05 + 1;
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+        }
+        var icoParts = {};
+        [1, 2, 3].forEach(function (i) {
+          icoParts[i] = $$("#v2-02-definition-ico" + i + " path, #v2-02-definition-ico" + i + " circle");
+          icoParts[i].forEach(prep);
+        });
+
+        // ---- macro camera: gentle push-in, settles before the Scene 5 hold ----
+        tl.fromTo("#v2-02-definition-stage", { scale: 1 }, { scale: 1.02, duration: 15.8, ease: "power1.inOut" }, 0);
+
+        // ---- Scene 1 (0.0–3.0s): slide-header, h2 word by word 0.8–2.0s ----
+        tl.fromTo("#v2-02-definition-eyebrow", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#v2-02-definition-pill", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+        tl.fromTo($$(".v2-02-definition-word"), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", stagger: 0.15 }, 0.8);
+
+        // ---- Scene 2 (3.2–7.2s): definition card slides up, two lines on cue ----
+        tl.fromTo("#v2-02-definition-def", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 3.2);
+        tl.fromTo("#v2-02-definition-def-l1", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 3.6);
+        tl.fromTo("#v2-02-definition-def-l2", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 4.6);
+
+        // ---- Scene 3 (8.2–9.4s): principles label ----
+        tl.fromTo("#v2-02-definition-label-rule", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 8.2);
+        tl.fromTo("#v2-02-definition-label span:last-child", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 8.3);
+
+        // ---- Scene 4 (9.6–15.8s): triptych assembles card by card, icons draw ----
+        function cardIn(i, at) {
+          tl.fromTo("#v2-02-definition-card" + i, { opacity: 0, y: 44, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, at);
+          icoParts[i].forEach(function (p, k) {
+            tl.to(p, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, at + 0.25 + k * 0.38);
+          });
+        }
+        cardIn(1, 9.6);
+        cardIn(2, 11.2);
+        cardIn(3, 13.4);
+
+        // ---- Scene 5 (15.8–18.704s): hold, still ----
+        tl.set({}, {}, DURATION);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["v2-02-definition"] = tl;
+      })();
+    </script>
+  </div>
+</template>

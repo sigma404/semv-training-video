@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-ry7o" id="root" data-composition-id="main" data-start="0" data-duration="108.504" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-inwu" id="el-01-title" class="scene" data-composition-id="01-title" data-composition-src="compositions/frames/01-title.html" data-start="0" data-duration="9.86" data-track-index="0"></div>
+      <audio data-hf-id="hf-tm1k" id="el-01-title-voice" src="assets/voice/01.mp3" data-start="0" data-duration="9.36" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-tws6" id="el-02-why" class="scene" data-composition-id="02-why" data-composition-src="compositions/frames/02-why.html" data-start="9.36" data-duration="13.34" data-track-index="1"></div>
+      <audio data-hf-id="hf-go7r" id="el-02-why-voice" src="assets/voice/02.mp3" data-start="9.36" data-duration="12.84" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-5qsb" id="el-03-access-password" class="scene" data-composition-id="03-access-password" data-composition-src="compositions/frames/03-access-password.html" data-start="22.2" data-duration="16.724" data-track-index="0"></div>
+      <audio data-hf-id="hf-brhp" id="el-03-access-password-voice" src="assets/voice/03.mp3" data-start="22.2" data-duration="16.224" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-dypa" id="el-04-malware" class="scene" data-composition-id="04-malware" data-composition-src="compositions/frames/04-malware.html" data-start="38.424" data-duration="13.412" data-track-index="1"></div>
+      <audio data-hf-id="hf-pv9r" id="el-04-malware-voice" src="assets/voice/04.mp3" data-start="38.424" data-duration="12.912" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-i5l2" id="el-05-incidents" class="scene" data-composition-id="05-incidents" data-composition-src="compositions/frames/05-incidents.html" data-start="51.336" data-duration="16.652" data-track-index="0"></div>
+      <audio data-hf-id="hf-x6z0" id="el-05-incidents-voice" src="assets/voice/05.mp3" data-start="51.336" data-duration="16.152" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-4k8x" id="el-06-real-cases" class="scene" data-composition-id="06-real-cases" data-composition-src="compositions/frames/06-real-cases.html" data-start="67.488" data-duration="18.62" data-track-index="1"></div>
+      <audio data-hf-id="hf-qjb7" id="el-06-real-cases-voice" src="assets/voice/06.mp3" data-start="67.488" data-duration="18.12" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-osz7" id="el-07-best-practices" class="scene" data-composition-id="07-best-practices" data-composition-src="compositions/frames/07-best-practices.html" data-start="85.608" data-duration="14.54" data-track-index="0"></div>
+      <audio data-hf-id="hf-unc9" id="el-07-best-practices-voice" src="assets/voice/07.mp3" data-start="85.608" data-duration="14.04" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-8hz3" id="el-08-closing" class="scene" data-composition-id="08-closing" data-composition-src="compositions/frames/08-closing.html" data-start="99.648" data-duration="8.856" data-track-index="1"></div>
+      <audio data-hf-id="hf-0806" id="el-08-closing-voice" src="assets/voice/08.mp3" data-start="99.648" data-duration="8.856" data-track-index="10" data-volume="1"></audio>
+
+      <!-- captions -->
+      <div data-hf-id="hf-cfpd" id="el-captions" class="scene" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="108.504" data-track-index="2"></div>
+
+      <!-- progress bar (hand-added after assemble-index; re-add if the index is re-assembled) -->
+      <div data-hf-id="hf-nv99" id="el-progress" class="clip" data-start="0" data-duration="108.504" data-track-index="3" style="position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: rgba(10, 61, 145, 0.12); z-index: 50">
+        <div data-hf-id="hf-263w" id="el-progress-fill" style="width: 100%; height: 100%; background: #0A3D91; transform-origin: 0 50%"></div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-title", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 9.36);
+        tl.fromTo("#el-02-why", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 9.36);
+        tl.addLabel("hf:transition:01-title:02-why:crossfade", 9.36);
+        tl.to("#el-02-why", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 22.2);
+        tl.fromTo("#el-03-access-password", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 22.2);
+        tl.addLabel("hf:transition:02-why:03-access-password:push-slide", 22.2);
+        tl.to("#el-03-access-password", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 38.424);
+        tl.fromTo("#el-04-malware", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 38.424);
+        tl.addLabel("hf:transition:03-access-password:04-malware:push-slide", 38.424);
+        tl.to("#el-04-malware", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 51.336);
+        tl.fromTo("#el-05-incidents", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 51.336);
+        tl.addLabel("hf:transition:04-malware:05-incidents:push-slide", 51.336);
+        tl.to("#el-05-incidents", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 67.488);
+        tl.fromTo("#el-06-real-cases", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 67.488);
+        tl.addLabel("hf:transition:05-incidents:06-real-cases:crossfade", 67.488);
+        tl.to("#el-06-real-cases", { x: -1920, duration: 0.5, ease: "power3.inOut" }, 85.608);
+        tl.fromTo("#el-07-best-practices", { x: 1920, opacity: 1 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.inOut" }, 85.608);
+        tl.addLabel("hf:transition:06-real-cases:07-best-practices:push-slide", 85.608);
+        tl.to("#el-07-best-practices", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 99.648);
+        tl.fromTo("#el-08-closing", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 99.648);
+        tl.addLabel("hf:transition:07-best-practices:08-closing:crossfade", 99.648);
+        tl.fromTo("#el-progress-fill", { scaleX: 0 }, { scaleX: 1, duration: 108.504, ease: "none" }, 0); // progress bar
+        tl.to({}, { duration: 108.504 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>
