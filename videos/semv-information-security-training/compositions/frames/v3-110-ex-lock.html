@@ -1,0 +1,588 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-110-ex-lock-all *, .v3-110-ex-lock-all *::before, .v3-110-ex-lock-all *::after { box-sizing: border-box; }
+    .v3-110-ex-lock-all { position: absolute; inset: 0; overflow: hidden; }
+    .v3-110-ex-lock-bg { position: absolute; inset: 0; background: #EEF3FB; }
+
+    .v3-110-ex-lock-tag {
+      position: absolute; left: 48px; top: 40px;
+      height: 60px; padding: 0 28px; border-radius: 30px;
+      background: #0A3D91; color: #FFFFFF;
+      font-size: 28px; font-weight: 700; line-height: 60px; white-space: nowrap;
+      box-shadow: 0 10px 24px rgba(10, 61, 145, 0.25);
+      z-index: 20;
+    }
+
+    /* ================= OFFICE WORLD ================= */
+    .v3-110-ex-lock-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    .v3-110-ex-lock-office { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+    .v3-110-ex-lock-chip {
+      position: absolute; left: 380px; top: 318px;
+      height: 52px; padding: 0 22px; border-radius: 26px;
+      background: #FFFFFF; color: #0F172A;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.25), 0 10px 22px rgba(15, 23, 42, 0.10);
+      font-size: 28px; font-weight: 700; line-height: 52px; white-space: nowrap;
+    }
+    .v3-110-ex-lock-badge {
+      position: absolute; left: 930px; top: 276px; width: 260px; height: 64px;
+    }
+    .v3-110-ex-lock-pill {
+      position: absolute; inset: 0; border-radius: 32px;
+      color: #FFFFFF; font-size: 30px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; gap: 12px; white-space: nowrap;
+    }
+    .v3-110-ex-lock-pill svg { width: 34px; height: 34px; display: block; }
+    .v3-110-ex-lock-open { background: #dc2626; box-shadow: 0 10px 22px rgba(220, 38, 38, 0.30); }
+    .v3-110-ex-lock-shut { background: #059669; box-shadow: 0 10px 22px rgba(5, 150, 105, 0.30); }
+
+    .v3-110-ex-lock-screen { position: absolute; left: 820px; top: 380px; width: 480px; height: 300px; overflow: hidden; border-radius: 4px; background: #F8FAFC; }
+    .v3-110-ex-lock-ui { position: absolute; left: 0; top: 0; width: 1600px; height: 1000px; transform: scale(0.3); transform-origin: 0 0; overflow: hidden; background: #F8FAFC; }
+    .v3-110-ex-lock-topbar {
+      position: absolute; left: 0; top: 0; right: 0; height: 90px;
+      background: #0A3D91; display: flex; align-items: center; padding: 0 44px; gap: 22px;
+      color: #FFFFFF; font-size: 34px; font-weight: 700;
+    }
+    .v3-110-ex-lock-topbar svg { width: 44px; height: 44px; display: block; }
+    .v3-110-ex-lock-search { margin-left: auto; width: 460px; height: 50px; border-radius: 25px; background: rgba(255, 255, 255, 0.18); }
+    .v3-110-ex-lock-side { position: absolute; left: 0; top: 90px; bottom: 0; width: 420px; background: #FFFFFF; border-right: 2px solid #E2E8F0; overflow: hidden; }
+    .v3-110-ex-lock-row { position: relative; height: 124px; display: flex; align-items: center; gap: 20px; padding: 0 28px; border-bottom: 2px solid #F1F5F9; }
+    .v3-110-ex-lock-ava { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%; background: #E2E8F0; }
+    .v3-110-ex-lock-bars { flex: 1; }
+    .v3-110-ex-lock-bar { height: 16px; border-radius: 8px; background: #E2E8F0; margin: 12px 0; }
+    .v3-110-ex-lock-pane { position: absolute; left: 420px; top: 90px; right: 0; bottom: 0; background: #F8FAFC; }
+    .v3-110-ex-lock-mail {
+      position: absolute; left: 56px; top: 44px; right: 56px; bottom: 44px;
+      background: #FFFFFF; border-radius: 14px; box-shadow: 0 0 0 2px #E2E8F0; padding: 52px 64px;
+    }
+    .v3-110-ex-lock-line { height: 24px; border-radius: 12px; background: #E2E8F0; margin-bottom: 24px; }
+
+    .v3-110-ex-lock-compose {
+      position: absolute; left: 300px; top: 130px; width: 1000px; height: 820px;
+      background: #FFFFFF; border-radius: 18px; overflow: hidden;
+      box-shadow: 0 0 0 2px #CBD5E1, 0 30px 70px rgba(15, 23, 42, 0.28);
+    }
+    .v3-110-ex-lock-chead { height: 96px; background: #0F172A; color: #FFFFFF; font-size: 38px; font-weight: 700; display: flex; align-items: center; padding: 0 44px; }
+    .v3-110-ex-lock-crow { margin: 0 44px; padding: 22px 0; border-bottom: 2px solid #F1F5F9; display: flex; align-items: center; gap: 24px; font-size: 36px; font-weight: 600; color: #64748B; white-space: nowrap; }
+    .v3-110-ex-lock-crow b { color: #0F172A; font-weight: 800; }
+    .v3-110-ex-lock-cbody { margin: 34px 44px 0; }
+    .v3-110-ex-lock-send {
+      position: absolute; left: 44px; bottom: 44px; width: 300px; height: 104px; border-radius: 16px;
+      background: #0A3D91; color: #FFFFFF; font-size: 42px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      box-shadow: 0 14px 30px rgba(10, 61, 145, 0.28);
+    }
+    .v3-110-ex-lock-send svg { width: 44px; height: 44px; display: block; }
+    .v3-110-ex-lock-plane { position: absolute; left: 380px; top: 760px; width: 110px; height: 110px; }
+    .v3-110-ex-lock-plane svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .v3-110-ex-lock-toast {
+      position: absolute; left: 380px; top: 360px; width: 840px; height: 260px;
+      background: #FFFFFF; border-radius: 20px;
+      box-shadow: 0 0 0 5px #dc2626, 0 30px 60px rgba(220, 38, 38, 0.30);
+      display: flex; align-items: center; gap: 34px; padding: 0 48px;
+    }
+    .v3-110-ex-lock-toast-i { flex: 0 0 120px; width: 120px; height: 120px; border-radius: 50%; background: #dc2626; display: flex; align-items: center; justify-content: center; }
+    .v3-110-ex-lock-toast-i svg { width: 70px; height: 70px; display: block; }
+    .v3-110-ex-lock-toast-t { font-size: 50px; font-weight: 800; color: #B91C1C; line-height: 1.2; }
+    .v3-110-ex-lock-toast-s { font-size: 40px; font-weight: 600; color: #334155; line-height: 1.3; margin-top: 6px; white-space: nowrap; }
+    .v3-110-ex-lock-alarm { position: absolute; inset: 0; box-shadow: inset 0 0 0 18px #dc2626; }
+    .v3-110-ex-lock-cursor { position: absolute; left: 0; top: 0; width: 78px; height: 98px; transform-origin: 8% 6%; }
+    .v3-110-ex-lock-cursor svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    .v3-110-ex-lock-lockscr { position: absolute; inset: 0; background: linear-gradient(160deg, #0A3D91 0%, #082F70 100%); color: #FFFFFF; text-align: center; }
+    .v3-110-ex-lock-lockic { position: absolute; left: 650px; top: 190px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255, 255, 255, 0.14); }
+    .v3-110-ex-lock-lockic svg { position: absolute; left: 50px; top: 40px; width: 200px; height: 220px; display: block; overflow: visible; }
+    .v3-110-ex-lock-locktx { position: absolute; left: 0; right: 0; top: 560px; font-size: 96px; font-weight: 800; line-height: 1.2; }
+    .v3-110-ex-lock-locksub { position: absolute; left: 0; right: 0; top: 700px; font-size: 52px; font-weight: 600; color: rgba(255, 255, 255, 0.8); }
+
+    .v3-110-ex-lock-ask { position: absolute; left: 700px; top: 150px; width: 120px; height: 120px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 4px #0F172A, 0 14px 28px rgba(15, 23, 42, 0.18); color: #0F172A; font-size: 80px; font-weight: 800; line-height: 120px; text-align: center; }
+
+    /* keycaps (screen space) */
+    .v3-110-ex-lock-keys {
+      position: absolute; left: 1150px; top: 120px; width: 660px; height: 290px;
+      border-radius: 28px; background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(10, 61, 145, 0.25), 0 30px 60px rgba(15, 23, 42, 0.20);
+    }
+    .v3-110-ex-lock-key { position: absolute; top: 40px; height: 200px; }
+    .v3-110-ex-lock-key-base { position: absolute; left: 0; right: 0; top: 16px; bottom: 0; border-radius: 26px; background: #94A3B8; }
+    .v3-110-ex-lock-key-cap {
+      position: absolute; left: 0; right: 0; top: 0; height: 184px; border-radius: 26px;
+      background: #F8FAFC; box-shadow: inset 0 0 0 4px #CBD5E1;
+      display: flex; align-items: center; justify-content: center; gap: 18px;
+      font-size: 64px; font-weight: 800; color: #0F172A;
+    }
+    .v3-110-ex-lock-key-cap svg { width: 62px; height: 62px; display: block; }
+    .v3-110-ex-lock-plus { position: absolute; left: 368px; top: 96px; width: 60px; font-size: 72px; font-weight: 800; color: #0A3D91; text-align: center; line-height: 1; }
+
+    /* rewind (VHS) */
+    .v3-110-ex-lock-vhs { position: absolute; inset: 0; overflow: hidden; }
+    .v3-110-ex-lock-tint { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.22); }
+    .v3-110-ex-lock-lines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.22) 0px, rgba(15, 23, 42, 0.22) 2px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0) 7px); }
+    .v3-110-ex-lock-band { position: absolute; left: 0; width: 1920px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0px, rgba(255, 255, 255, 0.85) 18px, rgba(203, 213, 225, 0.5) 18px, rgba(203, 213, 225, 0.5) 30px, rgba(255, 255, 255, 0.1) 30px, rgba(255, 255, 255, 0.1) 52px); }
+    .v3-110-ex-lock-rew {
+      position: absolute; right: 70px; top: 46px; height: 90px; padding: 0 34px; border-radius: 16px;
+      background: rgba(15, 23, 42, 0.78); color: #FFFFFF;
+      display: flex; align-items: center; gap: 18px;
+      font-size: 52px; font-weight: 800; letter-spacing: 0.04em; white-space: nowrap;
+    }
+    .v3-110-ex-lock-rew svg { width: 64px; height: 44px; display: block; }
+
+    .v3-110-ex-lock-take {
+      position: absolute; left: 460px; top: 890px; width: 1000px; height: 124px;
+      border-radius: 22px; background: #0A3D91; color: #FFFFFF;
+      display: flex; align-items: center; justify-content: center; gap: 22px;
+      font-size: 46px; font-weight: 700; white-space: nowrap;
+      box-shadow: 0 22px 48px rgba(10, 61, 145, 0.28);
+    }
+    .v3-110-ex-lock-take svg { width: 54px; height: 54px; display: block; flex: 0 0 54px; }
+  </style>
+
+  <div id="root" data-composition-id="v3-110-ex-lock" data-width="1920" data-height="1080" data-duration="16.53">
+    <div class="v3-110-ex-lock-bg clip" id="v3-110-ex-lock-bg" data-start="0" data-duration="16.53" data-track-index="0"></div>
+    <div class="v3-110-ex-lock-all" id="v3-110-ex-lock-all">
+      <div class="v3-110-ex-lock-world" id="v3-110-ex-lock-world">
+        <svg class="v3-110-ex-lock-office" viewBox="0 0 1920 1080">
+          <rect x="0" y="0" width="1920" height="1080" fill="#EEF3FB" />
+          <rect x="0" y="880" width="1920" height="200" fill="#DCE5F3" />
+          <!-- window -->
+          <rect x="140" y="130" width="420" height="330" rx="14" fill="#FFFFFF" />
+          <rect x="162" y="152" width="376" height="286" rx="6" fill="#D4E5FB" />
+          <circle cx="470" cy="214" r="34" fill="#FDE68A" />
+          <g id="v3-110-ex-lock-cloud1"><ellipse cx="250" cy="220" rx="56" ry="20" fill="#FFFFFF" /><ellipse cx="278" cy="206" rx="34" ry="20" fill="#FFFFFF" /></g>
+          <path d="M162 438 V370 H210 V340 H262 V384 H300 V320 H356 V360 H404 V350 H452 V392 H500 V362 H538 V438 Z" fill="#B9D0F0" />
+          <rect x="346" y="152" width="8" height="286" fill="#FFFFFF" />
+          <rect x="162" y="291" width="376" height="8" fill="#FFFFFF" />
+          <rect x="128" y="458" width="444" height="16" rx="8" fill="#FFFFFF" />
+          <!-- clock (almost 9:00 — meeting time) -->
+          <circle cx="1560" cy="230" r="80" fill="#FFFFFF" stroke="#334155" stroke-width="8" />
+          <g stroke="#94A3B8" stroke-width="6" stroke-linecap="round"><path d="M1560 164v12M1626 230h-12M1560 296v-12M1494 230h12" /></g>
+          <path d="M1560 230 L1526 222" stroke="#0F172A" stroke-width="9" stroke-linecap="round" />
+          <path id="v3-110-ex-lock-minute" d="M1560 230 L1554 174" stroke="#0F172A" stroke-width="6" stroke-linecap="round" />
+          <circle cx="1560" cy="230" r="8" fill="#0A3D91" />
+          <!-- shelf -->
+          <rect x="1380" y="440" width="340" height="14" rx="7" fill="#94A3B8" />
+          <rect x="1404" y="356" width="34" height="84" rx="4" fill="#0A3D91" />
+          <rect x="1444" y="368" width="30" height="72" rx="4" fill="#3B6CC4" />
+          <rect x="1480" y="350" width="34" height="90" rx="4" fill="#94A3B8" />
+          <rect x="1520" y="386" width="40" height="54" rx="4" fill="#CBD5E1" transform="rotate(-12 1540 440)" />
+          <rect x="1622" y="404" width="56" height="36" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3" />
+          <path d="M1650 404 C1636 380 1630 366 1640 352 M1650 404 C1652 380 1662 366 1676 362 M1650 404 C1648 388 1650 372 1656 360" stroke="#34A57A" stroke-width="8" fill="none" stroke-linecap="round" />
+          <!-- chair -->
+          <rect x="392" y="560" width="78" height="240" rx="32" fill="#334155" />
+          <rect x="408" y="590" width="46" height="170" rx="20" fill="#475569" />
+          <!-- people (generated) -->
+          <g id="v3-110-ex-lock-minh"></g>
+          <g id="v3-110-ex-lock-str"></g>
+          <!-- monitor -->
+          <rect x="1030" y="698" width="60" height="50" fill="#94A3B8" />
+          <rect x="976" y="742" width="168" height="20" rx="10" fill="#94A3B8" />
+          <rect x="800" y="360" width="520" height="340" rx="18" fill="#1E293B" />
+          <circle cx="1060" cy="690" r="4" fill="#475569" />
+          <!-- desk -->
+          <rect x="300" y="760" width="1420" height="28" rx="10" fill="#B8C6DB" />
+          <rect x="330" y="788" width="1360" height="300" fill="#D7E0EE" />
+          <rect x="1420" y="816" width="240" height="90" rx="10" fill="#E6ECF5" />
+          <rect x="1510" y="856" width="60" height="10" rx="5" fill="#94A3B8" />
+          <!-- keyboard + mouse -->
+          <rect id="v3-110-ex-lock-kbd" x="850" y="740" width="340" height="20" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <ellipse cx="800" cy="748" rx="24" ry="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <!-- notebook on the desk -->
+          <g id="v3-110-ex-lock-deskbook"><rect x="620" y="742" width="120" height="18" rx="4" fill="#3B6CC4" /><rect x="620" y="742" width="120" height="6" rx="3" fill="#FFFFFF" opacity="0.6" /></g>
+          <!-- desk arms (generated, in front of desk) -->
+          <g id="v3-110-ex-lock-arms"></g>
+          <!-- mug + steam -->
+          <rect x="1376" y="702" width="58" height="58" rx="12" fill="#FFFFFF" stroke="#0A3D91" stroke-width="5" />
+          <path d="M1434 716 C1454 716 1454 744 1434 744" stroke="#0A3D91" stroke-width="5" fill="none" />
+          <path id="v3-110-ex-lock-steam1" d="M1392 690 c-10 -14 10 -24 0 -40" stroke="#94A3B8" stroke-width="5" fill="none" stroke-linecap="round" />
+          <path id="v3-110-ex-lock-steam2" d="M1416 688 c-10 -14 10 -24 0 -40" stroke="#94A3B8" stroke-width="5" fill="none" stroke-linecap="round" />
+          <!-- plant -->
+          <path d="M1532 702 h76 l-8 58 h-60 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+          <g id="v3-110-ex-lock-plant">
+            <path d="M1570 702 C1540 660 1520 640 1526 606 C1556 622 1568 660 1570 702 Z" fill="#34A57A" />
+            <path d="M1570 702 C1600 662 1622 646 1622 612 C1590 626 1574 664 1570 702 Z" fill="#2E8F6A" />
+            <path d="M1570 702 C1566 660 1572 620 1590 590 C1600 630 1584 670 1570 702 Z" fill="#45B98A" />
+          </g>
+        </svg>
+
+        <div class="v3-110-ex-lock-chip" id="v3-110-ex-lock-chip">Anh Minh</div>
+
+        <div class="v3-110-ex-lock-screen">
+          <div class="v3-110-ex-lock-ui">
+            <div class="v3-110-ex-lock-topbar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 7 8.5-7" /></svg>
+              <span>Hộp thư đến</span>
+              <div class="v3-110-ex-lock-search"></div>
+            </div>
+            <div class="v3-110-ex-lock-side" id="v3-110-ex-lock-side"></div>
+            <div class="v3-110-ex-lock-pane">
+              <div class="v3-110-ex-lock-mail">
+                <div class="v3-110-ex-lock-line" style="width: 46%; height: 40px; background: #CBD5E1"></div>
+                <div class="v3-110-ex-lock-line" style="width: 92%"></div>
+                <div class="v3-110-ex-lock-line" style="width: 84%"></div>
+                <div class="v3-110-ex-lock-line" style="width: 88%"></div>
+                <div class="v3-110-ex-lock-line" style="width: 58%"></div>
+              </div>
+            </div>
+            <div class="v3-110-ex-lock-compose" id="v3-110-ex-lock-compose">
+              <div class="v3-110-ex-lock-chead">Thư mới</div>
+              <div class="v3-110-ex-lock-crow">Từ: <b>anh Minh</b></div>
+              <div class="v3-110-ex-lock-crow">Đến: <div class="v3-110-ex-lock-bar" style="width: 420px; height: 22px; margin: 0"></div></div>
+              <div class="v3-110-ex-lock-cbody">
+                <div class="v3-110-ex-lock-line" style="width: 90%"></div>
+                <div class="v3-110-ex-lock-line" style="width: 80%"></div>
+                <div class="v3-110-ex-lock-line" style="width: 64%"></div>
+              </div>
+              <div class="v3-110-ex-lock-send" id="v3-110-ex-lock-send">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4z" /></svg>
+                <span>Gửi</span>
+              </div>
+            </div>
+            <div class="v3-110-ex-lock-plane" id="v3-110-ex-lock-plane">
+              <svg viewBox="0 0 24 24" fill="#0A3D91" stroke="#FFFFFF" stroke-width="1.2" stroke-linejoin="round"><path d="M22 2 15 22l-4-9-9-4z" /></svg>
+            </div>
+            <div class="v3-110-ex-lock-alarm" id="v3-110-ex-lock-alarm"></div>
+            <div class="v3-110-ex-lock-toast" id="v3-110-ex-lock-toast">
+              <div class="v3-110-ex-lock-toast-i"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z" /><path d="M12 10v4.5M12 17.5v.01" /></svg></div>
+              <div>
+                <div class="v3-110-ex-lock-toast-t">Email đã gửi đi</div>
+                <div class="v3-110-ex-lock-toast-s">từ tài khoản của anh Minh</div>
+              </div>
+            </div>
+            <div class="v3-110-ex-lock-lockscr" id="v3-110-ex-lock-lockscr">
+              <div class="v3-110-ex-lock-lockic" id="v3-110-ex-lock-lockic">
+                <svg viewBox="0 0 200 220">
+                  <path id="v3-110-ex-lock-shackle" d="M50 110 V70 a50 50 0 0 1 100 0 V110" fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" />
+                  <rect x="20" y="100" width="160" height="120" rx="22" fill="#FFFFFF" />
+                  <circle cx="100" cy="150" r="16" fill="#0A3D91" /><rect x="93" y="152" width="14" height="36" rx="7" fill="#0A3D91" />
+                </svg>
+              </div>
+              <div class="v3-110-ex-lock-locktx">Máy đã khóa</div>
+              <div class="v3-110-ex-lock-locksub">anh Minh</div>
+            </div>
+            <div class="v3-110-ex-lock-cursor" id="v3-110-ex-lock-cursor">
+              <svg viewBox="0 0 24 30"><path d="M2 2 L2 24 L8 18.5 L12 27.5 L15.6 26 L11.8 17.2 L19.5 17.2 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.6" stroke-linejoin="round" /></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- "unlocked" / "locked" badge above the monitor -->
+        <div class="v3-110-ex-lock-badge" id="v3-110-ex-lock-badge">
+          <div class="v3-110-ex-lock-pill v3-110-ex-lock-open" id="v3-110-ex-lock-bopen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 7.8-1.2" /></svg>
+            <span>Chưa khóa</span>
+          </div>
+          <div class="v3-110-ex-lock-pill v3-110-ex-lock-shut" id="v3-110-ex-lock-bshut">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+            <span>Đã khóa</span>
+          </div>
+        </div>
+        <div class="v3-110-ex-lock-ask" id="v3-110-ex-lock-ask">?</div>
+      </div>
+
+      <!-- keycaps: Win + L -->
+      <div class="v3-110-ex-lock-keys" id="v3-110-ex-lock-keys">
+        <div class="v3-110-ex-lock-key" style="left: 40px; width: 310px">
+          <div class="v3-110-ex-lock-key-base"></div>
+          <div class="v3-110-ex-lock-key-cap" id="v3-110-ex-lock-kwin">
+            <svg viewBox="0 0 24 24" fill="#0A3D91"><rect x="2" y="2" width="9.5" height="9.5" rx="1" /><rect x="12.5" y="2" width="9.5" height="9.5" rx="1" /><rect x="2" y="12.5" width="9.5" height="9.5" rx="1" /><rect x="12.5" y="12.5" width="9.5" height="9.5" rx="1" /></svg>
+            <span>Win</span>
+          </div>
+        </div>
+        <div class="v3-110-ex-lock-plus">+</div>
+        <div class="v3-110-ex-lock-key" style="left: 446px; width: 174px">
+          <div class="v3-110-ex-lock-key-base"></div>
+          <div class="v3-110-ex-lock-key-cap" id="v3-110-ex-lock-kl"><span>L</span></div>
+        </div>
+      </div>
+
+      <!-- rewind overlay -->
+      <div class="v3-110-ex-lock-vhs" id="v3-110-ex-lock-vhs">
+        <div class="v3-110-ex-lock-tint"></div>
+        <div class="v3-110-ex-lock-lines"></div>
+        <div class="v3-110-ex-lock-band" id="v3-110-ex-lock-band1" style="top: 0; height: 46px"></div>
+        <div class="v3-110-ex-lock-band" id="v3-110-ex-lock-band2" style="top: 0; height: 22px"></div>
+        <div class="v3-110-ex-lock-rew">
+          <svg viewBox="0 0 64 44" fill="#FFFFFF"><path d="M32 4 L4 22 L32 40 Z" /><path d="M60 4 L32 22 L60 40 Z" /></svg>
+          <span>Tua lại</span>
+        </div>
+      </div>
+      <div class="v3-110-ex-lock-vhs" id="v3-110-ex-lock-flash" style="background: #FFFFFF"></div>
+
+      <div class="v3-110-ex-lock-take" id="v3-110-ex-lock-take">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+        <span>Rời chỗ — khóa máy: Win + L</span>
+      </div>
+
+      <div class="v3-110-ex-lock-tag">Ví dụ thực tế</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="v3-110-ex-lock"]');
+      var q = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+      var P = "#v3-110-ex-lock-";
+      var $ = function (id) { return root.querySelector(P + id); };
+      var CUE = /*hf-cues:start*/{"minh":0,"rush":0.2,"open":0.86,"stranger":2.32,"sit":3.46,"send":4.34,"account":5.22,"rewind":6.66,"win":8.28,"l":9.1,"locked":9.78,"leave":11.02,"takeaway":12.92}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/16.03/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+
+      // inbox rows
+      var side = $("side"), ws = [[70, 92], [55, 84], [64, 90], [48, 78], [60, 86], [52, 80], [66, 88]];
+      ws.forEach(function (w, i) {
+        side.insertAdjacentHTML("beforeend", '<div class="v3-110-ex-lock-row"' + (i === 0 ? ' style="background: rgba(10,61,145,0.08); border-left: 8px solid #0A3D91"' : "") +
+          '><div class="v3-110-ex-lock-ava"></div><div class="v3-110-ex-lock-bars"><div class="v3-110-ex-lock-bar" style="width: ' + w[0] + '%"></div><div class="v3-110-ex-lock-bar" style="width: ' + w[1] + '%"></div></div></div>');
+      });
+
+      // ---------- characters (anh Minh exactly as in v3-00-story, plus legs/arms for walking) ----------
+      var SKIN = "#F6CDA8", SKIN_D = "#E8B48C";
+      function person(id, o) {
+        var s = '<g id="' + id + '-flip">';
+        // legs (hidden behind the desk while seated)
+        s += '<g id="' + id + '-legB"><rect x="590" y="730" width="42" height="330" rx="20" fill="' + o.pantsD + '" /><ellipse cx="626" cy="1060" rx="34" ry="15" fill="#0F172A" /></g>';
+        s += '<g id="' + id + '-legF"><rect x="546" y="730" width="42" height="330" rx="20" fill="' + o.pants + '" /><ellipse cx="582" cy="1060" rx="34" ry="15" fill="#0F172A" /></g>';
+        s += '<g id="' + id + '-armB"><path d="M592 606 L596 738" stroke="' + o.shirtD + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="596" cy="754" r="17" fill="' + SKIN_D + '" /></g>';
+        s += '<path d="M494 772 C490 660 506 590 572 578 L606 578 C658 584 676 650 676 772 Z" fill="' + o.shirt + '" />';
+        s += '<path d="M566 580 L589 612 L612 580 Z" fill="' + (o.collar || "#FFFFFF") + '" />';
+        s += '<rect x="572" y="530" width="34" height="56" rx="10" fill="' + SKIN_D + '" />';
+        s += '<g id="' + id + '-head">';
+        s += '<circle cx="588" cy="478" r="64" fill="' + SKIN + '" />';
+        if (o.cap) {
+          s += '<path d="M526 474 C522 500 530 520 548 528 L556 470 Z" fill="#1E293B" />';
+          s += '<path d="M520 476 C512 418 556 396 604 400 C646 404 668 432 664 460 L520 478 Z" fill="#111827" />';
+          s += '<path d="M648 452 L712 458 C722 460 720 472 708 472 L636 470 Z" fill="#111827" />';
+        } else {
+          s += '<path d="M522 482 C512 418 556 398 602 404 C648 410 666 440 660 462 C630 450 600 452 580 466 C566 478 556 496 548 524 C532 514 524 500 522 482 Z" fill="#1E293B" />';
+        }
+        s += '<circle cx="560" cy="494" r="13" fill="' + SKIN_D + '" />';
+        s += '<path id="' + id + '-brow" d="M612 ' + (o.cap ? 478 : 456) + ' Q626 ' + (o.cap ? 470 : 448) + ' 640 ' + (o.cap ? 478 : 456) + '" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+        s += '<ellipse id="' + id + '-eye" cx="628" cy="' + (o.cap ? 490 : 482) + '" rx="6.5" ry="' + (o.cap ? 7 : 9) + '" fill="#0F172A" />';
+        s += '<path d="M646 478 Q666 494 648 506 Z" fill="' + SKIN + '" />';
+        s += '<circle cx="618" cy="504" r="10" fill="#F59E9E" opacity="0.45" />';
+        s += '<path id="' + id + '-mouth" d="' + (o.cap ? "M626 524 L645 522" : "M626 522 Q636 529 645 521") + '" stroke="#9A3412" stroke-width="4" fill="none" stroke-linecap="round" />';
+        s += '</g>';
+        s += '<g id="' + id + '-armF"><path d="M586 606 L590 738" stroke="' + o.shirtD + '" stroke-width="36" fill="none" stroke-linecap="round" />';
+        if (o.book) s += '<g id="' + id + '-book"><rect x="560" y="722" width="62" height="86" rx="6" fill="#3B6CC4" /><rect x="560" y="722" width="12" height="86" rx="4" fill="#0A3D91" /></g>';
+        s += '<circle cx="590" cy="754" r="18" fill="' + SKIN + '" /></g>';
+        return s + '</g>';
+      }
+      function deskArm(id, sd) {
+        return '<g id="' + id + '-adesk"><path d="M622 606 C652 650 668 704 704 738 L776 742" stroke="' + sd + '" stroke-width="40" fill="none" stroke-linecap="round" stroke-linejoin="round" /><circle cx="792" cy="740" r="19" fill="' + SKIN + '" /></g>';
+      }
+      var MI = "v3-110-ex-lock-mi", SR = "v3-110-ex-lock-sr";
+      $("minh").innerHTML = person(MI, { shirt: "#0A3D91", shirtD: "#08337A", pants: "#1E293B", pantsD: "#0F172A", book: true });
+      $("str").innerHTML = person(SR, { shirt: "#64748B", shirtD: "#475569", pants: "#334155", pantsD: "#1E293B", collar: "#475569", cap: true });
+      $("arms").innerHTML = deskArm(MI, "#08337A") + deskArm(SR, "#475569");
+      var m = { o: P + "minh", f: "#" + MI + "-flip", lf: "#" + MI + "-legF", lb: "#" + MI + "-legB", af: "#" + MI + "-armF", ab: "#" + MI + "-armB", head: "#" + MI + "-head", desk: "#" + MI + "-adesk" };
+      var s = { o: P + "str", f: "#" + SR + "-flip", lf: "#" + SR + "-legF", lb: "#" + SR + "-legB", af: "#" + SR + "-armF", ab: "#" + SR + "-armB", head: "#" + SR + "-head", desk: "#" + SR + "-adesk" };
+      var STAND = -100;
+
+      // ---------- motion helpers ----------
+      function face(p, dir, at) { tl.set(p.f, { scaleX: dir, svgOrigin: "588 700" }, at); }
+      function walk(p, at, dur, x0, x1) {
+        var STEP = 0.16, n = Math.max(1, Math.round(dur / STEP));
+        var st = dur / n;
+        tl.fromTo(p.o, { x: x0 }, { x: x1, duration: dur, ease: "none", immediateRender: false }, at);
+        tl.fromTo(p.lf, { rotation: -22 }, { rotation: 22, svgOrigin: "567 745", duration: st, ease: "sine.inOut", yoyo: true, repeat: n - 1, immediateRender: false }, at);
+        tl.fromTo(p.lb, { rotation: 22 }, { rotation: -22, svgOrigin: "611 745", duration: st, ease: "sine.inOut", yoyo: true, repeat: n - 1, immediateRender: false }, at);
+        tl.fromTo(p.af, { rotation: 20 }, { rotation: -20, svgOrigin: "588 604", duration: st, ease: "sine.inOut", yoyo: true, repeat: n - 1, immediateRender: false }, at);
+        tl.fromTo(p.ab, { rotation: -20 }, { rotation: 20, svgOrigin: "594 604", duration: st, ease: "sine.inOut", yoyo: true, repeat: n - 1, immediateRender: false }, at);
+        tl.fromTo(p.head, { y: 0 }, { y: -7, duration: st / 2, ease: "sine.inOut", yoyo: true, repeat: 2 * n - 1, immediateRender: false }, at);
+        var end = at + dur;
+        tl.to([p.lf, p.lb, p.af, p.ab], { rotation: 0, duration: 0.12, ease: "power1.out" }, end);
+      }
+      function stand(p, at, armsOn) {
+        tl.to(p.desk, { opacity: 0, duration: 0.1, ease: "none" }, at);
+        tl.to(p.o, { y: STAND, duration: 0.3, ease: "power2.out" }, at);
+        tl.to([p.af, p.ab], { opacity: 1, duration: 0.1, ease: "none" }, at + 0.05);
+      }
+      function sit(p, at) {
+        tl.to(p.o, { y: 0, duration: 0.3, ease: "power2.inOut" }, at);
+        tl.to([p.af, p.ab], { opacity: 0, duration: 0.1, ease: "none" }, at + 0.2);
+        tl.to(p.desk, { opacity: 1, duration: 0.1, ease: "none" }, at + 0.2);
+      }
+
+      // ---------- camera ----------
+      function cam(sc, fx, fy, cx, cy) { return { scale: sc, x: cx - fx * sc, y: cy - fy * sc }; }
+      var MON = [1060, 530], Z = 3.1, ZC = [960, 585];
+      var WIDE = cam(1, 960, 540, 960, 540);
+      var NEAR = cam(1.12, 900, 560, 960, 560);
+      var LOCKV = cam(1.22, 860, 560, 960, 540);
+      function camTo(c, at, dur, ease) { tl.to(P + "world", Object.assign({}, c, { duration: dur, ease: ease || "power3.inOut" }), at); }
+
+      // ---------- initial state ----------
+      gsap.set(P + "world", WIDE);
+      gsap.set([P + "compose", P + "plane", P + "toast", P + "alarm", P + "lockscr", P + "cursor", P + "ask", P + "keys", P + "vhs", P + "flash", P + "take", P + "badge", P + "bshut", P + "chip"], { opacity: 0 });
+      gsap.set([m.af, m.ab, s.af, s.ab, s.desk, "#" + MI + "-book"], { opacity: 0 });
+      gsap.set(s.o, { x: 1500, y: STAND });
+      gsap.set(m.o, { x: 0, y: 0 });
+      gsap.set(P + "cursor", { x: 1200, y: 900 });
+
+      // ambient
+      ["steam1", "steam2"].forEach(function (id, i) {
+        gsap.set(P + id, { opacity: 0 });
+        tl.fromTo(P + id, { y: 6 }, { y: -26, duration: 1.6, ease: "none", repeat: 9 }, i * 0.6);
+        tl.to(P + id, { keyframes: { opacity: [0, 0.8, 0] }, duration: 1.6, ease: "none", repeat: 9 }, i * 0.6);
+      });
+      tl.fromTo(P + "plant", { rotation: 0 }, { rotation: 1.5, svgOrigin: "1570 702", duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 13 }, 0);
+      tl.fromTo(P + "cloud1", { x: 0 }, { x: 80, duration: DURATION, ease: "none" }, 0);
+
+      // ================= 1. Minh hurries off to a meeting =================
+      tl.fromTo(P + "chip", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, Math.max(0.2, CUE.minh));
+      tl.fromTo(m.desk, { x: 0 }, { x: 6, duration: 0.15, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false }, 0.3);
+      // glances at the clock
+      tl.to(m.head, { rotation: -10, svgOrigin: "590 540", duration: 0.25, ease: "power2.out" }, CUE.rush - 0.45);
+      tl.to("#" + MI + "-brow", { y: -6, duration: 0.2, ease: "power2.out" }, CUE.rush - 0.45);
+      tl.to(P + "chip", { opacity: 0, duration: 0.25, ease: "power1.out" }, CUE.rush);
+      var R0 = CUE.rush;
+      stand(m, R0);
+      tl.to(m.head, { rotation: 0, svgOrigin: "590 540", duration: 0.2, ease: "power2.out" }, R0 + 0.15);
+      tl.set(P + "deskbook", { opacity: 0 }, R0 + 0.2);
+      tl.set("#" + MI + "-book", { opacity: 1 }, R0 + 0.2);
+      face(m, -1, R0 + 0.3);
+      tl.to(m.f, { rotation: -6, svgOrigin: "588 700", duration: 0.2, ease: "power2.out" }, R0 + 0.3);
+      walk(m, R0 + 0.35, 1.0, 0, -900);
+      // the screen stays open
+      var OP = CUE.open + 0.15;
+      tl.fromTo(P + "badge", { opacity: 0, y: 16, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, OP);
+      tl.fromTo(P + "badge", { scale: 1 }, { scale: 1.08, duration: 0.22, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false }, OP + 0.45);
+      camTo(NEAR, OP, 1.2, "sine.inOut");
+
+      // ================= 2. A stranger sits down and sends an email =================
+      var SA = CUE.stranger - 0.15;
+      var SIT = CUE.sit;
+      walk(s, SA, SIT - SA, 1500, 0);
+      face(s, -1, SA);
+      face(s, 1, SIT);
+      tl.to(s.head, { rotation: -6, svgOrigin: "590 540", duration: 0.25, ease: "power2.out" }, SIT + 0.05);
+      sit(s, SIT + 0.1);
+      tl.to(s.head, { rotation: 4, svgOrigin: "590 540", duration: 0.3, ease: "sine.inOut" }, SIT + 0.45);
+      tl.to(s.head, { rotation: 0, svgOrigin: "590 540", duration: 0.3, ease: "sine.inOut" }, SIT + 0.8);
+      // compose window, camera into the screen
+      var SE = CUE.send;
+      tl.fromTo(P + "compose", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, SE - 0.6);
+      tl.to(P + "badge", { opacity: 0, duration: 0.25, ease: "power1.out" }, SE - 0.4);
+      camTo(cam(Z, MON[0], MON[1], ZC[0], ZC[1]), SE - 0.45, 0.9);
+      var SEND = [44 + 150, 130 + 820 - 44 - 52];
+      tl.fromTo(P + "cursor", { opacity: 0, x: 1200, y: 900 }, { opacity: 1, duration: 0.15, ease: "none", immediateRender: false }, SE - 0.1);
+      tl.to(P + "cursor", { x: SEND[0], y: SEND[1], duration: 0.55, ease: "power2.inOut" }, SE - 0.05);
+      var CL = SE + 0.55;
+      tl.to(P + "cursor", { scale: 0.82, duration: 0.08, ease: "power2.in" }, CL);
+      tl.to(P + "cursor", { scale: 1, duration: 0.25, ease: "power2.out" }, CL + 0.1);
+      tl.to(P + "send", { scale: 0.94, backgroundColor: "#082F70", duration: 0.08, ease: "power2.in" }, CL);
+      tl.to(P + "send", { scale: 1, duration: 0.3, ease: "power2.out" }, CL + 0.1);
+      // the email flies off
+      tl.fromTo(P + "plane", { opacity: 0, x: 0, y: 0, rotation: 0, scale: 0.6 }, { opacity: 1, scale: 1.4, duration: 0.15, ease: "power2.out", immediateRender: false }, CL + 0.1);
+      tl.to(P + "plane", { x: 1150, y: -760, rotation: -10, duration: 0.65, ease: "power2.in" }, CL + 0.15);
+      tl.to(P + "compose", { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, CL + 0.2);
+      tl.set(P + "cursor", { opacity: 0 }, CL + 0.3);
+      // red alert
+      var AL = CUE.account - 0.25;
+      tl.fromTo(P + "toast", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)", immediateRender: false }, AL);
+      [0, 0.36, 0.72].forEach(function (d) {
+        tl.fromTo(P + "alarm", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none", immediateRender: false }, AL + d);
+        tl.to(P + "alarm", { opacity: 0.25, duration: 0.2, ease: "none" }, AL + d + 0.14);
+      });
+      tl.fromTo(P + "toast", { x: 0 }, { keyframes: { x: [0, -14, 12, -8, 0] }, duration: 0.3, ease: "none", immediateRender: false }, AL + 0.35);
+
+      // ================= 3. "Tua lại" — rewind =================
+      var R = CUE.rewind, RD = 1.2;
+      tl.set(P + "vhs", { opacity: 1 }, R);
+      tl.fromTo(P + "world", { filter: "saturate(1) contrast(1)" }, { filter: "saturate(0.45) contrast(1.12)", duration: 0.15, ease: "none", immediateRender: false }, R);
+      tl.fromTo(P + "band1", { y: 1100 }, { y: -60, duration: 0.55, ease: "none", repeat: 1, immediateRender: false }, R);
+      tl.fromTo(P + "band2", { y: 300 }, { y: 1100, duration: 0.4, ease: "none", repeat: 2, immediateRender: false }, R);
+      // everything plays backwards, fast
+      tl.to(P + "toast", { opacity: 0, scale: 0.85, duration: 0.15, ease: "none" }, R);
+      tl.to(P + "alarm", { opacity: 0, duration: 0.1, ease: "none" }, R);
+      tl.to(P + "compose", { opacity: 1, y: 0, duration: 0.12, ease: "none" }, R + 0.1);
+      tl.to(P + "compose", { opacity: 0, y: 50, duration: 0.15, ease: "none" }, R + 0.3);
+      camTo(WIDE, R + 0.05, 0.55, "power1.inOut");
+      tl.to(s.desk, { opacity: 0, duration: 0.05, ease: "none" }, R + 0.1);
+      tl.to(s.o, { y: STAND, duration: 0.15, ease: "none" }, R + 0.15);
+      face(s, -1, R + 0.3);
+      walk(s, R + 0.3, 0.6, 0, 1500);
+      tl.set([s.af, s.ab], { opacity: 1 }, R + 0.15);
+      // Minh walks back in, backwards, and sits down again
+      tl.set(m.o, { y: STAND }, R);
+      walk(m, R + 0.25, 0.6, -900, 0);
+      face(m, 1, R + 0.88);
+      tl.to(m.f, { rotation: 0, svgOrigin: "588 700", duration: 0.1, ease: "none" }, R + 0.88);
+      tl.set("#" + MI + "-book", { opacity: 0 }, R + 0.9);
+      tl.set(P + "deskbook", { opacity: 1 }, R + 0.9);
+      sit(m, R + 0.9);
+      tl.to(P + "badge", { opacity: 1, duration: 0.1, ease: "none" }, R + 0.9);
+      // VHS jitter
+      for (var k = 0; k < 12; k++) {
+        tl.set(P + "all", { x: (((k * 37) % 9) - 4) * 4 }, R + k * 0.1);
+      }
+      tl.set(P + "all", { x: 0 }, R + RD);
+      tl.set(P + "vhs", { opacity: 0 }, R + RD);
+      tl.to(P + "world", { filter: "saturate(1) contrast(1)", duration: 0.1, ease: "none" }, R + RD);
+      tl.fromTo(P + "flash", { opacity: 0.7 }, { opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, R + RD);
+
+      // ================= 4. Win + L =================
+      var W = CUE.win, L = CUE.l, LK = CUE.locked;
+      tl.fromTo(P + "keys", { opacity: 0, y: -30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)", immediateRender: false }, W - 0.3);
+      tl.to(m.desk, { x: 70, y: 2, duration: 0.3, ease: "power2.out" }, W - 0.3);
+      tl.to(m.head, { rotation: 6, svgOrigin: "590 540", duration: 0.3, ease: "power2.out" }, W - 0.3);
+      function press(id, at) {
+        tl.to(P + id, { y: 14, backgroundColor: "#DBE6F7", boxShadow: "inset 0 0 0 4px #0A3D91", duration: 0.1, ease: "power2.in" }, at);
+      }
+      press("kwin", W);
+      tl.to(m.desk, { y: 6, duration: 0.1, ease: "power2.in" }, W);
+      press("kl", L);
+      tl.to(m.desk, { x: 90, y: 8, duration: 0.1, ease: "power2.in" }, L);
+      // the screen locks
+      camTo(LOCKV, L - 0.2, 0.8, "power2.inOut");
+      tl.fromTo(P + "lockscr", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, LK);
+      tl.fromTo("#v3-110-ex-lock-shackle", { y: -26 }, { y: 0, duration: 0.3, ease: "bounce.out", immediateRender: false }, LK + 0.3);
+      tl.to(P + "bopen", { opacity: 0, duration: 0.2, ease: "none" }, LK + 0.2);
+      tl.fromTo(P + "bshut", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)", immediateRender: false }, LK + 0.2);
+      tl.to([P + "kwin", P + "kl"], { y: 0, backgroundColor: "#F8FAFC", boxShadow: "inset 0 0 0 4px #CBD5E1", duration: 0.2, ease: "power2.out" }, LK + 0.35);
+      tl.to(P + "keys", { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, LK + 0.75);
+      tl.to(m.desk, { x: 0, y: 0, duration: 0.25, ease: "power2.out" }, LK + 0.3);
+      tl.to(m.head, { rotation: 0, svgOrigin: "590 540", duration: 0.25, ease: "power2.out" }, LK + 0.3);
+
+      // ================= 5. Minh leaves; the stranger finds a locked screen =================
+      var LV = Math.max(LK + 0.7, CUE.leave - 0.6);
+      stand(m, LV);
+      tl.set(P + "deskbook", { opacity: 0 }, LV + 0.15);
+      tl.set("#" + MI + "-book", { opacity: 1 }, LV + 0.15);
+      face(m, -1, LV + 0.25);
+      tl.to(m.f, { rotation: -6, svgOrigin: "588 700", duration: 0.2, ease: "power2.out" }, LV + 0.25);
+      walk(m, LV + 0.3, 0.9, 0, -900);
+      var SB = LV + 0.5, SS = SB + 1.1;
+      face(s, -1, SB);
+      tl.set(s.o, { y: STAND }, SB);
+      walk(s, SB, SS - SB, 1500, 60);
+      face(s, 1, SS + 0.1);
+      tl.to(s.head, { rotation: 6, svgOrigin: "590 540", duration: 0.3, ease: "power2.out" }, SS + 0.1);
+      tl.fromTo(P + "ask", { opacity: 0, scale: 0.4, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: "back.out(2.2)", immediateRender: false }, SS + 0.25);
+      tl.fromTo(P + "lockic", { scale: 1 }, { scale: 1.1, duration: 0.2, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, SS + 0.3);
+      tl.fromTo(s.head, { rotation: 6 }, { keyframes: { rotation: [6, -6, 6, -6, 0] }, svgOrigin: "590 540", duration: 0.6, ease: "none", immediateRender: false }, SS + 0.65);
+      tl.to(P + "ask", { opacity: 0, duration: 0.25, ease: "power1.in" }, SS + 1.25);
+      walk(s, SS + 1.3, 1.1, 60, 1500);
+      // takeaway
+      tl.fromTo(P + "take", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, CUE.takeaway);
+      tl.fromTo(P + "bshut", { scale: 1 }, { scale: 1.06, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, CUE.takeaway + 1.2);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-110-ex-lock"] = tl;
+    })();
+  </script>
+</template>

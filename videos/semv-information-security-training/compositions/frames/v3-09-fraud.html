@@ -1,0 +1,387 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .v3-09-fraud-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+
+    /* slide-header */
+    .v3-09-fraud-header {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      top: 96px;
+      z-index: 4;
+    }
+    .v3-09-fraud-headrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .v3-09-fraud-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.3;
+    }
+    .v3-09-fraud-tag {
+      display: inline-block;
+      border-radius: 100px;
+      background: rgba(10, 61, 145, 0.08);
+      color: #0A3D91;
+      font-weight: 600;
+      font-size: 28px;
+      padding: 10px 28px;
+    }
+    .v3-09-fraud-h2 {
+      margin-top: 18px;
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+
+    /* connectors */
+    .v3-09-fraud-links {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      z-index: 1;
+      overflow: visible;
+    }
+    .v3-09-fraud-link {
+      fill: none;
+      stroke: rgba(10, 61, 145, 0.45);
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    /* left column: channel pills */
+    .v3-09-fraud-chan {
+      position: absolute;
+      left: 96px;
+      width: 400px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 30px 0 22px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 100px;
+      z-index: 2;
+    }
+    .v3-09-fraud-chan-ico {
+      width: 52px;
+      height: 52px;
+      flex: none;
+      border-radius: 50%;
+      background: rgba(10, 61, 145, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0A3D91;
+    }
+    .v3-09-fraud-chan-ico svg { width: 30px; height: 30px; display: block; }
+    .v3-09-fraud-chan-label {
+      font-size: 34px;
+      font-weight: 600;
+      color: #0F172A;
+      white-space: nowrap;
+    }
+
+    /* middle column: impersonation panel */
+    .v3-09-fraud-panel {
+      position: absolute;
+      left: 700px;
+      top: 300px;
+      width: 520px;
+      height: 540px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 14px;
+      z-index: 2;
+    }
+    .v3-09-fraud-panel-eyebrow {
+      position: absolute;
+      left: 24px;
+      top: 26px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #dc2626;
+    }
+    .v3-09-fraud-panel-eyebrow svg { width: 32px; height: 32px; flex: none; }
+    .v3-09-fraud-mask {
+      position: absolute;
+      left: 24px;
+      width: 472px;
+      height: 126px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 0 26px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 12px;
+    }
+    .v3-09-fraud-mask-ico {
+      width: 60px;
+      height: 60px;
+      flex: none;
+      color: #0A3D91;
+    }
+    .v3-09-fraud-mask-ico svg { width: 100%; height: 100%; display: block; }
+    .v3-09-fraud-mask-label {
+      font-size: 36px;
+      font-weight: 600;
+      color: #0F172A;
+      white-space: nowrap;
+    }
+
+    /* right: the core card */
+    .v3-09-fraud-core {
+      position: absolute;
+      left: 1340px;
+      top: 370px;
+      width: 484px;
+      height: 400px;
+      padding: 40px 40px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 14px;
+      z-index: 2;
+    }
+    .v3-09-fraud-core-icons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #0A3D91;
+    }
+    .v3-09-fraud-core-icons svg { display: block; }
+    .v3-09-fraud-core-title {
+      margin-top: 26px;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+    .v3-09-fraud-stamp {
+      position: absolute;
+      right: 36px;
+      bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #dc2626;
+      border: 3px solid #dc2626;
+      border-radius: 100px;
+      padding: 8px 28px 8px 22px;
+      background: #FFFFFF;
+      transform-origin: 50% 50%;
+    }
+    .v3-09-fraud-stamp svg { width: 38px; height: 38px; flex: none; }
+  </style>
+
+  <div data-hf-id="hf-h31h" id="root" data-composition-id="v3-09-fraud" data-start="0" data-duration="11.767" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-btry" id="v3-09-fraud-bg" class="v3-09-fraud-bg clip" data-start="0" data-duration="11.767" data-track-index="0"></div>
+
+    <!-- connectors (left → middle, middle → right) -->
+    <svg data-hf-id="hf-ldq9" class="v3-09-fraud-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <path data-hf-id="hf-w6eh" id="v3-09-fraud-l1" class="v3-09-fraud-link v3-09-fraud-inlink" d="M 496 362 C 610 362, 590 570, 700 570" />
+      <path data-hf-id="hf-rcma" id="v3-09-fraud-l2" class="v3-09-fraud-link v3-09-fraud-inlink" d="M 496 468 C 610 468, 590 570, 700 570" />
+      <path data-hf-id="hf-ss08" id="v3-09-fraud-l3" class="v3-09-fraud-link v3-09-fraud-inlink" d="M 496 574 C 600 574, 600 570, 700 570" />
+      <path data-hf-id="hf-nbqc" id="v3-09-fraud-l4" class="v3-09-fraud-link v3-09-fraud-inlink" d="M 496 680 C 610 680, 590 570, 700 570" />
+      <path data-hf-id="hf-izvp" id="v3-09-fraud-l5" class="v3-09-fraud-link v3-09-fraud-inlink" d="M 496 786 C 610 786, 590 570, 700 570" />
+      <path data-hf-id="hf-lx2d" id="v3-09-fraud-l6" class="v3-09-fraud-link" d="M 1220 570 L 1340 570" />
+    </svg>
+
+    <!-- slide-header -->
+    <div data-hf-id="hf-qdzk" class="v3-09-fraud-header">
+      <div data-hf-id="hf-zdkr" class="v3-09-fraud-headrow">
+        <div data-hf-id="hf-csps" class="v3-09-fraud-eyebrow" id="v3-09-fraud-eyebrow">PHẦN 4/5 · SỰ CỐ THỰC TẾ</div>
+        <span data-hf-id="hf-vibt" class="v3-09-fraud-tag" id="v3-09-fraud-tag">Lừa đảo tài chính</span>
+      </div>
+      <div data-hf-id="hf-63lm" class="v3-09-fraud-h2" id="v3-09-fraud-h2">Lừa đảo tài chính, ngân hàng</div>
+    </div>
+
+    <!-- left: 5 channel pills -->
+    <div data-hf-id="hf-dr5p" class="v3-09-fraud-chan" id="v3-09-fraud-c1" style="top: 320px;">
+      <div data-hf-id="hf-pjxv" class="v3-09-fraud-chan-ico"><svg data-hf-id="hf-h0hq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-uwav" x="3" y="5" width="18" height="14" rx="2" /><path data-hf-id="hf-t2z2" d="M3.5 6.5 12 13l8.5-6.5" /></svg></div>
+      <div data-hf-id="hf-lqvu" class="v3-09-fraud-chan-label">Email</div>
+    </div>
+    <div data-hf-id="hf-rk41" class="v3-09-fraud-chan" id="v3-09-fraud-c2" style="top: 426px;">
+      <div data-hf-id="hf-5vv7" class="v3-09-fraud-chan-ico"><svg data-hf-id="hf-pmle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-jt5w" d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12Z" /><path data-hf-id="hf-m39s" d="M8.5 12h.01M12 12h.01M15.5 12h.01" /></svg></div>
+      <div data-hf-id="hf-r57c" class="v3-09-fraud-chan-label">Tin nhắn</div>
+    </div>
+    <div data-hf-id="hf-tljm" class="v3-09-fraud-chan" id="v3-09-fraud-c3" style="top: 532px;">
+      <div data-hf-id="hf-5hk6" class="v3-09-fraud-chan-ico"><svg data-hf-id="hf-q0wf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-1cbz" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z" /></svg></div>
+      <div data-hf-id="hf-wc4x" class="v3-09-fraud-chan-label">Cuộc gọi</div>
+    </div>
+    <div data-hf-id="hf-nysy" class="v3-09-fraud-chan" id="v3-09-fraud-c4" style="top: 638px;">
+      <div data-hf-id="hf-5395" class="v3-09-fraud-chan-ico"><svg data-hf-id="hf-qf7g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-abn7" x="2.5" y="4" width="19" height="16" rx="2" /><path data-hf-id="hf-0f97" d="M2.5 8.5h19" /><path data-hf-id="hf-qbug" d="M5.5 6.3h.01M8 6.3h.01" /><path data-hf-id="hf-phly" d="M12 11.5v3.5M12 17.3v.2" /></svg></div>
+      <div data-hf-id="hf-orou" class="v3-09-fraud-chan-label">Website giả</div>
+    </div>
+    <div data-hf-id="hf-7fa7" class="v3-09-fraud-chan" id="v3-09-fraud-c5" style="top: 744px;">
+      <div data-hf-id="hf-4oy4" class="v3-09-fraud-chan-ico"><svg data-hf-id="hf-qtih" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-hf-id="hf-r6xf" cx="18" cy="5" r="3" /><circle data-hf-id="hf-rzq2" cx="6" cy="12" r="3" /><circle data-hf-id="hf-8p0c" cx="18" cy="19" r="3" /><path data-hf-id="hf-j0zz" d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4" /></svg></div>
+      <div data-hf-id="hf-x3cy" class="v3-09-fraud-chan-label">Mạng xã hội</div>
+    </div>
+
+    <!-- middle: impersonation panel -->
+    <div data-hf-id="hf-fu8c" class="v3-09-fraud-panel" id="v3-09-fraud-panel">
+      <div data-hf-id="hf-u9gy" class="v3-09-fraud-panel-eyebrow" id="v3-09-fraud-mask-eyebrow">
+        <svg data-hf-id="hf-8mq0" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-bihf" d="M3 6c3-1.3 6-1.3 9 0 3-1.3 6-1.3 9 0v5c0 5-4 9-9 9s-9-4-9-9Z" /><path data-hf-id="hf-9xni" d="M7 10.5c.8-.6 1.8-.6 2.6 0M14.4 10.5c.8-.6 1.8-.6 2.6 0" /><path data-hf-id="hf-f96h" d="M9 15.5c1.8 1.2 4.2 1.2 6 0" /></svg>
+        <span data-hf-id="hf-ps3m">MẠO DANH</span>
+      </div>
+      <div data-hf-id="hf-jmz6" class="v3-09-fraud-mask" id="v3-09-fraud-m1" style="top: 88px;">
+        <div data-hf-id="hf-fi1v" class="v3-09-fraud-mask-ico"><svg data-hf-id="hf-r7ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-deo6" d="M3 9.5 12 4l9 5.5" /><path data-hf-id="hf-n3p4" d="M4 9.5h16" /><path data-hf-id="hf-jypj" d="M6 12v6M10 12v6M14 12v6M18 12v6" /><path data-hf-id="hf-tb0q" d="M3 20.5h18" /></svg></div>
+        <div data-hf-id="hf-29ke" class="v3-09-fraud-mask-label">Cơ quan chức năng</div>
+      </div>
+      <div data-hf-id="hf-4tfy" class="v3-09-fraud-mask" id="v3-09-fraud-m2" style="top: 238px;">
+        <div data-hf-id="hf-u0wz" class="v3-09-fraud-mask-ico"><svg data-hf-id="hf-rm4j" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-frh1" d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle data-hf-id="hf-nb88" cx="9" cy="7" r="4" /><path data-hf-id="hf-4tns" d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8" /></svg></div>
+        <div data-hf-id="hf-frxz" class="v3-09-fraud-mask-label">Người thân</div>
+      </div>
+      <div data-hf-id="hf-xff7" class="v3-09-fraud-mask" id="v3-09-fraud-m3" style="top: 388px;">
+        <div data-hf-id="hf-tmly" class="v3-09-fraud-mask-ico"><svg data-hf-id="hf-s0fk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-n7s6" d="m11 17 2 2a1 1 0 1 0 3-3" /><path data-hf-id="hf-mdcx" d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path data-hf-id="hf-z3rp" d="m21 3 1 11h-2" /><path data-hf-id="hf-5tx9" d="M3 3 2 14l6.47 6.47a1 1 0 1 0 3-3" /><path data-hf-id="hf-4aha" d="M3 4h8" /></svg></div>
+        <div data-hf-id="hf-jhus" class="v3-09-fraud-mask-label">Đối tác</div>
+      </div>
+    </div>
+
+    <!-- right: core card -->
+    <div data-hf-id="hf-ufbm" class="v3-09-fraud-core" id="v3-09-fraud-core">
+      <div data-hf-id="hf-w8l3" class="v3-09-fraud-core-icons">
+        <svg data-hf-id="hf-dz7g" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-bpub" x="2" y="5" width="20" height="14" rx="2" /><path data-hf-id="hf-0f2s" d="M2 10h20" /><path data-hf-id="hf-148z" d="M6 15h4" /></svg>
+        <svg data-hf-id="hf-g49r" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-vlx4" d="M4 12h15" /><path data-hf-id="hf-ldqe" d="m13 6 6 6-6 6" /></svg>
+      </div>
+      <div data-hf-id="hf-orj7" class="v3-09-fraud-core-title">Yêu cầu<br data-hf-id="hf-x5px">chuyển khoản</div>
+      <div data-hf-id="hf-62m6" class="v3-09-fraud-stamp" id="v3-09-fraud-stamp">
+        <svg data-hf-id="hf-kg3k" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-yq8q" d="M12 3.5 2.5 20h19L12 3.5Z" /><path data-hf-id="hf-gfzk" d="M12 10v4.5" /><path data-hf-id="hf-wrvr" d="M12 17.3v.2" /></svg>
+        <span data-hf-id="hf-n6ke">Lừa đảo</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var root = document.querySelector('[data-composition-id="v3-09-fraud"]');
+      var q = function (sel) { return root.querySelector(sel); };
+      var qa = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* svg-path-draw setup: measured lengths */
+      function prepDraw(el, fallback) {
+        var len = fallback;
+        try { var m = el.getTotalLength(); if (m && isFinite(m) && m > 0) len = m; } catch (e) {}
+        len = len * 1.05;
+        el.style.strokeDasharray = String(len);
+        el.style.strokeDashoffset = String(len);
+        return len;
+      }
+      var inLinks = qa(".v3-09-fraud-inlink");
+      inLinks.forEach(function (p) { prepDraw(p, 320); });
+      var outLink = q("#v3-09-fraud-l6");
+      prepDraw(outLink, 120);
+
+      var CUE = /*hf-cues:start*/{"ch1":1.06,"ch2":1.54,"ch3":2.26,"ch4":2.78,"ch5":3.7,"masks":4.5,"m1":5.74,"m2":6.62,"m3":7.58,"core":7.71,"transfer":8.16,"stamp":8.76}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/11.267/*hf-dur:end*/;
+
+      /* spotlight helper — idx = -1 → rest (all normal) */
+      var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+      var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 rgba(10,61,145,0)";
+      function spot(items, idx, at) {
+        items.forEach(function (it, i) {
+          var on = i === idx, rest = idx < 0;
+          tl.to(it.el, { opacity: on || rest ? 1 : 0.4, scale: on ? 1.03 : 1, boxShadow: on ? RING_ON : RING_OFF,
+            backgroundColor: on ? it.on : it.base, duration: 0.35, ease: "power2.out" }, at);
+        });
+      }
+      function group(sel, base, on) {
+        return qa(sel).map(function (el) {
+          tl.set(el, { boxShadow: RING_OFF, backgroundColor: base, transformOrigin: "50% 50%" }, 0);
+          return { el: el, base: base, on: on };
+        });
+      }
+      var chans = group(".v3-09-fraud-chan", "rgba(10, 61, 145, 0.04)", "rgba(10, 61, 145, 0.08)");
+      var masks = group(".v3-09-fraud-mask", "#FFFFFF", "#EBF0F6");
+      var core = group("#v3-09-fraud-core", "rgba(10, 61, 145, 0.04)", "rgba(10, 61, 145, 0.08)");
+
+      /* Slide reveal (0–1.4s): header, then all five channel pills */
+      tl.fromTo(q("#v3-09-fraud-eyebrow"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+      tl.fromTo(q("#v3-09-fraud-tag"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.15);
+      tl.fromTo(q("#v3-09-fraud-h2"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.25);
+      chans.forEach(function (it, i) {
+        tl.fromTo(it.el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.6 + i * 0.08);
+      });
+
+      /* Stage 1: spotlight each channel as it is named */
+      spot(chans, 0, CUE.ch1);
+      spot(chans, 1, CUE.ch2);
+      spot(chans, 2, CUE.ch3);
+      spot(chans, 3, CUE.ch4);
+      spot(chans, 4, CUE.ch5);
+
+      /* Stage 2 ("kẻ gian mạo danh"): channels rest, links converge, impersonation panel builds */
+      spot(chans, -1, CUE.masks);
+      inLinks.forEach(function (p, i) {
+        tl.to(p, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, CUE.masks + i * 0.06);
+      });
+      tl.fromTo(q("#v3-09-fraud-panel"), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, CUE.masks + 0.05);
+      tl.fromTo(q("#v3-09-fraud-mask-eyebrow"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, CUE.masks + 0.15);
+      masks.forEach(function (it, i) {
+        tl.fromTo(it.el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, CUE.masks + 0.2 + i * 0.08);
+      });
+      spot(masks, 0, CUE.m1);
+      spot(masks, 1, CUE.m2);
+      spot(masks, 2, CUE.m3);
+
+      /* Stage 3 ("để yêu cầu chuyển khoản"): link → core card, spotlight it, red stamp lands */
+      tl.to(outLink, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, CUE.core);
+      tl.fromTo(q("#v3-09-fraud-core"), { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, CUE.core + 0.1);
+      spot(masks, -1, CUE.transfer);
+      spot(core, 0, CUE.transfer);
+      tl.fromTo(q("#v3-09-fraud-stamp"),
+        { opacity: 0, scale: 1.25, rotation: -10 },
+        { opacity: 1, scale: 1, rotation: -6, duration: 0.4, ease: "power3.out" }, CUE.stamp);
+      tl.to(q("#v3-09-fraud-core"), { borderColor: "rgba(220, 38, 38, 0.45)", duration: 0.4, ease: "power1.out" }, CUE.stamp + 0.1);
+
+      /* hold to the end of the voice */
+      tl.set({}, {}, DURATION);
+
+      window.__timelines["v3-09-fraud"] = tl;
+    })();
+  </script>
+</template>

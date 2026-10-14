@@ -1,0 +1,259 @@
+<template id="v3-06-incidents-template">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+#root {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #0F172A;
+}
+#root * { box-sizing: border-box; margin: 0; padding: 0; }
+
+#v3-06-incidents-bg {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  background: #FFFFFF;
+}
+
+#v3-06-incidents-world {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  transform-origin: 960px 480px;
+}
+
+/* slide-header */
+#v3-06-incidents-head {
+  position: absolute; left: 96px; right: 96px; top: 84px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+#v3-06-incidents-eyebrow {
+  font-size: 22px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #0A3D91;
+}
+#v3-06-incidents-tag {
+  border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91;
+  font-weight: 600; font-size: 25px; padding: 10px 27px; display: inline-block;
+}
+#v3-06-incidents-h2 {
+  position: absolute; left: 96px; top: 146px;
+  font-size: 54px; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: #0F172A;
+}
+
+/* table */
+#v3-06-incidents-table {
+  position: absolute; left: 96px; top: 238px; width: 1728px;
+}
+.v3-06-incidents-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr 1fr;
+  column-gap: 36px;
+  align-items: center;
+  padding: 0 32px;
+}
+#v3-06-incidents-thead {
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background: rgba(10, 61, 145, 0.08);
+}
+.v3-06-incidents-th {
+  font-size: 20px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #475569;
+}
+.v3-06-incidents-row {
+  height: 80px;
+  margin-bottom: 8px;
+  background: rgba(10, 61, 145, 0.04);
+  border: 1.5px solid rgba(10, 61, 145, 0.2);
+  border-radius: 12px;
+}
+.v3-06-incidents-name {
+  display: flex; align-items: baseline; gap: 16px; white-space: nowrap;
+}
+.v3-06-incidents-num {
+  font-size: 24px; font-weight: 700; letter-spacing: 0.04em; color: #0A3D91;
+}
+.v3-06-incidents-label {
+  font-size: 28px; font-weight: 700; letter-spacing: -0.01em; color: #0F172A;
+}
+.v3-06-incidents-desc {
+  font-size: 24px; font-weight: 400; line-height: 1.25; color: #475569;
+}
+.v3-06-incidents-cause {
+  font-size: 24px; font-weight: 500; line-height: 1.25; color: #0F172A;
+  padding-left: 20px;
+  border-left: 2px solid rgba(10, 61, 145, 0.2);
+}
+.v3-06-incidents-cause-empty {
+  height: 30px;
+  display: flex; align-items: center;
+}
+#v3-06-incidents-dash {
+  width: 56px; height: 2px; border-radius: 2px;
+  background: rgba(10, 61, 145, 0.35);
+  transform-origin: 0% 50%;
+}
+
+/* arrow */
+#v3-06-incidents-links {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+  overflow: visible;
+}
+#v3-06-incidents-links path {
+  fill: none; stroke: #0A3D91; stroke-width: 4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* process pill */
+#v3-06-incidents-pillrow {
+  position: absolute; left: 0; right: 0; top: 780px;
+  display: flex; justify-content: center;
+}
+#v3-06-incidents-pill {
+  border-radius: 100px; background: #0A3D91; color: #FFFFFF;
+  font-weight: 600; font-size: 31px; padding: 12px 42px; display: inline-block;
+}
+</style>
+
+<div data-hf-id="hf-r153" id="root" data-composition-id="v3-06-incidents" data-start="0" data-duration="22.5" data-width="1920" data-height="1080">
+  <div data-hf-id="hf-fpha" id="v3-06-incidents-bg" class="clip" data-start="0" data-duration="22.5" data-track-index="0"></div>
+
+  <div data-hf-id="hf-m4zm" id="v3-06-incidents-world">
+    <div data-hf-id="hf-fpz8" id="v3-06-incidents-head">
+      <div data-hf-id="hf-gyqw" id="v3-06-incidents-eyebrow">PHẦN 3/5 · ÁP DỤNG VÀ TUÂN THỦ</div>
+      <span data-hf-id="hf-3mrt" id="v3-06-incidents-tag">5 loại sự cố</span>
+    </div>
+    <div data-hf-id="hf-6tt1" id="v3-06-incidents-h2">Phân loại sự cố bảo mật</div>
+
+    <div data-hf-id="hf-4trm" id="v3-06-incidents-table">
+      <div data-hf-id="hf-ds2s" id="v3-06-incidents-thead" class="v3-06-incidents-grid">
+        <div data-hf-id="hf-n6y2" class="v3-06-incidents-th">Phân loại</div>
+        <div data-hf-id="hf-wjan" class="v3-06-incidents-th">Nội dung</div>
+        <div data-hf-id="hf-veqd" class="v3-06-incidents-th" style="padding-left:22px">Nguyên nhân</div>
+      </div>
+
+      <div data-hf-id="hf-9hm0" class="v3-06-incidents-row v3-06-incidents-grid">
+        <div data-hf-id="hf-yssq" class="v3-06-incidents-name"><span data-hf-id="hf-6pup" class="v3-06-incidents-num">01</span><span data-hf-id="hf-remj" class="v3-06-incidents-label">Lỗi dịch vụ</span></div>
+        <div data-hf-id="hf-4zdv" class="v3-06-incidents-desc">Ứng dụng, dịch vụ không chạy bình thường</div>
+        <div data-hf-id="hf-usov" class="v3-06-incidents-cause">Lỗi phần cứng / phần mềm</div>
+      </div>
+      <div data-hf-id="hf-qr8g" class="v3-06-incidents-row v3-06-incidents-grid">
+        <div data-hf-id="hf-rq4u" class="v3-06-incidents-name"><span data-hf-id="hf-7wrs" class="v3-06-incidents-num">02</span><span data-hf-id="hf-97u8" class="v3-06-incidents-label">Lỗi thông tin</span></div>
+        <div data-hf-id="hf-6ylm" class="v3-06-incidents-desc">Tính xác thực của thông tin bị nghi vấn</div>
+        <div data-hf-id="hf-0z8p" class="v3-06-incidents-cause">Rò rỉ, thay đổi, phá hủy thông tin</div>
+      </div>
+      <div data-hf-id="hf-pkbd" class="v3-06-incidents-row v3-06-incidents-grid">
+        <div data-hf-id="hf-s4fv" class="v3-06-incidents-name"><span data-hf-id="hf-7igr" class="v3-06-incidents-num">03</span><span data-hf-id="hf-hmp3" class="v3-06-incidents-label">Vi phạm an ninh</span></div>
+        <div data-hf-id="hf-0hoh" class="v3-06-incidents-desc">Cố ý vi phạm biện pháp bảo mật</div>
+        <div data-hf-id="hf-932y" class="v3-06-incidents-cause">Truy cập trái phép, nhiễm virus, bị hack mật khẩu</div>
+      </div>
+      <div data-hf-id="hf-pyme" class="v3-06-incidents-row v3-06-incidents-grid">
+        <div data-hf-id="hf-siqw" class="v3-06-incidents-name"><span data-hf-id="hf-5ixm" class="v3-06-incidents-num">04</span><span data-hf-id="hf-0gs6" class="v3-06-incidents-label">Lỗi bảo mật</span></div>
+        <div data-hf-id="hf-pakp" class="v3-06-incidents-desc">Biện pháp bảo mật không áp dụng hoặc không hiệu quả</div>
+        <div data-hf-id="hf-noub" class="v3-06-incidents-cause">Cài tường lửa không đầy đủ, xử lý key sai</div>
+      </div>
+      <div data-hf-id="hf-orpb" class="v3-06-incidents-row v3-06-incidents-grid">
+        <div data-hf-id="hf-pqlp" class="v3-06-incidents-name"><span data-hf-id="hf-54ml" class="v3-06-incidents-num">05</span><span data-hf-id="hf-gidf" class="v3-06-incidents-label">Sự cố đáng ngờ</span></div>
+        <div data-hf-id="hf-a20h" class="v3-06-incidents-desc">Nghi ngờ xuất hiện sự cố từ mục 1 đến 4</div>
+        <div data-hf-id="hf-z44c" class="v3-06-incidents-cause v3-06-incidents-cause-empty"><div data-hf-id="hf-92rq" id="v3-06-incidents-dash"></div></div>
+      </div>
+    </div>
+
+    <svg data-hf-id="hf-wy7q" id="v3-06-incidents-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <path data-hf-id="hf-lxtw" class="v3-06-incidents-arrow" d="M 960 728 L 960 762" />
+      <path data-hf-id="hf-vq2m" class="v3-06-incidents-arrow" d="M 945 748 L 960 763 L 975 748" />
+    </svg>
+
+    <div data-hf-id="hf-oex5" id="v3-06-incidents-pillrow">
+      <span data-hf-id="hf-niaj" id="v3-06-incidents-pill">Xử lý theo quy trình</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var CUE = /*hf-cues:start*/{"r1":1.7,"r2":4.68,"r3":8.3,"r4":12.02,"r5":16.2,"rest":17.75}/*hf-cues:end*/;
+  var DURATION = /*hf-dur:start*/22/*hf-dur:end*/;
+  var root = document.querySelector('[data-composition-id="v3-06-incidents"]');
+  var byId = function (id) { return root.querySelector('[id="' + id + '"]'); };
+  var byCls = function (c, scope) { return Array.prototype.slice.call((scope || root).querySelectorAll('[class~="' + c + '"]')); };
+
+  var world = byId("v3-06-incidents-world");
+  var eyebrow = byId("v3-06-incidents-eyebrow");
+  var tag = byId("v3-06-incidents-tag");
+  var h2 = byId("v3-06-incidents-h2");
+  var thead = byId("v3-06-incidents-thead");
+  var rows = byCls("v3-06-incidents-row");
+  var arrows = byCls("v3-06-incidents-arrow");
+  var dash = byId("v3-06-incidents-dash");
+  var pill = byId("v3-06-incidents-pill");
+
+  // svg-path-draw setup: measured lengths
+  arrows.forEach(function (p) {
+    var len = 0;
+    try { len = p.getTotalLength(); } catch (e) { len = 0; }
+    if (!len) len = 120;
+    len = len * 1.05;
+    p.style.strokeDasharray = len + "";
+    p.style.strokeDashoffset = len + "";
+  });
+
+  var tl = gsap.timeline({ paused: true });
+
+  var RING = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+  var NO_RING = "0 0 0 0px rgba(10,61,145,0), 0 0 0 rgba(10,61,145,0)";
+  var ROW_BG = "rgba(10,61,145,0.04)";
+  var ON_BG = "rgba(10,61,145,0.08)";
+  // pill is solid blue: white gap + cobalt ring so the ring reads against it
+  var PILL_RING = "0 0 0 4px #FFFFFF, 0 0 0 7px #0A3D91, 0 14px 32px rgba(10,61,145,0.22)";
+  var PILL_NO_RING = "0 0 0 0px rgba(255,255,255,0), 0 0 0 0px rgba(10,61,145,0), 0 0 0 rgba(10,61,145,0)";
+
+  // idx = -1 → rest (all normal). Wide rows: scale 1.012 so neighbours never collide.
+  function spot(items, idx, at) {
+    items.forEach(function (el, i) {
+      var on = i === idx, rest = idx < 0;
+      tl.to(el, { opacity: on || rest ? 1 : 0.4, scale: on ? 1.012 : 1,
+        boxShadow: on ? RING : NO_RING, backgroundColor: on ? ON_BG : ROW_BG,
+        duration: 0.35, ease: "power2.out" }, at);
+    });
+  }
+
+  // Slow camera push underneath the whole shot
+  tl.fromTo(world, { scale: 1 }, { scale: 1.015, duration: DURATION, ease: "none" }, 0);
+
+  // A — calm slide reveal: header, table header, all five rows, arrow + pill (whole slide by ~1.9s)
+  tl.fromTo(eyebrow, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.05);
+  tl.fromTo(h2, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.15);
+  tl.fromTo(tag, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+  tl.fromTo(thead, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.55);
+  rows.forEach(function (r, i) {
+    tl.set(r, { boxShadow: NO_RING, backgroundColor: ROW_BG, scale: 1 }, 0);
+    tl.fromTo(r, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.7 + i * 0.09);
+  });
+  tl.fromTo(dash, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 1.2);
+  tl.to(arrows[0], { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 1.2);
+  tl.to(arrows[1], { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, 1.5);
+  tl.set(pill, { boxShadow: PILL_NO_RING, scale: 1 }, 0);
+  tl.fromTo(pill, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.35);
+
+  // B — spotlight each row as its name is spoken
+  spot(rows, 0, CUE.r1);
+  spot(rows, 1, CUE.r2);
+  spot(rows, 2, CUE.r3);
+  spot(rows, 3, CUE.r4);
+  spot(rows, 4, CUE.r5);
+  // rest: recap view, payoff pill takes the spotlight on "Tất cả phải xử lý theo quy trình"
+  spot(rows, -1, CUE.rest);
+  tl.to(pill, { scale: 1.03, boxShadow: PILL_RING, duration: 0.35, ease: "power2.out" }, CUE.rest);
+
+  tl.set({}, {}, DURATION);
+  window.__timelines["v3-06-incidents"] = tl;
+})();
+</script>
+</template>

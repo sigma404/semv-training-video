@@ -1,0 +1,324 @@
+<template>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #0F172A;
+  }
+
+  /* full-bleed ground: white + 5% blue hairline grid */
+  #v3-03-context-bg {
+    position: absolute;
+    inset: 0;
+    background-color: #FFFFFF;
+    background-image:
+      linear-gradient(to right, rgba(10, 61, 145, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 61, 145, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    z-index: 0;
+  }
+
+  /* slide-header */
+  #v3-03-context-header {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 84px;
+    z-index: 4;
+  }
+  #v3-03-context-headrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #v3-03-context-eyebrow {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0A3D91;
+  }
+  #v3-03-context-tag {
+    display: inline-block;
+    border-radius: 100px;
+    background: rgba(10, 61, 145, 0.08);
+    color: #0A3D91;
+    font-weight: 600;
+    font-size: 25px;
+    padding: 10px 27px;
+  }
+  #v3-03-context-title {
+    margin-top: 16px;
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    white-space: nowrap;
+  }
+  .v3-03-context-word {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  /* connectors */
+  #v3-03-context-links {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 1;
+    overflow: visible;
+  }
+  .v3-03-context-link {
+    fill: none;
+    stroke: rgba(10, 61, 145, 0.45);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  /* purpose cards */
+  .v3-03-context-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 30px;
+    width: 620px;
+    height: 150px;
+    background: rgba(10, 61, 145, 0.04);
+    border: 1.5px solid rgba(10, 61, 145, 0.2);
+    border-radius: 14px;
+    box-sizing: border-box;
+    z-index: 2;
+    transform-origin: 50% 50%;
+    will-change: transform, opacity;
+  }
+  #v3-03-context-card-leak  { left: 96px;   top: 270px; }
+  #v3-03-context-card-prod  { left: 1204px; top: 270px; }
+  #v3-03-context-card-trust { left: 96px;   top: 560px; }
+  #v3-03-context-card-aware { left: 1204px; top: 560px; }
+  .v3-03-context-ico {
+    width: 64px;
+    height: 64px;
+    flex: none;
+    color: #0A3D91;
+  }
+  .v3-03-context-ico svg { width: 100%; height: 100%; display: block; }
+  .v3-03-context-label {
+    font-size: 33px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #0F172A;
+  }
+
+  /* hero shield */
+  #v3-03-context-shield {
+    position: absolute;
+    left: 845px;
+    top: 383px;
+    width: 230px;
+    height: 274px;
+    z-index: 3;
+    will-change: transform;
+  }
+  #v3-03-context-shield svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  #v3-03-context-outline {
+    fill: none;
+    stroke: #0A3D91;
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  /* payoff pill */
+  #v3-03-context-payoff {
+    position: absolute;
+    left: 560px;
+    top: 732px;
+    width: 800px;
+    height: 80px;
+    border-radius: 100px;
+    background: #0A3D91;
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    z-index: 4;
+    transform-origin: 50% 50%;
+    will-change: transform, opacity;
+  }
+</style>
+
+<div data-hf-id="hf-0jid" id="root" data-composition-id="v3-03-context" data-start="0" data-duration="15.8" data-width="1920" data-height="1080">
+
+  <div data-hf-id="hf-yji8" id="v3-03-context-bg" class="clip" data-start="0" data-duration="15.8" data-track-index="0"></div>
+
+  <svg data-hf-id="hf-tq5x" id="v3-03-context-links" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+    <path data-hf-id="hf-mo63" id="v3-03-context-link-leak" class="v3-03-context-link" d="M 716 345 L 872 440" />
+    <path data-hf-id="hf-v6fa" id="v3-03-context-link-prod" class="v3-03-context-link" d="M 1204 345 L 1048 440" />
+    <path data-hf-id="hf-ydic" id="v3-03-context-link-trust" class="v3-03-context-link" d="M 716 635 L 900 600" />
+    <path data-hf-id="hf-2f61" id="v3-03-context-link-aware" class="v3-03-context-link" d="M 1204 635 L 1020 600" />
+  </svg>
+
+  <div data-hf-id="hf-ffu6" id="v3-03-context-header">
+    <div data-hf-id="hf-5bdh" id="v3-03-context-headrow">
+      <div data-hf-id="hf-kkwz" id="v3-03-context-eyebrow">PHẦN 2/5 · BỐI CẢNH</div>
+      <span data-hf-id="hf-xmk1" id="v3-03-context-tag">Mục đích áp dụng</span>
+    </div>
+    <div data-hf-id="hf-1k01" id="v3-03-context-title"><span data-hf-id="hf-rbhb" class="v3-03-context-word">Vì</span> <span data-hf-id="hf-g1vm" class="v3-03-context-word">sao</span> <span data-hf-id="hf-60r7" class="v3-03-context-word">cần</span> <span data-hf-id="hf-nuh3" class="v3-03-context-word">chính</span> <span data-hf-id="hf-uo5u" class="v3-03-context-word">sách</span> <span data-hf-id="hf-unl3" class="v3-03-context-word">bảo</span> <span data-hf-id="hf-05bu" class="v3-03-context-word">mật?</span></div>
+  </div>
+
+  <div data-hf-id="hf-6sty" id="v3-03-context-card-leak" class="v3-03-context-card">
+    <div data-hf-id="hf-6rwr" class="v3-03-context-ico"><svg data-hf-id="hf-h0hq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-8aqh" x="4" y="10" width="16" height="11" rx="2" /><path data-hf-id="hf-apke" d="M8 10V7a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-p4yh" d="M12 14.5v2.5" /></svg></div>
+    <div data-hf-id="hf-78oe" class="v3-03-context-label">Ngăn thiệt hại do rò rỉ thông tin</div>
+  </div>
+
+  <div data-hf-id="hf-j7vc" id="v3-03-context-card-prod" class="v3-03-context-card">
+    <div data-hf-id="hf-95pn" class="v3-03-context-ico"><svg data-hf-id="hf-pmle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-lpb7" d="M3 21V10l5 3V10l5 3V10l5 3V4h3v17Z" /><path data-hf-id="hf-paag" d="M7 17h2M12 17h2M17 17h1" /></svg></div>
+    <div data-hf-id="hf-yqm0" class="v3-03-context-label">Sản xuất, kinh doanh không gián đoạn</div>
+  </div>
+
+  <div data-hf-id="hf-319n" id="v3-03-context-card-trust" class="v3-03-context-card">
+    <div data-hf-id="hf-8rem" class="v3-03-context-ico"><svg data-hf-id="hf-q0wf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-n7s6" d="m11 17 2 2a1 1 0 1 0 3-3" /><path data-hf-id="hf-q8aj" d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.790 5.790 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path data-hf-id="hf-z3rp" d="m21 3 1 11h-2" /><path data-hf-id="hf-5tx9" d="M3 3 2 14l6.47 6.47a1 1 0 1 0 3-3" /><path data-hf-id="hf-4aha" d="M3 4h8" /></svg></div>
+    <div data-hf-id="hf-9np7" class="v3-03-context-label">Giữ niềm tin khách hàng</div>
+  </div>
+
+  <div data-hf-id="hf-cfhr" id="v3-03-context-card-aware" class="v3-03-context-card">
+    <div data-hf-id="hf-8d3l" class="v3-03-context-ico"><svg data-hf-id="hf-qf7g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-dbut" d="M9 18h6" /><path data-hf-id="hf-5r6b" d="M10 21h4" /><path data-hf-id="hf-rxr9" d="M12 3a6 6 0 0 0-3.6 10.8c.7.55 1.1 1.2 1.1 2.2h5c0-1 .4-1.65 1.1-2.2A6 6 0 0 0 12 3Z" /></svg></div>
+    <div data-hf-id="hf-yjiv" class="v3-03-context-label">Hiểu tầm quan trọng của bảo mật</div>
+  </div>
+
+  <div data-hf-id="hf-br1y" id="v3-03-context-shield">
+    <svg data-hf-id="hf-1i60" viewBox="0 0 64 76" xmlns="http://www.w3.org/2000/svg">
+      <defs data-hf-id="hf-mh0t">
+        <clippath data-hf-id="hf-qo4o" id="v3-03-context-shieldclip">
+          <path data-hf-id="hf-kw1t" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+        </clippath>
+        <clippath data-hf-id="hf-fb6k" id="v3-03-context-riseclip">
+          <rect data-hf-id="hf-pcfl" id="v3-03-context-rise-mask" x="0" y="76" width="64" height="80" />
+        </clippath>
+      </defs>
+      <path data-hf-id="hf-vtc8" id="v3-03-context-body" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" fill="rgba(10,61,145,0.08)" fill-opacity="0" />
+      <g data-hf-id="hf-3yxy" clip-path="url(#v3-03-context-shieldclip)">
+        <rect data-hf-id="hf-8d6x" id="v3-03-context-rise" x="0" y="76" width="64" height="80" fill="#0A3D91" />
+      </g>
+      <g data-hf-id="hf-l30k" id="v3-03-context-mark" data-layout-allow-overlap="">
+        <text data-hf-id="hf-9thc" data-layout-allow-overlap="" x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#0A3D91">SEMV</text>
+        <rect data-hf-id="hf-4goi" x="27" y="48.5" width="10" height="1.1" rx="0.5" fill="#0A3D91" />
+      </g>
+      <g data-hf-id="hf-177p" id="v3-03-context-mark-white" data-layout-allow-overlap="" clip-path="url(#v3-03-context-riseclip)">
+        <text data-hf-id="hf-hojq" data-layout-allow-overlap="" x="32" y="44" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="800" font-size="13" fill="#FFFFFF">SEMV</text>
+        <rect data-hf-id="hf-0v3s" x="27" y="48.5" width="10" height="1.1" rx="0.5" fill="#FFFFFF" />
+      </g>
+      <path data-hf-id="hf-qfz3" id="v3-03-context-outline" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+    </svg>
+  </div>
+
+  <div data-hf-id="hf-82x3" id="v3-03-context-payoff">Tuân thủ quy định · tăng cường bảo mật</div>
+</div>
+
+<script>
+  (function () {
+    var byId = function (id) { return document.getElementById(id); };
+    var CUE = /*hf-cues:start*/{"c1":3.06,"c2":5.08,"c3":8.04,"c4":10.92,"pay":12.36}/*hf-cues:end*/;
+    var DURATION = /*hf-dur:start*/15.3/*hf-dur:end*/;
+    var tl = gsap.timeline({ paused: true });
+
+    /* --- draw setup (measured lengths) --- */
+    function prepDraw(el, fallback) {
+      var len = fallback;
+      try { var m = el.getTotalLength(); if (m && isFinite(m) && m > 0) len = m; } catch (e) {}
+      len = len * 1.05;
+      el.style.strokeDasharray = String(len);
+      el.style.strokeDashoffset = String(len);
+      return len;
+    }
+    var outline = byId("v3-03-context-outline");
+    var links = [
+      byId("v3-03-context-link-leak"), byId("v3-03-context-link-prod"),
+      byId("v3-03-context-link-trust"), byId("v3-03-context-link-aware")
+    ];
+    prepDraw(outline, 200);
+    prepDraw(links[0], Math.hypot(156, 95));
+    prepDraw(links[1], Math.hypot(156, 95));
+    prepDraw(links[2], Math.hypot(184, 35));
+    prepDraw(links[3], Math.hypot(184, 35));
+
+    /* --- A. calm slide reveal: header by ~0.8s, whole slide by ~2.0s --- */
+    tl.fromTo("#v3-03-context-eyebrow", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+    tl.fromTo("#v3-03-context-tag", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
+    tl.fromTo("#v3-03-context-title", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+
+    // central SEMV hub: fill + outline draw, then steady
+    tl.fromTo(byId("v3-03-context-body"), { attr: { "fill-opacity": 0 } }, { attr: { "fill-opacity": 1 }, duration: 0.5, ease: "power1.out" }, 0.4);
+    tl.to(outline, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 0.5);
+    tl.fromTo(byId("v3-03-context-mark"), { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.0);
+
+    var CARDS = ["#v3-03-context-card-leak", "#v3-03-context-card-prod", "#v3-03-context-card-trust", "#v3-03-context-card-aware"];
+    CARDS.forEach(function (sel, i) {
+      var at = 0.8 + i * 0.1;
+      tl.fromTo(sel, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, at);
+      tl.to(links[i], { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, at + 0.4);
+    });
+    tl.fromTo("#v3-03-context-payoff", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 1.3);
+
+    /* --- B. spotlight synced to narration --- */
+    var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+    var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 0px rgba(10,61,145,0)";
+    // the payoff pill is solid cobalt: its ring sits outside a white gap so it reads on blue
+    var PILL_ON = "0 0 0 4px #FFFFFF, 0 0 0 7px #0A3D91, 0 14px 32px rgba(10,61,145,0.22)";
+    var PILL_OFF = "0 0 0 0px rgba(255,255,255,0), 0 0 0 0px rgba(10,61,145,0), 0 0 0 0px rgba(10,61,145,0)";
+    var BASE_BG = "rgba(10,61,145,0.04)";
+    var ON_BG = "rgba(10,61,145,0.08)";
+    var PILL = "#v3-03-context-payoff";
+    CARDS.forEach(function (sel) { tl.set(sel, { boxShadow: RING_OFF, backgroundColor: BASE_BG }, 0); });
+    tl.set(PILL, { boxShadow: PILL_OFF }, 0);
+
+    // idx 0..3 → that card; idx -1 → rest (all cards normal) with the payoff pill spotlighted
+    function spot(idx, at) {
+      CARDS.forEach(function (sel, i) {
+        var on = i === idx, rest = idx < 0;
+        tl.to(sel, {
+          opacity: on || rest ? 1 : 0.4, scale: on ? 1.03 : 1,
+          boxShadow: on ? RING_ON : RING_OFF, backgroundColor: on ? ON_BG : BASE_BG,
+          duration: 0.35, ease: "power2.out"
+        }, at);
+      });
+      var pay = idx < 0;
+      tl.to(PILL, {
+        opacity: pay ? 1 : 0.4, scale: pay ? 1.03 : 1, boxShadow: pay ? PILL_ON : PILL_OFF,
+        duration: 0.35, ease: "power2.out"
+      }, at);
+    }
+    spot(0, CUE.c1);   // "ngăn thiệt hại"
+    spot(1, CUE.c2);   // "giữ sản xuất"
+    spot(2, CUE.c3);   // "giữ niềm tin"
+    spot(3, CUE.c4);   // "hiểu tầm quan trọng"
+    spot(-1, CUE.pay); // "để tuân thủ" → recap + payoff pill
+
+    // payoff: blue fill rises in the shield, SEMV turns white (hub stays in place)
+    var rise = [byId("v3-03-context-rise"), byId("v3-03-context-rise-mask")];
+    tl.fromTo(rise, { attr: { y: 76 } }, { attr: { y: -2 }, duration: 1.4, ease: "power1.inOut" }, CUE.pay);
+
+    tl.set({}, {}, DURATION);
+
+    window.__timelines["v3-03-context"] = tl;
+  })();
+</script>
+</template>

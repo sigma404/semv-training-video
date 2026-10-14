@@ -1,0 +1,272 @@
+<template id="v3-10-best-practices-template">
+<div data-hf-id="hf-8aao" id="root" data-composition-id="v3-10-best-practices" data-start="0" data-duration="17.596" data-width="1920" data-height="1080">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+  @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #0F172A;
+  }
+  #v3-10-best-practices-bg {
+    position: absolute;
+    inset: 0;
+    background: #FFFFFF;
+  }
+  #v3-10-best-practices-stage {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 45%;
+  }
+  /* slide-header */
+  .v3-10-best-practices-head {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 92px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .v3-10-best-practices-eyebrow {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0A3D91;
+  }
+  .v3-10-best-practices-pill {
+    display: inline-block;
+    border-radius: 100px;
+    background: rgba(10, 61, 145, 0.08);
+    color: #0A3D91;
+    font-weight: 600;
+    font-size: 25px;
+    padding: 10px 27px;
+    transform-origin: 100% 50%;
+  }
+  .v3-10-best-practices-h2 {
+    position: absolute;
+    left: 96px;
+    top: 146px;
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    white-space: nowrap;
+  }
+
+  /* grid of 7 measure cards */
+  .v3-10-best-practices-grid {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 262px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 122px;
+    gap: 20px 27px;
+  }
+  .v3-10-best-practices-slot {
+    position: relative;
+  }
+  .v3-10-best-practices-card {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: rgba(10, 61, 145, 0.04);
+    border: 1.5px solid rgba(10, 61, 145, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 30px;
+    overflow: hidden;
+  }
+  .v3-10-best-practices-num {
+    position: relative;
+    z-index: 1;
+    width: 60px;
+    height: 60px;
+    flex: none;
+    border-radius: 50%;
+    background: #0A3D91;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 27px;
+    display: grid;
+    place-items: center;
+  }
+  .v3-10-best-practices-ico {
+    position: relative;
+    z-index: 1;
+    width: 54px;
+    height: 54px;
+    flex: none;
+    color: #0A3D91;
+  }
+  .v3-10-best-practices-ico svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .v3-10-best-practices-label {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.22;
+    color: #0F172A;
+    white-space: normal;
+  }
+  /* item 7 keeps its solid-blue v2 styling, now static */
+  #v3-10-best-practices-card7 { background: #0A3D91; border-color: #0A3D91; }
+  #v3-10-best-practices-label7, #v3-10-best-practices-ico7 { color: #FFFFFF; }
+  #v3-10-best-practices-num7 { background: #FFFFFF; color: #0A3D91; }
+  #v3-10-best-practices-slot7 {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    width: calc(50% - 13.5px);
+  }
+</style>
+
+<div data-hf-id="hf-m553" id="v3-10-best-practices-bg" class="clip" data-start="0" data-duration="17.596" data-track-index="0"></div>
+
+<div data-hf-id="hf-utqd" id="v3-10-best-practices-stage">
+  <div data-hf-id="hf-79gg" class="v3-10-best-practices-head">
+    <div data-hf-id="hf-0lno" class="v3-10-best-practices-eyebrow" id="v3-10-best-practices-eyebrow">Phần 5/5 · Biện pháp nâng cao bảo mật</div>
+    <span data-hf-id="hf-082m" class="v3-10-best-practices-pill" id="v3-10-best-practices-pill">Làm ngay hôm nay</span>
+  </div>
+  <div data-hf-id="hf-v7fa" class="v3-10-best-practices-h2" id="v3-10-best-practices-h2">7 biện pháp nâng cao bảo mật</div>
+
+  <div data-hf-id="hf-afcy" class="v3-10-best-practices-grid">
+    <!-- 1 -->
+    <div data-hf-id="hf-d4hw" class="v3-10-best-practices-slot" id="v3-10-best-practices-slot1" style="grid-row:1;grid-column:1">
+      <div data-hf-id="hf-rs70" class="v3-10-best-practices-card">
+        <div data-hf-id="hf-1cop" class="v3-10-best-practices-num">1</div>
+        <div data-hf-id="hf-x1sl" class="v3-10-best-practices-ico"><svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><path data-hf-id="hf-79zj" d="M20.5 12a8.5 8.5 0 1 1-2.5-6" /><path data-hf-id="hf-dre9" d="M20 3.5V8h-4.5" /></svg></div>
+        <div data-hf-id="hf-ub2m" class="v3-10-best-practices-label">Định kỳ cập nhật Windows để vá lỗi</div>
+      </div>
+    </div>
+    <!-- 2 -->
+    <div data-hf-id="hf-cs1y" class="v3-10-best-practices-slot" id="v3-10-best-practices-slot2" style="grid-row:1;grid-column:2">
+      <div data-hf-id="hf-lgc4" class="v3-10-best-practices-card">
+        <div data-hf-id="hf-2jls" class="v3-10-best-practices-num">2</div>
+        <div data-hf-id="hf-cps9" class="v3-10-best-practices-ico"><svg data-hf-id="hf-1tol" viewBox="0 0 24 24"><path data-hf-id="hf-sk0w" d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1" /><path data-hf-id="hf-rbt1" d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1" /><path data-hf-id="hf-pjyx" d="M3.5 3.5l17 17" /></svg></div>
+        <div data-hf-id="hf-nefv" class="v3-10-best-practices-label">Không mở link lạ trong tin nhắn, email</div>
+      </div>
+    </div>
+    <!-- 3 -->
+    <div data-hf-id="hf-md6d" class="v3-10-best-practices-slot" id="v3-10-best-practices-slot3" style="grid-row:2;grid-column:1">
+      <div data-hf-id="hf-k9f1" class="v3-10-best-practices-card">
+        <div data-hf-id="hf-25ar" class="v3-10-best-practices-num">3</div>
+        <div data-hf-id="hf-dwpc" class="v3-10-best-practices-ico"><svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><circle data-hf-id="hf-1uez" cx="7.5" cy="16.5" r="4.5" /><path data-hf-id="hf-cgpf" d="M10.7 13.3 20.5 3.5" /><path data-hf-id="hf-818q" d="M16 8l3 3" /><path data-hf-id="hf-nyqp" d="M18.5 5.5l2 2" /></svg></div>
+        <div data-hf-id="hf-f6vk" class="v3-10-best-practices-label">Không cung cấp thông tin cá nhân, tài khoản, OTP</div>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div data-hf-id="hf-0cin" class="v3-10-best-practices-slot" id="v3-10-best-practices-slot4" style="grid-row:2;grid-column:2">
+      <div data-hf-id="hf-knq2" class="v3-10-best-practices-card">
+        <div data-hf-id="hf-05rm" class="v3-10-best-practices-num">4</div>
+        <div data-hf-id="hf-dieb" class="v3-10-best-practices-ico"><svg data-hf-id="hf-2man" viewBox="0 0 24 24"><rect data-hf-id="hf-13vb" x="3" y="3" width="7" height="7" rx="1.5" /><rect data-hf-id="hf-f2wl" x="14" y="3" width="7" height="7" rx="1.5" /><rect data-hf-id="hf-t3tv" x="3" y="14" width="7" height="7" rx="1.5" /><path data-hf-id="hf-4edz" d="M17.5 13.2 14 14.5v2.6c0 2.2 1.4 3.7 3.5 4.6 2.1-.9 3.5-2.4 3.5-4.6v-2.6z" /></svg></div>
+        <div data-hf-id="hf-80f0" class="v3-10-best-practices-label">Không cài ứng dụng chưa xác thực</div>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div data-hf-id="hf-1vzi" class="v3-10-best-practices-slot" id="v3-10-best-practices-slot5" style="grid-row:3;grid-column:1">
+      <div data-hf-id="hf-mn97" class="v3-10-best-practices-card">
+        <div data-hf-id="hf-zrgl" class="v3-10-best-practices-num">5</div>
+        <div data-hf-id="hf-biv6" class="v3-10-best-practices-ico"><svg data-hf-id="hf-3t7q" viewBox="0 0 24 24"><rect data-hf-id="hf-67m7" x="6.5" y="9" width="11" height="13" rx="2" /><path data-hf-id="hf-0pv8" d="M8.5 9V2.5h7V9" /><path data-hf-id="hf-0ww5" d="M10.7 5.2v1.3M13.3 5.2v1.3" /><path data-hf-id="hf-n2gk" d="M12 13v4" /></svg></div>
+        <div data-hf-id="hf-g1cg" class="v3-10-best-practices-label">Không cắm thiết bị lạ vào máy tính</div>
+      </div>
+    </div>
+    <!-- 6 -->
+    <div data-hf-id="hf-v6jo" class="v3-10-best-practices-slot" id="v3-10-best-practices-slot6" style="grid-row:3;grid-column:2">
+      <div data-hf-id="hf-n1k8" class="v3-10-best-practices-card">
+        <div data-hf-id="hf-0ydo" class="v3-10-best-practices-num">6</div>
+        <div data-hf-id="hf-b4k5" class="v3-10-best-practices-ico"><svg data-hf-id="hf-3ewp" viewBox="0 0 24 24"><rect data-hf-id="hf-5yrg" x="1.5" y="6" width="21" height="12" rx="3" /><path data-hf-id="hf-w5c3" d="M6.5 9.8v4.4M4.6 10.9l3.8 2.2M4.6 13.1l3.8-2.2" /><path data-hf-id="hf-1xo9" d="M12 9.8v4.4M10.1 10.9l3.8 2.2M10.1 13.1l3.8-2.2" /><path data-hf-id="hf-ogan" d="M17.5 9.8v4.4M15.6 10.9l3.8 2.2M15.6 13.1l3.8-2.2" /></svg></div>
+        <div data-hf-id="hf-bwhd" class="v3-10-best-practices-label">Chủ động đổi mật khẩu mạnh thường xuyên</div>
+      </div>
+    </div>
+    <!-- 7 -->
+    <div data-hf-id="hf-lz26" class="v3-10-best-practices-slot" id="v3-10-best-practices-slot7" style="grid-row:4">
+      <div data-hf-id="hf-bnbd" class="v3-10-best-practices-card" id="v3-10-best-practices-card7">
+        <div data-hf-id="hf-lczm" class="v3-10-best-practices-num" id="v3-10-best-practices-num7">7</div>
+        <div data-hf-id="hf-sh95" class="v3-10-best-practices-ico" id="v3-10-best-practices-ico7"><svg data-hf-id="hf-4lts" viewBox="0 0 24 24"><rect data-hf-id="hf-q14u" x="2" y="3" width="20" height="13" rx="2" /><path data-hf-id="hf-fgem" d="M8 21h8M12 16v5" /><rect data-hf-id="hf-mf8d" x="9" y="9" width="6" height="4.5" rx="1" /><path data-hf-id="hf-rvt9" d="M10.3 9V7.6a1.7 1.7 0 0 1 3.4 0V9" /></svg></div>
+        <div data-hf-id="hf-m2q0" class="v3-10-best-practices-label" id="v3-10-best-practices-label7">Khóa máy tính khi rời chỗ làm việc</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var FID = "v3-10-best-practices";
+  var $ = function (id) { return document.getElementById(FID + "-" + id); };
+  var cls = function (el, c) { return el.getElementsByClassName(FID + "-" + c); };
+  var tl = gsap.timeline({ paused: true });
+
+  var CUE = /*hf-cues:start*/{"c1":1.68,"c2":3,"c3":4.2,"c4":7.94,"c5":9.7,"c6":11.14,"c7":13.64,"rest":15.24}/*hf-cues:end*/;
+  var DURATION = /*hf-dur:start*/17.096/*hf-dur:end*/;
+
+  // ---- Slide reveal (0–2.0s): header, then all 7 cards in a gentle stagger --
+  tl.fromTo($("eyebrow"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+  tl.fromTo($("pill"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.15);
+  tl.fromTo($("h2"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.25);
+
+  var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+  var RING_ON_SOLID = "0 0 0 4px #FFFFFF, 0 0 0 7px #0A3D91, 0 14px 32px rgba(10,61,145,0.22)";
+  var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 rgba(10,61,145,0)";
+  var RING_OFF_SOLID = "0 0 0 0px rgba(255,255,255,0), 0 0 0 0px rgba(10,61,145,0), 0 0 0 rgba(10,61,145,0)";
+  var items = [];
+  for (var i = 0; i < 7; i++) {
+    var card = cls($("slot" + (i + 1)), "card")[0];
+    var solid = i === 6;
+    items.push({ el: card, base: solid ? "#0A3D91" : "rgba(10, 61, 145, 0.04)", on: solid ? "#0A3D91" : "rgba(10, 61, 145, 0.08)",
+      ringOn: solid ? RING_ON_SOLID : RING_ON, ringOff: solid ? RING_OFF_SOLID : RING_OFF });
+    tl.set(card, { boxShadow: items[i].ringOff, backgroundColor: items[i].base, transformOrigin: "50% 50%" }, 0);
+    tl.fromTo(card, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.6 + i * 0.1);
+  }
+
+  // ---- Spotlight: each measure lights up as it is named; idx -1 = rest ----
+  function spot(idx, at) {
+    items.forEach(function (it, i) {
+      var on = i === idx, rest = idx < 0;
+      tl.to(it.el, { opacity: on || rest ? 1 : 0.4, scale: on ? 1.03 : 1, boxShadow: on ? it.ringOn : it.ringOff,
+        backgroundColor: on ? it.on : it.base, duration: 0.35, ease: "power2.out" }, at);
+    });
+  }
+  spot(0, CUE.c1);
+  spot(1, CUE.c2);
+  spot(2, CUE.c3);
+  spot(3, CUE.c4);
+  spot(4, CUE.c5);
+  spot(5, CUE.c6);
+  spot(6, CUE.c7);
+  spot(-1, CUE.rest);
+
+  // ---- Slow macro push-in on the stage ----
+  tl.fromTo($("stage"), { scale: 1 }, { scale: 1.015, duration: DURATION - 1.0, ease: "none" }, 1.0);
+  tl.set({}, {}, DURATION);
+
+  window.__timelines[FID] = tl;
+})();
+</script>
+</div>
+</template>

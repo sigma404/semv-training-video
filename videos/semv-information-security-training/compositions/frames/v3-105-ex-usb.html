@@ -1,0 +1,600 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-105-ex-usb-stage *, .v3-105-ex-usb-stage *::before, .v3-105-ex-usb-stage *::after { box-sizing: border-box; }
+    .v3-105-ex-usb-bg { position: absolute; inset: 0; background: #EEF3FB; }
+    .v3-105-ex-usb-stage { position: absolute; inset: 0; overflow: hidden; }
+    .v3-105-ex-usb-scene { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+    .v3-105-ex-usb-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    .v3-105-ex-usb-svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+
+    /* monitor screen: 480x300 world px; UI authored at 1600x1000, scaled 0.3 */
+    .v3-105-ex-usb-screen { position: absolute; left: 820px; top: 380px; width: 480px; height: 300px; overflow: hidden; border-radius: 4px; background: #DCE7F8; }
+    .v3-105-ex-usb-ui { position: absolute; left: 0; top: 0; width: 1600px; height: 1000px; transform: scale(0.3); transform-origin: 0 0; overflow: hidden; background: linear-gradient(160deg, #DCE7F8 0%, #C3D5F1 100%); }
+    .v3-105-ex-usb-win { position: absolute; left: 110px; top: 80px; width: 1000px; height: 640px; border-radius: 22px; background: #FFFFFF; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12); overflow: hidden; }
+    .v3-105-ex-usb-winbar { height: 80px; background: #0A3D91; display: flex; align-items: center; gap: 16px; padding: 0 30px; }
+    .v3-105-ex-usb-winbar i { display: block; width: 22px; height: 22px; border-radius: 50%; background: rgba(255, 255, 255, 0.55); }
+    .v3-105-ex-usb-wline { height: 30px; border-radius: 15px; background: #E2E8F0; margin: 40px 50px 0; }
+    .v3-105-ex-usb-task { position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: rgba(255, 255, 255, 0.9); display: flex; align-items: center; gap: 26px; padding: 0 40px; }
+    .v3-105-ex-usb-task b { display: block; width: 56px; height: 56px; border-radius: 14px; background: #CBD5E1; }
+    .v3-105-ex-usb-avico { position: absolute; right: 40px; bottom: 14px; width: 68px; height: 68px; }
+    .v3-105-ex-usb-avico svg { width: 100%; height: 100%; display: block; }
+    .v3-105-ex-usb-scan { position: absolute; left: 0; top: 0; width: 1600px; height: 160px; background: linear-gradient(180deg, rgba(10, 61, 145, 0) 0%, rgba(10, 61, 145, 0.28) 70%, rgba(10, 61, 145, 0.6) 100%); }
+    .v3-105-ex-usb-toast {
+      position: absolute; left: 200px; top: 230px; width: 1200px; height: 420px;
+      border-radius: 30px; background: #FFFFFF;
+      display: flex; align-items: center; gap: 56px; padding: 0 70px;
+    }
+    .v3-105-ex-usb-toast-bad { box-shadow: 0 0 0 8px #dc2626, 0 40px 80px rgba(127, 29, 29, 0.35); }
+    .v3-105-ex-usb-toast-train { box-shadow: 0 0 0 8px #0A3D91, 0 40px 80px rgba(10, 61, 145, 0.3); }
+    .v3-105-ex-usb-toast svg { flex: 0 0 210px; width: 210px; height: 210px; display: block; }
+    .v3-105-ex-usb-tt { font-size: 74px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; white-space: nowrap; }
+    .v3-105-ex-usb-ts { margin-top: 18px; font-size: 60px; font-weight: 700; line-height: 1.2; color: #0F172A; white-space: nowrap; display: flex; align-items: center; gap: 20px; }
+    .v3-105-ex-usb-dot { display: block; width: 26px; height: 26px; border-radius: 50%; }
+
+    /* world-space overlays */
+    .v3-105-ex-usb-redring { position: absolute; left: 786px; top: 346px; width: 548px; height: 368px; border-radius: 26px; border: 8px solid #dc2626; }
+    .v3-105-ex-usb-bubble {
+      position: absolute; left: 828px; top: 292px; height: 74px;
+      padding: 0 26px 0 20px; border-radius: 37px;
+      background: #B91C1C; color: #FFFFFF;
+      font-size: 34px; font-weight: 700; line-height: 74px; white-space: nowrap;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 12px 28px rgba(10, 61, 145, 0.3);
+      transform-origin: 0% 100%;
+    }
+    .v3-105-ex-usb-bubble svg { width: 38px; height: 38px; display: block; }
+    .v3-105-ex-usb-btail { position: absolute; left: 22px; bottom: -14px; width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 18px solid #0A3D91; }
+    .v3-105-ex-usb-plane { position: absolute; left: 1220px; top: 302px; width: 56px; height: 56px; }
+    .v3-105-ex-usb-plane svg { width: 100%; height: 100%; display: block; }
+    .v3-105-ex-usb-pill {
+      position: absolute; left: 866px; top: 300px; height: 62px; padding: 0 28px 0 22px;
+      border-radius: 31px; background: #dc2626; color: #FFFFFF;
+      font-size: 32px; font-weight: 800; white-space: nowrap;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      box-shadow: 0 12px 28px rgba(185, 28, 28, 0.35);
+    }
+    .v3-105-ex-usb-pill svg { width: 34px; height: 34px; display: block; }
+
+    /* static UI chrome */
+    .v3-105-ex-usb-tag {
+      position: absolute; left: 56px; top: 44px;
+      height: 56px; padding: 0 26px 0 20px;
+      border-radius: 28px;
+      background: #0A3D91; color: #FFFFFF;
+      font-size: 28px; font-weight: 700;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25);
+      white-space: nowrap;
+    }
+    .v3-105-ex-usb-tag svg { width: 30px; height: 30px; display: block; }
+    .v3-105-ex-usb-takewrap { position: absolute; left: 0; right: 0; top: 890px; height: 120px; display: flex; justify-content: center; }
+    .v3-105-ex-usb-take {
+      height: 116px;
+      padding: 0 48px 0 30px;
+      border-radius: 18px;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2);
+      display: flex; align-items: center; gap: 24px;
+      font-size: 44px; font-weight: 800; color: #0F172A; letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .v3-105-ex-usb-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+    .v3-105-ex-usb-take-ico svg { width: 42px; height: 42px; display: block; }
+  </style>
+
+  <div id="root" data-composition-id="v3-105-ex-usb" data-width="1920" data-height="1080" data-duration="20.133">
+    <div class="v3-105-ex-usb-bg clip" id="v3-105-ex-usb-bg" data-start="0" data-duration="20.133" data-track-index="0"></div>
+
+    <div class="v3-105-ex-usb-stage">
+      <!-- ============ SCENE P: parking lot ============ -->
+      <div class="v3-105-ex-usb-scene" id="v3-105-ex-usb-sceneP">
+        <div class="v3-105-ex-usb-world" id="v3-105-ex-usb-worldP">
+          <svg class="v3-105-ex-usb-svg" viewBox="0 0 1920 1080">
+            <rect x="-300" y="-300" width="2520" height="960" fill="#EAF2FD" />
+            <g id="v3-105-ex-usb-pcloud1"><ellipse cx="300" cy="110" rx="90" ry="28" fill="#FFFFFF" /><ellipse cx="340" cy="90" rx="54" ry="30" fill="#FFFFFF" /></g>
+            <g id="v3-105-ex-usb-pcloud2"><ellipse cx="1560" cy="80" rx="74" ry="24" fill="#FFFFFF" /><ellipse cx="1590" cy="64" rx="44" ry="26" fill="#FFFFFF" /></g>
+            <!-- office building -->
+            <rect x="330" y="150" width="1260" height="500" fill="#DCE5F3" />
+            <rect x="310" y="130" width="1300" height="44" rx="8" fill="#B8C6DB" />
+            <g id="v3-105-ex-usb-pwins" fill="#C9DAF3"></g>
+            <rect x="860" y="470" width="200" height="180" fill="#9DB8E3" />
+            <rect x="958" y="470" width="4" height="180" fill="#DCE5F3" />
+            <rect x="830" y="446" width="260" height="30" rx="6" fill="#0A3D91" />
+            <!-- trees -->
+            <rect x="148" y="470" width="24" height="190" fill="#8B6B4A" />
+            <circle cx="160" cy="430" r="92" fill="#34A57A" /><circle cx="120" cy="470" r="60" fill="#2E8F6A" />
+            <rect x="1748" y="470" width="24" height="190" fill="#8B6B4A" />
+            <circle cx="1760" cy="430" r="92" fill="#34A57A" /><circle cx="1800" cy="470" r="60" fill="#2E8F6A" />
+            <!-- ground -->
+            <rect x="-300" y="640" width="2520" height="760" fill="#CBD5E1" />
+            <rect x="-300" y="640" width="2520" height="22" fill="#94A3B8" />
+            <g stroke="#F8FAFC" stroke-width="8" stroke-linecap="round">
+              <path d="M90 700 L40 880 M700 700 L660 880 M1240 700 L1210 880 M1860 700 L1830 880" />
+            </g>
+            <rect x="-300" y="940" width="2520" height="460" fill="#D5DDE8" />
+            <!-- lamp post -->
+            <rect x="1150" y="300" width="16" height="420" fill="#64748B" />
+            <path d="M1158 304 Q1158 270 1200 270 L1236 270" stroke="#64748B" stroke-width="12" fill="none" stroke-linecap="round" />
+            <rect x="1214" y="270" width="54" height="18" rx="8" fill="#475569" />
+            <!-- cars -->
+            <g id="v3-105-ex-usb-car1">
+              <path d="M130 860 L130 790 C130 770 150 756 176 752 L250 742 L320 690 C334 680 352 676 372 676 L520 676 C548 676 566 686 580 702 L622 748 C640 752 652 768 652 790 L652 860 Z" fill="#3B6CC4" />
+              <path d="M340 700 L374 694 L436 694 L436 742 L292 742 Z" fill="#D4E5FB" />
+              <path d="M452 694 L520 694 C536 694 548 700 558 712 L582 742 L452 742 Z" fill="#D4E5FB" />
+              <rect x="140" y="790" width="34" height="16" rx="6" fill="#FDE68A" />
+              <circle cx="240" cy="862" r="44" fill="#1E293B" /><circle cx="240" cy="862" r="18" fill="#94A3B8" />
+              <circle cx="550" cy="862" r="44" fill="#1E293B" /><circle cx="550" cy="862" r="18" fill="#94A3B8" />
+            </g>
+            <g id="v3-105-ex-usb-car2">
+              <path d="M1300 860 L1300 790 C1300 770 1320 756 1346 752 L1420 742 L1490 690 C1504 680 1522 676 1542 676 L1690 676 C1718 676 1736 686 1750 702 L1792 748 C1810 752 1822 768 1822 790 L1822 860 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="4" />
+              <path d="M1510 700 L1544 694 L1606 694 L1606 742 L1462 742 Z" fill="#D4E5FB" />
+              <path d="M1622 694 L1690 694 C1706 694 1718 700 1728 712 L1752 742 L1622 742 Z" fill="#D4E5FB" />
+              <circle cx="1410" cy="862" r="44" fill="#1E293B" /><circle cx="1410" cy="862" r="18" fill="#94A3B8" />
+              <circle cx="1720" cy="862" r="44" fill="#1E293B" /><circle cx="1720" cy="862" r="18" fill="#94A3B8" />
+            </g>
+            <!-- USB on the ground -->
+            <g id="v3-105-ex-usb-usbG">
+              <ellipse cx="980" cy="1004" rx="40" ry="8" fill="rgba(15,23,42,0.15)" />
+              <g transform="translate(980 992) rotate(-14) scale(1.25)">
+                <rect x="-28" y="-11" width="42" height="22" rx="5" fill="#475569" />
+                <rect x="-22" y="-4" width="14" height="8" rx="2" fill="#F59E0B" />
+                <rect x="14" y="-8" width="20" height="16" rx="2" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" />
+              </g>
+            </g>
+            <g id="v3-105-ex-usb-glint">
+              <path d="M1012 940 L1020 962 L1042 970 L1020 978 L1012 1000 L1004 978 L982 970 L1004 962 Z" fill="#FDE68A" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round" />
+            </g>
+            <circle id="v3-105-ex-usb-gring" cx="980" cy="992" r="40" fill="none" stroke="#F59E0B" stroke-width="5" />
+            <g id="v3-105-ex-usb-hostP"></g>
+            <!-- "?" thought -->
+            <g id="v3-105-ex-usb-qmark">
+              <circle cx="940" cy="250" r="38" fill="#FFFFFF" stroke="#0A3D91" stroke-width="5" />
+              <text x="940" y="268" text-anchor="middle" font-family="Be Vietnam Pro" font-size="50" font-weight="800" fill="#0A3D91">?</text>
+              <circle cx="912" cy="304" r="9" fill="#FFFFFF" stroke="#0A3D91" stroke-width="4" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ============ SCENE O: office ============ -->
+      <div class="v3-105-ex-usb-scene" id="v3-105-ex-usb-sceneO">
+        <div class="v3-105-ex-usb-world" id="v3-105-ex-usb-worldO">
+          <svg class="v3-105-ex-usb-svg" viewBox="0 0 1920 1080">
+            <rect x="-400" y="-400" width="2720" height="1280" fill="#EEF3FB" />
+            <rect x="-400" y="880" width="2720" height="500" fill="#DCE5F3" />
+            <!-- window -->
+            <rect x="140" y="130" width="420" height="330" rx="14" fill="#FFFFFF" />
+            <rect x="162" y="152" width="376" height="286" rx="6" fill="#D4E5FB" />
+            <circle cx="470" cy="214" r="34" fill="#FDE68A" />
+            <g id="v3-105-ex-usb-ocloud"><ellipse cx="250" cy="220" rx="56" ry="20" fill="#FFFFFF" /><ellipse cx="278" cy="206" rx="34" ry="20" fill="#FFFFFF" /></g>
+            <path d="M162 438 V370 H210 V340 H262 V384 H300 V320 H356 V360 H404 V350 H452 V392 H500 V362 H538 V438 Z" fill="#B9D0F0" />
+            <rect x="346" y="152" width="8" height="286" fill="#FFFFFF" />
+            <rect x="162" y="291" width="376" height="8" fill="#FFFFFF" />
+            <rect x="128" y="458" width="444" height="16" rx="8" fill="#FFFFFF" />
+            <!-- clock -->
+            <circle cx="1560" cy="230" r="80" fill="#FFFFFF" stroke="#334155" stroke-width="8" />
+            <g stroke="#94A3B8" stroke-width="6" stroke-linecap="round"><path d="M1560 164v12M1626 230h-12M1560 296v-12M1494 230h12" /></g>
+            <path d="M1560 230 L1594 248" stroke="#0F172A" stroke-width="9" stroke-linecap="round" />
+            <path d="M1560 230 L1560 174" stroke="#0F172A" stroke-width="6" stroke-linecap="round" />
+            <circle cx="1560" cy="230" r="8" fill="#0A3D91" />
+            <!-- shelf -->
+            <rect x="1380" y="440" width="340" height="14" rx="7" fill="#94A3B8" />
+            <rect x="1404" y="356" width="34" height="84" rx="4" fill="#0A3D91" />
+            <rect x="1444" y="368" width="30" height="72" rx="4" fill="#3B6CC4" />
+            <rect x="1480" y="350" width="34" height="90" rx="4" fill="#94A3B8" />
+            <rect x="1520" y="386" width="40" height="54" rx="4" fill="#CBD5E1" transform="rotate(-12 1540 440)" />
+            <!-- chair -->
+            <rect x="392" y="560" width="78" height="240" rx="32" fill="#334155" />
+            <rect x="408" y="590" width="46" height="170" rx="20" fill="#475569" />
+            <g id="v3-105-ex-usb-hostH"></g>
+            <!-- monitor -->
+            <rect x="1030" y="698" width="60" height="50" fill="#94A3B8" />
+            <rect x="976" y="742" width="168" height="20" rx="10" fill="#94A3B8" />
+            <rect x="800" y="360" width="520" height="340" rx="18" fill="#1E293B" />
+            <circle cx="1060" cy="690" r="4" fill="#475569" />
+            <!-- PC tower (USB port on its left side) -->
+            <g id="v3-105-ex-usb-tower">
+              <rect x="708" y="636" width="12" height="24" rx="3" fill="#0F172A" />
+              <rect x="716" y="560" width="88" height="202" rx="12" fill="#334155" />
+              <rect x="728" y="574" width="64" height="8" rx="4" fill="#475569" />
+              <rect x="728" y="704" width="64" height="6" rx="3" fill="#475569" />
+              <rect x="728" y="718" width="64" height="6" rx="3" fill="#475569" />
+              <circle id="v3-105-ex-usb-led" cx="760" cy="606" r="8" fill="#22C55E" />
+            </g>
+            <!-- desk -->
+            <rect x="300" y="760" width="1420" height="28" rx="10" fill="#B8C6DB" />
+            <rect x="330" y="788" width="1360" height="300" fill="#D7E0EE" />
+            <rect x="1420" y="816" width="240" height="90" rx="10" fill="#E6ECF5" />
+            <rect x="1510" y="856" width="60" height="10" rx="5" fill="#94A3B8" />
+            <rect x="850" y="740" width="340" height="20" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+            <ellipse cx="1236" cy="748" rx="24" ry="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+            <!-- plant -->
+            <path d="M1622 702 h76 l-8 58 h-60 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+            <g id="v3-105-ex-usb-plant">
+              <path d="M1660 702 C1630 660 1610 640 1616 606 C1646 622 1658 660 1660 702 Z" fill="#34A57A" />
+              <path d="M1660 702 C1690 662 1712 646 1712 612 C1680 626 1664 664 1660 702 Z" fill="#2E8F6A" />
+              <path d="M1660 702 C1656 660 1662 620 1680 590 C1690 630 1674 670 1660 702 Z" fill="#45B98A" />
+            </g>
+            <!-- USB put down on the desk -->
+            <g id="v3-105-ex-usb-usbD">
+              <g transform="translate(625 750)">
+                <rect x="-28" y="-11" width="42" height="22" rx="5" fill="#475569" />
+                <rect x="-22" y="-4" width="14" height="8" rx="2" fill="#F59E0B" />
+                <rect x="14" y="-8" width="20" height="16" rx="2" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" />
+              </g>
+            </g>
+            <g id="v3-105-ex-usb-nomark">
+              <circle cx="625" cy="742" r="34" fill="rgba(255,255,255,0.6)" stroke="#dc2626" stroke-width="7" />
+              <path d="M602 719 L648 765" stroke="#dc2626" stroke-width="7" stroke-linecap="round" />
+            </g>
+            <g id="v3-105-ex-usb-hostIT"></g>
+            <!-- startle "!" -->
+            <g id="v3-105-ex-usb-bang">
+              <circle cx="700" cy="372" r="30" fill="#dc2626" />
+              <rect x="695" y="350" width="10" height="28" rx="5" fill="#FFFFFF" />
+              <circle cx="700" cy="388" r="6" fill="#FFFFFF" />
+            </g>
+          </svg>
+
+          <div class="v3-105-ex-usb-screen">
+            <div class="v3-105-ex-usb-ui">
+              <div class="v3-105-ex-usb-win">
+                <div class="v3-105-ex-usb-winbar"><i></i><i></i><i></i></div>
+                <div class="v3-105-ex-usb-wline" style="width: 70%"></div>
+                <div class="v3-105-ex-usb-wline" style="width: 86%"></div>
+                <div class="v3-105-ex-usb-wline" style="width: 78%"></div>
+                <div class="v3-105-ex-usb-wline" style="width: 52%"></div>
+              </div>
+              <div class="v3-105-ex-usb-task">
+                <b></b><b></b><b></b>
+                <div class="v3-105-ex-usb-avico" id="v3-105-ex-usb-avico">
+                  <svg viewBox="0 0 24 24" fill="#0A3D91"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z" /><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </div>
+              </div>
+              <div class="v3-105-ex-usb-scan" id="v3-105-ex-usb-scan"></div>
+              <div class="v3-105-ex-usb-toast v3-105-ex-usb-toast-bad" id="v3-105-ex-usb-toastBad">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#dc2626" /><rect x="9" y="5" width="6" height="4" rx="0.8" fill="#FFFFFF" /><rect x="7.5" y="9" width="9" height="10" rx="2" fill="#FFFFFF" /><path d="M4.8 4.8 19.2 19.2" stroke="#dc2626" stroke-width="4.4" stroke-linecap="round" /><path d="M4.8 4.8 19.2 19.2" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" /></svg>
+                <div>
+                  <div class="v3-105-ex-usb-tt" style="color: #B91C1C">USB bị chặn</div>
+                  <div class="v3-105-ex-usb-ts" id="v3-105-ex-usb-tsBad" style="font-size: 54px"><span class="v3-105-ex-usb-dot" style="background: #dc2626"></span>Thiết bị không được nhận</div>
+                </div>
+              </div>
+              <div class="v3-105-ex-usb-toast v3-105-ex-usb-toast-train" id="v3-105-ex-usb-toastOk">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3.5" width="20" height="18.5" rx="3" fill="#0A3D91" /><rect x="2" y="3.5" width="20" height="5" rx="2" fill="#3B6CC4" /><rect x="6.5" y="1.5" width="2" height="4.5" rx="1" fill="#0F172A" /><rect x="15.5" y="1.5" width="2" height="4.5" rx="1" fill="#0F172A" /><path d="M7.5 15.2 10.6 18 16.8 11.6" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <div>
+                  <div class="v3-105-ex-usb-tt" style="color: #0A3D91; font-size: 66px">Đào tạo lại bảo mật</div>
+                  <div class="v3-105-ex-usb-ts" style="font-size: 54px"><span class="v3-105-ex-usb-dot" style="background: #F59E0B"></span>Bắt buộc · do vi phạm</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="v3-105-ex-usb-redring" id="v3-105-ex-usb-redring"></div>
+          <svg class="v3-105-ex-usb-svg" viewBox="0 0 1920 1080" style="pointer-events: none">
+            
+          </svg>
+          <div class="v3-105-ex-usb-pill" id="v3-105-ex-usb-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z" /><path d="M12 10v4.5M12 17.2v.1" /></svg>
+            <span>Vi phạm quy định</span>
+          </div>
+          <div class="v3-105-ex-usb-bubble" id="v3-105-ex-usb-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" /><path d="M10 20.5a2 2 0 0 0 4 0" /></svg>
+            <span>Cảnh báo đã gửi đến IT</span>
+          </div>
+          <div class="v3-105-ex-usb-plane" id="v3-105-ex-usb-plane">
+            <svg viewBox="0 0 24 24" fill="#B91C1C" stroke="#FFFFFF" stroke-width="1.2" stroke-linejoin="round"><path d="M22 2 2 10.5l7.5 3L12 21z" /><path d="M22 2 9.5 13.5" fill="none" /></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="v3-105-ex-usb-takewrap">
+        <div class="v3-105-ex-usb-take" id="v3-105-ex-usb-take">
+          <div class="v3-105-ex-usb-take-ico" style="background: #dc2626"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5" /><path d="M6 6l12 12" /></svg></div>
+          <span>Đừng cắm thiết bị lạ vào máy công ty</span>
+        </div>
+      </div>
+
+      <div class="v3-105-ex-usb-tag" id="v3-105-ex-usb-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+        <span>Ví dụ thực tế</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var PX = "v3-105-ex-usb-";
+      var root = document.querySelector('[data-composition-id="v3-105-ex-usb"]');
+      var $ = function (id) { return root.querySelector("#" + PX + id); };
+      var CUE = /*hf-cues:start*/{"hung":0,"usb":0.62,"lot":1.86,"plug":2.64,"blocked":5.16,"notrec":7.64,"alert":8.64,"sendit":9.48,"violate":11.6,"retrain":13.64,"never":15.54}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/19.633/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+      var NS = "http://www.w3.org/2000/svg";
+
+      // building windows (static)
+      var wins = $("pwins"), wh = "";
+      for (var r = 0; r < 3; r++) for (var c = 0; c < 10; c++) {
+        var wx = 380 + c * 118, wy = 210 + r * 82;
+        if (r === 2 && c >= 4 && c <= 5) continue;
+        wh += '<rect x="' + wx + '" y="' + wy + '" width="86" height="52" rx="6" />';
+      }
+      wins.innerHTML = wh;
+
+      // ================= character rig (flat geometric person, same build as anh Minh) =================
+      // local coords: hip = (0,0), facing +x, feet at y ≈ +305. Upper body drawn in Minh's coords via translate(-585 -772).
+      var SH = [37, -166], L1 = 112, L2 = 112;
+      function ik(T, sign) {
+        var dx = T[0] - SH[0], dy = T[1] - SH[1], d = Math.sqrt(dx * dx + dy * dy);
+        var dc = Math.max(Math.min(d, L1 + L2 - 0.5), 4);
+        var a = Math.acos(Math.max(-1, Math.min(1, (L1 * L1 + dc * dc - L2 * L2) / (2 * L1 * dc))));
+        var b = Math.atan2(dy, dx) + sign * a;
+        var E = [SH[0] + L1 * Math.cos(b), SH[1] + L1 * Math.sin(b)];
+        var H = d > dc ? [SH[0] + dx / d * dc, SH[1] + dy / d * dc] : T;
+        return [E, H];
+      }
+      var HAIR = {
+        spiky: "M522 482 C510 430 530 404 560 398 L566 378 L584 394 L598 374 L612 394 L630 382 L632 404 C654 414 666 440 660 462 C630 450 600 452 580 466 C566 478 556 496 548 524 C532 514 524 500 522 482 Z",
+        minh: "M522 482 C512 418 556 398 602 404 C648 410 666 440 660 462 C630 450 600 452 580 466 C566 478 556 496 548 524 C532 514 524 500 522 482 Z"
+      };
+      function person(o) {
+        var p = PX + o.id, flip = o.face < 0;
+        var s = '<g id="' + p + '-pos">';
+        s += '<g' + (flip ? ' transform="scale(-1 1)"' : '') + '>';
+        if (o.legs) {
+          s += '<line id="' + p + '-bt" x1="0" y1="0" x2="-4" y2="150" stroke="#334155" stroke-width="44" stroke-linecap="round" />';
+          s += '<line id="' + p + '-bs" x1="-4" y1="150" x2="-6" y2="284" stroke="#334155" stroke-width="42" stroke-linecap="round" />';
+          s += '<ellipse id="' + p + '-bf" cx="6" cy="294" rx="30" ry="13" fill="#0F172A" />';
+          s += '<line id="' + p + '-ft" x1="0" y1="0" x2="4" y2="150" stroke="#1E293B" stroke-width="44" stroke-linecap="round" />';
+          s += '<line id="' + p + '-fs" x1="4" y1="150" x2="8" y2="284" stroke="#1E293B" stroke-width="42" stroke-linecap="round" />';
+          s += '<ellipse id="' + p + '-ff" cx="20" cy="294" rx="30" ry="13" fill="#0F172A" />';
+        }
+        s += '<g id="' + p + '-up"><g transform="translate(-585 -772)">';
+        s += '<path d="M494 772 C490 660 506 590 572 578 L606 578 C658 584 676 650 676 772 Z" fill="' + o.shirt + '" />';
+        s += '<path d="M566 580 L589 612 L612 580 Z" fill="#FFFFFF" />';
+        s += '<rect x="572" y="530" width="34" height="56" rx="10" fill="#E8B48C" />';
+        if (o.lanyard) {
+          s += '<path d="M576 584 L612 650 M604 582 L620 650" stroke="#0A3D91" stroke-width="5" fill="none" stroke-linecap="round" />';
+          s += '<rect x="594" y="646" width="48" height="58" rx="7" fill="#FFFFFF" stroke="#0A3D91" stroke-width="3" />';
+          s += '<rect x="594" y="646" width="48" height="14" rx="5" fill="#0A3D91" />';
+          s += '<text x="618" y="694" text-anchor="middle" font-family="Be Vietnam Pro" font-size="26" font-weight="800" fill="#0A3D91"' + (flip ? ' transform="translate(1236 0) scale(-1 1)"' : '') + '>IT</text>';
+        }
+        s += '<g id="' + p + '-head">';
+        s += '<circle cx="588" cy="478" r="64" fill="#F6CDA8" />';
+        s += '<path d="' + HAIR[o.hair] + '" fill="' + o.hairColor + '" />';
+        s += '<circle cx="560" cy="494" r="13" fill="#E8B48C" />';
+        s += '<path id="' + p + '-brow" d="M612 456 Q626 448 640 456" stroke="' + o.hairColor + '" stroke-width="5" fill="none" stroke-linecap="round" />';
+        s += '<ellipse id="' + p + '-eye" cx="628" cy="482" rx="6.5" ry="9" fill="#0F172A" />';
+        if (o.glasses) s += '<circle cx="628" cy="484" r="17" fill="rgba(255,255,255,0.25)" stroke="#0F172A" stroke-width="4" /><path d="M611 482 L566 486" stroke="#0F172A" stroke-width="4" stroke-linecap="round" />';
+        s += '<path d="M646 478 Q666 494 648 506 Z" fill="#F6CDA8" />';
+        s += '<circle cx="618" cy="504" r="10" fill="#F59E9E" opacity="0.45" />';
+        s += '<path id="' + p + '-sm" d="M626 522 Q636 529 645 521" stroke="#9A3412" stroke-width="4" fill="none" stroke-linecap="round" />';
+        s += '<ellipse id="' + p + '-mo" cx="637" cy="525" rx="6" ry="8" fill="#9A3412" opacity="0" />';
+        s += '</g></g>';
+        s += '<g id="' + p + '-held"></g>';
+        s += '<line id="' + p + '-ua" x1="' + SH[0] + '" y1="' + SH[1] + '" x2="45" y2="-56" stroke="' + o.sleeve + '" stroke-width="38" stroke-linecap="round" />';
+        s += '<line id="' + p + '-fa" x1="45" y1="-56" x2="60" y2="52" stroke="' + o.sleeve + '" stroke-width="34" stroke-linecap="round" />';
+        s += '<circle id="' + p + '-hd" cx="60" cy="52" r="19" fill="#F6CDA8" />';
+        s += '</g></g></g>';
+        o.host.innerHTML = s;
+        var P = { p: p, legs: o.legs };
+        ["pos", "up", "head", "brow", "eye", "sm", "mo", "held", "ua", "fa", "hd", "bt", "bs", "bf", "ft", "fs", "ff"].forEach(function (k) { P[k] = root.querySelector("#" + p + "-" + k); });
+        return P;
+      }
+      function put(target, props, at, dur, ease) {
+        var v = Object.assign({}, props);
+        if (dur > 0) { v.duration = dur; v.ease = ease || "power2.inOut"; tl.to(target, v, at); }
+        else tl.set(target, v, at);
+      }
+      // pose: {x,y} hip in parent coords, rot (upper-body lean), hand [x,y] hip-local (pre-lean), sign (elbow side), legs
+      function pose(P, at, dur, o, ease) {
+        if (o.x != null || o.y != null) { var pp = {}; if (o.x != null) pp.x = o.x; if (o.y != null) pp.y = o.y; put(P.pos, pp, at, dur, ease); }
+        if (o.rot != null) put(P.up, { rotation: o.rot, svgOrigin: "0 0" }, at, dur, ease);
+        if (o.hand) {
+          var r = ik(o.hand, o.sign == null ? 1 : o.sign), E = r[0], H = r[1];
+          put(P.ua, { attr: { x2: E[0], y2: E[1] } }, at, dur, ease);
+          put(P.fa, { attr: { x1: E[0], y1: E[1], x2: H[0], y2: H[1] } }, at, dur, ease);
+          put(P.hd, { attr: { cx: H[0], cy: H[1] } }, at, dur, ease);
+          put(P.held, { x: H[0], y: H[1] }, at, dur, ease);
+        }
+        if (o.legs && P.legs) {
+          var L = o.legs;
+          put(P.bt, { attr: { x2: L.bk[0], y2: L.bk[1] } }, at, dur, ease);
+          put(P.bs, { attr: { x1: L.bk[0], y1: L.bk[1], x2: L.ba[0], y2: L.ba[1] } }, at, dur, ease);
+          put(P.bf, { attr: { cx: L.ba[0] + 12, cy: L.ba[1] + 10 } }, at, dur, ease);
+          put(P.ft, { attr: { x2: L.fk[0], y2: L.fk[1] } }, at, dur, ease);
+          put(P.fs, { attr: { x1: L.fk[0], y1: L.fk[1], x2: L.fa[0], y2: L.fa[1] } }, at, dur, ease);
+          put(P.ff, { attr: { cx: L.fa[0] + 12, cy: L.fa[1] + 10 } }, at, dur, ease);
+        }
+      }
+      var STAND = { bk: [-20, 150], ba: [-26, 284], fk: [18, 150], fa: [24, 284] };
+      var STEP_A = { bk: [-24, 146], ba: [-64, 270], fk: [40, 140], fa: [74, 272] };
+      var STEP_B = { bk: [40, 140], ba: [74, 272], fk: [-24, 146], fa: [-64, 270] };
+      function walk(P, t0, t1, x0, x1, y, stepDur) {
+        var n = Math.max(2, Math.round((t1 - t0) / stepDur)), sd = (t1 - t0) / n;
+        tl.fromTo(P.pos, { x: x0, y: y }, { x: x1, y: y, duration: t1 - t0, ease: "none", immediateRender: false }, t0);
+        for (var i = 0; i < n; i++) {
+          var at = t0 + i * sd, even = i % 2 === 0;
+          pose(P, at, sd, { legs: even ? STEP_A : STEP_B, hand: even ? [-6, 56] : [86, 30], sign: even ? 1 : -1 }, "sine.inOut");
+          tl.to(P.up, { y: -9, duration: sd / 2, ease: "sine.out", yoyo: true, repeat: 1 }, at);
+        }
+        pose(P, t1, 0.25, { legs: STAND, hand: [52, 56], sign: 1 }, "power2.out");
+      }
+      function blink(P, t) {
+        tl.to(P.eye, { scaleY: 0.12, svgOrigin: "628 482", duration: 0.07, ease: "power1.in" }, t);
+        tl.to(P.eye, { scaleY: 1, svgOrigin: "628 482", duration: 0.1, ease: "power1.out" }, t + 0.08);
+      }
+      function headRot(P, rot, at, dur) { tl.to(P.head, { rotation: rot, svgOrigin: "590 540", duration: dur || 0.35, ease: "power2.out" }, at); }
+      function face(P, mode, at) { // "o" surprised, "smile"
+        var o = mode === "o";
+        tl.to(P.mo, { opacity: o ? 1 : 0, duration: 0.15, ease: "none" }, at);
+        tl.to(P.sm, { opacity: o ? 0 : 1, duration: 0.15, ease: "none" }, at);
+        tl.to(P.brow, { y: o ? -8 : 0, duration: 0.2, ease: "power2.out" }, at);
+        tl.to(P.eye, { scale: o ? 1.25 : 1, svgOrigin: "628 482", duration: 0.2, ease: "power2.out" }, at);
+      }
+      function usbMarkup(id) {
+        return '<g id="' + PX + id + '"><rect x="-28" y="-11" width="42" height="22" rx="5" fill="#475569" /><rect x="-22" y="-4" width="14" height="8" rx="2" fill="#F59E0B" /><rect x="14" y="-8" width="20" height="16" rx="2" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" /></g>';
+      }
+
+      // ---- characters ----
+      var HP = person({ id: "hp", host: $("hostP"), legs: true, face: 1, shirt: "#0E7490", sleeve: "#0B5F77", hair: "spiky", hairColor: "#111827" });
+      HP.held.innerHTML = usbMarkup("usbHP");
+      var HO = person({ id: "ho", host: $("hostH"), legs: false, face: 1, shirt: "#0E7490", sleeve: "#0B5F77", hair: "spiky", hairColor: "#111827" });
+      HO.held.innerHTML = usbMarkup("usbHO") +
+        '<g id="' + PX + 'phone"><rect x="-20" y="-40" width="40" height="72" rx="8" fill="#0F172A" /><rect x="-15" y="-32" width="30" height="52" rx="4" fill="#3B6CC4" /></g>';
+      var IT = person({ id: "it", host: $("hostIT"), legs: true, face: -1, shirt: "#3B6CC4", sleeve: "#2F59A8", hair: "minh", hairColor: "#4A3426", glasses: true, lanyard: true });
+      IT.held.innerHTML = '<g id="' + PX + 'tab"><rect x="-10" y="-46" width="64" height="88" rx="10" fill="#1E293B" /><rect id="' + PX + 'tabscr" x="-3" y="-38" width="50" height="70" rx="5" fill="#3B6CC4" /><path id="' + PX + 'tabchk" d="M10 -4 L19 6 L35 -14" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>';
+
+      // ---- camera ----
+      function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; }
+      var C = CUE;
+
+      // ---- initial state ----
+      gsap.set(["#" + PX + "qmark", "#" + PX + "usbHP", "#" + PX + "glint", "#" + PX + "gring"], { opacity: 0 });
+      gsap.set(["#" + PX + "toastBad", "#" + PX + "toastOk", "#" + PX + "scan", "#" + PX + "redring", "#" + PX + "tsBad", "#" + PX + "pill", "#" + PX + "bubble", "#" + PX + "plane", "#" + PX + "take", "#" + PX + "usbD", "#" + PX + "nomark", "#" + PX + "bang", "#" + PX + "phone", "#" + PX + "tabchk"], { opacity: 0 });
+      gsap.set("#" + PX + "sceneO", { x: 1920 });
+      gsap.set("#" + PX + "worldP", cam(1, 960, 540, 960, 540));
+      // Hùng in the parking lot (hip 695 → feet on y 1000)
+      pose(HP, 0, 0, { x: 230, y: 695, rot: 0, legs: STEP_A, hand: [-6, 56], sign: 1 });
+      // Hùng at his desk (hip at Minh's seat)
+      pose(HO, 0, 0, { x: 585, y: 772, rot: 0, hand: [44, -112], sign: 1 });
+      gsap.set("#" + PX + "usbHO", { rotation: 0 });
+      // IT staff waits off-screen right (hip 755 → feet 1060) — tablet shows the incoming alert
+      gsap.set("#" + PX + "tabscr", { fill: "#dc2626" });
+      pose(IT, 0, 0, { x: 2200, y: 755, rot: 0, legs: STEP_A, hand: [-6, 56], sign: 1 });
+
+      // ================= 1. PARKING LOT =================
+      tl.fromTo("#" + PX + "worldP", cam(1, 960, 540, 960, 540), Object.assign(cam(1.14, 930, 700, 960, 600), { duration: C.lot + 0.3, ease: "sine.inOut" }), 0);
+      tl.fromTo("#" + PX + "pcloud1", { x: 0 }, { x: 60, duration: 3.6, ease: "none" }, 0);
+      tl.fromTo("#" + PX + "pcloud2", { x: 0 }, { x: -40, duration: 3.6, ease: "none" }, 0);
+      var WSTOP = C.usb - 0.1;
+      walk(HP, 0, WSTOP, 230, 860, 695, 0.3);
+      blink(HP, 0.8);
+      // the USB glints on the ground
+      tl.fromTo("#" + PX + "glint", { opacity: 0, scale: 0.2, rotation: -45 }, { opacity: 1, scale: 1.15, rotation: 0, svgOrigin: "1012 970", duration: 0.35, ease: "power2.out" }, C.usb);
+      tl.to("#" + PX + "glint", { scale: 0.85, svgOrigin: "1012 970", duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 1 }, C.usb + 0.35);
+      tl.fromTo("#" + PX + "gring", { opacity: 0.9, scale: 0.4 }, { opacity: 0, scale: 1.8, svgOrigin: "980 992", duration: 0.7, ease: "power2.out", immediateRender: false }, C.usb);
+      headRot(HP, 14, C.usb, 0.35);
+      tl.fromTo("#" + PX + "qmark", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, C.usb + 0.15);
+      // crouch, reach, grab
+      var CR = C.lot - 0.7;
+      tl.to("#" + PX + "qmark", { opacity: 0, duration: 0.2, ease: "none" }, CR);
+      tl.to("#" + PX + "glint", { opacity: 0, duration: 0.2, ease: "none" }, CR + 0.2);
+      var A = 50 * Math.PI / 180, Dx = 980 - 860, Dy = 992 - 845;
+      var reach = [Dx * Math.cos(A) + Dy * Math.sin(A), -Dx * Math.sin(A) + Dy * Math.cos(A)];
+      pose(HP, CR, 0.45, { y: 845, rot: 50, hand: reach, sign: -1, legs: { bk: [100, 64], ba: [-6, 134], fk: [124, 52], fa: [8, 134] } }, "power2.inOut");
+      tl.set("#" + PX + "usbG", { opacity: 0 }, CR + 0.5);
+      tl.set("#" + PX + "usbHP", { opacity: 1 }, CR + 0.5);
+      tl.set(HP.held, { rotation: -60 }, CR + 0.5);
+      // stand up, look at it
+      var UP = CR + 0.62;
+      pose(HP, UP, 0.42, { y: 695, rot: 0, hand: [112, -236], sign: 1, legs: STAND }, "power2.out");
+      tl.to(HP.held, { rotation: -20, duration: 0.42, ease: "power2.out" }, UP);
+      headRot(HP, 4, UP, 0.4);
+      blink(HP, UP + 0.45);
+
+      // ================= 2. PUSH TO THE OFFICE → plug in =================
+      var TR = C.plug - 0.45;
+      tl.to("#" + PX + "sceneP", { x: -1920, duration: 0.45, ease: "power3.inOut" }, TR);
+      tl.to("#" + PX + "sceneO", { x: 0, duration: 0.45, ease: "power3.inOut" }, TR);
+      var O1 = cam(1.85, 880, 590, 960, 540);
+      tl.fromTo("#" + PX + "worldO", O1, Object.assign(cam(1.95, 900, 585, 960, 540), { duration: C.blocked - 0.4 - TR, ease: "sine.inOut" }), TR);
+      // the hand pushes the USB into the tower's side port
+      var PORT = [678 - 585, 648 - 772];
+      pose(HO, C.plug + 0.05, 0.42, { hand: PORT, sign: 1 }, "power3.out");
+      tl.to("#" + PX + "tower", { keyframes: { x: [0, 3, -2, 0] }, duration: 0.2, ease: "none" }, C.plug + 0.45);
+      tl.to("#" + PX + "led", { fill: "#F59E0B", duration: 0.1, ease: "none", yoyo: true, repeat: 3 }, C.plug + 0.5);
+      blink(HO, C.plug + 0.9);
+      headRot(HO, 3, C.plug + 0.6, 0.4);
+
+      // ================= 3. USB ALREADY BLOCKED → NOT RECOGNISED =================
+      var BL = C.blocked;
+      tl.to("#" + PX + "worldO", Object.assign(cam(2.1, 900, 532, 960, 540), { duration: 0.8, ease: "power3.inOut" }), BL - 0.4);
+      tl.fromTo("#" + PX + "toastBad", { opacity: 0, y: 60, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out" }, BL);
+      tl.to("#" + PX + "led", { fill: "#dc2626", duration: 0.15, ease: "none" }, BL);
+      var NR = C.notrec;
+      tl.fromTo("#" + PX + "tsBad", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, NR);
+      tl.to("#" + PX + "toastBad", { keyframes: { x: [0, -16, 14, -8, 5, 0] }, duration: 0.35, ease: "none" }, NR + 0.1);
+      face(HO, "o", NR);
+      headRot(HO, -7, NR, 0.25);
+      pose(HO, NR, 0.25, { rot: -5 }, "power2.out");
+      tl.fromTo("#" + PX + "bang", { opacity: 0, y: 16, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, svgOrigin: "700 386", duration: 0.3, ease: "back.out(2.5)" }, NR + 0.05);
+
+      // ================= 4. THE ALERT GOES TO IT BY ITSELF =================
+      var AL = C.alert;
+      tl.to("#" + PX + "worldO", Object.assign(cam(1.6, 1000, 520, 960, 540), { duration: 0.8, ease: "power3.inOut" }), AL - 0.3);
+      tl.fromTo("#" + PX + "redring", { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }, AL);
+      tl.to("#" + PX + "redring", { opacity: 0.35, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 3 }, AL + 0.3);
+      tl.fromTo("#" + PX + "bubble", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, AL + 0.1);
+      var SI = C.sendit;
+      tl.fromTo("#" + PX + "plane", { opacity: 0, x: 0, y: 0, rotation: 0 }, { opacity: 1, duration: 0.15, ease: "none", immediateRender: false }, SI - 0.2);
+      tl.to("#" + PX + "plane", { x: 760, y: -110, rotation: 10, duration: 0.8, ease: "power2.in" }, SI - 0.2);
+      tl.to("#" + PX + "plane", { opacity: 0, duration: 0.15, ease: "none" }, SI + 0.45);
+      // Hùng pulls the useless USB out and puts it down
+      pose(HO, SI, 0.25, { hand: [66, -176], sign: 1, rot: -2 }, "power3.out");
+      tl.to("#" + PX + "bang", { opacity: 0, duration: 0.25, ease: "none" }, SI + 0.2);
+      pose(HO, SI + 0.45, 0.35, { hand: [40, -24], sign: 1, rot: 0 }, "power2.inOut");
+      tl.set("#" + PX + "usbHO", { opacity: 0 }, SI + 0.8);
+      tl.set("#" + PX + "usbD", { opacity: 1 }, SI + 0.8);
+      face(HO, "smile", SI + 0.7);
+      headRot(HO, 0, SI + 0.6, 0.35);
+
+      // ================= 5. IT ARRIVES: VIOLATION → RETRAINING =================
+      var VI = C.violate;
+      tl.to("#" + PX + "worldO", Object.assign(cam(1.22, 1060, 590, 960, 540), { duration: 1.0, ease: "power3.inOut" }), SI + 0.5);
+      walk(IT, VI - 1.1, VI, 2200, 1490, 755, 0.28);
+      tl.to("#" + PX + "bubble", { opacity: 0, duration: 0.3, ease: "power1.out" }, VI - 0.4);
+      headRot(HO, -3, VI - 0.3, 0.4);
+      // IT raises the tablet with the alert
+      pose(IT, VI + 0.1, 0.4, { hand: [96, -128], sign: 1 }, "power2.out");
+      headRot(IT, 8, VI + 0.1, 0.4);
+      tl.fromTo("#" + PX + "pill", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, VI + 0.2);
+      tl.to("#" + PX + "redring", { opacity: 0, duration: 0.3, ease: "none" }, VI + 0.2);
+      // Hùng: sheepish — head down, no smile
+      tl.to(HO.sm, { opacity: 0.35, duration: 0.2, ease: "none" }, VI + 0.4);
+      headRot(HO, 9, VI + 0.4, 0.4);
+      pose(HO, VI + 0.4, 0.4, { rot: 4 }, "power2.out");
+      blink(IT, VI + 1.0);
+      var RT = C.retrain;
+      tl.to("#" + PX + "toastBad", { opacity: 0, duration: 0.3, ease: "none" }, RT - 0.2);
+      tl.fromTo("#" + PX + "toastOk", { opacity: 0, y: 40, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out" }, RT - 0.1);
+      tl.to("#" + PX + "tabscr", { fill: "#0A3D91", duration: 0.3, ease: "none" }, RT - 0.1);
+      tl.to("#" + PX + "tabchk", { opacity: 1, duration: 0.3, ease: "none" }, RT);
+      headRot(IT, 0, RT + 0.3, 0.3);
+      // Hùng nods: understood
+      headRot(HO, 14, RT + 0.6, 0.25); headRot(HO, 6, RT + 0.85, 0.3);
+      blink(HO, RT + 1.3);
+
+      // ================= 6. LESSON + CALM HOLD =================
+      var NV = C.never;
+      tl.to("#" + PX + "worldO", Object.assign(cam(1.1, 1060, 560, 960, 440), { duration: 1.1, ease: "power2.inOut" }), NV - 0.3);
+      tl.fromTo("#" + PX + "take", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, NV);
+      tl.to("#" + PX + "pill", { opacity: 0, duration: 0.3, ease: "none" }, NV - 0.2);
+      pose(IT, NV, 0.5, { hand: [52, 40], sign: 1 }, "power2.inOut");
+      tl.to("#" + PX + "tab", { opacity: 0, duration: 0.3, ease: "none" }, NV + 0.1);
+      tl.fromTo("#" + PX + "nomark", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, svgOrigin: "625 742", duration: 0.35, ease: "back.out(2)" }, NV + 0.5);
+      blink(HO, NV + 1.2); blink(IT, NV + 1.8);
+      // gentle breathing through the hold
+      tl.fromTo(HO.up, { y: 0 }, { y: -4, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, NV + 0.4);
+      tl.fromTo("#" + PX + "plant", { rotation: 0 }, { rotation: 1.5, svgOrigin: "1660 702", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, NV);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-105-ex-usb"] = tl;
+    })();
+  </script>
+</template>

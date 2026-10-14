@@ -1,0 +1,744 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-109-ex-verify-all *, .v3-109-ex-verify-all *::before, .v3-109-ex-verify-all *::after { box-sizing: border-box; }
+    .v3-109-ex-verify-all { position: absolute; inset: 0; overflow: hidden; }
+    .v3-109-ex-verify-bg { position: absolute; inset: 0; background: #EEF3FB; }
+    .v3-109-ex-verify-scene { position: absolute; inset: 0; overflow: hidden; }
+
+    /* corner tag */
+    .v3-109-ex-verify-tag {
+      position: absolute; left: 48px; top: 40px;
+      height: 60px; padding: 0 28px;
+      border-radius: 30px;
+      background: #0A3D91; color: #FFFFFF;
+      font-size: 28px; font-weight: 700; line-height: 60px;
+      white-space: nowrap;
+      box-shadow: 0 10px 24px rgba(10, 61, 145, 0.25);
+      z-index: 20;
+    }
+
+    /* ================= OFFICE WORLD ================= */
+    .v3-109-ex-verify-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    .v3-109-ex-verify-office { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+    .v3-109-ex-verify-chip {
+      position: absolute; left: 330px; top: 318px;
+      height: 52px; padding: 0 22px; border-radius: 26px;
+      background: #FFFFFF; color: #0F172A;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.25), 0 10px 22px rgba(15, 23, 42, 0.10);
+      font-size: 28px; font-weight: 700; line-height: 52px; white-space: nowrap;
+    }
+    .v3-109-ex-verify-chip span { color: #0A3D91; }
+
+    .v3-109-ex-verify-screen { position: absolute; left: 820px; top: 380px; width: 480px; height: 300px; overflow: hidden; border-radius: 4px; background: #F8FAFC; }
+    .v3-109-ex-verify-ui { position: absolute; left: 0; top: 0; width: 1600px; height: 1000px; transform: scale(0.3); transform-origin: 0 0; overflow: hidden; background: #F8FAFC; }
+    .v3-109-ex-verify-topbar {
+      position: absolute; left: 0; top: 0; right: 0; height: 90px;
+      background: #0A3D91; display: flex; align-items: center; padding: 0 44px; gap: 22px;
+      color: #FFFFFF; font-size: 34px; font-weight: 700;
+    }
+    .v3-109-ex-verify-topbar svg { width: 44px; height: 44px; display: block; }
+    .v3-109-ex-verify-search { margin-left: auto; width: 460px; height: 50px; border-radius: 25px; background: rgba(255, 255, 255, 0.18); }
+    .v3-109-ex-verify-side { position: absolute; left: 0; top: 90px; bottom: 0; width: 420px; background: #FFFFFF; border-right: 2px solid #E2E8F0; overflow: hidden; }
+    .v3-109-ex-verify-rows { position: absolute; left: 0; top: 0; width: 420px; }
+    .v3-109-ex-verify-row { position: relative; height: 124px; display: flex; align-items: center; gap: 20px; padding: 0 28px; border-bottom: 2px solid #F1F5F9; }
+    .v3-109-ex-verify-ava { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%; background: #E2E8F0; }
+    .v3-109-ex-verify-bars { flex: 1; }
+    .v3-109-ex-verify-bar { height: 16px; border-radius: 8px; background: #E2E8F0; margin: 12px 0; }
+    .v3-109-ex-verify-newrow { position: absolute; left: 0; top: 0; width: 420px; background: #EBF0F8; border-left: 8px solid #0A3D91; }
+    .v3-109-ex-verify-newrow .v3-109-ex-verify-ava { background: #0A3D91; }
+    .v3-109-ex-verify-newname { font-size: 28px; font-weight: 700; color: #0F172A; white-space: nowrap; }
+    .v3-109-ex-verify-dot { position: absolute; right: 26px; top: 26px; width: 18px; height: 18px; border-radius: 50%; background: #dc2626; }
+    .v3-109-ex-verify-pane { position: absolute; left: 420px; top: 90px; right: 0; bottom: 0; background: #F8FAFC; }
+    .v3-109-ex-verify-email {
+      position: absolute; left: 56px; top: 44px; right: 56px; bottom: 44px;
+      background: #FFFFFF; border-radius: 14px;
+      box-shadow: 0 0 0 2px #E2E8F0, 0 18px 40px rgba(15, 23, 42, 0.08);
+      padding: 52px 64px;
+    }
+    .v3-109-ex-verify-from { display: flex; align-items: center; gap: 28px; }
+    .v3-109-ex-verify-from-ava {
+      flex: 0 0 104px; width: 104px; height: 104px; border-radius: 50%;
+      background: #0A3D91; color: #FFFFFF; font-size: 34px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v3-109-ex-verify-from-name { font-size: 42px; font-weight: 700; line-height: 1.2; }
+    .v3-109-ex-verify-known {
+      display: inline-block; margin-top: 8px; height: 44px; padding: 0 18px; border-radius: 22px;
+      background: rgba(10, 61, 145, 0.08); color: #0A3D91; font-size: 28px; font-weight: 600; line-height: 44px;
+    }
+    .v3-109-ex-verify-urgent {
+      position: absolute; right: 64px; top: 70px;
+      height: 70px; padding: 0 30px; border-radius: 35px;
+      background: #dc2626; color: #FFFFFF;
+      font-size: 38px; font-weight: 800; line-height: 70px; letter-spacing: 0.06em;
+      box-shadow: 0 10px 24px rgba(220, 38, 38, 0.35);
+    }
+    .v3-109-ex-verify-subject { position: relative; margin-top: 44px; font-size: 48px; font-weight: 800; line-height: 1.25; color: #0F172A; }
+    .v3-109-ex-verify-mark { position: absolute; left: -14px; top: -6px; right: -14px; bottom: -6px; border-radius: 10px; background: rgba(220, 38, 38, 0.10); transform-origin: 0 50%; }
+    .v3-109-ex-verify-rule { height: 3px; background: #E2E8F0; margin: 34px 0 36px; }
+    .v3-109-ex-verify-line { height: 24px; border-radius: 12px; background: #E2E8F0; margin-bottom: 24px; }
+
+    /* transfer form (on screen) */
+    .v3-109-ex-verify-form {
+      position: absolute; left: 36px; top: 150px; width: 820px; height: 800px;
+      background: #FFFFFF; border-radius: 18px; overflow: hidden;
+      box-shadow: 0 0 0 2px #CBD5E1, 0 30px 70px rgba(15, 23, 42, 0.28);
+    }
+    .v3-109-ex-verify-fbar { height: 96px; background: #0F172A; color: #FFFFFF; font-size: 38px; font-weight: 700; display: flex; align-items: center; padding: 0 44px; gap: 18px; }
+    .v3-109-ex-verify-fbar svg { width: 46px; height: 46px; display: block; }
+    .v3-109-ex-verify-frow { position: relative; margin: 0 44px; padding: 24px 0; border-bottom: 2px solid #F1F5F9; }
+    .v3-109-ex-verify-flab { font-size: 30px; font-weight: 500; color: #64748B; line-height: 1.3; }
+    .v3-109-ex-verify-fval { font-size: 44px; font-weight: 800; color: #0F172A; line-height: 1.3; white-space: nowrap; }
+    .v3-109-ex-verify-new {
+      display: inline-block; vertical-align: middle; margin-left: 18px; height: 46px; padding: 0 16px; border-radius: 10px;
+      background: #dc2626; color: #FFFFFF; font-size: 28px; font-weight: 800; line-height: 46px;
+    }
+    .v3-109-ex-verify-fbtn {
+      position: absolute; left: 180px; top: 640px; width: 460px; height: 112px; border-radius: 16px;
+      background: #0A3D91; color: #FFFFFF; font-size: 44px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 14px 30px rgba(10, 61, 145, 0.28);
+    }
+    .v3-109-ex-verify-fring { position: absolute; left: 164px; top: 624px; width: 492px; height: 144px; border-radius: 24px; border: 6px solid #0A3D91; }
+    .v3-109-ex-verify-toast {
+      position: absolute; left: 1040px; top: 120px; width: 520px; height: 140px;
+      background: #FFFFFF; border-radius: 14px;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.25), 0 20px 44px rgba(15, 23, 42, 0.18);
+      display: flex; align-items: center; gap: 24px; padding: 0 32px;
+    }
+    .v3-109-ex-verify-toast svg { flex: 0 0 64px; width: 64px; height: 64px; display: block; }
+    .v3-109-ex-verify-toast-t { font-size: 32px; font-weight: 700; color: #0A3D91; line-height: 1.2; }
+    .v3-109-ex-verify-toast-s { font-size: 28px; font-weight: 500; color: #475569; line-height: 1.3; }
+    .v3-109-ex-verify-cursor { position: absolute; left: 0; top: 0; width: 78px; height: 98px; transform-origin: 8% 6%; }
+    .v3-109-ex-verify-cursor svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    /* thought bubble */
+    .v3-109-ex-verify-think { position: absolute; left: 440px; top: 262px; width: 300px; height: 120px; transform-origin: 30% 100%; }
+    .v3-109-ex-verify-think-b {
+      position: absolute; left: 0; top: 0; width: 300px; height: 92px; border-radius: 46px;
+      background: #FFFFFF; box-shadow: 0 0 0 3px #0A3D91, 0 12px 26px rgba(15, 23, 42, 0.14);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      font-size: 36px; font-weight: 800; color: #0A3D91; white-space: nowrap;
+    }
+    .v3-109-ex-verify-think-b svg { width: 40px; height: 40px; display: block; }
+    .v3-109-ex-verify-think-d1 { position: absolute; left: 120px; top: 100px; width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 3px #0A3D91; }
+
+    /* contact callout (screen space) */
+    .v3-109-ex-verify-callout { position: absolute; left: 1130px; top: 210px; width: 640px; height: 460px; transform-origin: 0% 90%; }
+    .v3-109-ex-verify-card {
+      position: absolute; inset: 0; border-radius: 26px; background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(10, 61, 145, 0.25), 0 30px 60px rgba(15, 23, 42, 0.20);
+      padding: 34px 40px;
+    }
+    .v3-109-ex-verify-chead { display: flex; align-items: center; justify-content: space-between; }
+    .v3-109-ex-verify-ctitle { font-size: 30px; font-weight: 600; color: #64748B; }
+    .v3-109-ex-verify-saved {
+      position: relative; height: 52px; padding: 0 22px; border-radius: 26px;
+      background: #0A3D91; color: #FFFFFF; font-size: 28px; font-weight: 700; line-height: 52px; white-space: nowrap;
+    }
+    .v3-109-ex-verify-cbody { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
+    .v3-109-ex-verify-cava { flex: 0 0 120px; width: 120px; height: 120px; border-radius: 50%; background: #0A3D91; color: #FFFFFF; font-size: 38px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .v3-109-ex-verify-cname { font-size: 46px; font-weight: 800; line-height: 1.2; }
+    .v3-109-ex-verify-cnum { font-size: 38px; font-weight: 600; color: #334155; line-height: 1.3; margin-top: 6px; letter-spacing: 0.02em; }
+    .v3-109-ex-verify-cbtn {
+      position: absolute; left: 40px; right: 40px; bottom: 34px; height: 100px; border-radius: 50px;
+      background: #059669; color: #FFFFFF; font-size: 38px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      box-shadow: 0 14px 28px rgba(5, 150, 105, 0.30);
+    }
+    .v3-109-ex-verify-cbtn svg { width: 46px; height: 46px; display: block; }
+    .v3-109-ex-verify-cripple { position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; margin-left: -100px; margin-top: -100px; border-radius: 50%; border: 6px solid #FFFFFF; }
+    .v3-109-ex-verify-check { position: absolute; left: 1500px; top: 196px; width: 150px; height: 150px; border-radius: 50%; background: #059669; box-shadow: 0 0 0 10px #FFFFFF, 0 18px 36px rgba(5, 150, 105, 0.30); }
+    .v3-109-ex-verify-check svg { position: absolute; left: 30px; top: 30px; width: 90px; height: 90px; display: block; overflow: visible; }
+
+    /* ================= SPLIT CALL ================= */
+    .v3-109-ex-verify-split { position: absolute; inset: 0; background: #FFFFFF; }
+    .v3-109-ex-verify-panel { position: absolute; top: 0; width: 954px; height: 1080px; overflow: hidden; }
+    .v3-109-ex-verify-panel svg { position: absolute; left: 0; top: 0; width: 954px; height: 1080px; display: block; }
+    .v3-109-ex-verify-name {
+      position: absolute; bottom: 48px; height: 58px; padding: 0 24px; border-radius: 29px;
+      background: #FFFFFF; font-size: 30px; font-weight: 700; line-height: 58px; white-space: nowrap;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.25), 0 10px 22px rgba(15, 23, 42, 0.12);
+    }
+    .v3-109-ex-verify-speech { position: absolute; left: 1020px; top: 120px; width: 780px; height: 190px; transform-origin: 60% 100%; }
+    .v3-109-ex-verify-speech-b {
+      position: absolute; left: 0; top: 0; width: 780px; height: 150px; border-radius: 30px;
+      background: #FFFFFF; box-shadow: 0 0 0 4px #0F172A, 0 18px 40px rgba(15, 23, 42, 0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 46px; font-weight: 800; color: #0F172A; white-space: nowrap;
+    }
+    .v3-109-ex-verify-speech svg { position: absolute; left: 430px; top: 140px; width: 70px; height: 60px; display: block; overflow: visible; }
+    .v3-109-ex-verify-mini {
+      position: absolute; left: 650px; top: 600px; width: 620px; height: 300px;
+      border-radius: 20px; background: #FFFFFF;
+      box-shadow: 0 0 0 2px #CBD5E1, 0 30px 60px rgba(15, 23, 42, 0.25);
+      padding: 30px 36px;
+    }
+    .v3-109-ex-verify-mini-from { display: flex; align-items: center; gap: 18px; font-size: 32px; font-weight: 700; }
+    .v3-109-ex-verify-mini-from div { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%; background: #0A3D91; color: #FFFFFF; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .v3-109-ex-verify-mini-sub { margin-top: 22px; font-size: 32px; font-weight: 700; line-height: 1.3; color: #334155; }
+    .v3-109-ex-verify-stamp {
+      position: absolute; left: 120px; top: 92px; width: 380px; height: 130px;
+      border-radius: 16px; border: 8px solid #dc2626; background: rgba(255, 255, 255, 0.92);
+      color: #dc2626; font-size: 64px; font-weight: 800; letter-spacing: 0.05em; white-space: nowrap;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 16px 36px rgba(220, 38, 38, 0.25);
+    }
+
+    /* ================= OUTCOME ================= */
+    .v3-109-ex-verify-out { position: absolute; inset: 0; background: #EEF3FB; }
+    .v3-109-ex-verify-ocard {
+      position: absolute; left: 230px; top: 170px; width: 660px; height: 540px;
+      border-radius: 22px; background: #FFFFFF; overflow: hidden;
+      box-shadow: 0 0 0 2px #CBD5E1, 0 24px 50px rgba(15, 23, 42, 0.14);
+    }
+    .v3-109-ex-verify-ocard .v3-109-ex-verify-fbar { height: 88px; font-size: 36px; }
+    .v3-109-ex-verify-obtn {
+      position: absolute; left: 44px; right: 44px; bottom: 40px; height: 100px; border-radius: 16px;
+      background: #0A3D91; color: #FFFFFF; font-size: 40px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v3-109-ex-verify-cancel {
+      position: absolute; left: 150px; top: 388px; width: 360px; height: 130px;
+      border-radius: 16px; border: 8px solid #dc2626; background: rgba(255, 255, 255, 0.94);
+      color: #dc2626; font-size: 62px; font-weight: 800; letter-spacing: 0.04em; white-space: nowrap;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 16px 36px rgba(220, 38, 38, 0.22);
+    }
+    .v3-109-ex-verify-vault { position: absolute; left: 1060px; top: 150px; width: 640px; height: 580px; display: block; overflow: visible; }
+    .v3-109-ex-verify-kept {
+      position: absolute; left: 1210px; top: 684px; width: 340px; height: 70px; border-radius: 35px;
+      background: #059669; color: #FFFFFF; font-size: 34px; font-weight: 800; line-height: 70px; text-align: center; white-space: nowrap;
+      box-shadow: 0 14px 30px rgba(5, 150, 105, 0.30);
+    }
+    .v3-109-ex-verify-take {
+      position: absolute; left: 260px; top: 800px; width: 1400px; height: 130px;
+      border-radius: 22px; background: #0A3D91; color: #FFFFFF;
+      display: flex; align-items: center; justify-content: center; gap: 22px;
+      font-size: 44px; font-weight: 700; white-space: nowrap;
+      box-shadow: 0 22px 48px rgba(10, 61, 145, 0.28);
+    }
+    .v3-109-ex-verify-take svg { width: 56px; height: 56px; display: block; flex: 0 0 56px; }
+  </style>
+
+  <div id="root" data-composition-id="v3-109-ex-verify" data-width="1920" data-height="1080" data-duration="19.938">
+    <div class="v3-109-ex-verify-bg clip" id="v3-109-ex-verify-bg" data-start="0" data-duration="19.938" data-track-index="0"></div>
+    <div class="v3-109-ex-verify-all" id="v3-109-ex-verify-all">
+
+      <!-- ============ SCENE A: Mai's desk ============ -->
+      <div class="v3-109-ex-verify-scene" id="v3-109-ex-verify-sceneA">
+        <div class="v3-109-ex-verify-world" id="v3-109-ex-verify-world">
+          <svg class="v3-109-ex-verify-office" viewBox="0 0 1920 1080">
+            <rect x="0" y="0" width="1920" height="1080" fill="#EEF3FB" />
+            <rect x="0" y="880" width="1920" height="200" fill="#DCE5F3" />
+            <!-- window -->
+            <rect x="140" y="130" width="420" height="330" rx="14" fill="#FFFFFF" />
+            <rect x="162" y="152" width="376" height="286" rx="6" fill="#D4E5FB" />
+            <circle cx="470" cy="214" r="34" fill="#FDE68A" />
+            <g id="v3-109-ex-verify-cloud1"><ellipse cx="250" cy="220" rx="56" ry="20" fill="#FFFFFF" /><ellipse cx="278" cy="206" rx="34" ry="20" fill="#FFFFFF" /></g>
+            <path d="M162 438 V370 H210 V340 H262 V384 H300 V320 H356 V360 H404 V350 H452 V392 H500 V362 H538 V438 Z" fill="#B9D0F0" />
+            <rect x="346" y="152" width="8" height="286" fill="#FFFFFF" />
+            <rect x="162" y="291" width="376" height="8" fill="#FFFFFF" />
+            <rect x="128" y="458" width="444" height="16" rx="8" fill="#FFFFFF" />
+            <!-- clock -->
+            <circle cx="1560" cy="230" r="80" fill="#FFFFFF" stroke="#334155" stroke-width="8" />
+            <g stroke="#94A3B8" stroke-width="6" stroke-linecap="round"><path d="M1560 164v12M1626 230h-12M1560 296v-12M1494 230h12" /></g>
+            <path d="M1560 230 L1592 248" stroke="#0F172A" stroke-width="9" stroke-linecap="round" />
+            <path d="M1560 230 L1560 174" stroke="#0F172A" stroke-width="6" stroke-linecap="round" />
+            <circle cx="1560" cy="230" r="8" fill="#0A3D91" />
+            <!-- shelf with binders -->
+            <rect x="1380" y="440" width="340" height="14" rx="7" fill="#94A3B8" />
+            <rect x="1404" y="350" width="40" height="90" rx="4" fill="#0A3D91" />
+            <rect x="1450" y="350" width="40" height="90" rx="4" fill="#3B6CC4" />
+            <rect x="1496" y="350" width="40" height="90" rx="4" fill="#0A3D91" />
+            <rect x="1542" y="350" width="40" height="90" rx="4" fill="#94A3B8" />
+            <g fill="#FFFFFF"><rect x="1414" y="370" width="20" height="10" rx="2" /><rect x="1460" y="370" width="20" height="10" rx="2" /><rect x="1506" y="370" width="20" height="10" rx="2" /><rect x="1552" y="370" width="20" height="10" rx="2" /></g>
+            <rect x="1622" y="404" width="56" height="36" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3" />
+            <path d="M1650 404 C1636 380 1630 366 1640 352 M1650 404 C1652 380 1662 366 1676 362 M1650 404 C1648 388 1650 372 1656 360" stroke="#34A57A" stroke-width="8" fill="none" stroke-linecap="round" />
+            <!-- chair -->
+            <rect x="392" y="560" width="78" height="240" rx="32" fill="#334155" />
+            <rect x="408" y="590" width="46" height="170" rx="20" fill="#475569" />
+            <!-- Mai (body, generated) -->
+            <g id="v3-109-ex-verify-mai"></g>
+            <!-- monitor -->
+            <rect x="1030" y="698" width="60" height="50" fill="#94A3B8" />
+            <rect x="976" y="742" width="168" height="20" rx="10" fill="#94A3B8" />
+            <rect x="800" y="360" width="520" height="340" rx="18" fill="#1E293B" />
+            <circle cx="1060" cy="690" r="4" fill="#475569" />
+            <!-- desk -->
+            <rect x="300" y="760" width="1420" height="28" rx="10" fill="#B8C6DB" />
+            <rect x="330" y="788" width="1360" height="300" fill="#D7E0EE" />
+            <rect x="1420" y="816" width="240" height="90" rx="10" fill="#E6ECF5" />
+            <rect x="1510" y="856" width="60" height="10" rx="5" fill="#94A3B8" />
+            <!-- keyboard + mouse -->
+            <rect x="850" y="740" width="340" height="20" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+            <ellipse cx="800" cy="748" rx="24" ry="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+            <!-- smartphone lying on the desk -->
+            <g id="v3-109-ex-verify-deskphone"><rect x="664" y="748" width="72" height="12" rx="5" fill="#0F172A" /><rect x="672" y="750" width="56" height="4" rx="2" fill="#3B6CC4" /></g>
+            <!-- paper stack + calculator (accounting) -->
+            <rect x="1214" y="738" width="120" height="22" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3" />
+            <rect x="1222" y="728" width="104" height="14" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3" />
+            <!-- Mai arms (generated, in front of desk) -->
+            <g id="v3-109-ex-verify-maiarms"></g>
+            <!-- phone ring waves -->
+            <g id="v3-109-ex-verify-waves" fill="none" stroke="#059669" stroke-width="6" stroke-linecap="round">
+              <path class="v3-109-ex-verify-wave" d="M512 452 A44 44 0 0 0 512 532" />
+              <path class="v3-109-ex-verify-wave" d="M490 430 A72 72 0 0 0 490 556" />
+              <path class="v3-109-ex-verify-wave" d="M468 410 A100 100 0 0 0 468 578" />
+            </g>
+            <!-- mug + steam -->
+            <rect x="1376" y="702" width="58" height="58" rx="12" fill="#FFFFFF" stroke="#0A3D91" stroke-width="5" />
+            <path d="M1434 716 C1454 716 1454 744 1434 744" stroke="#0A3D91" stroke-width="5" fill="none" />
+            <path id="v3-109-ex-verify-steam1" d="M1392 690 c-10 -14 10 -24 0 -40" stroke="#94A3B8" stroke-width="5" fill="none" stroke-linecap="round" />
+            <path id="v3-109-ex-verify-steam2" d="M1416 688 c-10 -14 10 -24 0 -40" stroke="#94A3B8" stroke-width="5" fill="none" stroke-linecap="round" />
+            <!-- plant -->
+            <path d="M1532 702 h76 l-8 58 h-60 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+            <g id="v3-109-ex-verify-plant">
+              <path d="M1570 702 C1540 660 1520 640 1526 606 C1556 622 1568 660 1570 702 Z" fill="#34A57A" />
+              <path d="M1570 702 C1600 662 1622 646 1622 612 C1590 626 1574 664 1570 702 Z" fill="#2E8F6A" />
+              <path d="M1570 702 C1566 660 1572 620 1590 590 C1600 630 1584 670 1570 702 Z" fill="#45B98A" />
+            </g>
+          </svg>
+
+          <div class="v3-109-ex-verify-chip" id="v3-109-ex-verify-chip">Chị Mai · <span>Kế toán</span></div>
+
+          <div class="v3-109-ex-verify-screen">
+            <div class="v3-109-ex-verify-ui">
+              <div class="v3-109-ex-verify-topbar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 7 8.5-7" /></svg>
+                <span>Hộp thư đến</span>
+                <div class="v3-109-ex-verify-search"></div>
+              </div>
+              <div class="v3-109-ex-verify-side">
+                <div class="v3-109-ex-verify-rows" id="v3-109-ex-verify-rows">
+                  <div class="v3-109-ex-verify-row"><div class="v3-109-ex-verify-ava"></div><div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-bar" style="width: 70%"></div><div class="v3-109-ex-verify-bar" style="width: 92%"></div></div></div>
+                  <div class="v3-109-ex-verify-row"><div class="v3-109-ex-verify-ava"></div><div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-bar" style="width: 55%"></div><div class="v3-109-ex-verify-bar" style="width: 84%"></div></div></div>
+                  <div class="v3-109-ex-verify-row"><div class="v3-109-ex-verify-ava"></div><div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-bar" style="width: 64%"></div><div class="v3-109-ex-verify-bar" style="width: 90%"></div></div></div>
+                  <div class="v3-109-ex-verify-row"><div class="v3-109-ex-verify-ava"></div><div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-bar" style="width: 48%"></div><div class="v3-109-ex-verify-bar" style="width: 78%"></div></div></div>
+                  <div class="v3-109-ex-verify-row"><div class="v3-109-ex-verify-ava"></div><div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-bar" style="width: 60%"></div><div class="v3-109-ex-verify-bar" style="width: 86%"></div></div></div>
+                  <div class="v3-109-ex-verify-row"><div class="v3-109-ex-verify-ava"></div><div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-bar" style="width: 52%"></div><div class="v3-109-ex-verify-bar" style="width: 80%"></div></div></div>
+                  <div class="v3-109-ex-verify-row"><div class="v3-109-ex-verify-ava"></div><div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-bar" style="width: 66%"></div><div class="v3-109-ex-verify-bar" style="width: 88%"></div></div></div>
+                </div>
+                <div class="v3-109-ex-verify-row v3-109-ex-verify-newrow" id="v3-109-ex-verify-newrow">
+                  <div class="v3-109-ex-verify-ava"></div>
+                  <div class="v3-109-ex-verify-bars"><div class="v3-109-ex-verify-newname">Công ty ABC</div><div class="v3-109-ex-verify-bar" style="width: 88%; margin-bottom: 0"></div></div>
+                  <div class="v3-109-ex-verify-dot"></div>
+                </div>
+              </div>
+              <div class="v3-109-ex-verify-pane">
+                <div class="v3-109-ex-verify-email" id="v3-109-ex-verify-email">
+                  <div class="v3-109-ex-verify-from">
+                    <div class="v3-109-ex-verify-from-ava">ABC</div>
+                    <div>
+                      <div class="v3-109-ex-verify-from-name" data-layout-allow-overlap>Công ty ABC</div>
+                      <div class="v3-109-ex-verify-known" id="v3-109-ex-verify-known">Đối tác quen</div>
+                    </div>
+                  </div>
+                  <div class="v3-109-ex-verify-urgent" id="v3-109-ex-verify-urgent">GẤP</div>
+                  <div class="v3-109-ex-verify-subject"><div class="v3-109-ex-verify-mark" id="v3-109-ex-verify-mark"></div><span style="position: relative">Thông báo thay đổi số tài khoản – vui lòng chuyển gấp</span></div>
+                  <div class="v3-109-ex-verify-rule"></div>
+                  <div class="v3-109-ex-verify-line" style="width: 92%"></div>
+                  <div class="v3-109-ex-verify-line" style="width: 84%"></div>
+                  <div class="v3-109-ex-verify-line" style="width: 58%"></div>
+                </div>
+              </div>
+              <div class="v3-109-ex-verify-form" id="v3-109-ex-verify-form">
+                <div class="v3-109-ex-verify-fbar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10V19M9.5 10V19M14.5 10V19M19 10V19M3 21h18M12 3l9 5H3z" /></svg>
+                  <span>Lệnh chuyển tiền</span>
+                </div>
+                <div class="v3-109-ex-verify-frow"><div class="v3-109-ex-verify-flab">Người nhận</div><div class="v3-109-ex-verify-fval">Công ty ABC</div></div>
+                <div class="v3-109-ex-verify-frow"><div class="v3-109-ex-verify-flab">Số tài khoản</div><div class="v3-109-ex-verify-fval">1902 7788 4455<span class="v3-109-ex-verify-new">MỚI</span></div></div>
+                <div class="v3-109-ex-verify-frow"><div class="v3-109-ex-verify-flab">Số tiền</div><div class="v3-109-ex-verify-fval">850.000.000 đ</div></div>
+                <div class="v3-109-ex-verify-fring" id="v3-109-ex-verify-fring"></div>
+                <div class="v3-109-ex-verify-fbtn" id="v3-109-ex-verify-fbtn">Chuyển tiền</div>
+              </div>
+              <div class="v3-109-ex-verify-toast" id="v3-109-ex-verify-toast">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 7 8.5-7" /><circle cx="19.5" cy="5.5" r="3" fill="#dc2626" stroke="#FFFFFF" stroke-width="1.4" /></svg>
+                <div><div class="v3-109-ex-verify-toast-t">Email mới</div><div class="v3-109-ex-verify-toast-s">Công ty ABC</div></div>
+              </div>
+              <div class="v3-109-ex-verify-cursor" id="v3-109-ex-verify-cursor">
+                <svg viewBox="0 0 24 30"><path d="M2 2 L2 24 L8 18.5 L12 27.5 L15.6 26 L11.8 17.2 L19.5 17.2 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.6" stroke-linejoin="round" /></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="v3-109-ex-verify-think" id="v3-109-ex-verify-think">
+            <div class="v3-109-ex-verify-think-b">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.4l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15" /></svg>
+              <span>Khoan đã</span>
+            </div>
+            <div class="v3-109-ex-verify-think-d1"></div>
+          </div>
+        </div>
+
+        <!-- contact callout (screen space) -->
+        <div class="v3-109-ex-verify-callout" id="v3-109-ex-verify-callout">
+          <div class="v3-109-ex-verify-card" data-layout-allow-overlap data-layout-allow-occlusion>
+            <div class="v3-109-ex-verify-chead">
+              <div class="v3-109-ex-verify-ctitle">Danh bạ</div>
+              <div class="v3-109-ex-verify-saved" id="v3-109-ex-verify-saved">Số đã lưu</div>
+            </div>
+            <div class="v3-109-ex-verify-cbody">
+              <div class="v3-109-ex-verify-cava">ABC</div>
+              <div>
+                <div class="v3-109-ex-verify-cname">Công ty ABC</div>
+                <div class="v3-109-ex-verify-cnum">028 •••• 6868</div>
+              </div>
+            </div>
+            <div class="v3-109-ex-verify-cbtn" id="v3-109-ex-verify-cbtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
+              <span>Gọi</span>
+              <div class="v3-109-ex-verify-cripple" id="v3-109-ex-verify-cripple"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE B: split-screen call ============ -->
+      <div class="v3-109-ex-verify-scene v3-109-ex-verify-split" id="v3-109-ex-verify-split">
+        <div class="v3-109-ex-verify-panel" id="v3-109-ex-verify-pl" style="left: 0">
+          <svg viewBox="0 0 954 1080">
+            <rect x="0" y="0" width="954" height="1080" fill="#EEF3FB" />
+            <rect x="80" y="120" width="300" height="240" rx="14" fill="#FFFFFF" />
+            <rect x="98" y="138" width="264" height="204" rx="6" fill="#D4E5FB" />
+            <circle cx="300" cy="190" r="26" fill="#FDE68A" />
+            <g id="v3-109-ex-verify-smai"></g>
+            <rect x="0" y="900" width="954" height="180" fill="#B8C6DB" />
+            <rect x="0" y="928" width="954" height="152" fill="#D7E0EE" />
+            <g id="v3-109-ex-verify-smai-arm"></g>
+            <g id="v3-109-ex-verify-swl" fill="none" stroke="#059669" stroke-width="7" stroke-linecap="round">
+              <path class="v3-109-ex-verify-swave" d="M700 300 A60 60 0 0 1 700 420" />
+              <path class="v3-109-ex-verify-swave" d="M736 266 A100 100 0 0 1 736 454" />
+            </g>
+          </svg>
+          <div class="v3-109-ex-verify-name" style="left: 48px">Chị Mai · SEMV</div>
+        </div>
+        <div class="v3-109-ex-verify-panel" id="v3-109-ex-verify-pr" style="left: 966px">
+          <svg viewBox="0 0 954 1080">
+            <rect x="0" y="0" width="954" height="1080" fill="#E9EEF5" />
+            <rect x="560" y="150" width="300" height="14" rx="7" fill="#94A3B8" />
+            <rect x="584" y="66" width="40" height="84" rx="4" fill="#3B6CC4" />
+            <rect x="630" y="78" width="36" height="72" rx="4" fill="#94A3B8" />
+            <rect x="672" y="60" width="40" height="90" rx="4" fill="#0A3D91" />
+            <g id="v3-109-ex-verify-sptn"></g>
+            <rect x="0" y="900" width="954" height="180" fill="#B8C6DB" />
+            <rect x="0" y="928" width="954" height="152" fill="#D7E0EE" />
+            <g id="v3-109-ex-verify-sptn-arm"></g>
+            <g id="v3-109-ex-verify-swr" fill="none" stroke="#059669" stroke-width="7" stroke-linecap="round">
+              <path class="v3-109-ex-verify-swave" d="M254 300 A60 60 0 0 0 254 420" />
+              <path class="v3-109-ex-verify-swave" d="M218 266 A100 100 0 0 0 218 454" />
+            </g>
+          </svg>
+          <div class="v3-109-ex-verify-name" style="right: 48px">Công ty ABC</div>
+        </div>
+        <div class="v3-109-ex-verify-speech" id="v3-109-ex-verify-speech">
+          <div class="v3-109-ex-verify-speech-b">Chúng tôi không gửi email đó!</div>
+          <svg viewBox="0 0 70 60"><path d="M0 0 L70 0 L52 56 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="4" stroke-linejoin="round" /><rect x="-2" y="-8" width="74" height="10" fill="#FFFFFF" /></svg>
+        </div>
+        <div class="v3-109-ex-verify-mini" id="v3-109-ex-verify-mini">
+          <div class="v3-109-ex-verify-mini-from"><div>ABC</div>Công ty ABC</div>
+          <div class="v3-109-ex-verify-mini-sub">Thông báo thay đổi số tài khoản – vui lòng chuyển gấp</div>
+          <div class="v3-109-ex-verify-stamp" id="v3-109-ex-verify-stamp" data-layout-allow-overlap data-layout-allow-occlusion>GIẢ MẠO</div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE C: outcome ============ -->
+      <div class="v3-109-ex-verify-scene v3-109-ex-verify-out" id="v3-109-ex-verify-out">
+        <div class="v3-109-ex-verify-ocard" id="v3-109-ex-verify-ocard">
+          <div class="v3-109-ex-verify-fbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10V19M9.5 10V19M14.5 10V19M19 10V19M3 21h18M12 3l9 5H3z" /></svg>
+            <span>Lệnh chuyển tiền</span>
+          </div>
+          <div class="v3-109-ex-verify-frow"><div class="v3-109-ex-verify-flab">Số tài khoản</div><div class="v3-109-ex-verify-fval">1902 7788 4455</div></div>
+          <div class="v3-109-ex-verify-frow"><div class="v3-109-ex-verify-flab">Số tiền</div><div class="v3-109-ex-verify-fval">850.000.000 đ</div></div>
+          <div class="v3-109-ex-verify-obtn" id="v3-109-ex-verify-obtn">Chuyển tiền</div>
+          <div class="v3-109-ex-verify-cancel" id="v3-109-ex-verify-cancel" data-layout-allow-overlap data-layout-allow-occlusion>ĐÃ HỦY</div>
+        </div>
+        <svg class="v3-109-ex-verify-vault" viewBox="0 0 640 580">
+          <ellipse cx="320" cy="500" rx="250" ry="26" fill="#DCE5F3" />
+          <!-- safe -->
+          <rect x="110" y="110" width="420" height="380" rx="30" fill="#334155" />
+          <rect x="132" y="132" width="376" height="336" rx="20" fill="#475569" />
+          <rect x="150" y="488" width="60" height="22" rx="6" fill="#1E293B" />
+          <rect x="430" y="488" width="60" height="22" rx="6" fill="#1E293B" />
+          <rect x="132" y="132" width="376" height="336" rx="20" fill="#1E293B" />
+          <rect x="132" y="296" width="376" height="10" fill="#334155" />
+          <!-- money on the shelves -->
+          <g id="v3-109-ex-verify-cash">
+            <g><rect x="170" y="390" width="140" height="70" rx="8" fill="#34A57A" /><rect x="225" y="390" width="30" height="70" fill="#E2F4EC" /></g>
+            <g><rect x="330" y="390" width="140" height="70" rx="8" fill="#2E8F6A" /><rect x="385" y="390" width="30" height="70" fill="#E2F4EC" /></g>
+            <g><rect x="250" y="320" width="140" height="70" rx="8" fill="#45B98A" /><rect x="305" y="320" width="30" height="70" fill="#E2F4EC" /></g>
+            <g><rect x="170" y="226" width="140" height="70" rx="8" fill="#2E8F6A" /><rect x="225" y="226" width="30" height="70" fill="#E2F4EC" /></g>
+            <g><rect x="330" y="226" width="140" height="70" rx="8" fill="#34A57A" /><rect x="385" y="226" width="30" height="70" fill="#E2F4EC" /></g>
+            <g><rect x="250" y="156" width="140" height="70" rx="8" fill="#45B98A" /><rect x="305" y="156" width="30" height="70" fill="#E2F4EC" /></g>
+          </g>
+          <!-- open door, swung to the left -->
+          <path d="M110 120 L20 160 L20 470 L110 500 Z" fill="#64748B" stroke="#334155" stroke-width="6" stroke-linejoin="round" />
+          <ellipse cx="62" cy="310" rx="22" ry="44" fill="#475569" stroke="#E2E8F0" stroke-width="6" />
+        </svg>
+        <div class="v3-109-ex-verify-check" id="v3-109-ex-verify-check"><svg viewBox="0 0 90 90"><path id="v3-109-ex-verify-checkp" d="M14 46 L36 68 L78 22" fill="none" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /></svg></div>
+        <div class="v3-109-ex-verify-kept" id="v3-109-ex-verify-kept">Đã giữ lại</div>
+        <div class="v3-109-ex-verify-take" id="v3-109-ex-verify-take">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" /></svg>
+          <span>Một cuộc gọi xác nhận — giữ lại cả một khoản tiền lớn</span>
+        </div>
+      </div>
+
+      <div class="v3-109-ex-verify-tag">Ví dụ thực tế</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="v3-109-ex-verify"]');
+      var q = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+      var P = "#v3-109-ex-verify-";
+      var $ = function (id) { return root.querySelector(P + id); };
+      var CUE = /*hf-cues:start*/{"mai":0,"email":1.2,"partner":2.2,"change":3.64,"urgent":5,"instead":6.24,"call":7.86,"saved":8.82,"before":10.1,"confirm":11.12,"deny":12.12,"thatmail":12.56,"onecall":14.06,"keep":14.94,"takeaway":16.16,"big":16.54}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/19.438/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+
+      // ---------- character builder (same construction as anh Minh in v3-00-story) ----------
+      var SKIN = "#F6CDA8", SKIN_D = "#E8B48C";
+      function head(id, o) {
+        var s = "";
+        if (o.hair === "mai") {
+          s += '<path d="M540 438 C504 466 498 560 516 604 C536 618 566 612 580 592 L572 470 Z" fill="#3B2A20" />';
+          s += '<circle cx="540" cy="420" r="30" fill="#3B2A20" />';
+        }
+        s += '<circle cx="588" cy="478" r="64" fill="' + SKIN + '" />';
+        if (o.hair === "mai") {
+          s += '<path d="M524 486 C512 420 556 396 604 402 C648 408 668 436 662 464 C640 440 610 436 590 446 C570 456 556 480 550 516 C536 508 526 498 524 486 Z" fill="#3B2A20" />';
+        } else if (o.hair === "partner") {
+          s += '<path d="M524 476 C516 422 552 400 598 402 C642 404 664 428 664 452 C640 440 612 436 590 444 C572 452 558 470 552 500 C536 494 526 486 524 476 Z" fill="#334155" />';
+        } else {
+          s += '<path d="M522 482 C512 418 556 398 602 404 C648 410 666 440 660 462 C630 450 600 452 580 466 C566 478 556 496 548 524 C532 514 524 500 522 482 Z" fill="#1E293B" />';
+        }
+        s += '<circle cx="560" cy="494" r="13" fill="' + SKIN_D + '" />';
+        if (o.hair === "mai") s += '<circle cx="561" cy="514" r="5" fill="#F59E0B" />';
+        s += '<path id="' + id + '-brow" d="M612 456 Q626 448 640 456" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+        s += '<ellipse id="' + id + '-eye" cx="628" cy="482" rx="6.5" ry="9" fill="#0F172A" />';
+        if (o.hair === "mai") s += '<path d="M633 475 l8 -6" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />';
+        if (o.hair === "partner") s += '<circle cx="628" cy="484" r="17" fill="none" stroke="#0F172A" stroke-width="4" /><path d="M611 482 L566 480" stroke="#0F172A" stroke-width="4" stroke-linecap="round" />';
+        s += '<path d="M646 478 Q666 494 648 506 Z" fill="' + SKIN + '" />';
+        s += '<circle cx="618" cy="504" r="10" fill="#F59E9E" opacity="0.45" />';
+        s += '<path id="' + id + '-mouth" d="M626 522 Q636 529 645 521" stroke="' + (o.hair === "mai" ? "#BE185D" : "#9A3412") + '" stroke-width="4" fill="none" stroke-linecap="round" />';
+        return s;
+      }
+      function body(id, o) {
+        var s = '<g id="' + id + '-torso">';
+        s += '<path d="M494 772 C490 660 506 590 572 578 L606 578 C658 584 676 650 676 772 Z" fill="' + o.shirt + '" />';
+        if (o.tie) s += '<path d="M566 580 L589 640 L612 580 Z" fill="#FFFFFF" /><path d="M584 592 L594 592 L599 646 L589 660 L579 646 Z" fill="#0A3D91" />';
+        else s += '<path d="M566 580 L589 612 L612 580 Z" fill="#FFFFFF" />';
+        s += '<rect x="572" y="530" width="34" height="56" rx="10" fill="' + SKIN_D + '" />';
+        s += '<g id="' + id + '-head">' + head(id, o) + '</g></g>';
+        return s;
+      }
+      function armPath(d, col) { return '<path d="' + d + '" stroke="' + col + '" stroke-width="40" fill="none" stroke-linecap="round" stroke-linejoin="round" />'; }
+      function arms(id, sd, which) {
+        var s = "";
+        if (which.indexOf("desk") >= 0) s += '<g id="' + id + '-adesk">' + armPath("M622 606 C652 650 668 704 704 738 L776 742", sd) + '<circle cx="792" cy="740" r="19" fill="' + SKIN + '" /></g>';
+        if (which.indexOf("raise") >= 0) s += '<g id="' + id + '-araise">' + armPath("M624 606 C650 660 684 676 700 640 C710 616 712 590 712 566", sd) +
+          '<rect x="690" y="500" width="44" height="64" rx="20" fill="' + SKIN + '" /><rect x="676" y="538" width="20" height="34" rx="10" fill="' + SKIN + '" transform="rotate(-30 686 555)" /></g>';
+        if (which.indexOf("front") >= 0) s += '<g id="' + id + '-afront">' + armPath("M624 606 C646 668 668 700 704 690", sd) +
+          '<rect x="694" y="586" width="44" height="78" rx="9" fill="#0F172A" /><rect x="699" y="593" width="34" height="62" rx="5" fill="#93C5FD" /><circle cx="712" cy="680" r="19" fill="' + SKIN + '" /></g>';
+        if (which.indexOf("ear") >= 0) s += '<g id="' + id + '-aear">' +
+          '<rect x="540" y="452" width="38" height="84" rx="9" fill="#0F172A" transform="rotate(-14 559 494)" />' +
+          armPath("M624 606 C660 666 676 700 650 672 C628 640 606 590 590 548", sd) + '<circle cx="584" cy="532" r="20" fill="' + SKIN + '" /></g>';
+        return s;
+      }
+
+      // scene A: Mai at her desk (rose blouse)
+      var MAI = { shirt: "#C2557E", shirtDark: "#A8436A", hair: "mai" };
+      $("mai").innerHTML = body("v3-109-ex-verify-m", MAI);
+      $("maiarms").innerHTML = arms("v3-109-ex-verify-m", MAI.shirtDark, ["desk", "raise", "front", "ear"]);
+      // scene B: Mai (left, faces right) and the partner (right, mirrored to face left), both on the phone
+      var PTN = { shirt: "#334155", shirtDark: "#1E293B", hair: "partner", tie: true };
+      var SC = 1.55;
+      var tL = "translate(" + (400 - 588 * SC) + "," + (430 - 478 * SC) + ") scale(" + SC + ")";
+      var tR = "translate(" + (554 + 588 * SC) + "," + (430 - 478 * SC) + ") scale(" + (-SC) + "," + SC + ")";
+      $("smai").setAttribute("transform", tL);
+      $("smai").innerHTML = body("v3-109-ex-verify-sm", MAI);
+      $("smai-arm").setAttribute("transform", tL);
+      $("smai-arm").innerHTML = arms("v3-109-ex-verify-sm", MAI.shirtDark, ["ear"]);
+      $("sptn").setAttribute("transform", tR);
+      $("sptn").innerHTML = body("v3-109-ex-verify-sp", PTN);
+      $("sptn-arm").setAttribute("transform", tR);
+      $("sptn-arm").innerHTML = arms("v3-109-ex-verify-sp", PTN.shirtDark, ["ear"]);
+
+      // ---------- camera ----------
+      function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; }
+      var MON = [1060, 530], Z = 3.1, ZC = [960, 585];
+      var MED = cam(1.5, 760, 560, 960, 600);
+      function camTo(c, at, dur, ease) { tl.to(P + "world", Object.assign({}, c, { duration: dur, ease: ease || "power3.inOut" }), at); }
+
+      // ---------- initial state ----------
+      var M = "v3-109-ex-verify-m";
+      gsap.set(P + "world", cam(1, 960, 540, 960, 540));
+      gsap.set([P + "split", P + "out", P + "toast", P + "newrow", P + "email", P + "form", P + "cursor", P + "think", P + "callout", P + "fring", P + "urgent", P + "mark"], { opacity: 0 });
+      gsap.set(["#" + M + "-araise", "#" + M + "-afront", "#" + M + "-aear"], { opacity: 0 });
+      gsap.set(q(".v3-109-ex-verify-wave"), { opacity: 0 });
+      gsap.set(q(".v3-109-ex-verify-swave"), { opacity: 0 });
+      gsap.set([P + "speech", P + "mini", P + "stamp", P + "cancel", P + "kept", P + "take", P + "cripple"], { opacity: 0 });
+      gsap.set(P + "cursor", { x: 1420, y: 960 });
+
+      // ================= 1. Mai at her desk =================
+      tl.fromTo(P + "world", cam(1, 960, 540, 960, 540), Object.assign(cam(1.08, 860, 560, 860, 560), { duration: CUE.email, ease: "sine.inOut" }), 0);
+      tl.fromTo(P + "chip", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, Math.max(0.3, CUE.mai));
+      tl.fromTo(P + "mai", { y: 0 }, { y: -4, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      // typing: arm nudges
+      tl.fromTo("#" + M + "-adesk", { x: 0 }, { x: 6, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0.6);
+      [0.9, 1.9, 4.2, 9.9].forEach(function (t) {
+        tl.to("#" + M + "-eye", { scaleY: 0.12, svgOrigin: "628 482", duration: 0.07, ease: "power1.in" }, t);
+        tl.to("#" + M + "-eye", { scaleY: 1, svgOrigin: "628 482", duration: 0.1, ease: "power1.out" }, t + 0.08);
+      });
+      ["steam1", "steam2"].forEach(function (id, i) {
+        gsap.set(P + id, { opacity: 0 });
+        tl.fromTo(P + id, { y: 6 }, { y: -26, duration: 1.6, ease: "none", repeat: 4 }, i * 0.6);
+        tl.to(P + id, { keyframes: { opacity: [0, 0.8, 0] }, duration: 1.6, ease: "none", repeat: 4 }, i * 0.6);
+      });
+      tl.fromTo(P + "cloud1", { x: 0 }, { x: 60, duration: 11, ease: "none" }, 0);
+      tl.fromTo(P + "plant", { rotation: 0 }, { rotation: 1.5, svgOrigin: "1570 702", duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0);
+
+      // ================= 2. Email from the "partner" =================
+      var E = CUE.email;
+      tl.fromTo(P + "toast", { x: 90, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, E);
+      tl.fromTo(P + "rows", { y: 0 }, { y: 124, duration: 0.45, ease: "power2.out", immediateRender: false }, E + 0.1);
+      tl.fromTo(P + "newrow", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" }, E + 0.2);
+      tl.to("#" + M + "-head", { rotation: 3, svgOrigin: "590 540", duration: 0.4, ease: "power2.out" }, E);
+      tl.to(P + "chip", { opacity: 0, duration: 0.3, ease: "power1.out" }, E + 0.2);
+      camTo(cam(Z, MON[0], MON[1], ZC[0], ZC[1]), E, 1.2);
+      tl.fromTo(P + "email", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, CUE.partner - 0.15);
+      tl.to(P + "toast", { opacity: 0, x: 40, duration: 0.4, ease: "power2.in" }, CUE.partner + 0.2);
+      tl.fromTo(P + "known", { boxShadow: "0 0 0 0px rgba(10,61,145,0)" }, { boxShadow: "0 0 0 4px rgba(10,61,145,0.6)", duration: 0.3, ease: "power2.out", yoyo: true, repeat: 1, immediateRender: false }, CUE.partner + 0.3);
+      // "đã đổi số tài khoản": the subject gets marked
+      tl.fromTo(P + "mark", { opacity: 1, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.inOut", immediateRender: false }, CUE.change);
+      // "chuyển tiền gấp": urgency badge pops and throbs
+      var U = CUE.urgent;
+      tl.fromTo(P + "urgent", { opacity: 0, scale: 0.4, rotation: -12 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.4, ease: "back.out(2.2)" }, U - 0.1);
+      tl.fromTo(P + "urgent", { scale: 1 }, { scale: 1.12, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false }, U + 0.35);
+      var ZX = cam(Z, MON[0], MON[1], ZC[0], ZC[1]).x;
+      tl.to(P + "world", { keyframes: { x: [ZX, ZX - 7, ZX + 7, ZX - 4, ZX + 4, ZX] }, duration: 0.3, ease: "none" }, U + 0.35);
+      // transfer form slides in, cursor creeps to "Chuyển tiền"
+      var F = U + 0.55;
+      tl.fromTo(P + "form", { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" }, F);
+      var BTN = [36 + 410, 150 + 696];
+      tl.fromTo(P + "cursor", { opacity: 0, x: 1460, y: 980 }, { opacity: 1, duration: 0.15, ease: "none", immediateRender: false }, F + 0.25);
+      tl.to(P + "cursor", { x: BTN[0] + 10, y: BTN[1] - 8, duration: Math.max(0.4, CUE.instead - F - 0.3), ease: "power2.inOut" }, F + 0.3);
+      tl.to(P + "fring", { opacity: 1, duration: 0.25, ease: "power2.out" }, CUE.instead - 0.05);
+      tl.to(P + "fbtn", { backgroundColor: "#082F70", duration: 0.2, ease: "none" }, CUE.instead - 0.05);
+      // hover jitter: hesitates
+      tl.to(P + "cursor", { keyframes: { x: [BTN[0] + 10, BTN[0] + 18, BTN[0] + 6, BTN[0] + 12] }, duration: 0.5, ease: "sine.inOut" }, CUE.instead + 0.05);
+
+      // ================= 3. "Khoan đã" — she stops =================
+      var S = CUE.instead + 0.45;
+      camTo(MED, S, 0.9);
+      tl.to("#" + M + "-head", { rotation: -5, svgOrigin: "590 540", duration: 0.4, ease: "power2.out" }, S + 0.3);
+      tl.to("#" + M + "-adesk", { opacity: 0, duration: 0.12, ease: "none" }, S + 0.35);
+      tl.fromTo("#" + M + "-araise", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)", immediateRender: false }, S + 0.35);
+      tl.to("#" + M + "-brow", { y: -6, duration: 0.25, ease: "power2.out" }, S + 0.35);
+      tl.fromTo(P + "think", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.8)", immediateRender: false }, S + 0.5);
+      tl.fromTo("#" + M + "-araise", { rotation: 0 }, { rotation: 4, svgOrigin: "624 606", duration: 0.2, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false }, S + 0.7);
+
+      // ================= 4. Calls the saved number =================
+      var C = CUE.call;
+      tl.to(P + "think", { opacity: 0, scale: 0.9, duration: 0.3, ease: "power2.in" }, C + 0.1);
+      tl.to("#" + M + "-brow", { y: 0, duration: 0.25, ease: "power2.out" }, C + 0.2);
+      tl.to("#" + M + "-araise", { opacity: 0, duration: 0.12, ease: "none" }, C + 0.25);
+      tl.set(P + "deskphone", { opacity: 0 }, C + 0.3);
+      tl.fromTo("#" + M + "-afront", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out", immediateRender: false }, C + 0.25);
+      tl.to("#" + M + "-head", { rotation: 7, svgOrigin: "590 540", duration: 0.4, ease: "power2.out" }, C + 0.3);
+      tl.fromTo(P + "callout", { opacity: 0, scale: 0.6, x: -60 }, { opacity: 1, scale: 1, x: 0, duration: 0.5, ease: "back.out(1.5)", immediateRender: false }, C + 0.55);
+      // "số điện thoại đã lưu": the saved tag lights up
+      tl.fromTo(P + "saved", { scale: 1, boxShadow: "0 0 0 0px rgba(10,61,145,0)" }, { scale: 1.12, boxShadow: "0 0 0 8px rgba(10,61,145,0.25)", duration: 0.3, ease: "power2.out", immediateRender: false }, CUE.saved);
+      tl.to(P + "saved", { scale: 1, boxShadow: "0 0 0 4px rgba(10,61,145,0.18)", duration: 0.35, ease: "power2.inOut" }, CUE.saved + 0.4);
+      // tap "Gọi"
+      var TAP = CUE.before - 0.1;
+      tl.to(P + "cbtn", { scale: 0.94, duration: 0.08, ease: "power2.in" }, TAP);
+      tl.to(P + "cbtn", { scale: 1, duration: 0.3, ease: "power2.out" }, TAP + 0.1);
+      tl.fromTo(P + "cripple", { opacity: 0.9, scale: 0.3 }, { opacity: 0, scale: 3, duration: 0.7, ease: "power2.out", immediateRender: false }, TAP);
+      // phone to the ear, ringing
+      var EAR = TAP + 0.55;
+      tl.to(P + "callout", { opacity: 0, scale: 0.85, duration: 0.3, ease: "power2.in" }, EAR - 0.1);
+      tl.to("#" + M + "-afront", { opacity: 0, duration: 0.12, ease: "none" }, EAR);
+      tl.fromTo("#" + M + "-aear", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out", immediateRender: false }, EAR);
+      tl.to("#" + M + "-head", { rotation: 0, svgOrigin: "590 540", duration: 0.35, ease: "power2.out" }, EAR);
+      var waves = q(".v3-109-ex-verify-wave");
+      for (var r = 0; r < 3; r++) {
+        waves.forEach(function (w, i) {
+          var t0 = EAR + 0.3 + r * 0.42 + i * 0.1;
+          tl.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none", immediateRender: false }, t0);
+          tl.to(w, { opacity: 0, duration: 0.2, ease: "none" }, t0 + 0.2);
+        });
+      }
+
+      // ================= 5. Split-screen call =================
+      var B = CUE.confirm - 0.3;
+      tl.to(P + "split", { opacity: 1, duration: 0.3, ease: "power1.out" }, B);
+      tl.fromTo(P + "pl", { x: -240 }, { x: 0, duration: 0.55, ease: "power3.out", immediateRender: false }, B);
+      tl.fromTo(P + "pr", { x: 240 }, { x: 0, duration: 0.55, ease: "power3.out", immediateRender: false }, B);
+      tl.set(P + "sceneA", { opacity: 0 }, B + 0.4);
+      var swaves = q(".v3-109-ex-verify-swave");
+      for (var k = 0; k < 2; k++) {
+        swaves.forEach(function (w, i) {
+          var t0 = B + 0.4 + k * 0.4 + (i % 2) * 0.1;
+          tl.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none", immediateRender: false }, t0);
+          tl.to(w, { opacity: 0, duration: 0.2, ease: "none" }, t0 + 0.2);
+        });
+      }
+      // the partner reacts and speaks
+      var D = CUE.deny - 0.25;
+      tl.fromTo("#v3-109-ex-verify-sp-head", { rotation: 0 }, { rotation: -4, svgOrigin: "590 540", duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false }, D);
+      tl.to("#v3-109-ex-verify-sp-brow", { y: -6, duration: 0.2, ease: "power2.out" }, D);
+      tl.fromTo(P + "speech", { opacity: 0, scale: 0.6, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.7)", immediateRender: false }, D);
+      tl.to("#v3-109-ex-verify-sm-brow", { y: -7, duration: 0.25, ease: "power2.out" }, D + 0.3);
+      tl.to("#v3-109-ex-verify-sm-mouth", { scaleY: -1, svgOrigin: "636 525", duration: 0.2, ease: "power2.out" }, D + 0.3);
+      // the email gets stamped "GIẢ MẠO"
+      var ST = CUE.thatmail;
+      tl.fromTo(P + "mini", { opacity: 0, y: 120, rotation: 3 }, { opacity: 1, y: 0, rotation: -2, duration: 0.4, ease: "power3.out", immediateRender: false }, ST - 0.35);
+      tl.fromTo(P + "stamp", { opacity: 0, scale: 2.0, rotation: -22 }, { opacity: 1, scale: 1, rotation: -10, duration: 0.28, ease: "power3.in", immediateRender: false }, ST + 0.25);
+      tl.to(P + "mini", { keyframes: { x: [0, -10, 8, -5, 0] }, duration: 0.25, ease: "none" }, ST + 0.53);
+
+      // ================= 6. Outcome: transfer cancelled, money kept =================
+      var O = CUE.onecall - 0.15;
+      tl.to(P + "out", { opacity: 1, duration: 0.4, ease: "power1.inOut" }, O);
+      tl.fromTo(P + "ocard", { y: 30 }, { y: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, O);
+      tl.to(P + "obtn", { backgroundColor: "#94A3B8", duration: 0.3, ease: "none" }, O + 0.45);
+      tl.fromTo(P + "cancel", { opacity: 0, scale: 2, rotation: -20 }, { opacity: 1, scale: 1, rotation: -9, duration: 0.28, ease: "power3.in", immediateRender: false }, O + 0.45);
+      tl.to(P + "ocard", { keyframes: { x: [0, -8, 6, -3, 0] }, duration: 0.24, ease: "none" }, O + 0.73);
+      // cash stacks settle on the shelves, then bounce once and get the green check
+      var K = CUE.keep;
+      var stacks = q("#v3-109-ex-verify-cash > g");
+      tl.fromTo(stacks, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "bounce.out", stagger: 0.06, immediateRender: false }, O + 0.15);
+      tl.fromTo(stacks, { y: 0 }, { y: -14, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1, stagger: 0.03, immediateRender: false }, K);
+      gsap.set(P + "check", { opacity: 0 });
+      tl.fromTo(P + "check", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)", immediateRender: false }, K + 0.2);
+      tl.to(P + "checkp", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, K + 0.4);
+      tl.fromTo(P + "kept", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, K + 0.5);
+      // takeaway
+      tl.fromTo(P + "take", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, CUE.takeaway);
+      // calm hold: one soft glow on the check
+      tl.fromTo(P + "check", { scale: 1 }, { scale: 1.06, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, CUE.big + 0.6);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-109-ex-verify"] = tl;
+    })();
+  </script>
+</template>

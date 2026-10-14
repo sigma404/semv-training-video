@@ -1,0 +1,477 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-103-ex-leak-scene *, .v3-103-ex-leak-scene *::before, .v3-103-ex-leak-scene *::after { box-sizing: border-box; }
+    .v3-103-ex-leak-bg { position: absolute; inset: 0; background: #FFFFFF; }
+    .v3-103-ex-leak-scene { position: absolute; inset: 0; overflow: hidden; }
+    .v3-103-ex-leak-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    .v3-103-ex-leak-office { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+
+    /* monitor screen: 480x300 world px; UI authored at 1600x1000 and scaled 0.3 */
+    .v3-103-ex-leak-screen { position: absolute; left: 820px; top: 380px; width: 480px; height: 300px; overflow: hidden; border-radius: 4px; background: #F8FAFC; }
+    .v3-103-ex-leak-ui { position: absolute; left: 0; top: 0; width: 1600px; height: 1000px; transform: scale(0.3); transform-origin: 0 0; overflow: hidden; background: #F8FAFC; }
+    .v3-103-ex-leak-compose { position: absolute; inset: 0; background: #FFFFFF; }
+    .v3-103-ex-leak-topbar { position: absolute; left: 0; top: 0; right: 0; height: 90px; background: #0A3D91; display: flex; align-items: center; padding: 0 44px; gap: 22px; color: #FFFFFF; font-size: 34px; font-weight: 700; }
+    .v3-103-ex-leak-topbar svg { width: 44px; height: 44px; display: block; }
+    .v3-103-ex-leak-frow { position: absolute; left: 0; right: 0; height: 104px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; padding: 0 50px; gap: 24px; }
+    .v3-103-ex-leak-flab { flex: 0 0 150px; font-size: 34px; font-weight: 600; color: #64748B; }
+    .v3-103-ex-leak-subj { font-size: 40px; font-weight: 700; color: #0F172A; white-space: nowrap; }
+    .v3-103-ex-leak-chip { position: relative; height: 66px; padding: 0 28px 0 12px; border-radius: 33px; background: rgba(220, 38, 38, 0.08); display: flex; align-items: center; gap: 14px; font-size: 36px; font-weight: 700; color: #B91C1C; white-space: nowrap; }
+    .v3-103-ex-leak-chip-ava { width: 46px; height: 46px; border-radius: 50%; background: #94A3B8; }
+    .v3-103-ex-leak-chipring { position: absolute; left: -14px; top: -14px; width: calc(100% + 28px); height: calc(100% + 28px); overflow: visible; display: block; }
+    .v3-103-ex-leak-tagred { height: 58px; padding: 0 24px; border-radius: 29px; background: #dc2626; color: #FFFFFF; font-size: 32px; font-weight: 700; line-height: 58px; white-space: nowrap; margin-left: 20px; }
+    .v3-103-ex-leak-line { position: absolute; left: 50px; height: 22px; border-radius: 11px; background: #E2E8F0; }
+    .v3-103-ex-leak-att {
+      position: absolute; left: 50px; top: 560px; width: 800px; height: 170px;
+      border-radius: 14px; background: #F8FAFC;
+      box-shadow: 0 0 0 2px #CBD5E1;
+      display: flex; align-items: center; gap: 28px; padding: 0 30px;
+    }
+    .v3-103-ex-leak-att svg { flex: 0 0 92px; width: 92px; height: 110px; display: block; }
+    .v3-103-ex-leak-fname { font-size: 38px; font-weight: 700; color: #0F172A; white-space: nowrap; line-height: 1.25; }
+    .v3-103-ex-leak-fsize { font-size: 30px; font-weight: 500; color: #64748B; line-height: 1.3; }
+    .v3-103-ex-leak-mat {
+      position: absolute; right: -60px; top: -34px;
+      width: 190px; height: 84px;
+      border: 6px solid #dc2626; border-radius: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #dc2626; font-size: 46px; font-weight: 800; letter-spacing: 0.08em;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v3-103-ex-leak-send {
+      position: absolute; left: 50px; top: 820px; width: 260px; height: 110px;
+      border-radius: 14px; background: #0A3D91; color: #FFFFFF;
+      font-size: 44px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 18px;
+      box-shadow: 0 14px 30px rgba(10, 61, 145, 0.28);
+    }
+    .v3-103-ex-leak-send svg { width: 46px; height: 46px; display: block; }
+    .v3-103-ex-leak-drop {
+      position: absolute; left: 200px; top: 182px; width: 980px;
+      background: #FFFFFF; border-radius: 14px;
+      box-shadow: 0 0 0 2px #CBD5E1, 0 24px 50px rgba(15, 23, 42, 0.18);
+      padding: 14px;
+    }
+    .v3-103-ex-leak-opt { position: relative; height: 128px; border-radius: 12px; display: flex; align-items: center; gap: 26px; padding: 0 24px; }
+    .v3-103-ex-leak-opt-hi { background: rgba(10, 61, 145, 0.10); }
+    .v3-103-ex-leak-oava { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; color: #FFFFFF; font-size: 30px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .v3-103-ex-leak-oaddr { font-size: 40px; font-weight: 700; color: #0F172A; white-space: nowrap; line-height: 1.2; }
+    .v3-103-ex-leak-ocomp { font-size: 30px; font-weight: 500; color: #64748B; line-height: 1.3; }
+    .v3-103-ex-leak-optring { position: absolute; inset: -6px; border-radius: 16px; box-shadow: 0 0 0 5px #dc2626; }
+    .v3-103-ex-leak-cursor { position: absolute; left: 0; top: 0; width: 78px; height: 98px; transform-origin: 8% 6%; }
+    .v3-103-ex-leak-cursor svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .v3-103-ex-leak-ripple { position: absolute; width: 200px; height: 200px; margin-left: -100px; margin-top: -100px; border-radius: 50%; border: 6px solid #0A3D91; background: rgba(10, 61, 145, 0.12); }
+    .v3-103-ex-leak-mailenv { position: absolute; left: 600px; top: 300px; width: 400px; height: 280px; }
+    .v3-103-ex-leak-mailenv svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    /* scene B */
+    .v3-103-ex-leak-b { position: absolute; inset: 0; background: #F4F7FC; }
+    .v3-103-ex-leak-bcam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 50% 40%; }
+    .v3-103-ex-leak-paths { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+    .v3-103-ex-leak-bld { position: absolute; width: 300px; height: 280px; }
+    .v3-103-ex-leak-bld svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .v3-103-ex-leak-blab { position: absolute; width: 420px; margin-left: -210px; text-align: center; font-size: 32px; font-weight: 700; color: #0F172A; line-height: 1.3; white-space: nowrap; }
+    .v3-103-ex-leak-env { position: absolute; left: -60px; top: -42px; width: 120px; height: 84px; }
+    .v3-103-ex-leak-env svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .v3-103-ex-leak-paper { position: absolute; left: -34px; top: -42px; width: 68px; height: 84px; }
+    .v3-103-ex-leak-paper svg { width: 100%; height: 100%; display: block; }
+    .v3-103-ex-leak-burst { position: absolute; width: 360px; height: 360px; margin-left: -180px; margin-top: -180px; display: block; overflow: visible; }
+    .v3-103-ex-leak-heart { position: absolute; left: -46px; top: -42px; width: 92px; height: 84px; }
+    .v3-103-ex-leak-heart svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    .v3-103-ex-leak-cons { position: absolute; left: 170px; top: 600px; width: 1580px; height: 210px; display: flex; gap: 40px; }
+    .v3-103-ex-leak-con {
+      position: relative; flex: 0 0 500px; height: 200px;
+      border-radius: 14px; background: #FFFFFF;
+      display: flex; align-items: center; gap: 26px; padding: 0 30px;
+      transform-origin: center;
+    }
+    .v3-103-ex-leak-cico { position: relative; flex: 0 0 112px; width: 112px; height: 112px; border-radius: 50%; background: rgba(220, 38, 38, 0.08); }
+    .v3-103-ex-leak-cico svg { position: absolute; left: 20px; top: 20px; width: 72px; height: 72px; display: block; overflow: visible; }
+    .v3-103-ex-leak-clab { font-size: 34px; font-weight: 700; color: #0F172A; line-height: 1.25; }
+
+    .v3-103-ex-leak-tag {
+      position: absolute; left: 56px; top: 44px;
+      height: 56px; padding: 0 26px 0 20px;
+      border-radius: 28px;
+      background: #0A3D91; color: #FFFFFF;
+      font-size: 28px; font-weight: 700;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25);
+      white-space: nowrap;
+    }
+    .v3-103-ex-leak-tag svg { width: 30px; height: 30px; display: block; }
+    .v3-103-ex-leak-takewrap { position: absolute; left: 0; right: 0; top: 880px; height: 120px; display: flex; justify-content: center; }
+    .v3-103-ex-leak-take {
+      height: 116px; padding: 0 52px 0 30px;
+      border-radius: 18px; background: #FFFFFF;
+      box-shadow: 0 0 0 3px #dc2626, 0 20px 44px rgba(220, 38, 38, 0.18);
+      display: flex; align-items: center; gap: 24px;
+      font-size: 46px; font-weight: 800; color: #0F172A; letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .v3-103-ex-leak-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #dc2626; display: flex; align-items: center; justify-content: center; }
+    .v3-103-ex-leak-take-ico svg { width: 42px; height: 42px; display: block; }
+  </style>
+
+  <div id="root" data-composition-id="v3-103-ex-leak" data-width="1920" data-height="1080" data-duration="17.319">
+    <div class="v3-103-ex-leak-bg clip" id="v3-103-ex-leak-bg" data-start="0" data-duration="17.319" data-track-index="0"></div>
+
+    <!-- ============ SCENE A: Tuấn at his desk → compose window ============ -->
+    <div class="v3-103-ex-leak-scene" id="v3-103-ex-leak-sceneA">
+      <div class="v3-103-ex-leak-world" id="v3-103-ex-leak-world">
+        <svg class="v3-103-ex-leak-office" viewBox="0 0 1920 1080">
+          <rect x="0" y="0" width="1920" height="1080" fill="#EEF3FB" />
+          <rect x="0" y="880" width="1920" height="200" fill="#DCE5F3" />
+          <rect x="140" y="130" width="420" height="330" rx="14" fill="#FFFFFF" />
+          <rect x="162" y="152" width="376" height="286" rx="6" fill="#D4E5FB" />
+          <circle cx="470" cy="214" r="34" fill="#FDE68A" />
+          <g id="v3-103-ex-leak-cloud1"><ellipse cx="250" cy="220" rx="56" ry="20" fill="#FFFFFF" /><ellipse cx="278" cy="206" rx="34" ry="20" fill="#FFFFFF" /></g>
+          <path d="M162 438 V370 H210 V340 H262 V384 H300 V320 H356 V360 H404 V350 H452 V392 H500 V362 H538 V438 Z" fill="#B9D0F0" />
+          <rect x="346" y="152" width="8" height="286" fill="#FFFFFF" />
+          <rect x="162" y="291" width="376" height="8" fill="#FFFFFF" />
+          <rect x="128" y="458" width="444" height="16" rx="8" fill="#FFFFFF" />
+          <!-- clock 4:55 -->
+          <circle cx="1560" cy="230" r="80" fill="#FFFFFF" stroke="#334155" stroke-width="8" />
+          <g stroke="#94A3B8" stroke-width="6" stroke-linecap="round"><path d="M1560 164v12M1626 230h-12M1560 296v-12M1494 230h12" /></g>
+          <path d="M1560 230 L1590 268" stroke="#0F172A" stroke-width="9" stroke-linecap="round" />
+          <path d="M1560 230 L1534 180" stroke="#0F172A" stroke-width="6" stroke-linecap="round" />
+          <circle cx="1560" cy="230" r="8" fill="#0A3D91" />
+          <!-- shelf -->
+          <rect x="1380" y="440" width="340" height="14" rx="7" fill="#94A3B8" />
+          <rect x="1404" y="356" width="34" height="84" rx="4" fill="#0A3D91" />
+          <rect x="1444" y="368" width="30" height="72" rx="4" fill="#3B6CC4" />
+          <rect x="1480" y="350" width="34" height="90" rx="4" fill="#94A3B8" />
+          <rect x="1520" y="386" width="40" height="54" rx="4" fill="#CBD5E1" transform="rotate(-12 1540 440)" />
+          <!-- chair -->
+          <rect x="392" y="560" width="78" height="240" rx="32" fill="#334155" />
+          <rect x="408" y="590" width="46" height="170" rx="20" fill="#475569" />
+          <!-- Tuấn (body) -->
+          <g id="v3-103-ex-leak-tuan">
+            <path d="M494 772 C490 660 506 590 572 578 L606 578 C658 584 676 650 676 772 Z" fill="#0E7490" />
+            <path d="M566 580 L589 612 L612 580 Z" fill="#FFFFFF" />
+            <rect x="572" y="530" width="34" height="56" rx="10" fill="#E8B48C" />
+            <g id="v3-103-ex-leak-head">
+              <circle cx="588" cy="478" r="64" fill="#F6CDA8" />
+              <path d="M522 482 C512 418 556 398 602 404 C648 410 666 440 660 462 C630 450 600 452 580 466 C566 478 556 496 548 524 C532 514 524 500 522 482 Z" fill="#1E293B" />
+              <path d="M566 404 C586 380 622 384 640 404 C624 400 600 402 584 412 Z" fill="#1E293B" />
+              <circle cx="560" cy="494" r="13" fill="#E8B48C" />
+              <path id="v3-103-ex-leak-brow" d="M612 456 Q626 448 640 456" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />
+              <ellipse id="v3-103-ex-leak-eye" cx="628" cy="482" rx="6.5" ry="9" fill="#0F172A" />
+              <path d="M646 478 Q666 494 648 506 Z" fill="#F6CDA8" />
+              <circle cx="618" cy="504" r="10" fill="#F59E9E" opacity="0.45" />
+              <path d="M626 522 Q636 529 645 521" stroke="#9A3412" stroke-width="4" fill="none" stroke-linecap="round" />
+              <!-- hurry sweat drop -->
+              <path id="v3-103-ex-leak-sweat" d="M664 432 C672 446 674 454 666 458 C658 460 654 452 664 432 Z" fill="#60A5FA" />
+            </g>
+          </g>
+          <!-- monitor -->
+          <rect x="1030" y="698" width="60" height="50" fill="#94A3B8" />
+          <rect x="976" y="742" width="168" height="20" rx="10" fill="#94A3B8" />
+          <rect x="800" y="360" width="520" height="340" rx="18" fill="#1E293B" />
+          <circle cx="1060" cy="690" r="4" fill="#475569" />
+          <!-- desk -->
+          <rect x="300" y="760" width="1420" height="28" rx="10" fill="#B8C6DB" />
+          <rect x="330" y="788" width="1360" height="300" fill="#D7E0EE" />
+          <rect x="1420" y="816" width="240" height="90" rx="10" fill="#E6ECF5" />
+          <rect x="1510" y="856" width="60" height="10" rx="5" fill="#94A3B8" />
+          <!-- keyboard + mouse -->
+          <rect x="850" y="740" width="340" height="20" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <ellipse cx="800" cy="748" rx="24" ry="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <!-- Tuấn (arm) -->
+          <g id="v3-103-ex-leak-arm">
+            <path d="M622 606 C652 650 668 704 704 738 L776 742" stroke="#0B5F75" stroke-width="40" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="792" cy="740" r="19" fill="#F6CDA8" />
+          </g>
+          <!-- drawings roll + mug -->
+          <rect x="1376" y="702" width="58" height="58" rx="12" fill="#FFFFFF" stroke="#0A3D91" stroke-width="5" />
+          <path d="M1434 716 C1454 716 1454 744 1434 744" stroke="#0A3D91" stroke-width="5" fill="none" />
+          <rect x="1480" y="728" width="200" height="32" rx="16" fill="#DCE7F8" stroke="#3B6CC4" stroke-width="4" />
+          <circle cx="1680" cy="744" r="16" fill="#FFFFFF" stroke="#3B6CC4" stroke-width="4" />
+        </svg>
+
+        <div class="v3-103-ex-leak-screen" id="v3-103-ex-leak-screen">
+          <div class="v3-103-ex-leak-ui" id="v3-103-ex-leak-ui">
+            <div class="v3-103-ex-leak-compose" id="v3-103-ex-leak-compose">
+              <div class="v3-103-ex-leak-topbar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z" /><path d="m13.5 6.5 4 4" /></svg>
+                <span>Thư mới</span>
+              </div>
+              <div class="v3-103-ex-leak-frow" style="top: 90px">
+                <div class="v3-103-ex-leak-flab">Tới:</div>
+                <div class="v3-103-ex-leak-chip" id="v3-103-ex-leak-chip">
+                  <div class="v3-103-ex-leak-chip-ava"></div>
+                  <span>nguyen.an@ktec-vn.com</span>
+                  <svg class="v3-103-ex-leak-chipring" viewBox="0 0 300 80" preserveAspectRatio="none"><path id="v3-103-ex-leak-chipring-p" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M34 10 C110 -2 236 0 284 18 C304 32 298 62 250 72 C176 84 70 82 22 66 C-2 56 4 26 46 10 C80 2 120 0 150 2" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke" /></svg>
+                </div>
+                <div class="v3-103-ex-leak-tagred" id="v3-103-ex-leak-tagred">Khách hàng khác</div>
+              </div>
+              <div class="v3-103-ex-leak-frow" style="top: 194px">
+                <div class="v3-103-ex-leak-flab">Tiêu đề:</div>
+                <div class="v3-103-ex-leak-subj">Bản vẽ sản phẩm</div>
+              </div>
+              <div class="v3-103-ex-leak-line" style="top: 350px; width: 1300px"></div>
+              <div class="v3-103-ex-leak-line" style="top: 400px; width: 1180px"></div>
+              <div class="v3-103-ex-leak-line" style="top: 450px; width: 760px"></div>
+              <div class="v3-103-ex-leak-att" id="v3-103-ex-leak-att">
+                <svg viewBox="0 0 92 110"><path d="M8 8 a8 8 0 0 1 8 -8 h46 l26 26 v76 a8 8 0 0 1 -8 8 h-64 a8 8 0 0 1 -8 -8 z" fill="#FEE2E2" stroke="#dc2626" stroke-width="4" /><path d="M62 0 v26 h26" fill="none" stroke="#dc2626" stroke-width="4" /><rect x="14" y="62" width="58" height="28" rx="5" fill="#dc2626" /><path d="M24 72 h38 M24 80 h26" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" /></svg>
+                <div><div class="v3-103-ex-leak-fname">Ban-ve-san-pham.pdf</div><div class="v3-103-ex-leak-fsize">2,4 MB</div></div>
+                <div class="v3-103-ex-leak-mat" id="v3-103-ex-leak-mat">MẬT</div>
+              </div>
+              <div class="v3-103-ex-leak-send" id="v3-103-ex-leak-send">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10 14" /><path d="m21 3-7 18-4-7-7-4z" /></svg>
+                <span>Gửi</span>
+              </div>
+              <div class="v3-103-ex-leak-ripple" id="v3-103-ex-leak-ripple" style="left: 180px; top: 875px"></div>
+              <div class="v3-103-ex-leak-drop" id="v3-103-ex-leak-drop" data-layout-allow-overlap>
+                <div class="v3-103-ex-leak-opt v3-103-ex-leak-opt-hi" id="v3-103-ex-leak-opt1">
+                  <div class="v3-103-ex-leak-oava" style="background: #94A3B8">AN</div>
+                  <div><div class="v3-103-ex-leak-oaddr">nguyen.an@ktec-vn.com</div><div class="v3-103-ex-leak-ocomp">Công ty KTEC</div></div>
+                  <div class="v3-103-ex-leak-optring" id="v3-103-ex-leak-optring"></div>
+                </div>
+                <div class="v3-103-ex-leak-opt" id="v3-103-ex-leak-opt2">
+                  <div class="v3-103-ex-leak-oava" style="background: #0A3D91">AN</div>
+                  <div><div class="v3-103-ex-leak-oaddr">nguyen.an@ktech-vn.com</div><div class="v3-103-ex-leak-ocomp">Công ty KTECH</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="v3-103-ex-leak-mailenv" id="v3-103-ex-leak-mailenv">
+              <svg viewBox="0 0 400 280"><rect x="10" y="10" width="380" height="260" rx="22" fill="#FFFFFF" stroke="#0A3D91" stroke-width="10" /><path d="M24 30 L200 160 L376 30" fill="none" stroke="#0A3D91" stroke-width="10" stroke-linejoin="round" /><rect x="250" y="190" width="110" height="50" rx="8" fill="none" stroke="#dc2626" stroke-width="6" /><path d="M268 215h74" stroke="#dc2626" stroke-width="6" stroke-linecap="round" /></svg>
+            </div>
+            <div class="v3-103-ex-leak-cursor" id="v3-103-ex-leak-cursor">
+              <svg viewBox="0 0 24 30"><path d="M2 2 L2 24 L8 18.5 L12 27.5 L15.6 26 L11.8 17.2 L19.5 17.2 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.6" stroke-linejoin="round" /></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCENE B: the email flies to the wrong customer ============ -->
+    <div class="v3-103-ex-leak-scene v3-103-ex-leak-b" id="v3-103-ex-leak-sceneB">
+      <div class="v3-103-ex-leak-bcam" id="v3-103-ex-leak-bcam">
+        <svg class="v3-103-ex-leak-paths" viewBox="0 0 1920 1080">
+          <path d="M440 260 C700 60 900 80 1100 230" fill="none" stroke="#94A3B8" stroke-width="5" stroke-dasharray="4 16" stroke-linecap="round" />
+          <path id="v3-103-ex-leak-route" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M440 260 C760 20 1340 20 1600 230" fill="none" stroke="#dc2626" stroke-width="6" stroke-linecap="round" />
+        </svg>
+        <!-- SEMV -->
+        <div class="v3-103-ex-leak-bld" style="left: 180px; top: 200px">
+          <svg viewBox="0 0 300 280"><rect x="40" y="40" width="220" height="230" rx="12" fill="#0A3D91" /><rect x="40" y="40" width="220" height="40" rx="12" fill="#08337A" /><g fill="#DCE7F8"><rect x="70" y="100" width="44" height="34" rx="5" /><rect x="128" y="100" width="44" height="34" rx="5" /><rect x="186" y="100" width="44" height="34" rx="5" /><rect x="70" y="152" width="44" height="34" rx="5" /><rect x="128" y="152" width="44" height="34" rx="5" /><rect x="186" y="152" width="44" height="34" rx="5" /></g><rect x="122" y="206" width="56" height="64" rx="6" fill="#FFFFFF" /><rect x="20" y="266" width="260" height="10" rx="5" fill="#94A3B8" /></svg>
+        </div>
+        <div class="v3-103-ex-leak-blab" style="left: 330px; top: 486px">SEMV</div>
+        <!-- intended customer -->
+        <div class="v3-103-ex-leak-bld" id="v3-103-ex-leak-bldA" style="left: 960px; top: 200px">
+          <svg viewBox="0 0 300 280"><rect x="50" y="70" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#3B6CC4" stroke-width="6" /><g fill="#DCE7F8"><rect x="78" y="100" width="40" height="32" rx="5" /><rect x="130" y="100" width="40" height="32" rx="5" /><rect x="182" y="100" width="40" height="32" rx="5" /><rect x="78" y="150" width="40" height="32" rx="5" /><rect x="130" y="150" width="40" height="32" rx="5" /><rect x="182" y="150" width="40" height="32" rx="5" /></g><rect x="124" y="206" width="52" height="64" rx="6" fill="#3B6CC4" /><rect x="20" y="266" width="260" height="10" rx="5" fill="#94A3B8" /></svg>
+        </div>
+        <div class="v3-103-ex-leak-blab" style="left: 1110px; top: 486px">Khách hàng</div>
+        <!-- wrong customer -->
+        <div class="v3-103-ex-leak-bld" id="v3-103-ex-leak-bldB" style="left: 1450px; top: 200px">
+          <svg viewBox="0 0 300 280"><rect id="v3-103-ex-leak-bldB-body" x="50" y="70" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="6" /><g fill="#E2E8F0"><rect x="78" y="100" width="40" height="32" rx="5" /><rect x="130" y="100" width="40" height="32" rx="5" /><rect x="182" y="100" width="40" height="32" rx="5" /><rect x="78" y="150" width="40" height="32" rx="5" /><rect x="130" y="150" width="40" height="32" rx="5" /><rect x="182" y="150" width="40" height="32" rx="5" /></g><rect x="124" y="206" width="52" height="64" rx="6" fill="#94A3B8" /><rect x="20" y="266" width="260" height="10" rx="5" fill="#94A3B8" /></svg>
+        </div>
+        <div class="v3-103-ex-leak-blab" id="v3-103-ex-leak-labB" style="left: 1600px; top: 486px">Khách hàng khác</div>
+        <svg class="v3-103-ex-leak-burst" id="v3-103-ex-leak-burst" style="left: 1600px; top: 330px" viewBox="-180 -180 360 360">
+          <circle id="v3-103-ex-leak-burst-c" r="120" fill="rgba(220,38,38,0.12)" stroke="#dc2626" stroke-width="8" />
+          <g stroke="#dc2626" stroke-width="10" stroke-linecap="round" id="v3-103-ex-leak-rays"><path d="M0 -150v-26M106 -106l18 -18M150 0h26M106 106l18 18M0 150v26M-106 106l-18 18M-150 0h-26M-106 -106l-18 -18" /></g>
+        </svg>
+        <div id="v3-103-ex-leak-papers"></div>
+        <div class="v3-103-ex-leak-env" id="v3-103-ex-leak-env">
+          <svg viewBox="0 0 120 84"><rect x="3" y="3" width="114" height="78" rx="10" fill="#FFFFFF" stroke="#0A3D91" stroke-width="5" /><path d="M8 10 L60 48 L112 10" fill="none" stroke="#0A3D91" stroke-width="5" stroke-linejoin="round" /><circle cx="100" cy="66" r="12" fill="#dc2626" /></svg>
+        </div>
+        <div class="v3-103-ex-leak-heart" id="v3-103-ex-leak-heart" style="left: 1110px; top: 214px">
+          <svg viewBox="0 0 92 84">
+            <g id="v3-103-ex-leak-hl"><path d="M46 80 L10 44 C-6 26 4 2 24 4 C34 5 42 12 46 20 L40 34 L50 46 L40 60 Z" fill="#dc2626" /></g>
+            <g id="v3-103-ex-leak-hr"><path d="M46 80 L82 44 C98 26 88 2 68 4 C58 5 50 12 46 20 L40 34 L50 46 L40 60 Z" fill="#dc2626" /></g>
+          </svg>
+        </div>
+
+        <div class="v3-103-ex-leak-cons" id="v3-103-ex-leak-cons">
+          <div class="v3-103-ex-leak-con" id="v3-103-ex-leak-con1">
+            <div class="v3-103-ex-leak-cico"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5 3.8 12.6A4.9 4.9 0 0 1 12 6.2a4.9 4.9 0 0 1 8.2 6.4z" /><path d="m12 6.2-1.6 4 2.6 2.2-2 3.4" /></svg></div>
+            <div class="v3-103-ex-leak-clab">Mất niềm tin</div>
+          </div>
+          <div class="v3-103-ex-leak-con" id="v3-103-ex-leak-con2">
+            <div class="v3-103-ex-leak-cico"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2" /><path d="M9 4V3h6v1" /><g id="v3-103-ex-leak-ox"><path d="m9.5 10.5 5 5M14.5 10.5l-5 5" stroke-width="2.6" /></g></svg></div>
+            <div class="v3-103-ex-leak-clab">Đơn hàng bị hủy</div>
+          </div>
+          <div class="v3-103-ex-leak-con" id="v3-103-ex-leak-con3">
+            <div class="v3-103-ex-leak-cico"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="13" height="13" rx="2" /><path d="M3 9h13M7 3v4M12 3v4" /><g id="v3-103-ex-leak-gear"><circle cx="17.5" cy="17.5" r="2" /><path d="M17.5 13v1.5M17.5 20.5V22M13 17.5h1.5M20.5 17.5H22M14.3 14.3l1.1 1.1M19.6 19.6l1.1 1.1M14.3 20.7l1.1-1.1M19.6 15.4l1.1-1.1" /></g></svg></div>
+            <div class="v3-103-ex-leak-clab">Kế hoạch sản xuất thay đổi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v3-103-ex-leak-takewrap">
+      <div class="v3-103-ex-leak-take" id="v3-103-ex-leak-take">
+        <div class="v3-103-ex-leak-take-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z" /><path d="M12 10v4.5M12 17.2v.3" /></svg></div>
+        <span>Một sơ suất nhỏ — thiệt hại rất lớn</span>
+      </div>
+    </div>
+
+    <div class="v3-103-ex-leak-tag" id="v3-103-ex-leak-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+      <span>Ví dụ thực tế</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="v3-103-ex-leak"]');
+      var PX = "v3-103-ex-leak-";
+      var $ = function (id) { return root.querySelector("#" + PX + id); };
+      var CUE = /*hf-cues:start*/{"tuan":0,"drawing":0.88,"but":1.72,"wrong":2.16,"addr":2.68,"other":3.4,"info":4.66,"leak":5.56,"cust":7.18,"trust":7.74,"order":8.42,"cancel":9.06,"plan":9.68,"small":12}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/16.819/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+
+      function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; }
+      var MON = [1060, 530], Z = 3.1;
+
+      // leaked papers (deterministic)
+      var PAPERS = [[1600, 330, 1360, 560, -24], [1600, 330, 1830, 150, 28], [1600, 330, 1860, 520, 40], [1600, 330, 1380, 120, -36], [1600, 330, 1720, 600, 14]];
+      var host = $("papers");
+      PAPERS.forEach(function () {
+        var d = document.createElement("div");
+        d.className = PX + "paper";
+        d.innerHTML = '<svg viewBox="0 0 68 84"><path d="M4 6 a6 6 0 0 1 6 -6 h34 l20 20 v58 a6 6 0 0 1 -6 6 h-48 a6 6 0 0 1 -6 -6 z" fill="#FFFFFF" stroke="#0A3D91" stroke-width="3" /><path d="M14 34h40M14 46h40M14 58h26" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round" /><rect x="10" y="10" width="30" height="14" rx="3" fill="none" stroke="#dc2626" stroke-width="3" /></svg>';
+        host.appendChild(d);
+      });
+      var papers = Array.prototype.slice.call(root.querySelectorAll("." + PX + "paper"));
+
+      // ---------- initial state ----------
+      gsap.set("#" + PX + "world", cam(1, MON[0], MON[1], MON[0], MON[1]));
+      gsap.set(["#" + PX + "att", "#" + PX + "drop", "#" + PX + "chip", "#" + PX + "tagred", "#" + PX + "optring", "#" + PX + "ripple", "#" + PX + "mailenv", "#" + PX + "cursor", "#" + PX + "sweat"], { opacity: 0 });
+      gsap.set("#" + PX + "cursor", { x: 1300, y: 760 });
+      gsap.set("#" + PX + "sceneB", { opacity: 0 });
+      gsap.set(["#" + PX + "env", "#" + PX + "burst", "#" + PX + "take", "#" + PX + "heart"], { opacity: 0 });
+      gsap.set(papers, { opacity: 0 });
+      var cons = ["#" + PX + "con1", "#" + PX + "con2", "#" + PX + "con3"];
+      gsap.set(cons, { opacity: 0, y: 30 });
+      gsap.set("#" + PX + "ox", { opacity: 0 });
+
+      // ================= 1. Tuấn in a hurry =================
+      tl.fromTo("#" + PX + "world", cam(1, MON[0], MON[1], MON[0], MON[1]), Object.assign(cam(1.06, MON[0], MON[1], MON[0], MON[1] - 6), { duration: CUE.tuan + 0.4, ease: "sine.inOut" }), 0);
+      tl.fromTo("#" + PX + "cloud1", { x: 0 }, { x: 30, duration: 3, ease: "none" }, 0);
+      // fast typing: arm jitter
+      tl.fromTo("#" + PX + "arm", { x: 0, y: 0 }, { keyframes: { x: [0, 8, -3, 9, -2, 7, 0, 8, -3, 6, 0], y: [0, -5, 0, -6, 0, -4, 0, -6, 0, -4, 0] }, duration: 1.6, ease: "none" }, 0);
+      tl.fromTo("#" + PX + "tuan", { y: 0 }, { keyframes: { y: [0, -3, 0, -3, 0] }, duration: 1.6, ease: "none" }, 0);
+      tl.fromTo("#" + PX + "sweat", { opacity: 0, y: -6 }, { opacity: 1, y: 6, duration: 0.6, ease: "power1.in", immediateRender: false }, CUE.tuan + 0.1);
+      tl.to("#" + PX + "head", { rotation: 3, svgOrigin: "590 540", duration: 0.3, ease: "power2.out" }, CUE.tuan);
+
+      // push into the monitor
+      tl.to("#" + PX + "world", Object.assign(cam(Z, MON[0], MON[1], 960, 600), { duration: 1.1, ease: "power3.inOut" }), CUE.tuan + 0.4);
+
+      // attachment lands
+      var D = CUE.drawing;
+      tl.fromTo("#" + PX + "att", { opacity: 0, y: -60, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out", immediateRender: false }, D);
+      tl.fromTo("#" + PX + "mat", { opacity: 0, scale: 1.7, rotation: -18 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.3, ease: "power3.in", immediateRender: false }, D + 0.4);
+
+      // autocomplete suggests two near-identical addresses
+      var B = CUE.but;
+      // opaque from its first frame (a half-faded list lets the subject line bleed through) — unrolls downward instead
+      tl.set("#" + PX + "drop", { opacity: 1 }, B);
+      tl.fromTo("#" + PX + "drop", { clipPath: "inset(0% 0% 100% 0%)", y: -14 }, { clipPath: "inset(0% 0% 0% 0%)", y: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, B);
+      tl.fromTo("#" + PX + "cursor", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none", immediateRender: false }, B);
+      tl.to("#" + PX + "cursor", { x: 880, y: 300, duration: 0.5, ease: "power2.inOut" }, B + 0.05);
+      var W = CUE.wrong;
+      tl.fromTo("#" + PX + "optring", { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, W);
+      tl.to("#" + PX + "opt2", { opacity: 0.55, duration: 0.3, ease: "power2.out" }, W);
+      tl.to("#" + PX + "cursor", { scale: 0.82, duration: 0.08, ease: "power2.in" }, W + 0.25);
+      tl.to("#" + PX + "cursor", { scale: 1, duration: 0.25, ease: "power2.out" }, W + 0.33);
+      // chosen → fills the To field
+      var A = CUE.addr;
+      tl.to("#" + PX + "drop", { clipPath: "inset(0% 0% 100% 0%)", y: -10, duration: 0.25, ease: "power2.in" }, A - 0.05);
+      tl.set("#" + PX + "drop", { opacity: 0 }, A + 0.2);
+      tl.fromTo("#" + PX + "chip", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, A + 0.1);
+      tl.fromTo("#" + PX + "chipring-p", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut", immediateRender: false }, CUE.other - 0.2);
+      tl.fromTo("#" + PX + "tagred", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, CUE.other);
+      // Tuấn hits Send without looking
+      var SN = CUE.info - 0.35;
+      tl.to("#" + PX + "cursor", { x: 200, y: 870, duration: 0.45, ease: "power2.inOut" }, CUE.other - 0.25);
+      tl.to("#" + PX + "cursor", { scale: 0.82, duration: 0.08, ease: "power2.in" }, SN);
+      tl.to("#" + PX + "cursor", { scale: 1, duration: 0.25, ease: "power2.out" }, SN + 0.1);
+      tl.to("#" + PX + "send", { scale: 0.94, duration: 0.08, ease: "power2.in" }, SN);
+      tl.to("#" + PX + "send", { scale: 1, duration: 0.3, ease: "power2.out" }, SN + 0.1);
+      tl.fromTo("#" + PX + "ripple", { opacity: 0.9, scale: 0.2 }, { opacity: 0, scale: 2.2, duration: 0.7, ease: "power2.out", immediateRender: false }, SN);
+      // compose window folds into an envelope that flies away
+      var I = CUE.info;
+      tl.to("#" + PX + "compose", { scale: 0.3, opacity: 0, duration: 0.35, ease: "power2.in" }, I - 0.1);
+      tl.to("#" + PX + "cursor", { opacity: 0, duration: 0.15, ease: "none" }, I - 0.1);
+      tl.fromTo("#" + PX + "mailenv", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power2.out", immediateRender: false }, I + 0.1);
+      tl.to("#" + PX + "mailenv", { x: 1300, y: -700, rotation: 18, scale: 0.6, duration: 0.45, ease: "power2.in" }, I + 0.3);
+
+      // ================= 2. off it goes — to the wrong customer =================
+      var X = I + 0.6;
+      tl.to("#" + PX + "sceneA", { opacity: 0, duration: 0.35, ease: "power1.in" }, X);
+      tl.to("#" + PX + "sceneB", { opacity: 1, duration: 0.35, ease: "power1.out" }, X);
+      tl.fromTo("#" + PX + "bcam", { scale: 1.05 }, { scale: 1, duration: CUE.cust - X, ease: "sine.out" }, X);
+      // envelope along the red route (bezier sampled at build time)
+      var P0 = [440, 260], P1 = [760, 20], P2 = [1340, 20], P3 = [1600, 230];
+      function bez(t, k) { var u = 1 - t; return u * u * u * P0[k] + 3 * u * u * t * P1[k] + 3 * u * t * t * P2[k] + t * t * t * P3[k]; }
+      var F0 = X + 0.15, FD = CUE.leak - 0.15 - F0, NS = 8;
+      tl.set("#" + PX + "env", { x: P0[0], y: P0[1], opacity: 1, rotation: -20 }, F0);
+      tl.to("#" + PX + "route", { strokeDashoffset: 0, duration: FD, ease: "none" }, F0);
+      for (var k = 1; k <= NS; k++) {
+        var t = k / NS;
+        tl.to("#" + PX + "env", { x: bez(t, 0), y: bez(t, 1), rotation: -20 + 45 * t, duration: FD / NS, ease: "none" }, F0 + FD * (k - 1) / NS);
+      }
+      // leak burst
+      var LK = CUE.leak;
+      tl.to("#" + PX + "env", { scale: 1.4, opacity: 0, duration: 0.25, ease: "power2.in" }, LK - 0.15);
+      tl.fromTo("#" + PX + "burst", { opacity: 1, scale: 0.3 }, { opacity: 1, scale: 0.82, duration: 0.4, ease: "power3.out", immediateRender: false }, LK);
+      tl.to("#" + PX + "burst", { opacity: 0.35, duration: 0.8, ease: "power1.out" }, LK + 0.5);
+      tl.to("#" + PX + "burst", { opacity: 0, duration: 0.5, ease: "power1.in" }, CUE.cust - 0.3);
+      tl.to("#" + PX + "bldB-body", { stroke: "#dc2626", fill: "#FEF2F2", duration: 0.3 }, LK);
+      tl.to("#" + PX + "labB", { color: "#B91C1C", duration: 0.3 }, LK);
+      tl.to("#" + PX + "bldB", { keyframes: { x: [0, -8, 7, -4, 0] }, duration: 0.3, ease: "none" }, LK);
+      papers.forEach(function (p, i) {
+        var d = PAPERS[i], at = LK + 0.05 + i * 0.07;
+        tl.fromTo(p, { x: d[0], y: d[1], opacity: 0, rotation: 0, scale: 0.5 }, { x: d[2], y: d[3], opacity: 1, rotation: d[4], scale: 1, duration: 0.7, ease: "power3.out", immediateRender: false }, at);
+        tl.to(p, { y: d[3] + 30, rotation: d[4] * 1.4, duration: 1.2, ease: "sine.inOut" }, at + 0.7);
+      });
+
+      // ================= 3. consequences =================
+      var C = CUE.cust;
+      tl.to(cons, { opacity: 0.4, y: 0, duration: 0.45, ease: "power2.out", stagger: 0.08 }, C - 0.3);
+      tl.to(papers, { opacity: 0, duration: 0.4, ease: "power1.in" }, C - 0.3);
+      var RED_ON = "0 0 0 3px #dc2626, 0 14px 32px rgba(220,38,38,0.18)", OFF = "0 0 0 2px #E2E8F0, 0 0 0 rgba(220,38,38,0)";
+      gsap.set(cons, { boxShadow: OFF, backgroundColor: "#FFFFFF" });
+      function spot(idx, at) {
+        cons.forEach(function (sel, i) {
+          var on = i === idx, rest = idx < 0;
+          tl.to(sel, { opacity: on || rest ? 1 : 0.4, scale: on ? 1.03 : 1, boxShadow: on ? RED_ON : OFF, backgroundColor: on ? "#FEF2F2" : "#FFFFFF", duration: 0.35, ease: "power2.out" }, at);
+        });
+      }
+      spot(0, CUE.trust);
+      // broken heart over the real customer
+      tl.fromTo("#" + PX + "heart", { opacity: 0, y: 30, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)", immediateRender: false }, CUE.trust - 0.1);
+      tl.to("#" + PX + "hl", { x: -12, rotation: -14, svgOrigin: "46 80", duration: 0.35, ease: "power3.out" }, CUE.trust + 0.35);
+      tl.to("#" + PX + "hr", { x: 12, rotation: 14, svgOrigin: "46 80", duration: 0.35, ease: "power3.out" }, CUE.trust + 0.35);
+      spot(1, CUE.order);
+      tl.fromTo("#" + PX + "ox", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, svgOrigin: "12 13", duration: 0.25, ease: "power3.in", immediateRender: false }, CUE.cancel);
+      tl.to("#" + PX + "con2", { keyframes: { x: [0, -6, 5, -3, 0] }, duration: 0.25, ease: "none" }, CUE.cancel + 0.25);
+      spot(2, CUE.plan);
+      tl.fromTo("#" + PX + "gear", { rotation: 0 }, { rotation: 360, svgOrigin: "17.5 17.5", duration: 1.6, ease: "power1.inOut", immediateRender: false }, CUE.plan);
+      // takeaway: recap view + card
+      var T = CUE.small;
+      spot(-1, T - 0.1);
+      tl.fromTo("#" + PX + "take", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, T);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-103-ex-leak"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,316 @@
+<template>
+  <div data-hf-id="hf-px8b" id="root" data-composition-id="v3-02-definition" data-start="0" data-width="1920" data-height="1080" data-duration="18.898">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: "Be Vietnam Pro", sans-serif;
+        color: #0F172A;
+      }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      #v3-02-definition-bg {
+        position: absolute;
+        inset: 0;
+        background: #FFFFFF;
+      }
+
+      #v3-02-definition-stage {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 40%;
+      }
+
+      /* ---------- slide-header ---------- */
+      .v3-02-definition-head {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 84px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #v3-02-definition-eyebrow {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0A3D91;
+      }
+      #v3-02-definition-pill {
+        display: inline-block;
+        border-radius: 100px;
+        background: rgba(10, 61, 145, 0.08);
+        color: #0A3D91;
+        font-weight: 600;
+        font-size: 28px;
+        padding: 10px 30px;
+      }
+      #v3-02-definition-h2 {
+        position: absolute;
+        left: 96px;
+        top: 140px;
+        font-size: 60px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #0F172A;
+        white-space: nowrap;
+      }
+      .v3-02-definition-word {
+        display: inline-block;
+      }
+
+      /* ---------- definition card (split-highlight, focal) ---------- */
+      #v3-02-definition-def {
+        position: absolute;
+        transform-origin: 50% 50%;
+        left: 96px;
+        right: 96px;
+        top: 262px;
+        height: 206px;
+        background: rgba(10, 61, 145, 0.08);
+        border-left: 4px solid #0A3D91;
+        border-radius: 12px;
+        padding: 0 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 14px;
+      }
+      #v3-02-definition-def-l1 {
+        font-size: 52px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #0F172A;
+      }
+      #v3-02-definition-def-l2 {
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #475569;
+      }
+
+      /* ---------- principles label ---------- */
+      #v3-02-definition-label {
+        position: absolute;
+        left: 96px;
+        top: 510px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #475569;
+      }
+      #v3-02-definition-label-rule {
+        width: 60px;
+        height: 4px;
+        border-radius: 2px;
+        background: #0A3D91;
+      }
+
+      /* ---------- triptych ---------- */
+      #v3-02-definition-grid {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 566px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 28px;
+      }
+      .v3-02-definition-card {
+        position: relative;
+        transform-origin: 50% 50%;
+        height: 290px;
+        background: rgba(10, 61, 145, 0.04);
+        border: 1.5px solid rgba(10, 61, 145, 0.2);
+        border-radius: 14px;
+        padding: 36px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .v3-02-definition-ico {
+        width: 80px;
+        height: 80px;
+        color: #0A3D91;
+      }
+      .v3-02-definition-ico svg { width: 100%; height: 100%; display: block; overflow: visible; }
+      .v3-02-definition-ico path, .v3-02-definition-ico circle {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .v3-02-definition-num {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #0A3D91;
+        opacity: 0.55;
+      }
+      .v3-02-definition-name {
+        font-size: 38px;
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        color: #0F172A;
+      }
+    </style>
+
+    <!-- full-bleed ground on its own clip -->
+    <div data-hf-id="hf-dfdo" id="v3-02-definition-bg" class="clip" data-start="0" data-duration="18.898" data-track-index="0"></div>
+
+    <div data-hf-id="hf-73lk" id="v3-02-definition-stage" class="clip" data-start="0" data-duration="18.898" data-track-index="1">
+      <!-- slide-header -->
+      <div data-hf-id="hf-72qt" class="v3-02-definition-head">
+        <div data-hf-id="hf-2l7v" id="v3-02-definition-eyebrow">PHẦN 1/5 · ĐỊNH NGHĨA</div>
+        <span data-hf-id="hf-an21" id="v3-02-definition-pill">Chính sách bảo mật</span>
+      </div>
+      <div data-hf-id="hf-5eoe" id="v3-02-definition-h2"><span data-hf-id="hf-cjdk" class="v3-02-definition-word">Chính</span> <span data-hf-id="hf-5wnz" class="v3-02-definition-word">sách</span> <span data-hf-id="hf-8nms" class="v3-02-definition-word">bảo</span> <span data-hf-id="hf-pjma" class="v3-02-definition-word">mật</span> <span data-hf-id="hf-s3uw" class="v3-02-definition-word">là</span> <span data-hf-id="hf-5mnk" class="v3-02-definition-word">gì?</span></div>
+
+      <!-- definition card -->
+      <div data-hf-id="hf-5pq1" id="v3-02-definition-def">
+        <div data-hf-id="hf-ojzb" id="v3-02-definition-def-l1">Tiêu chuẩn chung về hệ thống thông tin</div>
+        <div data-hf-id="hf-hb86" id="v3-02-definition-def-l2">Quy định cách bảo đảm an ninh cho hệ thống thông tin</div>
+      </div>
+
+      <!-- principles label -->
+      <div data-hf-id="hf-wucu" id="v3-02-definition-label"><span data-hf-id="hf-9bfo" id="v3-02-definition-label-rule"></span><span data-hf-id="hf-s4fl">BA NGUYÊN TẮC CỐT LÕI</span></div>
+
+      <!-- triptych -->
+      <div data-hf-id="hf-w1d8" id="v3-02-definition-grid">
+        <div data-hf-id="hf-1o39" class="v3-02-definition-card" id="v3-02-definition-card1">
+          <div data-hf-id="hf-jzvu" class="v3-02-definition-num">01</div>
+          <div data-hf-id="hf-js2f" class="v3-02-definition-ico" id="v3-02-definition-ico1">
+            <svg data-hf-id="hf-wgi3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path data-hf-id="hf-i1j2" d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+              <path data-hf-id="hf-pseq" d="M21 3v5h-5" />
+              <path data-hf-id="hf-56nx" d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+              <path data-hf-id="hf-8lg6" d="M8 16H3v5" />
+            </svg>
+          </div>
+          <div data-hf-id="hf-ny5i" class="v3-02-definition-name">Cải tiến bảo mật<br data-hf-id="hf-x5px">liên tục</div>
+        </div>
+        <div data-hf-id="hf-5m7a" class="v3-02-definition-card" id="v3-02-definition-card2">
+          <div data-hf-id="hf-ke6v" class="v3-02-definition-num">02</div>
+          <div data-hf-id="hf-b46k" class="v3-02-definition-ico" id="v3-02-definition-ico2">
+            <svg data-hf-id="hf-s357" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle data-hf-id="hf-nb88" cx="9" cy="7" r="4" />
+              <path data-hf-id="hf-jvdc" d="M2 21v-1a6 6 0 0 1 6-6h3" />
+              <path data-hf-id="hf-vgpj" d="M17.5 11.5l4 1.5v2.6c0 2.5-1.7 4.3-4 5.1-2.3-.8-4-2.6-4-5.1V13Z" />
+              <path data-hf-id="hf-n4w2" d="M15.9 16.2l1.2 1.2 2.1-2.3" />
+            </svg>
+          </div>
+          <div data-hf-id="hf-2lfs" class="v3-02-definition-name">Hoàn thành trách nhiệm<br data-hf-id="hf-rsrt">theo vai trò</div>
+        </div>
+        <div data-hf-id="hf-brx3" class="v3-02-definition-card" id="v3-02-definition-card3">
+          <div data-hf-id="hf-kshw" class="v3-02-definition-num">03</div>
+          <div data-hf-id="hf-bvud" class="v3-02-definition-ico" id="v3-02-definition-ico3">
+            <svg data-hf-id="hf-rou6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path data-hf-id="hf-wqg3" d="M12 3.5 21.5 20h-19Z" />
+              <path data-hf-id="hf-gfzk" d="M12 10v4.5" />
+              <path data-hf-id="hf-1h9a" d="M12 17.4v.2" />
+            </svg>
+          </div>
+          <div data-hf-id="hf-s9pt" class="v3-02-definition-name">Đánh giá rủi ro<br data-hf-id="hf-szow">qua mối đe dọa</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var root = document.querySelector('[data-composition-id="v3-02-definition"]');
+        function $$(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+
+        var CUE = /*hf-cues:start*/{"def":3.48,"p1":8.92,"p2":11.38,"p3":14.22,"rest":16.72}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/18.398/*hf-dur:end*/;
+        var tl = gsap.timeline({ paused: true });
+
+        // ---- svg-path-draw setup: measured lengths ----
+        function prep(el) {
+          var len = 0;
+          try { len = el.getTotalLength(); } catch (e) { len = 0; }
+          if (!len || !isFinite(len)) len = 60;
+          len = len * 1.05 + 1;
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+        }
+        var icoParts = {};
+        [1, 2, 3].forEach(function (i) {
+          icoParts[i] = $$("#v3-02-definition-ico" + i + " path, #v3-02-definition-ico" + i + " circle");
+          icoParts[i].forEach(prep);
+        });
+
+        // ---- macro camera: gentle push-in across the whole frame ----
+        tl.fromTo("#v3-02-definition-stage", { scale: 1 }, { scale: 1.02, duration: DURATION, ease: "power1.inOut" }, 0);
+
+        // ---- A. calm slide reveal: header by ~0.8s, full slide by ~2.0s ----
+        tl.fromTo("#v3-02-definition-eyebrow", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#v3-02-definition-pill", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
+        tl.fromTo("#v3-02-definition-h2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+        tl.fromTo("#v3-02-definition-def", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 0.8);
+        tl.fromTo("#v3-02-definition-label-rule", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 1.0);
+        tl.fromTo("#v3-02-definition-label span:last-child", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 1.0);
+        [1, 2, 3].forEach(function (i) {
+          var at = 1.1 + (i - 1) * 0.1;
+          tl.fromTo("#v3-02-definition-card" + i, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, at);
+          icoParts[i].forEach(function (p, k) {
+            tl.to(p, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, at + 0.2 + k * 0.12);
+          });
+        });
+
+        // ---- B. spotlight synced to narration ----
+        var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+        var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 0px rgba(10,61,145,0)";
+        var ITEMS = [
+          { sel: "#v3-02-definition-def", bg: "rgba(10,61,145,0.08)", on: "rgba(10,61,145,0.08)", scale: 1.02 },
+          { sel: "#v3-02-definition-card1", bg: "rgba(10,61,145,0.04)", on: "rgba(10,61,145,0.08)", scale: 1.03 },
+          { sel: "#v3-02-definition-card2", bg: "rgba(10,61,145,0.04)", on: "rgba(10,61,145,0.08)", scale: 1.03 },
+          { sel: "#v3-02-definition-card3", bg: "rgba(10,61,145,0.04)", on: "rgba(10,61,145,0.08)", scale: 1.03 }
+        ];
+        ITEMS.forEach(function (it) { tl.set(it.sel, { boxShadow: RING_OFF, backgroundColor: it.bg }, 0); });
+        function spot(idx, at) { // idx = -1 → rest (all normal)
+          ITEMS.forEach(function (it, i) {
+            var on = i === idx, rest = idx < 0;
+            tl.to(it.sel, {
+              opacity: on || rest ? 1 : 0.4, scale: on ? it.scale : 1,
+              boxShadow: on ? RING_ON : RING_OFF, backgroundColor: on ? it.on : it.bg,
+              duration: 0.35, ease: "power2.out"
+            }, at);
+          });
+        }
+        spot(0, CUE.def);   // "tiêu chuẩn chung"
+        spot(1, CUE.p1);    // "cải tiến bảo mật liên tục"
+        spot(2, CUE.p2);    // "mỗi người hoàn thành trách nhiệm"
+        spot(3, CUE.p3);    // "đánh giá rủi ro"
+        spot(-1, CUE.rest); // recap view
+
+        tl.set({}, {}, DURATION);
+
+        window.__timelines["v3-02-definition"] = tl;
+      })();
+    </script>
+  </div>
+</template>

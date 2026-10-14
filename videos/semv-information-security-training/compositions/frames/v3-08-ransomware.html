@@ -1,0 +1,473 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .v3-08-ransomware-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+
+    /* slide-header */
+    .v3-08-ransomware-header {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      top: 84px;
+    }
+    .v3-08-ransomware-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .v3-08-ransomware-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.3;
+    }
+    .v3-08-ransomware-pill {
+      display: inline-block;
+      border-radius: 100px;
+      background: rgba(10, 61, 145, 0.08);
+      color: #0A3D91;
+      font-weight: 600;
+      font-size: 28px;
+      padding: 10px 28px;
+      transform-origin: 50% 50%;
+    }
+    .v3-08-ransomware-h2 {
+      margin-top: 16px;
+      font-size: 58px;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+
+    /* left column — 3-step chain */
+    .v3-08-ransomware-chain {
+      position: absolute;
+      left: 96px;
+      top: 290px;
+      width: 820px;
+      height: 570px;
+    }
+    .v3-08-ransomware-step {
+      position: absolute;
+      left: -20px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 10px 28px 10px 20px;
+      border-radius: 14px;
+      transform-origin: 50% 50%;
+    }
+    #v3-08-ransomware-step1 { top: -10px; }
+    #v3-08-ransomware-step2 { top: 170px; align-items: flex-start; }
+    #v3-08-ransomware-step3 { top: 460px; }
+    .v3-08-ransomware-icon {
+      flex: none;
+      width: 96px;
+      height: 96px;
+      border-radius: 14px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .v3-08-ransomware-icon svg { width: 52px; height: 52px; }
+    .v3-08-ransomware-step-num {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #475569;
+      line-height: 1.2;
+    }
+    .v3-08-ransomware-step-label {
+      margin-top: 4px;
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: #0F172A;
+    }
+    .v3-08-ransomware-step2-text { padding-top: 12px; }
+
+    .v3-08-ransomware-arrow {
+      position: absolute;
+      left: 47px;
+      width: 2px;
+      transform-origin: 50% 0%;
+    }
+    #v3-08-ransomware-arrow1 { top: 116px; height: 50px; }
+    #v3-08-ransomware-arrow2 { top: 388px; height: 66px; }
+    .v3-08-ransomware-arrow-line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 6px;
+      width: 2px;
+      background: rgba(10, 61, 145, 0.45);
+    }
+    .v3-08-ransomware-arrow svg {
+      position: absolute;
+      left: -9px;
+      bottom: 0;
+      width: 20px;
+      height: 14px;
+    }
+
+    /* file → lock row */
+    .v3-08-ransomware-files {
+      margin-top: 22px;
+      display: flex;
+      gap: 26px;
+      height: 76px;
+    }
+    .v3-08-ransomware-slot {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      perspective: 500px;
+      transform-origin: 50% 50%;
+    }
+    .v3-08-ransomware-slot svg {
+      position: absolute;
+      inset: 0;
+      width: 76px;
+      height: 76px;
+      backface-visibility: hidden;
+    }
+
+    /* right card — Colonial Pipeline */
+    .v3-08-ransomware-card {
+      position: absolute;
+      left: 990px;
+      top: 290px;
+      width: 834px;
+      height: 580px;
+      padding: 38px 44px;
+      background: rgba(10, 61, 145, 0.04);
+      border: 1.5px solid rgba(10, 61, 145, 0.2);
+      border-radius: 14px;
+    }
+    .v3-08-ransomware-card-eyebrow {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      line-height: 1.35;
+    }
+    .v3-08-ransomware-body {
+      margin-top: 14px;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #475569;
+      max-width: 720px;
+    }
+    .v3-08-ransomware-counter-wrap {
+      position: absolute;
+      left: 28px;
+      top: 210px;
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      width: 778px;
+      height: 172px;
+      padding: 12px 16px 0;
+      border-radius: 14px;
+      transform-origin: 50% 50%;
+    }
+    .v3-08-ransomware-counter {
+      display: inline-block;
+      font-size: 168px;
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: #0A3D91;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum" 1;
+      min-width: 1ch;
+      transform-origin: 0% 85%;
+    }
+    .v3-08-ransomware-suffix {
+      display: inline-block;
+      font-size: 68px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #0A3D91;
+    }
+    .v3-08-ransomware-vnd {
+      position: absolute;
+      left: 28px;
+      top: 394px;
+      padding: 6px 16px;
+      border-radius: 10px;
+      transform-origin: 50% 50%;
+      font-size: 36px;
+      font-weight: 500;
+      color: #475569;
+      line-height: 1.3;
+    }
+    .v3-08-ransomware-vnd b { color: #0F172A; font-weight: 700; }
+    .v3-08-ransomware-alert {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      top: 468px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      transform-origin: 50% 50%;
+      font-size: 29px;
+      font-weight: 600;
+      white-space: nowrap;
+      color: #dc2626;
+      line-height: 1.3;
+    }
+    .v3-08-ransomware-divider {
+      position: absolute;
+      left: 44px;
+      right: 44px;
+      top: 461px;
+      height: 1.5px;
+      background: rgba(10, 61, 145, 0.15);
+    }
+    .v3-08-ransomware-alert svg { width: 38px; height: 38px; flex: none; }
+  </style>
+
+  <div data-hf-id="hf-txwp" id="root" data-composition-id="v3-08-ransomware" data-width="1920" data-height="1080" data-duration="15.693">
+    <div data-hf-id="hf-fb5k" id="v3-08-ransomware-bg" class="v3-08-ransomware-bg clip" data-start="0" data-duration="15.693" data-track-index="0"></div>
+
+    <!-- slide-header -->
+    <div data-hf-id="hf-hh4o" class="v3-08-ransomware-header">
+      <div data-hf-id="hf-2sea" class="v3-08-ransomware-head-row">
+        <div data-hf-id="hf-uqpw" class="v3-08-ransomware-eyebrow" id="v3-08-ransomware-eyebrow">PHẦN 4/5 · SỰ CỐ THỰC TẾ</div>
+        <span data-hf-id="hf-xmuo" class="v3-08-ransomware-pill" id="v3-08-ransomware-pill">Ransomware</span>
+      </div>
+      <div data-hf-id="hf-7d66" class="v3-08-ransomware-h2" id="v3-08-ransomware-h2">Ransomware: khóa dữ liệu, đòi tiền chuộc</div>
+    </div>
+
+    <!-- left: 3-step causal chain -->
+    <div data-hf-id="hf-pw5e" class="v3-08-ransomware-chain" id="v3-08-ransomware-chain">
+      <div data-hf-id="hf-j4ix" class="v3-08-ransomware-step" id="v3-08-ransomware-step1">
+        <div data-hf-id="hf-t38g" class="v3-08-ransomware-icon">
+          <svg data-hf-id="hf-arzb" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+            <rect data-hf-id="hf-w3u4" x="3" y="4" width="18" height="12" rx="1.5" />
+            <path data-hf-id="hf-x8w8" d="M8.5 20h7M12 16v4" />
+            <path data-hf-id="hf-of9m" d="M10 8.5 12.5 10 10 11.5" />
+          </svg>
+        </div>
+        <div data-hf-id="hf-yeow">
+          <div data-hf-id="hf-6t39" class="v3-08-ransomware-step-num">BƯỚC 1</div>
+          <div data-hf-id="hf-i9me" class="v3-08-ransomware-step-label">Xâm nhập máy tính / server</div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-6687" class="v3-08-ransomware-arrow" id="v3-08-ransomware-arrow1">
+        <div data-hf-id="hf-sx1t" class="v3-08-ransomware-arrow-line"></div>
+        <svg data-hf-id="hf-taf8" viewBox="0 0 20 14" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-r5v2" d="M3 3l7 8 7-8" /></svg>
+      </div>
+
+      <div data-hf-id="hf-n2my" class="v3-08-ransomware-step" id="v3-08-ransomware-step2">
+        <div data-hf-id="hf-m2zc" class="v3-08-ransomware-icon">
+          <svg data-hf-id="hf-0ipz" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+            <circle data-hf-id="hf-p9kr" cx="8" cy="12" r="4" />
+            <path data-hf-id="hf-e69j" d="M12 12h9M18 12v3M21 12v2" />
+          </svg>
+        </div>
+        <div data-hf-id="hf-2slb" class="v3-08-ransomware-step2-text">
+          <div data-hf-id="hf-800c" class="v3-08-ransomware-step-num">BƯỚC 2</div>
+          <div data-hf-id="hf-9pue" class="v3-08-ransomware-step-label">Mã hóa tệp quan trọng</div>
+          <div data-hf-id="hf-hv3q" class="v3-08-ransomware-files" id="v3-08-ransomware-files">
+            <div data-hf-id="hf-15rf" class="v3-08-ransomware-slot">
+              <svg data-hf-id="hf-lsa8" class="v3-08-ransomware-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-igg3" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-4box" d="M14 3v5h5" /><path data-hf-id="hf-k8n0" d="M9 13h6M9 16.5h6" /></svg>
+              <svg data-hf-id="hf-tp1e" class="v3-08-ransomware-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-ekjk" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-3rve" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-p4yh" d="M12 14.5v2.5" /></svg>
+            </div>
+            <div data-hf-id="hf-zxvv" class="v3-08-ransomware-slot">
+              <svg data-hf-id="hf-7hoo" class="v3-08-ransomware-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-owub" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-hyjp" d="M14 3v5h5" /><path data-hf-id="hf-mz3o" d="M9 13h6M9 16.5h6" /></svg>
+              <svg data-hf-id="hf-9s9y" class="v3-08-ransomware-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-59iw" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-3hfi" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-i7n1" d="M12 14.5v2.5" /></svg>
+            </div>
+            <div data-hf-id="hf-zjku" class="v3-08-ransomware-slot">
+              <svg data-hf-id="hf-6arl" class="v3-08-ransomware-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-oija" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-j5gs" d="M14 3v5h5" /><path data-hf-id="hf-ls6l" d="M9 13h6M9 16.5h6" /></svg>
+              <svg data-hf-id="hf-a6kz" class="v3-08-ransomware-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-42lt" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-3vqj" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-jek4" d="M12 14.5v2.5" /></svg>
+            </div>
+            <div data-hf-id="hf-z59t" class="v3-08-ransomware-slot">
+              <svg data-hf-id="hf-6p2m" class="v3-08-ransomware-file" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-o489" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-ir5r" d="M14 3v5h5" /><path data-hf-id="hf-m6hm" d="M9 13h6M9 16.5h6" /></svg>
+              <svg data-hf-id="hf-akw0" class="v3-08-ransomware-lock" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-4gwu" x="5" y="10.5" width="14" height="10" rx="2" /><path data-hf-id="hf-4a1k" d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /><path data-hf-id="hf-j093" d="M12 14.5v2.5" /></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-xicc" class="v3-08-ransomware-arrow" id="v3-08-ransomware-arrow2">
+        <div data-hf-id="hf-7jd1" class="v3-08-ransomware-arrow-line"></div>
+        <svg data-hf-id="hf-k6d8" viewBox="0 0 20 14" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-lcvm" d="M3 3l7 8 7-8" /></svg>
+      </div>
+
+      <div data-hf-id="hf-r0qz" class="v3-08-ransomware-step" id="v3-08-ransomware-step3">
+        <div data-hf-id="hf-kw29" class="v3-08-ransomware-icon">
+          <svg data-hf-id="hf-04ey" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round">
+            <rect data-hf-id="hf-sj5h" x="2.5" y="6" width="19" height="12" rx="1.5" />
+            <circle data-hf-id="hf-n66w" cx="12" cy="12" r="2.6" />
+            <path data-hf-id="hf-fg39" d="M6 9.5v5M18 9.5v5" />
+          </svg>
+        </div>
+        <div data-hf-id="hf-y7yw">
+          <div data-hf-id="hf-7lpb" class="v3-08-ransomware-step-num">BƯỚC 3</div>
+          <div data-hf-id="hf-kldh" class="v3-08-ransomware-step-label">Đòi tiền chuộc</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right: Colonial Pipeline card with the hero counter -->
+    <div data-hf-id="hf-b228" class="v3-08-ransomware-card" id="v3-08-ransomware-card">
+      <div data-hf-id="hf-k0ab" class="v3-08-ransomware-card-eyebrow" id="v3-08-ransomware-card-eyebrow">COLONIAL PIPELINE · MỸ</div>
+      <div data-hf-id="hf-gri8" class="v3-08-ransomware-body" id="v3-08-ransomware-body">Công ty vận hành đường ống dẫn dầu lớn nhất nước Mỹ</div>
+
+      <div data-hf-id="hf-8evm" class="v3-08-ransomware-counter-wrap" id="v3-08-ransomware-counter-wrap">
+        <span data-hf-id="hf-ki7d" class="v3-08-ransomware-counter" id="v3-08-ransomware-counter">0</span><span data-hf-id="hf-5lpw" class="v3-08-ransomware-suffix" id="v3-08-ransomware-suffix">triệu USD</span>
+      </div>
+      <div data-hf-id="hf-4bok" class="v3-08-ransomware-vnd" id="v3-08-ransomware-vnd"><b data-hf-id="hf-s9xa">≈ 114 tỷ VND</b> tiền chuộc</div>
+
+      <div data-hf-id="hf-wooy" class="v3-08-ransomware-divider" id="v3-08-ransomware-divider"></div>
+      <div data-hf-id="hf-tcw2" class="v3-08-ransomware-alert" id="v3-08-ransomware-alert">
+        <svg data-hf-id="hf-8mq0" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path data-hf-id="hf-yq8q" d="M12 3.5 2.5 20h19L12 3.5Z" />
+          <path data-hf-id="hf-gfzk" d="M12 10v4.5" />
+          <path data-hf-id="hf-wrvr" d="M12 17.3v.2" />
+        </svg>
+        <span data-hf-id="hf-etvl">Khôi phục chậm → vận hành vẫn bị gián đoạn</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var CUE = /*hf-cues:start*/{"enc":0.48,"ransom":3.08,"colonial":4.6,"money":8.78,"vnd":10.08,"alert":11.8,"rest":14.1}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/15.193/*hf-dur:end*/;
+      var root = document.querySelector('[data-composition-id="v3-08-ransomware"]');
+      var q = function (sel) { return root.querySelector(sel); };
+      var qa = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+
+      var tl = gsap.timeline({ paused: true });
+
+      var RING = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+      var RED_RING = "0 0 0 3px #dc2626, 0 14px 32px rgba(220,38,38,0.16)";
+      var NO_RING = "0 0 0 0px rgba(10,61,145,0), 0 0 0 rgba(10,61,145,0)";
+      var ON_BG = "rgba(10,61,145,0.08)";
+      var CLEAR = "rgba(10,61,145,0)";
+
+      var s1 = q("#v3-08-ransomware-step1"), s2 = q("#v3-08-ransomware-step2"), s3 = q("#v3-08-ransomware-step3");
+      var card = q("#v3-08-ransomware-card");
+      var money = q("#v3-08-ransomware-counter-wrap"), vnd = q("#v3-08-ransomware-vnd"), alert = q("#v3-08-ransomware-alert");
+      var base = function (el) { return el === card ? "rgba(10,61,145,0.04)" : CLEAR; };
+      var ring = function (el) { return el === alert ? RED_RING : RING; };
+      var onBg = function (el) { return el === alert ? "rgba(220,38,38,0.06)" : ON_BG; };
+
+      // spot(items, onList, at): items in onList light up, the rest dim to 0.4.
+      // Only already-revealed items are passed, so the sequence reveal is never fought.
+      function spot(items, onList, at) {
+        items.forEach(function (el) {
+          var on = onList.indexOf(el) >= 0;
+          tl.to(el, { opacity: on ? 1 : 0.4, scale: on ? (el === card ? 1.02 : 1.03) : 1,
+            boxShadow: on ? ring(el) : NO_RING, backgroundColor: on ? onBg(el) : base(el),
+            duration: 0.35, ease: "power2.out" }, at);
+        });
+      }
+      // calm(items, at): back to the plain rest state (opacity 1, no ring)
+      function calm(items, at) {
+        items.forEach(function (el) {
+          tl.to(el, { opacity: 1, scale: 1, boxShadow: NO_RING, backgroundColor: base(el), duration: 0.35, ease: "power2.out" }, at);
+        });
+      }
+
+      [s1, s2, s3, card, money, vnd, alert].forEach(function (el) {
+        tl.set(el, { boxShadow: NO_RING, backgroundColor: base(el), scale: 1 }, 0);
+      });
+      tl.set([s2, s3, money, vnd, alert], { opacity: 0 }, 0);
+
+      /* A: header, step 1 and the Colonial card shell early (the card waits dimmed until it is named) */
+      tl.fromTo(q("#v3-08-ransomware-eyebrow"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.0);
+      tl.fromTo(q("#v3-08-ransomware-h2"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.1);
+      tl.fromTo(q("#v3-08-ransomware-pill"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.25);
+      tl.fromTo(s1, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+      tl.fromTo(q("#v3-08-ransomware-arrow1"), { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.55);
+      tl.fromTo(card, { opacity: 0, y: 16 }, { opacity: 0.4, y: 0, duration: 0.55, ease: "power3.out" }, 1.3);
+
+      /* sequence (spec exception): steps reveal in narration order, each spotlighted when spoken */
+      // "mã hóa dữ liệu trên máy tính và server" -> steps 1 + 2 together
+      tl.fromTo(s2, { y: 16 }, { y: 0, duration: 0.5, ease: "power3.out" }, CUE.enc);
+      spot([s1, s2], [s1, s2], CUE.enc);
+      var slots = qa(".v3-08-ransomware-slot");
+      slots.forEach(function (slot, i) {
+        tl.fromTo(slot, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, CUE.enc + 0.2 + i * 0.07);
+      });
+      // files flip into locks (icon graphic, not text)
+      var files = qa(".v3-08-ransomware-file");
+      var locks = qa(".v3-08-ransomware-lock");
+      files.forEach(function (f, i) {
+        var at = CUE.enc + 0.8 + i * 0.3;
+        tl.fromTo(f, { rotationY: 0, opacity: 1 }, { rotationY: 90, opacity: 0, duration: 0.2, ease: "power2.in" }, at);
+        tl.fromTo(locks[i], { rotationY: -90, opacity: 0 }, { rotationY: 0, opacity: 1, duration: 0.28, ease: "power2.out" }, at + 0.2);
+      });
+      // "đòi tiền chuộc" -> step 3
+      tl.fromTo(q("#v3-08-ransomware-arrow2"), { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.35, ease: "power2.out" }, CUE.ransom - 0.3);
+      tl.fromTo(s3, { y: 16 }, { y: 0, duration: 0.5, ease: "power3.out" }, CUE.ransom);
+      spot([s1, s2, s3], [s3], CUE.ransom);
+
+      /* "Colonial Pipeline" -> the case card */
+      spot([s1, s2, s3, card], [card], CUE.colonial);
+
+      /* "năm triệu đô la" -> card ring hands over to the figure, which counts 0 -> 5 */
+      calm([card], CUE.money);
+      tl.fromTo(money, { y: 12 }, { y: 0, duration: 0.45, ease: "power2.out" }, CUE.money);
+      spot([money], [money], CUE.money);
+      var counterEl = q("#v3-08-ransomware-counter");
+      var state = { value: 0 };
+      tl.fromTo(state, { value: 0 }, {
+        value: 5, duration: 0.8, ease: "power2.out",
+        onUpdate: function () { counterEl.textContent = String(Math.round(state.value)); }
+      }, CUE.money);
+
+      /* "tương đương 114 tỷ đồng" */
+      tl.fromTo(vnd, { y: 12 }, { y: 0, duration: 0.45, ease: "power2.out" }, CUE.vnd);
+      spot([money, vnd], [vnd], CUE.vnd);
+
+      /* "mà vận hành vẫn bị gián đoạn" -> red consequence note */
+      tl.fromTo(alert, { y: 12 }, { y: 0, duration: 0.45, ease: "power2.out" }, CUE.alert);
+      spot([money, vnd, alert], [alert], CUE.alert);
+
+      /* rest: whole slide back for the hold; the payoff note keeps its spotlight */
+      calm([s1, s2, s3, card, money, vnd], CUE.rest);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-08-ransomware"] = tl;
+    })();
+  </script>
+</template>

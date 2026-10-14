@@ -1,0 +1,338 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-01-intro-bg {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+
+    /* ---------- Scenes 1–2: hook ---------- */
+    .v3-01-intro-hook {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      top: 290px;
+      text-align: center;
+      font-size: 84px;
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+    .v3-01-intro-line { display: block; white-space: nowrap; }
+    .v3-01-intro-w {
+      display: inline-block;
+      margin: 0 0.12em;
+      position: relative;
+    }
+    .v3-01-intro-hl {
+      display: inline-block;
+      position: relative;
+      margin: 0 0.12em;
+      isolation: isolate;
+    }
+    .v3-01-intro-hl .v3-01-intro-w { margin: 0 0.12em; z-index: 1; }
+    .v3-01-intro-hl-bg {
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      top: 48%;
+      bottom: 4%;
+      background: rgba(10, 61, 145, 0.15);
+      border-radius: 10px;
+      z-index: 0;
+      transform-origin: 0% 50%;
+    }
+    .v3-01-intro-cursor {
+      position: absolute;
+      left: 58%;
+      top: 62%;
+      width: 54px;
+      height: 66px;
+      transform-origin: 0% 0%;
+      z-index: 2;
+    }
+    .v3-01-intro-cursor svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .v3-01-intro-ripple {
+      position: absolute;
+      left: 58%;
+      top: 62%;
+      width: 110px;
+      height: 110px;
+      margin-left: -55px;
+      margin-top: -55px;
+      border-radius: 50%;
+      border: 3px solid #0A3D91;
+      z-index: 1;
+    }
+
+    /* ---------- Scene 3+: atmosphere ---------- */
+    .v3-01-intro-diag {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 730px;
+      background: #0A3D91;
+      clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+    }
+    .v3-01-intro-dots {
+      position: absolute;
+      right: 115px;
+      top: 115px;
+      display: grid;
+      grid-template-columns: repeat(3, 12px);
+      gap: 23px;
+    }
+    .v3-01-intro-dots i {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.55);
+    }
+    .v3-01-intro-shield {
+      position: absolute;
+      right: 173px;
+      top: 318px;
+      width: 307px;
+      height: 365px;
+      color: #FFFFFF;
+    }
+    .v3-01-intro-shield svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .v3-01-intro-shield path,
+    .v3-01-intro-shield rect {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    /* ---------- Scene 4: cover title ---------- */
+    .v3-01-intro-cover {
+      position: absolute;
+      left: 96px;
+      top: 270px;
+      width: 1040px;
+      transform-origin: 0% 0%;
+    }
+    .v3-01-intro-eyebrow {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0A3D91;
+      margin-bottom: 23px;
+    }
+    .v3-01-intro-accent {
+      width: 60px;
+      height: 4px;
+      border-radius: 2px;
+      background: #0A3D91;
+      margin-bottom: 31px;
+      transform-origin: 0% 50%;
+    }
+    .v3-01-intro-h1 {
+      font-size: 88px;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+    }
+    .v3-01-intro-tw {
+      display: inline-block;
+      margin-right: 0.22em;
+    }
+    .v3-01-intro-sub {
+      margin-top: 27px;
+      font-size: 31px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    /* ---------- Scene 5: table of contents ---------- */
+    .v3-01-intro-toc {
+      position: absolute;
+      left: 96px;
+      top: 392px;
+      width: 1040px;
+    }
+    .v3-01-intro-panel {
+      position: absolute;
+      left: -36px;
+      top: -28px;
+      width: 800px;
+      height: 476px;
+      border-radius: 14px;
+      background: rgba(10, 61, 145, 0.06);
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.35);
+    }
+    .v3-01-intro-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      height: 64px;
+      margin-bottom: 26px;
+    }
+    .v3-01-intro-num {
+      flex: 0 0 56px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #0A3D91;
+      color: #FFFFFF;
+      font-size: 26px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .v3-01-intro-label {
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #0F172A;
+      white-space: nowrap;
+    }
+  </style>
+
+  <div data-hf-id="hf-fjqz" id="root" data-composition-id="v3-01-intro" data-width="1920" data-height="1080" data-duration="11.718">
+    <div data-hf-id="hf-9r7y" class="v3-01-intro-bg clip" id="v3-01-intro-bg" data-start="0" data-duration="11.718" data-track-index="0"></div>
+
+    <!-- atmosphere (Scene 3) -->
+    <div data-hf-id="hf-7yde" class="v3-01-intro-diag" id="v3-01-intro-diag"></div>
+    <div data-hf-id="hf-g3ae" class="v3-01-intro-dots" id="v3-01-intro-dots">
+      <i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i><i data-hf-id="hf-ylp6"></i><i data-hf-id="hf-0l8b"></i><i data-hf-id="hf-0zjc"></i><i data-hf-id="hf-zsm9"></i><i data-hf-id="hf-06xa"></i><i data-hf-id="hf-26gf"></i>
+    </div>
+    <div data-hf-id="hf-yej2" class="v3-01-intro-shield" id="v3-01-intro-shield">
+      <svg data-hf-id="hf-2wn0" viewBox="0 0 64 76">
+        <path data-hf-id="hf-amnh" id="v3-01-intro-shield-body" pathLength="1" d="M32 3 6 13v20c0 18 11 32 26 40 15-8 26-22 26-40V13L32 3Z" />
+        <rect data-hf-id="hf-jiys" id="v3-01-intro-lock-body" pathLength="1" x="22" y="34" width="20" height="16" rx="2.5" />
+        <path data-hf-id="hf-ydjj" id="v3-01-intro-lock-shackle" pathLength="1" d="M26 34v-5a6 6 0 0 1 12 0v5" />
+      </svg>
+    </div>
+
+    <!-- hook (Scenes 1–2) -->
+    <div data-hf-id="hf-81pm" class="v3-01-intro-hook" id="v3-01-intro-hook">
+      <span data-hf-id="hf-jtf0" class="v3-01-intro-line" id="v3-01-intro-line1"><span data-hf-id="hf-9s2a" class="v3-01-intro-w v3-01-intro-l1 v3-01-intro-x">Chỉ</span><span data-hf-id="hf-qc9q" class="v3-01-intro-w v3-01-intro-l1 v3-01-intro-x">một</span><span data-hf-id="hf-xrk5" class="v3-01-intro-w v3-01-intro-l1 v3-01-intro-x">cú</span><span data-hf-id="hf-txsn" class="v3-01-intro-w v3-01-intro-l1 v3-01-intro-x">nhấp</span><span data-hf-id="hf-7avn" class="v3-01-intro-w v3-01-intro-l1 v3-01-intro-x">chuột</span><span data-hf-id="hf-yv2p" class="v3-01-intro-w v3-01-intro-l1 v3-01-intro-x" id="v3-01-intro-sai">sai<span data-hf-id="hf-t9gn" class="v3-01-intro-ripple" id="v3-01-intro-ripple"></span><span data-hf-id="hf-9fev" class="v3-01-intro-cursor" id="v3-01-intro-cursor"><svg data-hf-id="hf-rx6i" viewBox="0 0 24 30"><path data-hf-id="hf-j73d" d="M2 2 L2 24 L8 18.5 L12 27.5 L15.6 26 L11.8 17.2 L19.5 17.2 Z" fill="#FFFFFF" stroke="#0A3D91" stroke-width="1.6" stroke-linejoin="round" /></svg></span></span></span>
+      <span data-hf-id="hf-uown" class="v3-01-intro-line" id="v3-01-intro-line2"><span data-hf-id="hf-30o5" class="v3-01-intro-w v3-01-intro-l2 v3-01-intro-x">—</span><span data-hf-id="hf-89k9" class="v3-01-intro-w v3-01-intro-l2 v3-01-intro-x">cả</span><span data-hf-id="hf-zynm" class="v3-01-intro-w v3-01-intro-l2 v3-01-intro-x">hệ</span><span data-hf-id="hf-hkuh" class="v3-01-intro-w v3-01-intro-l2 v3-01-intro-x">thống</span><span data-hf-id="hf-3p4p" class="v3-01-intro-w v3-01-intro-l2 v3-01-intro-x">có</span><span data-hf-id="hf-tbuk" class="v3-01-intro-w v3-01-intro-l2 v3-01-intro-x">thể</span><span data-hf-id="hf-o92q" class="v3-01-intro-hl v3-01-intro-x" id="v3-01-intro-hl"><span data-hf-id="hf-p21h" class="v3-01-intro-hl-bg" id="v3-01-intro-hl-bg"></span><span data-hf-id="hf-3sk0" class="v3-01-intro-w v3-01-intro-l2">dừng</span><span data-hf-id="hf-gol6" class="v3-01-intro-w v3-01-intro-l2">lại.</span></span></span>
+    </div>
+
+    <!-- cover title (Scene 4) -->
+    <div data-hf-id="hf-c6ke" class="v3-01-intro-cover" id="v3-01-intro-cover">
+      <div data-hf-id="hf-i1f6" class="v3-01-intro-eyebrow" id="v3-01-intro-eyebrow">SEMV · IT Part</div>
+      <div data-hf-id="hf-6xiq" class="v3-01-intro-accent" id="v3-01-intro-accent"></div>
+      <div data-hf-id="hf-1262" class="v3-01-intro-h1" id="v3-01-intro-h1"><span data-hf-id="hf-9qbe" class="v3-01-intro-tw">Đào</span><span data-hf-id="hf-zp87" class="v3-01-intro-tw">tạo</span><span data-hf-id="hf-itzf" class="v3-01-intro-tw">bảo</span><span data-hf-id="hf-4p1x" class="v3-01-intro-tw">mật</span><br data-hf-id="hf-x5px"><span data-hf-id="hf-86t4" class="v3-01-intro-tw">thông</span><span data-hf-id="hf-618c" class="v3-01-intro-tw">tin</span></div>
+      <div data-hf-id="hf-oxkh" class="v3-01-intro-sub" id="v3-01-intro-sub">Dành cho nhân viên mới · Sumika Electronic Materials Vietnam</div>
+    </div>
+
+    <!-- table of contents (Scene 5) -->
+    <div data-hf-id="hf-a8d0" class="v3-01-intro-toc" id="v3-01-intro-toc">
+      <div data-hf-id="hf-e1i0" class="v3-01-intro-panel" id="v3-01-intro-panel"></div>
+      <div data-hf-id="hf-6ord" class="v3-01-intro-row"><div data-hf-id="hf-cq08" class="v3-01-intro-num">1</div><div data-hf-id="hf-sqfc" class="v3-01-intro-label">Định nghĩa chính sách bảo mật</div></div>
+      <div data-hf-id="hf-2i7h" class="v3-01-intro-row"><div data-hf-id="hf-bj35" class="v3-01-intro-num">2</div><div data-hf-id="hf-p6t3" class="v3-01-intro-label">Bối cảnh</div></div>
+      <div data-hf-id="hf-3p4k" class="v3-01-intro-row"><div data-hf-id="hf-bxe6" class="v3-01-intro-num">3</div><div data-hf-id="hf-ept9" class="v3-01-intro-label">Áp dụng và tuân thủ chính sách</div></div>
+      <div data-hf-id="hf-3atj" class="v3-01-intro-row"><div data-hf-id="hf-aqh3" class="v3-01-intro-num">4</div><div data-hf-id="hf-g0to" class="v3-01-intro-label">Các trường hợp sự cố thực tế</div></div>
+      <div data-hf-id="hf-4hqm" class="v3-01-intro-row"><div data-hf-id="hf-b4s4" class="v3-01-intro-num">5</div><div data-hf-id="hf-s750" class="v3-01-intro-label">Biện pháp nâng cao bảo mật</div></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="v3-01-intro"]');
+      var q = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+      var CUE = /*hf-cues:start*/{"line2":1.22,"click":0.78,"stop":2.7,"title":3.36,"parts":8.56}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/11.218/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+
+      // Initial states (later-phase elements hidden; entrances below use fromTo)
+      gsap.set(["#v3-01-intro-diag", "#v3-01-intro-eyebrow", "#v3-01-intro-sub", "#v3-01-intro-h1", "#v3-01-intro-panel"], { opacity: 0 });
+      gsap.set(q(".v3-01-intro-dots i"), { opacity: 0 });
+      gsap.set("#v3-01-intro-accent", { scaleX: 0 });
+      gsap.set(q(".v3-01-intro-row"), { opacity: 0 });
+      gsap.set("#v3-01-intro-hl-bg", { scaleX: 0 });
+      gsap.set("#v3-01-intro-line2", { opacity: 0 });
+      gsap.set(["#v3-01-intro-cursor", "#v3-01-intro-ripple"], { opacity: 0 });
+      // cover sits in its compact slide position from the start (no shrink move)
+      gsap.set("#v3-01-intro-cover", { scale: 0.65, y: -180 });
+
+      // ---- Hook: "Chỉ một cú nhấp chuột sai — cả hệ thống có thể dừng lại." (each line fades in whole) ----
+      tl.fromTo("#v3-01-intro-line1", { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.1);
+      // cursor glides to "sai", one soft click + ripple as the word is spoken
+      tl.fromTo("#v3-01-intro-cursor", { opacity: 0, x: 200, y: 130 },
+        { opacity: 1, x: 0, y: 0, duration: 0.7, ease: "power3.out" }, Math.max(0.3, CUE.click - 0.75));
+      tl.fromTo("#v3-01-intro-cursor", { scale: 1 },
+        { scale: 0.86, duration: 0.1, ease: "power2.in", immediateRender: false }, CUE.click);
+      tl.to("#v3-01-intro-cursor", { scale: 1, duration: 0.25, ease: "power2.out" }, CUE.click + 0.1);
+      tl.fromTo("#v3-01-intro-ripple", { opacity: 0.6, scale: 0.15 },
+        { opacity: 0, scale: 1.6, duration: 0.7, ease: "power2.out" }, CUE.click);
+      tl.to("#v3-01-intro-cursor", { opacity: 0, duration: 0.35, ease: "power1.out" }, CUE.line2 + 0.2);
+      tl.fromTo("#v3-01-intro-line2", { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, CUE.line2 - 0.15);
+      // quiet marker sweep behind "dừng lại."
+      tl.fromTo("#v3-01-intro-hl-bg", { scaleX: 0 },
+        { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, CUE.stop);
+
+      // ---- Slide: hook fades out, cover + agenda revealed calmly ----
+      var T = CUE.title;
+      tl.to("#v3-01-intro-hook", { opacity: 0, y: -12, duration: 0.45, ease: "power2.in" }, T - 0.1);
+      tl.fromTo("#v3-01-intro-diag", { x: 160, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, T + 0.15);
+      tl.fromTo(q(".v3-01-intro-dots i"), { opacity: 0 },
+        { opacity: 1, duration: 0.4, ease: "power2.out", stagger: 0.03 }, T + 0.5);
+      tl.fromTo("#v3-01-intro-shield-body", { strokeDashoffset: 1 },
+        { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, T + 0.5);
+      tl.fromTo("#v3-01-intro-lock-body", { strokeDashoffset: 1 },
+        { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, T + 1.0);
+      tl.fromTo("#v3-01-intro-lock-shackle", { strokeDashoffset: 1 },
+        { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, T + 1.3);
+
+      tl.fromTo("#v3-01-intro-eyebrow", { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, T + 0.3);
+      tl.fromTo("#v3-01-intro-accent", { scaleX: 0 },
+        { scaleX: 1, duration: 0.45, ease: "power2.out" }, T + 0.35);
+      tl.fromTo("#v3-01-intro-h1", { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, T + 0.45);
+      tl.fromTo("#v3-01-intro-sub", { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, T + 0.65);
+      q(".v3-01-intro-row").forEach(function (r, i) {
+        tl.fromTo(r, { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, T + 0.9 + i * 0.1);
+      });
+
+      // ---- "gồm năm phần": one soft emphasis of the whole agenda (panel settles in behind it) ----
+      tl.fromTo("#v3-01-intro-panel", { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: "power2.out" }, CUE.parts);
+
+      // ---- hold: quiet settle on the shield ----
+      tl.fromTo("#v3-01-intro-shield", { y: 0 },
+        { y: -6, duration: 2.0, ease: "sine.inOut" }, T + 2.0);
+
+      tl.set({}, {}, DURATION);
+
+      window.__timelines["v3-01-intro"] = tl;
+    })();
+  </script>
+</template>

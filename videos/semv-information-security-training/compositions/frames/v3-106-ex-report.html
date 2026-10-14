@@ -1,0 +1,578 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-106-ex-report-stage *, .v3-106-ex-report-stage *::before, .v3-106-ex-report-stage *::after { box-sizing: border-box; }
+    .v3-106-ex-report-bg { position: absolute; inset: 0; background: #DCE5F3; }
+    .v3-106-ex-report-stage { position: absolute; inset: 0; overflow: hidden; }
+    .v3-106-ex-report-world { position: absolute; left: 0; top: 0; width: 3400px; height: 1080px; transform-origin: 0 0; }
+    .v3-106-ex-report-svg { position: absolute; left: 0; top: 0; width: 3400px; height: 1080px; display: block; overflow: visible; }
+
+    .v3-106-ex-report-screen { position: absolute; top: 380px; width: 480px; height: 300px; overflow: hidden; border-radius: 4px; background: #F8FAFC; }
+    .v3-106-ex-report-ui { position: absolute; left: 0; top: 0; width: 1600px; height: 1000px; transform: scale(0.3); transform-origin: 0 0; overflow: hidden; }
+
+    /* ---- Hoa's screen ---- */
+    .v3-106-ex-report-desk { position: absolute; inset: 0; background: linear-gradient(160deg, #DCE7F8 0%, #C3D5F1 100%); }
+    .v3-106-ex-report-lwin { position: absolute; left: 300px; top: 140px; width: 1000px; height: 640px; border-radius: 24px; background: #FFFFFF; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12); overflow: hidden; }
+    .v3-106-ex-report-lbar { height: 80px; background: #0A3D91; display: flex; align-items: center; gap: 16px; padding: 0 30px; }
+    .v3-106-ex-report-lbar i { display: block; width: 22px; height: 22px; border-radius: 50%; background: rgba(255, 255, 255, 0.55); }
+    .v3-106-ex-report-spin { position: absolute; left: 410px; top: 170px; width: 180px; height: 180px; border-radius: 50%; border: 22px solid #E2E8F0; border-top-color: #0A3D91; border-right-color: #0A3D91; }
+    .v3-106-ex-report-track { position: absolute; left: 150px; top: 440px; width: 700px; height: 44px; border-radius: 22px; background: #E2E8F0; overflow: hidden; }
+    .v3-106-ex-report-fill { position: absolute; left: 0; top: 0; width: 700px; height: 44px; border-radius: 22px; background: #0A3D91; transform-origin: 0 50%; }
+    .v3-106-ex-report-task { position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: rgba(255, 255, 255, 0.9); display: flex; align-items: center; gap: 26px; padding: 0 40px; }
+    .v3-106-ex-report-task b { display: block; width: 56px; height: 56px; border-radius: 14px; background: #CBD5E1; }
+    .v3-106-ex-report-pop { position: absolute; border-radius: 20px; background: #FFFFFF; box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.25), 0 26px 50px rgba(15, 23, 42, 0.3); overflow: hidden; }
+    .v3-106-ex-report-pbar { height: 70px; display: flex; align-items: center; justify-content: flex-end; padding: 0 22px; }
+    .v3-106-ex-report-pbar svg { width: 40px; height: 40px; display: block; }
+    .v3-106-ex-report-prize { display: flex; align-items: center; gap: 30px; padding: 40px 44px 0; }
+    .v3-106-ex-report-prize svg { flex: 0 0 150px; width: 150px; height: 150px; display: block; }
+    .v3-106-ex-report-prize span { font-size: 76px; font-weight: 800; color: #B45309; line-height: 1.15; letter-spacing: -0.01em; }
+    .v3-106-ex-report-pbtn { margin: 34px 44px 0; height: 84px; border-radius: 16px; background: #F59E0B; }
+    .v3-106-ex-report-warn { display: flex; align-items: flex-start; gap: 30px; padding: 40px 40px 0; }
+    .v3-106-ex-report-warn svg { flex: 0 0 120px; width: 120px; height: 120px; display: block; }
+    .v3-106-ex-report-wl { flex: 1; }
+    .v3-106-ex-report-wl i { display: block; height: 26px; border-radius: 13px; background: #E2E8F0; margin: 14px 0 26px; }
+    .v3-106-ex-report-flash { position: absolute; inset: 0; background: #FFFFFF; }
+    .v3-106-ex-report-clean { position: absolute; inset: 0; background: linear-gradient(160deg, #E7F6EF 0%, #CDEEDF 100%); display: flex; align-items: center; justify-content: center; }
+    .v3-106-ex-report-clean svg { width: 420px; height: 420px; display: block; }
+
+    /* ---- IT dashboard ---- */
+    .v3-106-ex-report-dash { position: absolute; inset: 0; background: #F1F5F9; }
+    .v3-106-ex-report-dtop { position: absolute; left: 0; top: 0; right: 0; height: 90px; background: #0A3D91; color: #FFFFFF; display: flex; align-items: center; gap: 20px; padding: 0 40px; font-size: 36px; font-weight: 700; }
+    .v3-106-ex-report-dtop svg { width: 46px; height: 46px; display: block; }
+    .v3-106-ex-report-panel { position: absolute; border-radius: 18px; background: #FFFFFF; box-shadow: 0 0 0 2px #E2E8F0, 0 12px 30px rgba(15, 23, 42, 0.06); }
+    .v3-106-ex-report-plab { position: absolute; left: 30px; top: 22px; font-size: 28px; font-weight: 700; color: #64748B; letter-spacing: 0.02em; white-space: nowrap; }
+    .v3-106-ex-report-inc { left: 40px; top: 120px; width: 880px; height: 330px; }
+    .v3-106-ex-report-thumb { position: absolute; left: 30px; top: 74px; width: 300px; height: 220px; border-radius: 12px; background: #1E293B; overflow: hidden; }
+    .v3-106-ex-report-ititle { position: absolute; left: 370px; top: 80px; font-size: 44px; font-weight: 800; white-space: nowrap; }
+    .v3-106-ex-report-irow { position: absolute; left: 370px; font-size: 32px; font-weight: 600; color: #334155; white-space: nowrap; }
+    .v3-106-ex-report-cls { left: 40px; top: 480px; width: 880px; height: 290px; }
+    .v3-106-ex-report-chips { position: absolute; left: 30px; top: 82px; right: 30px; display: flex; flex-wrap: wrap; gap: 18px 16px; }
+    .v3-106-ex-report-chip { height: 64px; padding: 0 26px; border-radius: 32px; background: #FFFFFF; box-shadow: 0 0 0 2px #CBD5E1; font-size: 30px; font-weight: 700; color: #0F172A; line-height: 64px; white-space: nowrap; transform-origin: 50% 50%; }
+    .v3-106-ex-report-net { left: 950px; top: 120px; width: 610px; height: 650px; }
+    .v3-106-ex-report-netsvg { position: absolute; left: 0; top: 0; width: 610px; height: 650px; display: block; overflow: visible; }
+    .v3-106-ex-report-iso { position: absolute; left: 34px; top: 540px; width: 250px; height: 62px; border-radius: 31px; background: #059669; color: #FFFFFF; font-size: 30px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap; }
+    .v3-106-ex-report-iso svg { width: 32px; height: 32px; display: block; }
+    .v3-106-ex-report-steps { left: 40px; top: 800px; width: 1520px; height: 160px; }
+    .v3-106-ex-report-step { position: absolute; top: 40px; display: flex; align-items: center; gap: 22px; }
+    .v3-106-ex-report-sdot { position: relative; width: 80px; height: 80px; border-radius: 50%; background: #FFFFFF; box-shadow: inset 0 0 0 4px #CBD5E1; color: #64748B; font-size: 34px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .v3-106-ex-report-sok { position: absolute; inset: 0; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+    .v3-106-ex-report-sok svg { width: 46px; height: 46px; display: block; }
+    .v3-106-ex-report-slab { font-size: 36px; font-weight: 700; color: #0F172A; white-space: nowrap; }
+    .v3-106-ex-report-sline { position: absolute; top: 78px; height: 8px; border-radius: 4px; background: #E2E8F0; overflow: hidden; }
+    .v3-106-ex-report-sfill { position: absolute; inset: 0; background: #059669; transform-origin: 0 50%; }
+
+    /* ---- world overlays ---- */
+    .v3-106-ex-report-ticket { position: absolute; left: 890px; top: 395px; width: 340px; height: 270px; border-radius: 18px; background: #FFFFFF; box-shadow: 0 0 0 3px #0A3D91, 0 24px 50px rgba(10, 61, 145, 0.3); padding: 18px; }
+    .v3-106-ex-report-tthumb { position: relative; width: 304px; height: 160px; border-radius: 10px; background: #1E293B; overflow: hidden; }
+    .v3-106-ex-report-trow { margin-top: 18px; display: flex; align-items: center; gap: 12px; font-size: 32px; font-weight: 800; color: #0A3D91; white-space: nowrap; }
+    .v3-106-ex-report-trow svg { width: 38px; height: 38px; display: block; }
+    .v3-106-ex-report-mini { position: absolute; border-radius: 4px; }
+    .v3-106-ex-report-screenflash { position: absolute; inset: 0; background: #FFFFFF; }
+
+    .v3-106-ex-report-tag {
+      position: absolute; left: 56px; top: 44px;
+      height: 56px; padding: 0 26px 0 20px;
+      border-radius: 28px;
+      background: #0A3D91; color: #FFFFFF;
+      font-size: 28px; font-weight: 700;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25);
+      white-space: nowrap;
+    }
+    .v3-106-ex-report-tag svg { width: 30px; height: 30px; display: block; }
+    .v3-106-ex-report-takewrap { position: absolute; left: 0; right: 0; top: 890px; height: 120px; display: flex; justify-content: center; }
+    .v3-106-ex-report-take {
+      height: 116px;
+      padding: 0 52px 0 30px;
+      border-radius: 18px;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2);
+      display: flex; align-items: center; gap: 24px;
+      font-size: 48px; font-weight: 800; color: #0F172A; letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .v3-106-ex-report-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+    .v3-106-ex-report-take-ico svg { width: 42px; height: 42px; display: block; }
+  </style>
+
+  <div id="root" data-composition-id="v3-106-ex-report" data-width="1920" data-height="1080" data-duration="16.944">
+    <div class="v3-106-ex-report-bg clip" id="v3-106-ex-report-bg" data-start="0" data-duration="16.944" data-track-index="0"></div>
+
+    <div class="v3-106-ex-report-stage">
+      <div class="v3-106-ex-report-world" id="v3-106-ex-report-world">
+        <svg class="v3-106-ex-report-svg" viewBox="0 0 3400 1080">
+          <rect x="-600" y="-800" width="4600" height="1680" fill="#EEF3FB" />
+          <rect x="-600" y="880" width="4600" height="1200" fill="#DCE5F3" />
+          <!-- ===== Hoa's corner ===== -->
+          <rect x="140" y="130" width="420" height="330" rx="14" fill="#FFFFFF" />
+          <rect x="162" y="152" width="376" height="286" rx="6" fill="#D4E5FB" />
+          <circle cx="470" cy="214" r="34" fill="#FDE68A" />
+          <g id="v3-106-ex-report-cloud"><ellipse cx="250" cy="220" rx="56" ry="20" fill="#FFFFFF" /><ellipse cx="278" cy="206" rx="34" ry="20" fill="#FFFFFF" /></g>
+          <path d="M162 438 V370 H210 V340 H262 V384 H300 V320 H356 V360 H404 V350 H452 V392 H500 V362 H538 V438 Z" fill="#B9D0F0" />
+          <rect x="346" y="152" width="8" height="286" fill="#FFFFFF" />
+          <rect x="162" y="291" width="376" height="8" fill="#FFFFFF" />
+          <rect x="128" y="458" width="444" height="16" rx="8" fill="#FFFFFF" />
+          <circle cx="1480" cy="230" r="80" fill="#FFFFFF" stroke="#334155" stroke-width="8" />
+          <g stroke="#94A3B8" stroke-width="6" stroke-linecap="round"><path d="M1480 164v12M1546 230h-12M1480 296v-12M1414 230h12" /></g>
+          <path d="M1480 230 L1448 254" stroke="#0F172A" stroke-width="9" stroke-linecap="round" />
+          <path d="M1480 230 L1480 174" stroke="#0F172A" stroke-width="6" stroke-linecap="round" />
+          <circle cx="1480" cy="230" r="8" fill="#0A3D91" />
+          <rect x="1340" y="440" width="320" height="14" rx="7" fill="#94A3B8" />
+          <rect x="1364" y="356" width="34" height="84" rx="4" fill="#0A3D91" />
+          <rect x="1404" y="368" width="30" height="72" rx="4" fill="#3B6CC4" />
+          <rect x="1440" y="350" width="34" height="90" rx="4" fill="#94A3B8" />
+          <rect x="1582" y="404" width="56" height="36" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3" />
+          <path d="M1610 404 C1596 380 1590 366 1600 352 M1610 404 C1612 380 1622 366 1636 362" stroke="#34A57A" stroke-width="8" fill="none" stroke-linecap="round" />
+          <rect x="392" y="560" width="78" height="240" rx="32" fill="#334155" />
+          <rect x="408" y="590" width="46" height="170" rx="20" fill="#475569" />
+          <g id="v3-106-ex-report-hostH"></g>
+          <rect x="1030" y="698" width="60" height="50" fill="#94A3B8" />
+          <rect x="976" y="742" width="168" height="20" rx="10" fill="#94A3B8" />
+          <rect x="800" y="360" width="520" height="340" rx="18" fill="#1E293B" />
+          <circle cx="1060" cy="690" r="4" fill="#475569" />
+          <rect x="300" y="760" width="1420" height="28" rx="10" fill="#B8C6DB" />
+          <rect x="330" y="788" width="1360" height="300" fill="#D7E0EE" />
+          <rect x="1420" y="816" width="240" height="90" rx="10" fill="#E6ECF5" />
+          <rect x="1510" y="856" width="60" height="10" rx="5" fill="#94A3B8" />
+          <rect x="850" y="740" width="340" height="20" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <ellipse cx="800" cy="748" rx="24" ry="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <g id="v3-106-ex-report-hostHarm"></g>
+          <rect x="1376" y="702" width="58" height="58" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="5" />
+          <path d="M1434 716 C1454 716 1454 744 1434 744" stroke="#7C3AED" stroke-width="5" fill="none" />
+          <path id="v3-106-ex-report-steam1" d="M1392 690 c-10 -14 10 -24 0 -40" stroke="#94A3B8" stroke-width="5" fill="none" stroke-linecap="round" />
+          <path id="v3-106-ex-report-steam2" d="M1414 686 c-10 -14 10 -24 0 -40" stroke="#94A3B8" stroke-width="5" fill="none" stroke-linecap="round" />
+          <!-- sweat drop -->
+          <path id="v3-106-ex-report-sweat" d="M676 420 C670 432 666 438 666 444 a10 10 0 0 0 20 0 C686 438 682 432 676 420 Z" fill="#7DB4F5" stroke="#3B82F6" stroke-width="2" />
+          <!-- partition -->
+          <rect x="1730" y="-800" width="60" height="1680" fill="#DCE5F3" />
+          <rect x="1724" y="-800" width="8" height="1680" fill="#CBD5E1" />
+          <!-- ===== IT corner (offset 1580) ===== -->
+          <rect x="1960" y="150" width="380" height="250" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+          <g stroke="#CBD5E1" stroke-width="10" stroke-linecap="round"><path d="M2000 210h180M2000 260h240M2000 310h140" /></g>
+          <path d="M2220 330 l30 -60 l30 40 l20 -30" stroke="#0A3D91" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          <rect x="2990" y="290" width="230" height="470" rx="14" fill="#334155" />
+          <g fill="#475569"><rect x="3010" y="316" width="190" height="70" rx="8" /><rect x="3010" y="404" width="190" height="70" rx="8" /><rect x="3010" y="492" width="190" height="70" rx="8" /><rect x="3010" y="580" width="190" height="70" rx="8" /></g>
+          <g id="v3-106-ex-report-leds" fill="#22C55E"><circle cx="3172" cy="351" r="8" /><circle cx="3172" cy="439" r="8" /><circle cx="3172" cy="527" r="8" /><circle cx="3172" cy="615" r="8" /></g>
+          <rect x="1972" y="560" width="78" height="240" rx="32" fill="#334155" />
+          <rect x="1988" y="590" width="46" height="170" rx="20" fill="#475569" />
+          <g id="v3-106-ex-report-hostIT"></g>
+          <rect x="2610" y="698" width="60" height="50" fill="#94A3B8" />
+          <rect x="2556" y="742" width="168" height="20" rx="10" fill="#94A3B8" />
+          <rect x="2380" y="360" width="520" height="340" rx="18" fill="#1E293B" />
+          <circle cx="2640" cy="690" r="4" fill="#475569" />
+          <rect x="1880" y="760" width="1420" height="28" rx="10" fill="#B8C6DB" />
+          <rect x="1910" y="788" width="1360" height="300" fill="#D7E0EE" />
+          <rect x="2430" y="740" width="340" height="20" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <ellipse cx="2380" cy="748" rx="24" ry="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <g id="v3-106-ex-report-hostITarm"></g>
+          <rect x="2960" y="700" width="96" height="60" rx="10" fill="#FFFFFF" stroke="#0A3D91" stroke-width="4" />
+          <path d="M2980 720h56M2980 738h36" stroke="#0A3D91" stroke-width="5" stroke-linecap="round" />
+        </svg>
+
+        <!-- Hoa's monitor -->
+        <div class="v3-106-ex-report-screen" style="left: 820px">
+          <div class="v3-106-ex-report-ui">
+            <div class="v3-106-ex-report-desk"></div>
+            <div class="v3-106-ex-report-lwin">
+              <div class="v3-106-ex-report-lbar"><i></i><i></i><i></i></div>
+              <div class="v3-106-ex-report-spin" id="v3-106-ex-report-spin"></div>
+              <div class="v3-106-ex-report-track"><div class="v3-106-ex-report-fill" id="v3-106-ex-report-fill"></div></div>
+            </div>
+            <div class="v3-106-ex-report-task"><b></b><b></b><b></b></div>
+            <div id="v3-106-ex-report-pops"></div>
+            <div class="v3-106-ex-report-clean" id="v3-106-ex-report-clean">
+              <svg viewBox="0 0 24 24"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z" fill="#059669" /><path d="m8.2 12.2 2.7 2.7 5-5.4" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <div class="v3-106-ex-report-flash" id="v3-106-ex-report-flash"></div>
+          </div>
+        </div>
+
+        <!-- IT monitor: incident dashboard -->
+        <div class="v3-106-ex-report-screen" style="left: 2400px">
+          <div class="v3-106-ex-report-ui">
+            <div class="v3-106-ex-report-dash">
+              <div class="v3-106-ex-report-dtop">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z" /></svg>
+                <span>Quản lý sự cố</span>
+              </div>
+              <div class="v3-106-ex-report-panel v3-106-ex-report-inc" id="v3-106-ex-report-inc">
+                <div class="v3-106-ex-report-plab">SỰ CỐ MỚI</div>
+                <div class="v3-106-ex-report-thumb" id="v3-106-ex-report-thumbA"></div>
+                <div class="v3-106-ex-report-ititle">Báo sự cố</div>
+                <div class="v3-106-ex-report-irow" style="top: 160px">Người báo: chị Hoa</div>
+                <div class="v3-106-ex-report-irow" style="top: 214px">Máy: PC-HOA</div>
+              </div>
+              <div class="v3-106-ex-report-panel v3-106-ex-report-cls" id="v3-106-ex-report-cls">
+                <div class="v3-106-ex-report-plab">PHÂN LOẠI</div>
+                <div class="v3-106-ex-report-chips">
+                  <div class="v3-106-ex-report-chip">Lỗi dịch vụ</div>
+                  <div class="v3-106-ex-report-chip">Lỗi thông tin</div>
+                  <div class="v3-106-ex-report-chip">Vi phạm an ninh</div>
+                  <div class="v3-106-ex-report-chip">Lỗi bảo mật</div>
+                  <div class="v3-106-ex-report-chip" id="v3-106-ex-report-chipS">Sự cố đáng ngờ</div>
+                </div>
+              </div>
+              <div class="v3-106-ex-report-panel v3-106-ex-report-net" id="v3-106-ex-report-net">
+                <div class="v3-106-ex-report-plab">MẠNG NỘI BỘ</div>
+                <svg class="v3-106-ex-report-netsvg" viewBox="0 0 610 650">
+                  <g stroke="#94A3B8" stroke-width="6" stroke-linecap="round">
+                    <line x1="460" y1="330" x2="460" y2="170" />
+                    <line x1="460" y1="330" x2="460" y2="490" />
+                  </g>
+                  <line id="v3-106-ex-report-linkA" x1="230" y1="330" x2="345" y2="330" stroke="#0A3D91" stroke-width="8" stroke-linecap="round" />
+                  <line id="v3-106-ex-report-linkB" x1="345" y1="330" x2="420" y2="330" stroke="#0A3D91" stroke-width="8" stroke-linecap="round" />
+                  <g id="v3-106-ex-report-cut">
+                    <circle cx="345" cy="330" r="30" fill="#FFFFFF" stroke="#dc2626" stroke-width="6" />
+                    <path d="M333 318 L357 342 M357 318 L333 342" stroke="#dc2626" stroke-width="6" stroke-linecap="round" />
+                  </g>
+                  <!-- server -->
+                  <rect x="420" y="270" width="80" height="120" rx="12" fill="#FFFFFF" stroke="#0A3D91" stroke-width="5" />
+                  <path d="M436 300h48M436 330h48M436 360h48" stroke="#0A3D91" stroke-width="5" stroke-linecap="round" />
+                  <!-- other PCs -->
+                  <rect x="420" y="110" width="80" height="60" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="5" />
+                  <rect x="420" y="490" width="80" height="60" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="5" />
+                  <!-- PC-HOA -->
+                  <g id="v3-106-ex-report-pcnode">
+                    <rect id="v3-106-ex-report-pcbox" x="50" y="270" width="180" height="120" rx="14" fill="#FFFFFF" stroke="#0A3D91" stroke-width="6" />
+                    <rect x="72" y="290" width="136" height="70" rx="6" fill="#FDE68A" />
+                    <rect x="84" y="300" width="60" height="34" rx="4" fill="#F59E0B" />
+                    <rect x="130" y="320" width="64" height="30" rx="4" fill="#dc2626" />
+                  </g>
+                  <text x="140" y="440" text-anchor="middle" font-family="Be Vietnam Pro" font-size="28" font-weight="700" fill="#0F172A">PC-HOA</text>
+                  <g id="v3-106-ex-report-lock">
+                    <circle cx="222" cy="272" r="34" fill="#0F172A" />
+                    <rect x="207" y="270" width="30" height="24" rx="5" fill="none" stroke="#FFFFFF" stroke-width="4" />
+                    <path d="M213 270v-7a9 9 0 0 1 18 0v7" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+                  </g>
+                </svg>
+                <div class="v3-106-ex-report-iso" id="v3-106-ex-report-iso">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2" /><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" /></svg>
+                  <span>Đã cô lập</span>
+                </div>
+              </div>
+              <div class="v3-106-ex-report-panel v3-106-ex-report-steps">
+                <div class="v3-106-ex-report-sline" style="left: 420px; width: 200px"><div class="v3-106-ex-report-sfill" id="v3-106-ex-report-sf1"></div></div>
+                <div class="v3-106-ex-report-sline" style="left: 960px; width: 200px"><div class="v3-106-ex-report-sfill" id="v3-106-ex-report-sf2"></div></div>
+                <div class="v3-106-ex-report-step" style="left: 80px"><div class="v3-106-ex-report-sdot">1<div class="v3-106-ex-report-sok" id="v3-106-ex-report-s1"></div></div><div class="v3-106-ex-report-slab">Tiếp nhận</div></div>
+                <div class="v3-106-ex-report-step" style="left: 650px"><div class="v3-106-ex-report-sdot">2<div class="v3-106-ex-report-sok" id="v3-106-ex-report-s2"></div></div><div class="v3-106-ex-report-slab">Phân loại</div></div>
+                <div class="v3-106-ex-report-step" style="left: 1190px"><div class="v3-106-ex-report-sdot">3<div class="v3-106-ex-report-sok" id="v3-106-ex-report-s3"></div></div><div class="v3-106-ex-report-slab">Xử lý</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- screenshot → ticket -->
+        <div class="v3-106-ex-report-ticket" id="v3-106-ex-report-ticket">
+          <div class="v3-106-ex-report-tthumb" id="v3-106-ex-report-thumbB"></div>
+          <div class="v3-106-ex-report-trow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z" /><path d="M12 10v4.5" /><circle cx="12" cy="17.2" r="0.6" fill="#0A3D91" /></svg>
+            <span>Báo sự cố</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="v3-106-ex-report-screenflash" id="v3-106-ex-report-sflash"></div>
+
+      <div class="v3-106-ex-report-takewrap">
+        <div class="v3-106-ex-report-take" id="v3-106-ex-report-take">
+          <div class="v3-106-ex-report-take-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z" /></svg></div>
+          <span>Báo sớm — xử lý nhanh</span>
+        </div>
+      </div>
+
+      <div class="v3-106-ex-report-tag" id="v3-106-ex-report-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+        <span>Ví dụ thực tế</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var PX = "v3-106-ex-report-";
+      var root = document.querySelector('[data-composition-id="v3-106-ex-report"]');
+      var $ = function (id) { return root.querySelector("#" + PX + id); };
+      var q = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+      var CUE = /*hf-cues:start*/{"hoa":0.5,"slow":1.14,"popups":2.22,"strange":3.54,"shot":4.9,"screen":5.24,"report":5.88,"it":7.4,"susp":8.7,"isolate":9.78,"process":11.02,"early":12.18,"fast":12.94}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/16.444/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+
+      // ---------- pop-up windows on Hoa's screen (static markup, deterministic layout) ----------
+      var X_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>';
+      var WARN_ICON = '<svg viewBox="0 0 24 24"><path d="M12 2.5 1.5 21h21z" fill="#F59E0B" /><rect x="11" y="9" width="2" height="6.5" rx="1" fill="#FFFFFF" /><circle cx="12" cy="18" r="1.2" fill="#FFFFFF" /></svg>';
+      var POPS = [
+        // [left, top, w, h, rot, kind, header]
+        [700, 70, 760, 380, 2, "warn", "#dc2626"],
+        [90, 420, 700, 360, -2, "warn", "#475569"],
+        [880, 470, 640, 340, 1.5, "warn", "#dc2626"],
+        [320, 250, 680, 330, -1, "warn", "#B45309"],
+        [200, 130, 1020, 470, -1.5, "prize", "#F59E0B"]
+      ];
+      var popHost = $("pops"), ph = "";
+      POPS.forEach(function (p, i) {
+        ph += '<div class="' + PX + 'pop" id="' + PX + 'pop' + i + '" style="left:' + p[0] + 'px;top:' + p[1] + 'px;width:' + p[2] + 'px;height:' + p[3] + 'px">';
+        ph += '<div class="' + PX + 'pbar" style="background:' + p[6] + '">' + X_ICON + '</div>';
+        if (p[5] === "prize") {
+          ph += '<div class="' + PX + 'prize"><svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11.5" rx="1.5" fill="#FDE68A" /><rect x="2.5" y="6" width="19" height="4" rx="1" fill="#F59E0B" /><path d="M12 6v14.5" /><path d="M12 6C10 2.5 6.5 3 7.5 5.2 8.2 6.5 12 6 12 6zM12 6c2-3.5 5.5-3 4.5-.8C15.8 6.5 12 6 12 6z" /></svg><span>Bạn đã trúng thưởng!</span></div>';
+          ph += '<div class="' + PX + 'pbtn"></div>';
+        } else {
+          ph += '<div class="' + PX + 'warn">' + WARN_ICON + '<div class="' + PX + 'wl"><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i></div></div>';
+        }
+        ph += '</div>';
+      });
+      popHost.innerHTML = ph;
+      var pops = POPS.map(function (p, i) { return $("pop" + i); });
+      // mini screenshot (used in the ticket + the dashboard)
+      function mini(host, s) {
+        host.innerHTML =
+          '<div class="' + PX + 'mini" style="left:' + 14 * s + 'px;top:' + 12 * s + 'px;width:' + 150 * s + 'px;height:' + 84 * s + 'px;background:#F59E0B"></div>' +
+          '<div class="' + PX + 'mini" style="left:' + 120 * s + 'px;top:' + 36 * s + 'px;width:' + 160 * s + 'px;height:' + 70 * s + 'px;background:#dc2626"></div>' +
+          '<div class="' + PX + 'mini" style="left:' + 40 * s + 'px;top:' + 92 * s + 'px;width:' + 130 * s + 'px;height:' + 58 * s + 'px;background:#FFFFFF"></div>' +
+          '<div class="' + PX + 'mini" style="left:' + 190 * s + 'px;top:' + 104 * s + 'px;width:' + 100 * s + 'px;height:' + 46 * s + 'px;background:#FDE68A"></div>';
+      }
+      mini($("thumbB"), 1.03);
+      mini($("thumbA"), 1.0);
+
+      // ================= character rig (same build as anh Minh) =================
+      var SH = [37, -166], L1 = 112, L2 = 112;
+      function ik(T, sign) {
+        var dx = T[0] - SH[0], dy = T[1] - SH[1], d = Math.sqrt(dx * dx + dy * dy);
+        var dc = Math.max(Math.min(d, L1 + L2 - 0.5), 4);
+        var a = Math.acos(Math.max(-1, Math.min(1, (L1 * L1 + dc * dc - L2 * L2) / (2 * L1 * dc))));
+        var b = Math.atan2(dy, dx) + sign * a;
+        var E = [SH[0] + L1 * Math.cos(b), SH[1] + L1 * Math.sin(b)];
+        var H = d > dc ? [SH[0] + dx / d * dc, SH[1] + dy / d * dc] : T;
+        return [E, H];
+      }
+      var HAIR = {
+        minh: "M522 482 C512 418 556 398 602 404 C648 410 666 440 660 462 C630 450 600 452 580 466 C566 478 556 496 548 524 C532 514 524 500 522 482 Z",
+        hoa: "M524 488 C512 420 556 396 604 402 C650 408 670 442 662 470 C640 452 608 446 586 458 C572 468 562 488 558 514 C540 512 528 502 524 488 Z"
+      };
+      // body + head go into o.host; the arm goes into o.armHost (drawn in front of the desk edge)
+      function person(o) {
+        var p = PX + o.id;
+        var s = '<g id="' + p + '-pos"><g id="' + p + '-up"><g transform="translate(-585 -772)">';
+        s += '<path d="M494 772 C490 660 506 590 572 578 L606 578 C658 584 676 650 676 772 Z" fill="' + o.shirt + '" />';
+        s += '<path d="M566 580 L589 612 L612 580 Z" fill="#FFFFFF" />';
+        s += '<rect x="572" y="530" width="34" height="56" rx="10" fill="#E8B48C" />';
+        if (o.lanyard) {
+          s += '<path d="M576 584 L612 650 M604 582 L620 650" stroke="#0A3D91" stroke-width="5" fill="none" stroke-linecap="round" />';
+          s += '<rect x="594" y="646" width="48" height="58" rx="7" fill="#FFFFFF" stroke="#0A3D91" stroke-width="3" />';
+          s += '<rect x="594" y="646" width="48" height="14" rx="5" fill="#0A3D91" />';
+          s += '<text x="618" y="694" text-anchor="middle" font-family="Be Vietnam Pro" font-size="26" font-weight="800" fill="#0A3D91">IT</text>';
+        }
+        s += '<g id="' + p + '-head">';
+        if (o.bun) {
+          s += '<path d="M540 430 C504 452 494 522 508 592 C522 608 550 606 562 590 C552 556 548 516 556 474 Z" fill="' + o.hairColor + '" />';
+          s += '<circle cx="532" cy="420" r="32" fill="' + o.hairColor + '" />';
+        }
+        s += '<circle cx="588" cy="478" r="64" fill="#F6CDA8" />';
+        s += '<path d="' + HAIR[o.hair] + '" fill="' + o.hairColor + '" />';
+        s += '<circle cx="560" cy="494" r="13" fill="#E8B48C" />';
+        if (o.bun) s += '<circle cx="560" cy="512" r="5" fill="#F59E0B" />';
+        s += '<path id="' + p + '-brow" d="M612 456 Q626 448 640 456" stroke="' + o.hairColor + '" stroke-width="5" fill="none" stroke-linecap="round" />';
+        s += '<ellipse id="' + p + '-eye" cx="628" cy="482" rx="6.5" ry="9" fill="#0F172A" />';
+        if (o.bun) s += '<path d="M632 474 L641 467" stroke="#0F172A" stroke-width="3" stroke-linecap="round" />';
+        if (o.glasses) s += '<circle cx="628" cy="484" r="17" fill="rgba(255,255,255,0.25)" stroke="#0F172A" stroke-width="4" /><path d="M611 482 L566 486" stroke="#0F172A" stroke-width="4" stroke-linecap="round" />';
+        s += '<path d="M646 478 Q666 494 648 506 Z" fill="#F6CDA8" />';
+        s += '<circle cx="618" cy="504" r="10" fill="#F59E9E" opacity="0.45" />';
+        s += '<path id="' + p + '-sm" d="M626 522 Q636 529 645 521" stroke="' + (o.lips || "#9A3412") + '" stroke-width="4" fill="none" stroke-linecap="round" />';
+        s += '<ellipse id="' + p + '-mo" cx="637" cy="525" rx="6" ry="8" fill="' + (o.lips || "#9A3412") + '" opacity="0" />';
+        s += '</g></g></g></g>';
+        o.host.innerHTML = s;
+        var a = '<g id="' + p + '-apos"><g id="' + p + '-aup">';
+        a += '<line id="' + p + '-ua" x1="' + SH[0] + '" y1="' + SH[1] + '" x2="45" y2="-56" stroke="' + o.sleeve + '" stroke-width="38" stroke-linecap="round" />';
+        a += '<line id="' + p + '-fa" x1="45" y1="-56" x2="60" y2="52" stroke="' + o.sleeve + '" stroke-width="34" stroke-linecap="round" />';
+        a += '<circle id="' + p + '-hd" cx="60" cy="52" r="19" fill="#F6CDA8" />';
+        a += '</g></g>';
+        o.armHost.innerHTML = a;
+        var P = { p: p };
+        ["pos", "up", "head", "brow", "eye", "sm", "mo", "apos", "aup", "ua", "fa", "hd"].forEach(function (k) { P[k] = root.querySelector("#" + p + "-" + k); });
+        return P;
+      }
+      function put(target, props, at, dur, ease) {
+        var v = Object.assign({}, props);
+        if (dur > 0) { v.duration = dur; v.ease = ease || "power2.inOut"; tl.to(target, v, at); }
+        else tl.set(target, v, at);
+      }
+      function pose(P, at, dur, o, ease) {
+        if (o.x != null) { put([P.pos, P.apos], { x: o.x, y: o.y }, at, dur, ease); }
+        if (o.rot != null) put([P.up, P.aup], { rotation: o.rot, svgOrigin: "0 0" }, at, dur, ease);
+        if (o.hand) {
+          var r = ik(o.hand, o.sign == null ? 1 : o.sign), E = r[0], H = r[1];
+          put(P.ua, { attr: { x2: E[0], y2: E[1] } }, at, dur, ease);
+          put(P.fa, { attr: { x1: E[0], y1: E[1], x2: H[0], y2: H[1] } }, at, dur, ease);
+          put(P.hd, { attr: { cx: H[0], cy: H[1] } }, at, dur, ease);
+        }
+      }
+      function blink(P, t) {
+        tl.to(P.eye, { scaleY: 0.12, svgOrigin: "628 482", duration: 0.07, ease: "power1.in" }, t);
+        tl.to(P.eye, { scaleY: 1, svgOrigin: "628 482", duration: 0.1, ease: "power1.out" }, t + 0.08);
+      }
+      function headRot(P, rot, at, dur) { tl.to(P.head, { rotation: rot, svgOrigin: "590 540", duration: dur || 0.35, ease: "power2.out" }, at); }
+      function face(P, mode, at) {
+        var o = mode === "o";
+        tl.to(P.mo, { opacity: o ? 1 : 0, duration: 0.15, ease: "none" }, at);
+        tl.to(P.sm, { opacity: o ? 0 : 1, duration: 0.15, ease: "none" }, at);
+        tl.to(P.brow, { y: o ? -8 : 0, duration: 0.2, ease: "power2.out" }, at);
+        tl.to(P.eye, { scale: o ? 1.25 : 1, svgOrigin: "628 482", duration: 0.2, ease: "power2.out" }, at);
+      }
+
+      var HOA = person({ id: "hoa", host: $("hostH"), armHost: $("hostHarm"), shirt: "#7C3AED", sleeve: "#6D28D9", hair: "hoa", hairColor: "#1F2937", bun: true, lips: "#BE185D" });
+      var ITP = person({ id: "it", host: $("hostIT"), armHost: $("hostITarm"), shirt: "#3B6CC4", sleeve: "#2F59A8", hair: "minh", hairColor: "#4A3426", glasses: true, lanyard: true });
+      var MOUSE = [207, -32];
+      pose(HOA, 0, 0, { x: 585, y: 772, rot: 0, hand: MOUSE, sign: 1 });
+      pose(ITP, 0, 0, { x: 2165, y: 772, rot: 0, hand: [2380 - 2165 - 6, -30], sign: 1 });
+
+      // ---------- camera ----------
+      function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; }
+      var C = CUE;
+      var ITMON = [2640, 530], Z = 3.4;
+
+      // ---------- initial state ----------
+      gsap.set(pops, { opacity: 0 });
+      gsap.set(["#" + PX + "clean", "#" + PX + "flash", "#" + PX + "sflash", "#" + PX + "ticket", "#" + PX + "inc", "#" + PX + "cut", "#" + PX + "lock", "#" + PX + "iso", "#" + PX + "take", "#" + PX + "sweat"], { opacity: 0 });
+      gsap.set(q("." + PX + "sok"), { opacity: 0, scale: 0.4 });
+      gsap.set(q("." + PX + "sfill"), { scaleX: 0 });
+      gsap.set("#" + PX + "fill", { scaleX: 0.04 });
+      var chips = q("." + PX + "chip");
+      chips.forEach(function (c) { tl.set(c, { opacity: 1, scale: 1, boxShadow: "0 0 0 2px #CBD5E1, 0 0 0 rgba(10,61,145,0)", backgroundColor: "#FFFFFF" }, 0); });
+
+      // ================= 1. SLOW PC =================
+      tl.fromTo("#" + PX + "world", cam(1.8, 860, 570, 960, 540), Object.assign(cam(1.92, 900, 565, 960, 540), { duration: C.popups - 0.1, ease: "sine.inOut" }), 0);
+      tl.fromTo("#" + PX + "spin", { rotation: 0 }, { rotation: 360 * 6, duration: C.screen, ease: "none" }, 0);
+      tl.to("#" + PX + "fill", { scaleX: 0.16, duration: 1.4, ease: "power1.out" }, 0.1);
+      tl.to("#" + PX + "fill", { scaleX: 0.19, duration: 2.4, ease: "none" }, 1.5);
+      ["steam1", "steam2"].forEach(function (id, i) {
+        gsap.set("#" + PX + id, { opacity: 0 });
+        tl.fromTo("#" + PX + id, { y: 6 }, { y: -26, duration: 1.6, ease: "none", repeat: 1 }, i * 0.5);
+        tl.to("#" + PX + id, { keyframes: { opacity: [0, 0.8, 0] }, duration: 1.6, ease: "none", repeat: 1 }, i * 0.5);
+      });
+      // Hoa clicks impatiently, leans in
+      [0.5, 0.9, 1.3, 2.4, 2.75].forEach(function (t) {
+        tl.to(HOA.hd, { attr: { cy: -24 }, duration: 0.08, ease: "power2.out" }, t);
+        tl.to(HOA.hd, { attr: { cy: -32 }, duration: 0.12, ease: "power2.in" }, t + 0.09);
+      });
+      pose(HOA, C.hoa - 0.1, 0.5, { rot: 4 }, "power2.inOut");
+      headRot(HOA, 5, C.hoa, 0.4);
+      blink(HOA, 1.0);
+      tl.fromTo("#" + PX + "sweat", { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, C.slow);
+      tl.to("#" + PX + "sweat", { y: 26, opacity: 0, duration: 0.6, ease: "power1.in" }, C.slow + 0.6);
+      headRot(HOA, -3, C.slow + 0.1, 0.3);
+      headRot(HOA, 5, C.slow + 0.45, 0.3);
+
+      // ================= 2. POP-UPS =================
+      var PP = C.popups;
+      tl.to("#" + PX + "world", Object.assign(cam(2.15, 940, 536, 960, 540), { duration: 0.7, ease: "power3.inOut" }), PP - 0.15);
+      var popAt = [PP, PP + 0.22, PP + 0.44, PP + 0.66, C.strange - 0.05];
+      pops.forEach(function (p, i) {
+        tl.fromTo(p, { opacity: 0, scale: 0.7, rotation: 0 }, { opacity: 1, scale: 1, rotation: POPS[i][4], duration: 0.28, ease: "back.out(2)" }, popAt[i]);
+      });
+      face(HOA, "o", PP + 0.1);
+      pose(HOA, PP + 0.1, 0.3, { rot: -5 }, "power2.out");
+      headRot(HOA, -8, PP + 0.1, 0.3);
+      tl.to(pops[4], { keyframes: { x: [0, -10, 9, -5, 0] }, duration: 0.3, ease: "none" }, C.strange + 0.3);
+
+      // ================= 3. SCREENSHOT → REPORT TO IT =================
+      var SHOT = C.shot;
+      face(HOA, "smile", SHOT - 0.4);
+      pose(HOA, SHOT - 0.45, 0.35, { rot: 2, hand: [262, -34], sign: 1 }, "power2.inOut");
+      headRot(HOA, 2, SHOT - 0.4, 0.35);
+      tl.to(HOA.hd, { attr: { cy: -22 }, duration: 0.08, ease: "power2.out" }, SHOT - 0.05);
+      tl.to(HOA.hd, { attr: { cy: -34 }, duration: 0.12, ease: "power2.in" }, SHOT + 0.04);
+      tl.fromTo("#" + PX + "flash", { opacity: 0 }, { opacity: 1, duration: 0.06, ease: "none" }, SHOT);
+      tl.to("#" + PX + "flash", { opacity: 0, duration: 0.45, ease: "power2.out" }, SHOT + 0.08);
+      tl.fromTo("#" + PX + "sflash", { opacity: 0 }, { opacity: 0.55, duration: 0.06, ease: "none" }, SHOT);
+      tl.to("#" + PX + "sflash", { opacity: 0, duration: 0.4, ease: "power2.out" }, SHOT + 0.08);
+      // the screenshot lifts off the screen as a ticket
+      tl.to("#" + PX + "world", Object.assign(cam(1.6, 1000, 520, 960, 540), { duration: 0.6, ease: "power2.inOut" }), C.screen - 0.1);
+      tl.fromTo("#" + PX + "ticket", { opacity: 0, scale: 1.5, x: 0, y: 0 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, C.screen);
+      // fly to the IT desk (camera follows)
+      var RP = C.report, FLY = 0.95;
+      tl.to("#" + PX + "world", Object.assign(cam(0.95, 1850, 560, 960, 540), { duration: FLY + 0.1, ease: "power2.inOut" }), RP);
+      tl.to("#" + PX + "ticket", { x: ITMON[0] - 1060, duration: FLY, ease: "power2.inOut" }, RP + 0.05);
+      tl.to("#" + PX + "ticket", { keyframes: { y: [0, -230, -260, -120, 0] }, rotation: 0, duration: FLY, ease: "sine.inOut" }, RP + 0.05);
+      tl.to("#" + PX + "ticket", { keyframes: { rotation: [0, -6, 4, 0] }, duration: FLY, ease: "none" }, RP + 0.05);
+      face(HOA, "smile", RP);
+      pose(HOA, RP + 0.2, 0.5, { rot: 0, hand: MOUSE }, "power2.inOut");
+      headRot(HOA, 0, RP + 0.2, 0.4);
+      // ticket lands on the IT screen
+      var LAND = RP + 0.05 + FLY;
+      tl.to("#" + PX + "ticket", { scale: 0.45, opacity: 0, duration: 0.3, ease: "power2.in" }, LAND);
+      headRot(ITP, 6, LAND - 0.2, 0.3);
+      pose(ITP, LAND - 0.2, 0.4, { rot: 5 }, "power2.out");
+      blink(ITP, LAND + 0.4);
+
+      // ================= 4. IT DASHBOARD =================
+      var IT = C.it;
+      tl.to("#" + PX + "world", Object.assign(cam(Z, ITMON[0], ITMON[1], 960, 540), { duration: 1.1, ease: "power3.inOut" }), Math.max(IT, LAND) - 0.05);
+      // the dashboard header fills the top-left corner in this close-up — step the "Ví dụ" tag aside
+      tl.to("#" + PX + "tag", { opacity: 0, duration: 0.3, ease: "power2.in" }, Math.max(IT, LAND) - 0.05);
+      tl.fromTo("#" + PX + "inc", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, LAND + 0.15);
+      // step 1: received
+      tl.to("#" + PX + "s1", { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, LAND + 0.9);
+      tl.to("#" + PX + "sf1", { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, LAND + 1.1);
+      // classify: spotlight "Sự cố đáng ngờ"
+      var SU = C.susp;
+      chips.forEach(function (c, i) {
+        var on = i === 4;
+        tl.to(c, { opacity: on ? 1 : 0.4, scale: on ? 1.06 : 1,
+          boxShadow: on ? "0 0 0 4px #0A3D91, 0 14px 32px rgba(10,61,145,0.22)" : "0 0 0 2px #CBD5E1, 0 0 0 rgba(10,61,145,0)",
+          backgroundColor: on ? "#E6EDF8" : "#FFFFFF", duration: 0.35, ease: "power2.out" }, SU);
+      });
+      tl.to("#" + PX + "s2", { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, SU + 0.4);
+      tl.to("#" + PX + "sf2", { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, SU + 0.6);
+      // isolate the PC: link cut, lock
+      var IS = C.isolate;
+      tl.to("#" + PX + "linkA", { x: -18, stroke: "#dc2626", duration: 0.35, ease: "power2.out" }, IS);
+      tl.to("#" + PX + "linkB", { x: 18, stroke: "#dc2626", duration: 0.35, ease: "power2.out" }, IS);
+      tl.fromTo("#" + PX + "cut", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, svgOrigin: "345 330", duration: 0.35, ease: "back.out(2.2)" }, IS + 0.1);
+      tl.fromTo("#" + PX + "lock", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, svgOrigin: "222 272", duration: 0.35, ease: "back.out(2.2)" }, IS + 0.3);
+      tl.to("#" + PX + "pcbox", { stroke: "#0F172A", duration: 0.3, ease: "none" }, IS + 0.3);
+      tl.fromTo("#" + PX + "iso", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, IS + 0.45);
+      // process: step 3
+      var PR = C.process;
+      tl.to("#" + PX + "s3", { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, PR + 0.45);
+      // chips back to rest
+      chips.forEach(function (c, i) {
+        if (i === 4) return;
+        tl.to(c, { opacity: 0.55, duration: 0.3, ease: "power2.out" }, PR);
+      });
+
+      // ================= 5. PULL BACK, LESSON =================
+      var EA = C.early;
+      tl.set(pops, { opacity: 0 }, EA - 0.4);
+      tl.set("#" + PX + "clean", { opacity: 1 }, EA - 0.4);
+      tl.to("#" + PX + "world", Object.assign(cam(0.6, 1700, 560, 960, 440), { duration: 1.2, ease: "power3.inOut" }), EA - 0.3);
+      tl.to("#" + PX + "tag", { opacity: 1, duration: 0.4, ease: "power2.out" }, EA - 0.1);
+      tl.fromTo("#" + PX + "take", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, EA + 0.1);
+      pose(ITP, EA, 0.5, { rot: 0 }, "power2.inOut");
+      headRot(ITP, 0, EA, 0.4);
+      headRot(HOA, 4, EA + 0.6, 0.4);
+      // quick nods on "xử lý nhanh"
+      headRot(ITP, 9, C.fast, 0.25); headRot(ITP, 0, C.fast + 0.25, 0.3);
+      headRot(HOA, 10, C.fast + 0.15, 0.25); headRot(HOA, 4, C.fast + 0.4, 0.3);
+      blink(HOA, 14.6); blink(ITP, 15.2); blink(HOA, 16.3);
+      tl.fromTo("#" + PX + "leds", { opacity: 1 }, { opacity: 0.45, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 5, immediateRender: false }, EA + 0.8);
+      tl.fromTo([HOA.up, HOA.aup], { y: 0 }, { y: -3, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, EA + 1.2);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-106-ex-report"] = tl;
+    })();
+  </script>
+</template>

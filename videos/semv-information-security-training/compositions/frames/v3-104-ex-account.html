@@ -1,0 +1,483 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-104-ex-account-scene *, .v3-104-ex-account-scene *::before, .v3-104-ex-account-scene *::after { box-sizing: border-box; }
+    .v3-104-ex-account-bg { position: absolute; inset: 0; background: #EEF3FB; }
+    .v3-104-ex-account-scene { position: absolute; inset: 0; overflow: hidden; }
+    .v3-104-ex-account-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    .v3-104-ex-account-office { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+    .v3-104-ex-account-desk { position: absolute; left: -60px; top: 170px; width: 1574.4px; height: 885.6px; display: block; overflow: visible; }
+
+    .v3-104-ex-account-person { position: absolute; left: -160px; top: 370px; width: 320px; height: 640px; }
+    .v3-104-ex-account-person svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    .v3-104-ex-account-bubble {
+      position: absolute; left: 860px; top: 196px;
+      width: 640px; height: 132px;
+      background: #FFFFFF;
+      border-radius: 28px;
+      box-shadow: 0 0 0 3px #0A3D91, 0 18px 40px rgba(15, 23, 42, 0.14);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; font-weight: 700; color: #0F172A;
+      white-space: nowrap;
+      transform-origin: 85% 100%;
+    }
+    .v3-104-ex-account-tail { position: absolute; left: 520px; top: 124px; width: 70px; height: 56px; display: block; overflow: visible; }
+
+    .v3-104-ex-account-note { position: absolute; left: -70px; top: -70px; width: 140px; height: 140px; }
+    .v3-104-ex-account-note svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    /* time card */
+    .v3-104-ex-account-time {
+      position: absolute; inset: 0;
+      background: #0A3D91;
+      display: flex; align-items: center; justify-content: center; gap: 40px;
+      color: #FFFFFF;
+    }
+    .v3-104-ex-account-time svg { width: 150px; height: 150px; display: block; }
+    .v3-104-ex-account-time span { font-size: 88px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+
+    /* scene B */
+    .v3-104-ex-account-b { position: absolute; inset: 0; background: #F4F7FC; }
+    .v3-104-ex-account-win {
+      position: absolute; left: 110px; top: 170px;
+      width: 700px; height: 600px;
+      border-radius: 16px; background: #FFFFFF;
+      box-shadow: 0 0 0 2px #E2E8F0, 0 22px 50px rgba(15, 23, 42, 0.10);
+      overflow: hidden;
+    }
+    .v3-104-ex-account-whead { height: 96px; background: #E8A93A; display: flex; align-items: center; gap: 20px; padding: 0 32px; color: #FFFFFF; font-size: 34px; font-weight: 700; white-space: nowrap; }
+    .v3-104-ex-account-whead svg { width: 46px; height: 40px; display: block; }
+    .v3-104-ex-account-files { position: absolute; left: 50px; top: 140px; width: 600px; height: 420px; }
+    .v3-104-ex-account-file { position: absolute; width: 150px; height: 180px; }
+    .v3-104-ex-account-file svg { width: 100%; height: 100%; display: block; }
+    .v3-104-ex-account-bit { position: absolute; width: 22px; height: 22px; border-radius: 4px; }
+    .v3-104-ex-account-empty { position: absolute; left: 50px; top: 140px; width: 600px; height: 420px; border-radius: 16px; border: 4px dashed #CBD5E1; }
+
+    .v3-104-ex-account-log {
+      position: absolute; left: 870px; top: 170px;
+      width: 940px; height: 600px;
+      border-radius: 16px; background: #FFFFFF;
+      box-shadow: 0 0 0 2px #E2E8F0, 0 22px 50px rgba(15, 23, 42, 0.12);
+      padding: 0 0 30px;
+    }
+    .v3-104-ex-account-lhead { height: 96px; background: #0F172A; border-radius: 16px 16px 0 0; display: flex; align-items: center; gap: 20px; padding: 0 36px; color: #FFFFFF; font-size: 34px; font-weight: 700; white-space: nowrap; }
+    .v3-104-ex-account-lhead svg { width: 42px; height: 42px; display: block; }
+    .v3-104-ex-account-rows { position: absolute; left: 30px; top: 132px; width: 880px; }
+    .v3-104-ex-account-row {
+      position: relative;
+      height: 124px; margin-bottom: 18px;
+      border-radius: 14px; background: #F8FAFC;
+      display: flex; align-items: center; gap: 24px;
+      padding: 0 26px;
+      transform-origin: center;
+    }
+    .v3-104-ex-account-rt { flex: 0 0 96px; font-size: 30px; font-weight: 600; color: #64748B; font-variant-numeric: tabular-nums; }
+    .v3-104-ex-account-ra { flex: 0 0 250px; font-size: 32px; font-weight: 700; color: #0F172A; white-space: nowrap; }
+    .v3-104-ex-account-ru { flex: 1; font-size: 30px; font-weight: 600; color: #334155; white-space: nowrap; }
+    .v3-104-ex-account-red { color: #B91C1C; }
+    .v3-104-ex-account-uname { position: relative; display: inline-block; }
+    .v3-104-ex-account-uring { position: absolute; left: -16px; top: -12px; width: calc(100% + 32px); height: calc(100% + 24px); overflow: visible; display: block; }
+
+    .v3-104-ex-account-lanB { position: absolute; left: 300px; top: 210px; width: 320px; height: 640px; }
+    .v3-104-ex-account-lanB svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .v3-104-ex-account-bang {
+      position: absolute; left: 560px; top: 200px;
+      width: 84px; height: 84px; border-radius: 50%;
+      background: #dc2626; color: #FFFFFF;
+      font-size: 56px; font-weight: 800; line-height: 84px; text-align: center;
+      box-shadow: 0 10px 24px rgba(220, 38, 38, 0.3);
+    }
+
+    .v3-104-ex-account-tag {
+      position: absolute; left: 56px; top: 44px;
+      height: 56px; padding: 0 26px 0 20px;
+      border-radius: 28px;
+      background: #0A3D91; color: #FFFFFF;
+      font-size: 28px; font-weight: 700;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25);
+      white-space: nowrap;
+    }
+    .v3-104-ex-account-tag svg { width: 30px; height: 30px; display: block; }
+    .v3-104-ex-account-takewrap { position: absolute; left: 0; right: 0; top: 880px; height: 120px; display: flex; justify-content: center; }
+    .v3-104-ex-account-take {
+      height: 116px; padding: 0 52px 0 30px;
+      border-radius: 18px; background: #FFFFFF;
+      box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2);
+      display: flex; align-items: center; gap: 24px;
+      font-size: 44px; font-weight: 800; color: #0F172A; letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .v3-104-ex-account-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #0A3D91; display: flex; align-items: center; justify-content: center; }
+    .v3-104-ex-account-take-ico svg { width: 42px; height: 42px; display: block; }
+  </style>
+
+  <div id="root" data-composition-id="v3-104-ex-account" data-width="1920" data-height="1080" data-duration="15.821">
+    <div class="v3-104-ex-account-bg clip" id="v3-104-ex-account-bg" data-start="0" data-duration="15.821" data-track-index="0"></div>
+
+    <!-- ============ SCENE A: the favour ============ -->
+    <div class="v3-104-ex-account-scene" id="v3-104-ex-account-sceneA">
+      <div class="v3-104-ex-account-world" id="v3-104-ex-account-world">
+        <svg class="v3-104-ex-account-office" viewBox="0 0 1920 1080">
+          <rect x="-400" y="-300" width="2720" height="1680" fill="#EEF3FB" />
+          <rect x="-400" y="900" width="2720" height="500" fill="#DCE5F3" />
+          <rect x="-400" y="892" width="2720" height="12" fill="#C9D5E8" />
+          <!-- window -->
+          <rect x="120" y="110" width="400" height="300" rx="14" fill="#FFFFFF" />
+          <rect x="142" y="132" width="356" height="256" rx="6" fill="#D4E5FB" />
+          <circle cx="430" cy="190" r="32" fill="#FDE68A" />
+          <g id="v3-104-ex-account-cloud1"><ellipse cx="230" cy="200" rx="54" ry="19" fill="#FFFFFF" /><ellipse cx="256" cy="186" rx="32" ry="19" fill="#FFFFFF" /></g>
+          <path d="M142 388 V330 H190 V302 H240 V344 H280 V286 H334 V322 H380 V314 H426 V350 H470 V326 H498 V388 Z" fill="#B9D0F0" />
+          <rect x="316" y="132" width="8" height="256" fill="#FFFFFF" />
+          <rect x="142" y="256" width="356" height="8" fill="#FFFFFF" />
+          <rect x="108" y="408" width="424" height="16" rx="8" fill="#FFFFFF" />
+          <!-- notice board -->
+          <rect x="1640" y="150" width="220" height="170" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+          <rect x="1664" y="176" width="70" height="56" rx="4" fill="#FDE68A" />
+          <rect x="1748" y="180" width="86" height="40" rx="4" fill="#DCE7F8" />
+          <rect x="1664" y="246" width="170" height="14" rx="7" fill="#E2E8F0" />
+          <rect x="1664" y="272" width="120" height="14" rx="7" fill="#E2E8F0" />
+          <!-- plant -->
+          <path d="M1786 822 h104 l-12 78 h-80 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+          <g id="v3-104-ex-account-plant">
+            <path d="M1838 822 C1794 764 1768 734 1776 686 C1818 708 1834 764 1838 822 Z" fill="#34A57A" />
+            <path d="M1838 822 C1880 766 1910 742 1910 696 C1866 716 1844 768 1838 822 Z" fill="#2E8F6A" />
+          </g>
+        </svg>
+
+        <!-- Lan at her desk (same construction as anh Minh, scaled 0.82) -->
+        <svg class="v3-104-ex-account-desk" viewBox="0 0 1920 1080">
+          <rect x="392" y="560" width="78" height="240" rx="32" fill="#334155" />
+          <rect x="408" y="590" width="46" height="170" rx="20" fill="#475569" />
+          <g id="v3-104-ex-account-lan">
+            <path d="M530 452 C500 520 506 610 540 660 L600 640 C572 600 560 540 568 470 Z" fill="#3B2416" />
+            <path d="M494 772 C490 660 506 590 572 578 L606 578 C658 584 676 650 676 772 Z" fill="#7C5CC4" />
+            <path d="M566 580 L589 612 L612 580 Z" fill="#FFFFFF" />
+            <rect x="572" y="530" width="34" height="56" rx="10" fill="#E8B48C" />
+            <g id="v3-104-ex-account-head">
+              <circle cx="588" cy="478" r="64" fill="#F6CDA8" />
+              <path d="M520 486 C506 412 556 394 604 400 C650 406 668 436 662 462 C632 446 600 448 580 462 C566 474 556 496 550 526 C532 516 522 502 520 486 Z" fill="#3B2416" />
+              <path d="M612 456 Q626 448 640 456" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />
+              <ellipse id="v3-104-ex-account-eye" cx="628" cy="482" rx="6.5" ry="9" fill="#0F172A" />
+              <path d="M646 478 Q666 494 648 506 Z" fill="#F6CDA8" />
+              <circle cx="618" cy="504" r="10" fill="#F59E9E" opacity="0.45" />
+              <path d="M624 520 Q636 532 647 519" stroke="#9A3412" stroke-width="4" fill="none" stroke-linecap="round" />
+            </g>
+          </g>
+          <!-- monitor -->
+          <rect x="1030" y="698" width="60" height="50" fill="#94A3B8" />
+          <rect x="976" y="742" width="168" height="20" rx="10" fill="#94A3B8" />
+          <rect x="800" y="360" width="520" height="340" rx="18" fill="#1E293B" />
+          <rect x="820" y="380" width="480" height="300" rx="4" fill="#F8FAFC" />
+          <rect x="820" y="380" width="480" height="28" fill="#0A3D91" />
+          <circle cx="1060" cy="480" r="30" fill="#7C5CC4" />
+          <path d="M1048 474 a12 12 0 1 1 24 0 a12 12 0 1 1 -24 0" fill="#FFFFFF" opacity="0.0" />
+          <rect x="960" y="530" width="200" height="30" rx="8" fill="#E2E8F0" />
+          <rect x="960" y="574" width="200" height="30" rx="8" fill="#E2E8F0" />
+          <g fill="#64748B"><circle cx="982" cy="589" r="5" /><circle cx="998" cy="589" r="5" /><circle cx="1014" cy="589" r="5" /><circle cx="1030" cy="589" r="5" /><circle cx="1046" cy="589" r="5" /></g>
+          <rect x="1000" y="620" width="120" height="32" rx="8" fill="#0A3D91" />
+          <!-- desk -->
+          <rect x="300" y="760" width="1420" height="28" rx="10" fill="#B8C6DB" />
+          <rect x="330" y="788" width="1360" height="300" fill="#D7E0EE" />
+          <rect x="1420" y="816" width="240" height="90" rx="10" fill="#E6ECF5" />
+          <rect x="1510" y="856" width="60" height="10" rx="5" fill="#94A3B8" />
+          <rect x="850" y="740" width="340" height="20" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <!-- sticky-note pad -->
+          <rect x="1250" y="738" width="110" height="22" rx="4" fill="#FCD34D" />
+          <!-- Lan's arm -->
+          <g id="v3-104-ex-account-arm">
+            <path d="M622 606 C652 650 668 704 704 738 L776 742" stroke="#6A4BB0" stroke-width="40" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="792" cy="740" r="19" fill="#F6CDA8" />
+          </g>
+        </svg>
+
+        <div class="v3-104-ex-account-person" id="v3-104-ex-account-mate"></div>
+
+        <div class="v3-104-ex-account-note" id="v3-104-ex-account-note">
+          <svg viewBox="0 0 140 140">
+            <rect x="6" y="10" width="128" height="124" rx="6" fill="#FCD34D" />
+            <rect x="6" y="10" width="128" height="22" rx="6" fill="#F5B82E" />
+            <path id="v3-104-ex-account-scrib1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M22 64 c6 -14 10 -14 14 0 s8 14 14 0 s8 -14 14 0 s8 14 14 0 s8 -14 14 0 s8 14 14 0" fill="none" stroke="#1E293B" stroke-width="5" stroke-linecap="round" />
+            <path id="v3-104-ex-account-scrib2" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M22 100 c8 -12 14 -12 18 0 s10 12 16 0 s10 -12 16 0 s8 10 14 2" fill="none" stroke="#1E293B" stroke-width="5" stroke-linecap="round" />
+            <g id="v3-104-ex-account-nkey" fill="none" stroke="#B45309" stroke-width="4" stroke-linecap="round"><circle cx="110" cy="100" r="9" /><path d="M110 91 v-18 M110 80 h7" /></g>
+          </svg>
+        </div>
+
+        <div class="v3-104-ex-account-bubble" id="v3-104-ex-account-bubble">
+          <span>Cho mình mượn tài khoản nhé?</span>
+          <svg class="v3-104-ex-account-tail" viewBox="0 0 70 56"><path d="M2 0 L60 52 L46 0 Z" fill="#FFFFFF" /><path d="M4 2 L60 52 L44 2" fill="none" stroke="#0A3D91" stroke-width="3" stroke-linejoin="round" /></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCENE B: next day — deleted data + system log ============ -->
+    <div class="v3-104-ex-account-scene v3-104-ex-account-b" id="v3-104-ex-account-sceneB">
+      <div class="v3-104-ex-account-win" id="v3-104-ex-account-win">
+        <div class="v3-104-ex-account-whead">
+          <svg viewBox="0 0 30 26"><path d="M1 4a3 3 0 0 1 3-3h7l3 3.5h12a3 3 0 0 1 3 3V22a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3z" fill="#FFFFFF" /></svg>
+          <span>Dữ liệu quan trọng</span>
+        </div>
+        <div class="v3-104-ex-account-empty" id="v3-104-ex-account-empty"></div>
+        <div class="v3-104-ex-account-files" id="v3-104-ex-account-files"></div>
+      </div>
+
+      <div class="v3-104-ex-account-lanB" id="v3-104-ex-account-lanB"></div>
+      <div class="v3-104-ex-account-bang" id="v3-104-ex-account-bang">!</div>
+
+      <div class="v3-104-ex-account-log" id="v3-104-ex-account-log">
+        <div class="v3-104-ex-account-lhead">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" /></svg>
+          <span>Nhật ký hệ thống</span>
+        </div>
+        <div class="v3-104-ex-account-rows">
+          <div class="v3-104-ex-account-row" id="v3-104-ex-account-row1"><div class="v3-104-ex-account-rt">08:02</div><div class="v3-104-ex-account-ra">Đăng nhập</div><div class="v3-104-ex-account-ru">lan.nguyen</div></div>
+          <div class="v3-104-ex-account-row" id="v3-104-ex-account-row2"><div class="v3-104-ex-account-rt">08:05</div><div class="v3-104-ex-account-ra">Mở thư mục</div><div class="v3-104-ex-account-ru">lan.nguyen</div></div>
+          <div class="v3-104-ex-account-row" id="v3-104-ex-account-row3"><div class="v3-104-ex-account-rt">08:07</div><div class="v3-104-ex-account-ra v3-104-ex-account-red">Xóa dữ liệu</div><div class="v3-104-ex-account-ru">Tài khoản: <span class="v3-104-ex-account-uname v3-104-ex-account-red">lan.nguyen<svg class="v3-104-ex-account-uring" viewBox="0 0 300 80" preserveAspectRatio="none"><path id="v3-104-ex-account-uring-p" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M34 10 C110 -2 236 0 284 18 C304 32 298 62 250 72 C176 84 70 82 22 66 C-2 56 4 26 46 10 C80 2 120 0 150 2" fill="none" stroke="#dc2626" stroke-width="4.5" stroke-linecap="round" vector-effect="non-scaling-stroke" /></svg></span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- time card -->
+    <div class="v3-104-ex-account-time" id="v3-104-ex-account-time">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /><path d="m10 14.5 2 2 3.5-3.5" /></svg>
+      <span>Hôm sau</span>
+    </div>
+
+    <div class="v3-104-ex-account-takewrap">
+      <div class="v3-104-ex-account-take" id="v3-104-ex-account-take">
+        <div class="v3-104-ex-account-take-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6" /><path d="M5 20c1-3.8 3.8-5.6 7-5.6s6 1.8 7 5.6" /></svg></div>
+        <span>Tài khoản của ai — người đó chịu trách nhiệm</span>
+      </div>
+    </div>
+
+    <div class="v3-104-ex-account-tag" id="v3-104-ex-account-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+      <span>Ví dụ thực tế</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="v3-104-ex-account"]');
+      var PX = "v3-104-ex-account-";
+      var $ = function (id) { return root.querySelector("#" + PX + id); };
+      var part = function (who, p) { return root.querySelector("#" + PX + who + " ." + PX + p); };
+      var CUE = /*hf-cues:start*/{"mate":0,"ask":0.44,"fast":2.16,"give":3.42,"pw":4.14,"next":5.3,"data":5.98,"del":7,"log":8.16,"acct":9.38,"lanname":10.28,"rule":11.2}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/15.321/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+
+      // ---------- flat front-facing person (same construction as anh Minh) ----------
+      var SKIN = "#F6CDA8", SKIN2 = "#E8B48C";
+      function person(o) {
+        var s = '<svg viewBox="-160 -620 320 640">';
+        if (o.hairStyle === "long") s += '<path d="M-72 -520 C-82 -606 82 -606 72 -520 L82 -410 C46 -392 -46 -392 -82 -410 Z" fill="' + o.hair + '" />';
+        if (o.skirt) {
+          s += '<g class="' + PX + 'legL"><rect x="-40" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="-28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+          s += '<g class="' + PX + 'legR"><rect x="12" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+        } else {
+          s += '<g class="' + PX + 'legL"><rect x="-44" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="-30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          s += '<g class="' + PX + 'legR"><rect x="8" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+        }
+        s += '<rect x="-17" y="-458" width="34" height="52" rx="10" fill="' + SKIN2 + '" />';
+        s += '<path d="M-90 -214 C-96 -330 -86 -398 -34 -414 L34 -414 C86 -398 96 -330 90 -214 Z" fill="' + o.shirt + '" />';
+        if (o.skirt) s += '<path d="M-88 -236 L88 -236 L106 -132 L-106 -132 Z" fill="' + o.skirt + '" />';
+        s += '<path d="M-26 -413 L0 -378 L26 -413 Z" fill="#FFFFFF" />';
+        s += '<g class="' + PX + 'armL"><path d="M-74 -392 C-96 -350 -104 -300 -100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="-100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+        s += '<g class="' + PX + 'armR"><path d="M74 -392 C96 -350 104 -300 100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+        s += '<g class="' + PX + 'head">';
+        s += '<circle cx="-63" cy="-506" r="13" fill="' + SKIN2 + '" /><circle cx="63" cy="-506" r="13" fill="' + SKIN2 + '" />';
+        s += '<circle cx="0" cy="-512" r="64" fill="' + SKIN + '" />';
+        if (o.hairStyle === "m") s += '<path d="M-66 -510 C-74 -588 -18 -602 10 -596 C58 -590 76 -556 66 -508 C52 -538 22 -548 -8 -546 C-34 -544 -56 -534 -66 -510 Z" fill="' + o.hair + '" />';
+        else s += '<path d="M-68 -498 C-78 -594 74 -604 68 -500 C50 -536 10 -552 -24 -534 C-42 -524 -58 -512 -68 -498 Z" fill="' + o.hair + '" />';
+        s += '<path class="' + PX + 'brows" d="M-34 -538 Q-22 -546 -10 -538 M10 -538 Q22 -546 34 -538" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+        s += '<g class="' + PX + 'eyes"><ellipse cx="-22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /><ellipse cx="22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /></g>';
+        s += '<circle cx="-38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" /><circle cx="38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" />';
+        s += '<path class="' + PX + 'mouth" d="M-13 -478 Q0 -466 13 -478" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" />';
+        s += '<path class="' + PX + 'grin" d="M-18 -480 Q0 -456 18 -480 Z" fill="#9A3412" />';
+        s += '<ellipse class="' + PX + 'oh" cx="0" cy="-472" rx="10" ry="13" fill="#9A3412" />';
+        s += '</g></svg>';
+        return s;
+      }
+      $("mate").innerHTML = person({ shirt: "#D97706", arm: "#B45F06", hair: "#1E293B", hairStyle: "m", pants: "#334155" });
+      $("lanB").innerHTML = person({ shirt: "#7C5CC4", arm: "#6A4BB0", hair: "#3B2416", hairStyle: "long", skirt: "#334155" });
+      gsap.set(root.querySelectorAll("." + PX + "grin, ." + PX + "oh"), { opacity: 0 });
+
+      // files grid + dissolve bits (deterministic)
+      var FILES = [[0, 0], [215, 0], [430, 0], [0, 220], [215, 220], [430, 220]];
+      var GLYPH = ['<path d="M18 50h56M18 66h56M18 82h36" />', '<path d="M18 84V70M36 84V56M54 84V64M72 84V48" />', '<rect x="16" y="46" width="60" height="44" rx="4" /><path d="M16 60h60M36 46v44M56 46v44" />'];
+      var fhost = $("files");
+      FILES.forEach(function (f, i) {
+        var d = document.createElement("div");
+        d.className = PX + "file";
+        d.style.left = f[0] + "px"; d.style.top = f[1] + "px";
+        d.innerHTML = '<svg viewBox="0 0 92 110"><path d="M6 8 a8 8 0 0 1 8 -8 h46 l26 26 v76 a8 8 0 0 1 -8 8 h-64 a8 8 0 0 1 -8 -8 z" fill="#DCE7F8" stroke="#0A3D91" stroke-width="4" /><path d="M60 0 v26 h26" fill="none" stroke="#0A3D91" stroke-width="4" /><g fill="none" stroke="#0A3D91" stroke-width="5" stroke-linecap="round">' + GLYPH[i % 3] + '</g></svg>';
+        fhost.appendChild(d);
+        for (var b = 0; b < 4; b++) {
+          var bit = document.createElement("div");
+          bit.className = PX + "bit";
+          bit.style.left = (f[0] + 40 + (b % 2) * 50) + "px"; bit.style.top = (f[1] + 50 + Math.floor(b / 2) * 60) + "px";
+          bit.style.background = b % 2 ? "#0A3D91" : "#93B4E8";
+          fhost.appendChild(bit);
+        }
+      });
+      var files = Array.prototype.slice.call(root.querySelectorAll("." + PX + "file"));
+      var bits = Array.prototype.slice.call(root.querySelectorAll("." + PX + "bit"));
+
+      function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; }
+      var PIV = { armL: "-74 -392", armR: "74 -392", legL: "-26 -222", legR: "26 -222", head: "0 -450", eyes: "0 -510" };
+      function pose(who, p, rot, at, dur) { tl.to(part(who, p), { rotation: rot, svgOrigin: PIV[p], duration: dur || 0.4, ease: "power2.out" }, at); }
+      function blink(who, t) {
+        tl.to(part(who, "eyes"), { scaleY: 0.12, svgOrigin: PIV.eyes, duration: 0.07, ease: "power1.in" }, t);
+        tl.to(part(who, "eyes"), { scaleY: 1, svgOrigin: PIV.eyes, duration: 0.1, ease: "power1.out" }, t + 0.08);
+      }
+      function face(who, which, at) {
+        ["mouth", "grin", "oh"].forEach(function (m) { tl.to(part(who, m), { opacity: m === which ? 1 : 0, duration: 0.15, ease: "none" }, at); });
+      }
+      function walk(who, toX, t0, dur) {
+        var w = $(who), steps = Math.max(2, Math.round(dur / 0.3)), h = dur / steps;
+        tl.to(w, { x: toX, duration: dur, ease: "power1.inOut" }, t0);
+        for (var i = 0; i < steps; i++) {
+          var t = t0 + i * h, leg = part(who, i % 2 ? "legR" : "legL");
+          tl.to(w, { y: -10, duration: h / 2, ease: "sine.out" }, t);
+          tl.to(w, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+          tl.to(leg, { y: -20, duration: h / 2, ease: "sine.out" }, t);
+          tl.to(leg, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+        }
+      }
+
+      // ---------- initial state ----------
+      gsap.set("#" + PX + "world", cam(1, 960, 540, 960, 540));
+      gsap.set($("mate"), { x: 2150, y: 0 });
+      gsap.set(["#" + PX + "bubble", "#" + PX + "note", "#" + PX + "sceneB", "#" + PX + "take", "#" + PX + "bang", "#" + PX + "lanB", "#" + PX + "log", "#" + PX + "empty"], { opacity: 0 });
+      gsap.set("#" + PX + "time", { xPercent: 100 });
+      gsap.set("#" + PX + "note", { x: 700, y: 730 });
+      var rows = ["#" + PX + "row1", "#" + PX + "row2", "#" + PX + "row3"];
+      gsap.set(rows, { opacity: 0, x: 40 });
+
+      // ================= 1. a colleague asks =================
+      tl.fromTo("#" + PX + "world", cam(1, 960, 540, 960, 540), Object.assign(cam(1.06, 1000, 560, 960, 560), { duration: CUE.next, ease: "sine.inOut" }), 0);
+      tl.fromTo("#" + PX + "cloud1", { x: 0 }, { x: 40, duration: 6.5, ease: "none" }, 0);
+      tl.fromTo("#" + PX + "lan", { y: 0 }, { y: -4, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      tl.fromTo("#" + PX + "arm", { x: 0 }, { keyframes: { x: [0, 5, 0, 6, 0] }, duration: 0.9, ease: "none" }, 0.1);
+      walk("mate", 1560, CUE.mate - 0.3, 1.2);
+      tl.to(part("mate", "eyes"), { x: -7, duration: 0.25, ease: "power2.out" }, CUE.mate);
+      face("mate", "grin", CUE.mate + 0.6);
+      // Lan turns toward him
+      tl.to("#" + PX + "head", { rotation: -4, svgOrigin: "590 540", duration: 0.4, ease: "power2.out" }, CUE.mate + 0.6);
+      tl.to("#" + PX + "eye", { x: 3, y: -3, duration: 0.3, ease: "power2.out" }, CUE.mate + 0.6);
+      // speech bubble (static once shown)
+      var AK = CUE.ask;
+      tl.fromTo("#" + PX + "bubble", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.8)", immediateRender: false }, AK - 0.1);
+      pose("mate", "armL", 40, AK, 0.35);
+      pose("mate", "armL", 10, AK + 0.6, 0.4);
+      // "…to get it done fast" — pleading hop + hands together
+      var FS = CUE.fast;
+      pose("mate", "armL", -28, FS - 0.1, 0.3);
+      pose("mate", "armR", 28, FS - 0.1, 0.3);
+      tl.to($("mate"), { y: -14, duration: 0.15, ease: "power2.out" }, FS);
+      tl.to($("mate"), { y: 0, duration: 0.2, ease: "power2.in" }, FS + 0.15);
+      tl.to($("mate"), { y: -10, duration: 0.15, ease: "power2.out" }, FS + 0.4);
+      tl.to($("mate"), { y: 0, duration: 0.2, ease: "power2.in" }, FS + 0.55);
+      blink("mate", FS + 0.9);
+
+      // ================= 2. Lan writes the password on a sticky note =================
+      var GV = CUE.give;
+      tl.to("#" + PX + "bubble", { opacity: 0, scale: 0.9, duration: 0.3, ease: "power2.in" }, GV - 0.2);
+      tl.fromTo("#" + PX + "note", { opacity: 0, scale: 0.4, rotation: -8 }, { opacity: 1, scale: 1, rotation: -4, duration: 0.3, ease: "back.out(2)", immediateRender: false }, GV - 0.1);
+      tl.to("#" + PX + "scrib1", { strokeDashoffset: 0, duration: 0.4, ease: "none" }, GV + 0.1);
+      tl.to("#" + PX + "scrib2", { strokeDashoffset: 0, duration: 0.3, ease: "none" }, GV + 0.5);
+      tl.fromTo("#" + PX + "arm", { x: 0, y: 0 }, { keyframes: { x: [0, 10, 20, 30, 12, 24, 0], y: [0, -6, 0, -6, 4, -2, 0] }, duration: 0.7, ease: "none", immediateRender: false }, GV + 0.1);
+      tl.to("#" + PX + "eye", { x: 0, y: 4, duration: 0.2, ease: "power2.out" }, GV);
+      // hands it over at "mật khẩu"
+      var PW = CUE.pw;
+      tl.to("#" + PX + "arm", { x: 70, y: -30, duration: 0.3, ease: "power2.out" }, PW - 0.05);
+      tl.to("#" + PX + "arm", { x: 0, y: 0, duration: 0.4, ease: "power2.inOut" }, PW + 0.4);
+      tl.to("#" + PX + "eye", { x: 3, y: -3, duration: 0.2, ease: "power2.out" }, PW);
+      pose("mate", "armL", 0, PW - 0.1, 0.25);
+      pose("mate", "armR", 0, PW - 0.1, 0.25);
+      pose("mate", "armL", 36, PW + 0.1, 0.3);
+      tl.to("#" + PX + "note", { x: 1080, y: 560, rotation: 8, duration: 0.25, ease: "power2.out" }, PW + 0.05);
+      tl.to("#" + PX + "note", { x: 1430, y: 720, rotation: 12, scale: 0.8, duration: 0.3, ease: "power2.in" }, PW + 0.3);
+      face("mate", "grin", PW + 0.5);
+      // he leaves with it
+      var LV = PW + 0.75;
+      tl.to("#" + PX + "note", { x: 1430 + 760, duration: CUE.next - LV, ease: "power1.in" }, LV);
+      walk("mate", 2320, LV, CUE.next - LV);
+
+      // ================= 3. "Hôm sau" time card =================
+      var NX = CUE.next;
+      tl.to("#" + PX + "time", { xPercent: 0, duration: 0.4, ease: "power3.inOut" }, NX - 0.3);
+      tl.fromTo("#" + PX + "time svg", { rotation: -12, scale: 0.8 }, { rotation: 0, scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, NX);
+      tl.set("#" + PX + "sceneA", { opacity: 0 }, NX + 0.15);
+      tl.set("#" + PX + "sceneB", { opacity: 1 }, NX + 0.15);
+      tl.to("#" + PX + "time", { xPercent: -100, duration: 0.4, ease: "power3.inOut" }, CUE.data - 0.35);
+
+      // ================= 4. important data gets deleted =================
+      var DL = CUE.del;
+      tl.fromTo("#" + PX + "win", { y: 20 }, { y: 0, duration: 0.6, ease: "power2.out" }, CUE.data - 0.3);
+      tl.set(bits, { opacity: 0 }, 0);
+      files.forEach(function (f, i) {
+        var at = DL - 0.05 + i * 0.09;
+        tl.to(f, { keyframes: { x: [0, -5, 5, -3, 0] }, duration: 0.2, ease: "none" }, at);
+        tl.to(f, { opacity: 0, scale: 0.4, duration: 0.3, ease: "power2.in" }, at + 0.18);
+        for (var b = 0; b < 4; b++) {
+          var bit = bits[i * 4 + b];
+          var dx = ((i * 7 + b * 13) % 9 - 4) * 22, dy = -80 - ((i * 5 + b * 11) % 5) * 26;
+          tl.fromTo(bit, { opacity: 0, x: 0, y: 0, rotation: 0 }, { opacity: 1, x: dx * 0.4, y: dy * 0.3, rotation: 45, duration: 0.15, ease: "power1.out", immediateRender: false }, at + 0.25);
+          tl.to(bit, { opacity: 0, x: dx, y: dy, rotation: 120, duration: 0.55, ease: "power1.in" }, at + 0.4);
+        }
+      });
+      tl.to("#" + PX + "empty", { opacity: 1, duration: 0.4, ease: "power1.out" }, DL + 0.9);
+
+      // ================= 5. the system log =================
+      var LG = CUE.log;
+      tl.fromTo("#" + PX + "log", { opacity: 0, x: 140 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out", immediateRender: false }, LG - 0.2);
+      tl.to(rows, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out", stagger: 0.12 }, LG + 0.15);
+      var ON = "0 0 0 3px #dc2626, 0 14px 32px rgba(220,38,38,0.18)", OFF = "0 0 0 0px rgba(220,38,38,0), 0 0 0 rgba(220,38,38,0)";
+      gsap.set(rows, { boxShadow: OFF, backgroundColor: "#F8FAFC" });
+      var AC = CUE.acct;
+      rows.forEach(function (r, i) {
+        var on = i === 2;
+        tl.to(r, { opacity: on ? 1 : 0.4, scale: on ? 1.02 : 1, boxShadow: on ? ON : OFF, backgroundColor: on ? "#FEF2F2" : "#F8FAFC", duration: 0.35, ease: "power2.out" }, AC);
+      });
+      tl.to("#" + PX + "uring-p", { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" }, CUE.lanname);
+      // Lan realises: her account
+      tl.to("#" + PX + "win", { opacity: 0, x: -40, duration: 0.35, ease: "power2.in" }, AC + 0.05);
+      tl.fromTo("#" + PX + "lanB", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, AC + 0.3);
+      face("lanB", "oh", CUE.lanname + 0.2);
+      tl.to(part("lanB", "brows"), { y: -8, duration: 0.2, ease: "power2.out" }, CUE.lanname + 0.2);
+      pose("lanB", "armL", 150, CUE.lanname + 0.25, 0.35);
+      pose("lanB", "armR", -150, CUE.lanname + 0.25, 0.35);
+      tl.fromTo("#" + PX + "bang", { opacity: 0, scale: 0.3, rotation: -20 }, { opacity: 1, scale: 1, rotation: 8, duration: 0.35, ease: "back.out(2.2)", immediateRender: false }, CUE.lanname + 0.3);
+      tl.to(part("lanB", "eyes"), { x: 8, duration: 0.3, ease: "power2.out" }, CUE.lanname + 0.5);
+      // takeaway
+      var RL = CUE.rule;
+      pose("lanB", "armL", 0, RL + 0.3, 0.5);
+      pose("lanB", "armR", 0, RL + 0.3, 0.5);
+      face("lanB", "mouth", RL + 0.4);
+      tl.to(part("lanB", "brows"), { y: 0, duration: 0.3, ease: "power2.out" }, RL + 0.4);
+      tl.fromTo("#" + PX + "take", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, RL);
+      blink("lanB", RL + 1.4);
+      blink("lanB", RL + 3.2);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-104-ex-account"] = tl;
+    })();
+  </script>
+</template>

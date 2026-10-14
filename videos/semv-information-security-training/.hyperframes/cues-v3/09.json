@@ -1,0 +1,14 @@
+{
+  "ch1": "email",
+  "ch2": "tin nhắn",
+  "ch3": "cuộc gọi",
+  "ch4": "website giả",
+  "ch5": "mạng xã hội",
+  "masks": "kẻ gian -0.1",
+  "m1": "cơ quan chức năng",
+  "m2": "người thân",
+  "m3": "đối tác",
+  "core": "để yêu cầu -0.35",
+  "transfer": "yêu cầu chuyển khoản",
+  "stamp": "chuyển khoản +0.2"
+}

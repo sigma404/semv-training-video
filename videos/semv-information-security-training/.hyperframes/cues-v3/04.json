@@ -1,0 +1,12 @@
+{
+  "acct": "Tài khoản",
+  "b1": "không chia sẻ",
+  "b2": "không cho mượn",
+  "pw": "Mật khẩu",
+  "r1": "dài từ 8",
+  "r2": "chữ thường",
+  "r3": "chữ hoa",
+  "r4": "số và",
+  "r5": "ký tự đặc biệt",
+  "rest": "biệt +0.7"
+}

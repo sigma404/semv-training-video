@@ -1,0 +1,544 @@
+<template>
+  <style>
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+    @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: #0F172A;
+    }
+    .v3-102-ex-roles-scene *, .v3-102-ex-roles-scene *::before, .v3-102-ex-roles-scene *::after { box-sizing: border-box; }
+    .v3-102-ex-roles-bg { position: absolute; inset: 0; background: #EEF3FB; }
+    .v3-102-ex-roles-scene { position: absolute; inset: 0; overflow: hidden; }
+    .v3-102-ex-roles-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    .v3-102-ex-roles-office { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+
+    /* people: 320x640 box, feet at y=930 world; x = centre (set by GSAP) */
+    .v3-102-ex-roles-person { position: absolute; left: -160px; top: 310px; width: 320px; height: 640px; }
+    .v3-102-ex-roles-person svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    /* props (left/top = minus half size; x/y = centre) */
+    .v3-102-ex-roles-prop { position: absolute; }
+    .v3-102-ex-roles-prop svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .v3-102-ex-roles-laptop { left: -110px; top: -80px; width: 220px; height: 160px; }
+
+    /* IT's security-training board (world space, x/y = centre) */
+    .v3-102-ex-roles-board {
+      position: absolute;
+      left: -290px; top: -215px;
+      width: 580px; height: 430px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.25), 0 20px 44px rgba(15, 23, 42, 0.16);
+      padding: 30px 38px;
+    }
+    .v3-102-ex-roles-bk { font-size: 22px; font-weight: 700; letter-spacing: 0.08em; color: #64748B; line-height: 1.2; white-space: nowrap; }
+    .v3-102-ex-roles-bt { margin-top: 6px; font-size: 42px; font-weight: 800; color: #0A3D91; line-height: 1.2; letter-spacing: -0.01em; white-space: nowrap; }
+    .v3-102-ex-roles-brule { height: 3px; background: #E2E8F0; margin: 18px 0 14px; }
+    .v3-102-ex-roles-brow { display: flex; align-items: center; gap: 20px; height: 78px; }
+    .v3-102-ex-roles-bico { position: relative; flex: 0 0 60px; width: 60px; height: 60px; border-radius: 50%; background: rgba(10, 61, 145, 0.08); display: flex; align-items: center; justify-content: center; }
+    .v3-102-ex-roles-bico svg { width: 32px; height: 32px; display: block; }
+    .v3-102-ex-roles-btxt { flex: 1; font-size: 32px; font-weight: 600; color: #0F172A; line-height: 1.2; white-space: nowrap; }
+    .v3-102-ex-roles-bok { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(5, 150, 105, 0.35); }
+    .v3-102-ex-roles-bok svg { width: 24px; height: 24px; display: block; }
+
+    .v3-102-ex-roles-card {
+      position: absolute;
+      left: -230px; top: -62px;
+      width: 460px; height: 124px;
+      background: #FFFFFF;
+      border-radius: 14px;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.25), 0 18px 40px rgba(15, 23, 42, 0.14);
+      display: flex; align-items: center; gap: 22px;
+      padding: 0 26px;
+    }
+    .v3-102-ex-roles-ava { flex: 0 0 76px; width: 76px; height: 76px; border-radius: 50%; background: #7C5CC4; display: flex; align-items: center; justify-content: center; }
+    .v3-102-ex-roles-ava svg { width: 46px; height: 46px; display: block; }
+    .v3-102-ex-roles-uname { font-size: 32px; font-weight: 700; color: #0F172A; line-height: 1.2; white-space: nowrap; }
+    .v3-102-ex-roles-ubar { height: 14px; border-radius: 7px; background: #E2E8F0; margin-top: 12px; width: 220px; }
+
+    .v3-102-ex-roles-panel {
+      position: absolute;
+      left: -230px; top: -100px;
+      width: 460px; height: 200px;
+      background: #FFFFFF;
+      border-radius: 14px;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.25), 0 18px 40px rgba(15, 23, 42, 0.14);
+    }
+    .v3-102-ex-roles-tiles { position: absolute; left: 28px; top: 88px; width: 404px; height: 92px; display: flex; gap: 20px; }
+    .v3-102-ex-roles-tile { position: relative; flex: 0 0 86px; width: 86px; height: 86px; border-radius: 14px; background: rgba(10, 61, 145, 0.07); }
+    .v3-102-ex-roles-tile svg.v3-102-ex-roles-ficon { position: absolute; left: 13px; top: 15px; width: 60px; height: 52px; display: block; }
+    .v3-102-ex-roles-badge { position: absolute; right: -10px; top: -10px; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .v3-102-ex-roles-badge svg { width: 22px; height: 22px; display: block; }
+    .v3-102-ex-roles-ok { background: #059669; box-shadow: 0 4px 10px rgba(5, 150, 105, 0.35); }
+    .v3-102-ex-roles-no { background: #94A3B8; }
+    .v3-102-ex-roles-key {
+      position: absolute;
+      left: -150px; top: -30px;
+      width: 300px; height: 60px;
+      border-radius: 30px;
+      background: #0A3D91;
+      color: #FFFFFF;
+      font-size: 28px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      box-shadow: 0 10px 24px rgba(10, 61, 145, 0.3);
+      white-space: nowrap;
+    }
+    .v3-102-ex-roles-key svg { width: 32px; height: 32px; display: block; }
+
+    .v3-102-ex-roles-shield { position: absolute; left: -150px; top: -165px; width: 300px; height: 330px; }
+    .v3-102-ex-roles-shield svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+    /* screen-space overlays */
+    .v3-102-ex-roles-tag {
+      position: absolute; left: 56px; top: 44px;
+      height: 56px; padding: 0 26px 0 20px;
+      border-radius: 28px;
+      background: #0A3D91; color: #FFFFFF;
+      font-size: 28px; font-weight: 700;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25);
+      white-space: nowrap;
+    }
+    .v3-102-ex-roles-tag svg { width: 30px; height: 30px; display: block; }
+    .v3-102-ex-roles-doc {
+      position: absolute; left: 1010px; top: 150px;
+      width: 760px; height: 720px;
+      background: #FFFFFF;
+      border-radius: 14px;
+      box-shadow: 0 0 0 2px rgba(10, 61, 145, 0.2), 0 26px 60px rgba(15, 23, 42, 0.2);
+      padding: 56px 64px;
+    }
+    .v3-102-ex-roles-doc-ico { width: 84px; height: 84px; border-radius: 50%; background: rgba(10, 61, 145, 0.1); display: flex; align-items: center; justify-content: center; }
+    .v3-102-ex-roles-doc-ico svg { width: 48px; height: 48px; display: block; }
+    .v3-102-ex-roles-doc-t { margin-top: 26px; font-size: 52px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.2; color: #0A3D91; white-space: nowrap; }
+    .v3-102-ex-roles-doc-rule { height: 3px; background: #E2E8F0; margin: 30px 0 34px; }
+    .v3-102-ex-roles-doc-line { height: 20px; border-radius: 10px; background: #E2E8F0; margin-bottom: 22px; }
+    .v3-102-ex-roles-sigline { position: absolute; left: 64px; bottom: 120px; width: 400px; height: 3px; background: #94A3B8; }
+    .v3-102-ex-roles-sig { position: absolute; left: 70px; bottom: 126px; width: 390px; height: 120px; display: block; overflow: visible; }
+    .v3-102-ex-roles-pen { position: absolute; left: 0; top: 0; width: 90px; height: 90px; }
+    .v3-102-ex-roles-pen svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .v3-102-ex-roles-seal {
+      position: absolute; right: 64px; bottom: 70px;
+      width: 170px; height: 170px;
+      border-radius: 50%;
+      border: 7px solid #059669;
+      background: rgba(5, 150, 105, 0.08);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v3-102-ex-roles-seal svg { width: 96px; height: 96px; display: block; }
+
+    .v3-102-ex-roles-role {
+      position: absolute; top: 808px;
+      width: 300px; margin-left: -150px;
+      text-align: center;
+      font-size: 30px; font-weight: 700; color: #0A3D91;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .v3-102-ex-roles-takewrap { position: absolute; left: 0; right: 0; top: 890px; height: 120px; display: flex; justify-content: center; }
+    .v3-102-ex-roles-take {
+      height: 116px;
+      padding: 0 52px 0 30px;
+      border-radius: 18px;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2);
+      display: flex; align-items: center; gap: 24px;
+      font-size: 48px; font-weight: 800; color: #0F172A; letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .v3-102-ex-roles-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+    .v3-102-ex-roles-take-ico svg { width: 42px; height: 42px; display: block; }
+  </style>
+
+  <div id="root" data-composition-id="v3-102-ex-roles" data-width="1920" data-height="1080" data-duration="18.269">
+    <div class="v3-102-ex-roles-bg clip" id="v3-102-ex-roles-bg" data-start="0" data-duration="18.269" data-track-index="0"></div>
+
+    <div class="v3-102-ex-roles-scene" id="v3-102-ex-roles-scene">
+      <div class="v3-102-ex-roles-world" id="v3-102-ex-roles-world">
+        <svg class="v3-102-ex-roles-office" viewBox="0 0 1920 1080">
+          <!-- wall + floor (oversized for camera pull-back) -->
+          <rect x="-800" y="-600" width="3520" height="2400" fill="#EEF3FB" />
+          <rect x="-800" y="860" width="3520" height="900" fill="#DCE5F3" />
+          <rect x="-800" y="852" width="3520" height="12" fill="#C9D5E8" />
+          <!-- window -->
+          <rect x="140" y="130" width="420" height="330" rx="14" fill="#FFFFFF" />
+          <rect x="162" y="152" width="376" height="286" rx="6" fill="#D4E5FB" />
+          <circle cx="470" cy="214" r="34" fill="#FDE68A" />
+          <g id="v3-102-ex-roles-cloud1"><ellipse cx="250" cy="220" rx="56" ry="20" fill="#FFFFFF" /><ellipse cx="278" cy="206" rx="34" ry="20" fill="#FFFFFF" /></g>
+          <path d="M162 438 V370 H210 V340 H262 V384 H300 V320 H356 V360 H404 V350 H452 V392 H500 V362 H538 V438 Z" fill="#B9D0F0" />
+          <rect x="346" y="152" width="8" height="286" fill="#FFFFFF" />
+          <rect x="162" y="291" width="376" height="8" fill="#FFFFFF" />
+          <rect x="128" y="458" width="444" height="16" rx="8" fill="#FFFFFF" />
+          <!-- clock 8:00 -->
+          <circle cx="1560" cy="230" r="80" fill="#FFFFFF" stroke="#334155" stroke-width="8" />
+          <g stroke="#94A3B8" stroke-width="6" stroke-linecap="round"><path d="M1560 164v12M1626 230h-12M1560 296v-12M1494 230h12" /></g>
+          <path d="M1560 230 L1525 250" stroke="#0F172A" stroke-width="9" stroke-linecap="round" />
+          <path d="M1560 230 L1560 174" stroke="#0F172A" stroke-width="6" stroke-linecap="round" />
+          <circle cx="1560" cy="230" r="8" fill="#0A3D91" />
+          <!-- shelf -->
+          <rect x="1380" y="440" width="340" height="14" rx="7" fill="#94A3B8" />
+          <rect x="1404" y="356" width="34" height="84" rx="4" fill="#0A3D91" />
+          <rect x="1444" y="368" width="30" height="72" rx="4" fill="#3B6CC4" />
+          <rect x="1480" y="350" width="34" height="90" rx="4" fill="#94A3B8" />
+          <rect x="1622" y="404" width="56" height="36" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3" />
+          <path d="M1650 404 C1636 380 1630 366 1640 352 M1650 404 C1652 380 1662 366 1676 362 M1650 404 C1648 388 1650 372 1656 360" stroke="#34A57A" stroke-width="8" fill="none" stroke-linecap="round" />
+          <!-- big plant (far right) -->
+          <path d="M1766 790 h112 l-14 80 h-84 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+          <g id="v3-102-ex-roles-plant">
+            <path d="M1822 790 C1776 730 1748 700 1756 650 C1800 672 1818 730 1822 790 Z" fill="#34A57A" />
+            <path d="M1822 790 C1866 732 1898 708 1898 660 C1852 680 1828 734 1822 790 Z" fill="#2E8F6A" />
+            <path d="M1822 790 C1816 730 1826 672 1852 628 C1866 686 1842 744 1822 790 Z" fill="#45B98A" />
+          </g>
+          <!-- door (far left) -->
+          <rect x="-150" y="420" width="220" height="440" rx="8" fill="#C9D5E8" />
+          <circle cx="40" cy="650" r="9" fill="#94A3B8" />
+        </svg>
+
+        <!-- props & people (world space) -->
+        <div class="v3-102-ex-roles-prop v3-102-ex-roles-card" id="v3-102-ex-roles-card">
+          <div class="v3-102-ex-roles-ava"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4" /><path d="M4.5 20c1.2-4 4-6 7.5-6s6.3 2 7.5 6" /></svg></div>
+          <div><div class="v3-102-ex-roles-uname">lan.nguyen</div><div class="v3-102-ex-roles-ubar"></div></div>
+        </div>
+        <div class="v3-102-ex-roles-prop v3-102-ex-roles-panel" id="v3-102-ex-roles-panel">
+          <div class="v3-102-ex-roles-tiles">
+            <div class="v3-102-ex-roles-tile"><svg class="v3-102-ex-roles-ficon" viewBox="0 0 30 26"><path d="M1 4a3 3 0 0 1 3-3h7l3 3.5h12a3 3 0 0 1 3 3V22a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3z" fill="#0A3D91" /></svg><div class="v3-102-ex-roles-badge v3-102-ex-roles-ok"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></div></div>
+            <div class="v3-102-ex-roles-tile"><svg class="v3-102-ex-roles-ficon" viewBox="0 0 30 26"><path d="M1 4a3 3 0 0 1 3-3h7l3 3.5h12a3 3 0 0 1 3 3V22a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3z" fill="#0A3D91" /></svg><div class="v3-102-ex-roles-badge v3-102-ex-roles-ok"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></div></div>
+            <div class="v3-102-ex-roles-tile"><svg class="v3-102-ex-roles-ficon" viewBox="0 0 30 26"><path d="M1 4a3 3 0 0 1 3-3h7l3 3.5h12a3 3 0 0 1 3 3V22a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3z" fill="#CBD5E1" /></svg><div class="v3-102-ex-roles-badge v3-102-ex-roles-no"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="9" rx="2" /><path d="M8.5 11V8.5a3.5 3.5 0 0 1 7 0V11" /></svg></div></div>
+            <div class="v3-102-ex-roles-tile"><svg class="v3-102-ex-roles-ficon" viewBox="0 0 30 26"><path d="M1 4a3 3 0 0 1 3-3h7l3 3.5h12a3 3 0 0 1 3 3V22a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3z" fill="#CBD5E1" /></svg><div class="v3-102-ex-roles-badge v3-102-ex-roles-no"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="9" rx="2" /><path d="M8.5 11V8.5a3.5 3.5 0 0 1 7 0V11" /></svg></div></div>
+          </div>
+        </div>
+        <div class="v3-102-ex-roles-prop v3-102-ex-roles-shield" id="v3-102-ex-roles-shield">
+          <svg viewBox="0 0 300 330">
+            <circle id="v3-102-ex-roles-glow" cx="150" cy="160" r="150" fill="none" stroke="#059669" stroke-width="8" />
+            <path d="M150 12 L272 58 V156 C272 236 220 292 150 318 C80 292 28 236 28 156 V58 Z" fill="#0A3D91" />
+            <path d="M150 40 L248 76 V156 C248 222 206 268 150 290 C94 268 52 222 52 156 V76 Z" fill="#3B6CC4" />
+            <path id="v3-102-ex-roles-check" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M100 164 L138 202 L204 126" fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="v3-102-ex-roles-prop v3-102-ex-roles-board" id="v3-102-ex-roles-board">
+          <div class="v3-102-ex-roles-bk">BỘ PHẬN IT</div>
+          <div class="v3-102-ex-roles-bt">Đào tạo bảo mật</div>
+          <div class="v3-102-ex-roles-brule"></div>
+          <div class="v3-102-ex-roles-brow">
+            <div class="v3-102-ex-roles-bico"><svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg></div>
+            <div class="v3-102-ex-roles-btxt">Mật khẩu mạnh</div>
+            <div class="v3-102-ex-roles-bok"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></div>
+          </div>
+          <div class="v3-102-ex-roles-brow">
+            <div class="v3-102-ex-roles-bico"><svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 6.5 8.5-6.5" /></svg></div>
+            <div class="v3-102-ex-roles-btxt">Cẩn thận email lạ</div>
+            <div class="v3-102-ex-roles-bok"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></div>
+          </div>
+          <div class="v3-102-ex-roles-brow">
+            <div class="v3-102-ex-roles-bico"><svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2.5" width="8" height="6" rx="1" /><rect x="6" y="8.5" width="12" height="13" rx="2.5" /><path d="M10.5 5.5h.01M13.5 5.5h.01" /></svg></div>
+            <div class="v3-102-ex-roles-btxt">Không cắm thiết bị lạ</div>
+            <div class="v3-102-ex-roles-bok"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></div>
+          </div>
+        </div>
+        <div class="v3-102-ex-roles-person" id="v3-102-ex-roles-it"></div>
+        <div class="v3-102-ex-roles-person" id="v3-102-ex-roles-lan"></div>
+        <div class="v3-102-ex-roles-prop v3-102-ex-roles-laptop" id="v3-102-ex-roles-laptop">
+          <svg viewBox="0 0 220 160">
+            <rect x="26" y="6" width="168" height="116" rx="10" fill="#1E293B" />
+            <rect x="36" y="16" width="148" height="96" rx="5" fill="#DCE7F8" />
+            <circle cx="110" cy="52" r="15" fill="#0A3D91" />
+            <path d="M88 86 c4 -14 14 -18 22 -18 s18 4 22 18" fill="#0A3D91" />
+            <rect x="74" y="94" width="72" height="9" rx="4.5" fill="#FFFFFF" />
+            <path d="M6 128 H214 L202 150 H18 Z" fill="#94A3B8" />
+            <rect x="92" y="128" width="36" height="6" rx="3" fill="#64748B" />
+          </svg>
+        </div>
+        <div class="v3-102-ex-roles-prop v3-102-ex-roles-key" id="v3-102-ex-roles-key">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.5" /><path d="m11.2 11.8 8.3-8.3M16.5 6.5l2.5 2.5M14 9l2 2" /></svg>
+          <span>Quyền vừa đủ</span>
+        </div>
+      </div>
+
+      <!-- screen-space: signing close-up -->
+      <div class="v3-102-ex-roles-doc" id="v3-102-ex-roles-doc">
+        <div class="v3-102-ex-roles-doc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z" /><path d="m9 12 2.2 2.2L15.5 10" /></svg></div>
+        <div class="v3-102-ex-roles-doc-t">Cam kết bảo mật</div>
+        <div class="v3-102-ex-roles-doc-rule"></div>
+        <div class="v3-102-ex-roles-doc-line" style="width: 96%"></div>
+        <div class="v3-102-ex-roles-doc-line" style="width: 88%"></div>
+        <div class="v3-102-ex-roles-doc-line" style="width: 92%"></div>
+        <div class="v3-102-ex-roles-doc-line" style="width: 64%"></div>
+        <div class="v3-102-ex-roles-sigline"></div>
+        <svg class="v3-102-ex-roles-sig" viewBox="0 0 390 120"><path id="v3-102-ex-roles-sigp" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M10 92 C30 40 50 20 58 34 C66 50 40 96 52 98 C66 100 84 50 100 52 C114 54 100 92 116 92 C134 92 146 60 160 62 C172 64 164 90 178 90 C196 90 214 58 232 64 C248 70 236 94 254 92 C276 90 300 70 330 70 C350 70 366 76 380 74" fill="none" stroke="#0A3D91" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <div class="v3-102-ex-roles-pen" id="v3-102-ex-roles-pen"><svg viewBox="0 0 90 90"><g transform="rotate(40 10 80)"><rect x="4" y="2" width="14" height="66" rx="4" fill="#0F172A" /><rect x="4" y="2" width="14" height="14" rx="4" fill="#3B6CC4" /><path d="M4 68 L11 84 L18 68 Z" fill="#E2E8F0" /><path d="M9 79 L11 84 L13 79 Z" fill="#0F172A" /></g></svg></div>
+        <div class="v3-102-ex-roles-seal" id="v3-102-ex-roles-seal"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></div>
+      </div>
+
+      <div class="v3-102-ex-roles-role" id="v3-102-ex-roles-role1" style="left: 796px">Bộ phận IT</div>
+      <div class="v3-102-ex-roles-role" id="v3-102-ex-roles-role2" style="left: 1124px">Nhân viên</div>
+
+      <div class="v3-102-ex-roles-takewrap">
+        <div class="v3-102-ex-roles-take" id="v3-102-ex-roles-take">
+          <div class="v3-102-ex-roles-take-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2" /><path d="M3 19c.8-3.4 3.2-5 6-5s5.2 1.6 6 5" /><circle cx="17" cy="9" r="2.6" /><path d="M16 14.2c2.6-.2 4.4 1.4 5 4.8" /></svg></div>
+          <span>Mỗi người một vai trò</span>
+        </div>
+      </div>
+
+      <div class="v3-102-ex-roles-tag" id="v3-102-ex-roles-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+        <span>Ví dụ thực tế</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-composition-id="v3-102-ex-roles"]');
+      var PX = "v3-102-ex-roles-";
+      var $ = function (id) { return root.querySelector("#" + PX + id); };
+      var part = function (who, p) { return root.querySelector("#" + PX + who + " ." + PX + p); };
+      var CUE = /*hf-cues:start*/{"lan":1.46,"laptop":2.52,"account":2.96,"it":4.2,"grant":5.02,"enough":5.7,"train":7.22,"topic":8.04,"read":9.6,"sign":10.6,"pledge":10.9,"roles":12.32,"together":13.52,"safe":14.5}/*hf-cues:end*/;
+      var DURATION = /*hf-dur:start*/17.769/*hf-dur:end*/;
+      var tl = gsap.timeline({ paused: true });
+
+      // ---------- flat front-facing person (same construction as anh Minh) ----------
+      var SKIN = "#F6CDA8", SKIN2 = "#E8B48C";
+      function person(o) {
+        var s = '<svg viewBox="-160 -620 320 640">';
+        if (o.hairStyle === "long") s += '<path d="M-72 -520 C-82 -606 82 -606 72 -520 L82 -410 C46 -392 -46 -392 -82 -410 Z" fill="' + o.hair + '" />';
+        if (o.hairStyle === "bun") s += '<circle cx="0" cy="-592" r="32" fill="' + o.hair + '" />';
+        if (o.skirt) {
+          s += '<g class="' + PX + 'legL"><rect x="-40" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="-28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+          s += '<g class="' + PX + 'legR"><rect x="12" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+        } else {
+          s += '<g class="' + PX + 'legL"><rect x="-44" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="-30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          s += '<g class="' + PX + 'legR"><rect x="8" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+        }
+        s += '<rect x="-17" y="-458" width="34" height="52" rx="10" fill="' + SKIN2 + '" />';
+        s += '<path d="M-90 -214 C-96 -330 -86 -398 -34 -414 L34 -414 C86 -398 96 -330 90 -214 Z" fill="' + o.shirt + '" />';
+        if (o.skirt) s += '<path d="M-88 -236 L88 -236 L106 -132 L-106 -132 Z" fill="' + o.skirt + '" />';
+        s += '<path d="M-26 -413 L0 -378 L26 -413 Z" fill="' + (o.collar || "#FFFFFF") + '" />';
+        if (o.tie) s += '<path d="M0 -384 L-11 -368 L0 -300 L11 -368 Z" fill="' + o.tie + '" />';
+        if (o.lanyard) s += '<path d="M-22 -410 L-6 -330 M22 -410 L6 -330" stroke="#0A3D91" stroke-width="5" fill="none" /><rect x="-22" y="-334" width="44" height="54" rx="6" fill="#FFFFFF" stroke="#0A3D91" stroke-width="3" /><rect x="-12" y="-322" width="24" height="16" rx="3" fill="#0A3D91" />';
+        s += '<g class="' + PX + 'armL"><path d="M-74 -392 C-96 -350 -104 -300 -100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="-100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+        s += '<g class="' + PX + 'armR"><path d="M74 -392 C96 -350 104 -300 100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+        s += '<g class="' + PX + 'head">';
+        s += '<circle cx="-63" cy="-506" r="13" fill="' + SKIN2 + '" /><circle cx="63" cy="-506" r="13" fill="' + SKIN2 + '" />';
+        s += '<circle cx="0" cy="-512" r="64" fill="' + SKIN + '" />';
+        if (o.hairStyle === "m") s += '<path d="M-66 -510 C-74 -588 -18 -602 10 -596 C58 -590 76 -556 66 -508 C52 -538 22 -548 -8 -546 C-34 -544 -56 -534 -66 -510 Z" fill="' + o.hair + '" />';
+        else s += '<path d="M-68 -498 C-78 -594 74 -604 68 -500 C50 -536 10 -552 -24 -534 C-42 -524 -58 -512 -68 -498 Z" fill="' + o.hair + '" />';
+        s += '<path d="M-34 -538 Q-22 -546 -10 -538 M10 -538 Q22 -546 34 -538" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+        s += '<g class="' + PX + 'eyes"><ellipse cx="-22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /><ellipse cx="22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /></g>';
+        if (o.glasses) s += '<g fill="none" stroke="#0F172A" stroke-width="4"><circle cx="-22" cy="-510" r="17" /><circle cx="22" cy="-510" r="17" /><path d="M-5 -512 h10" /></g>';
+        s += '<circle cx="-38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" /><circle cx="38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" />';
+        s += '<path class="' + PX + 'mouth" d="M-13 -478 Q0 -466 13 -478" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" />';
+        s += '<path class="' + PX + 'grin" d="M-18 -480 Q0 -456 18 -480 Z" fill="#9A3412" />';
+        s += '</g></svg>';
+        return s;
+      }
+      $("lan").innerHTML = person({ shirt: "#7C5CC4", arm: "#6A4BB0", hair: "#3B2416", hairStyle: "long", skirt: "#334155" });
+      $("it").innerHTML = person({ shirt: "#3B6CC4", arm: "#2F5AA8", hair: "#1E293B", hairStyle: "m", pants: "#334155", glasses: true, lanyard: true });
+
+      // ---------- helpers ----------
+      function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; }
+      var PIV = { armL: "-74 -392", armR: "74 -392", legL: "-26 -222", legR: "26 -222", head: "0 -450", eyes: "0 -510" };
+      function pose(who, p, rot, at, dur, ease) {
+        tl.to(part(who, p), { rotation: rot, svgOrigin: PIV[p], duration: dur || 0.4, ease: ease || "power2.out" }, at);
+      }
+      function walk(who, toX, t0, dur) {
+        var w = $(who);
+        var steps = Math.max(2, Math.round(dur / 0.3)), h = dur / steps;
+        tl.to(w, { x: toX, duration: dur, ease: "power1.inOut" }, t0);
+        for (var i = 0; i < steps; i++) {
+          var t = t0 + i * h, leg = part(who, i % 2 ? "legR" : "legL");
+          tl.to(w, { y: -10, duration: h / 2, ease: "sine.out" }, t);
+          tl.to(w, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+          tl.to(leg, { y: -20, duration: h / 2, ease: "sine.out" }, t);
+          tl.to(leg, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+        }
+      }
+      function blink(who, t) {
+        tl.to(part(who, "eyes"), { scaleY: 0.12, svgOrigin: PIV.eyes, duration: 0.07, ease: "power1.in" }, t);
+        tl.to(part(who, "eyes"), { scaleY: 1, svgOrigin: PIV.eyes, duration: 0.1, ease: "power1.out" }, t + 0.08);
+      }
+      function look(who, dx, at) { tl.to(part(who, "eyes"), { x: dx, duration: 0.25, ease: "power2.out" }, at); }
+      function grin(who, on, at) {
+        tl.to(part(who, "grin"), { opacity: on ? 1 : 0, duration: 0.2, ease: "none" }, at);
+        tl.to(part(who, "mouth"), { opacity: on ? 0 : 1, duration: 0.2, ease: "none" }, at);
+      }
+      function hop(sel, at, h) {
+        tl.to(sel, { y: -(h || 16), duration: 0.16, ease: "power2.out" }, at);
+        tl.to(sel, { y: 0, duration: 0.22, ease: "power2.in" }, at + 0.16);
+      }
+      function flyArc(sel, x0, y0, x1, y1, lift, at, dur) {
+        tl.fromTo(sel, { x: x0 }, { x: x1, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
+        tl.fromTo(sel, { y: y0 }, { y: Math.min(y0, y1) - lift, duration: dur / 2, ease: "power2.out", immediateRender: false }, at);
+        tl.to(sel, { y: y1, duration: dur / 2, ease: "power2.in" }, at + dur / 2);
+      }
+
+      // ---------- initial state ----------
+      var HOLD_Y = 672;
+      gsap.set("#" + PX + "world", cam(1, 960, 540, 960, 540));
+      gsap.set($("lan"), { x: 520, y: 0 });
+      gsap.set($("it"), { x: -220, y: 0 });
+      gsap.set($("laptop"), { x: -220, y: HOLD_Y });
+      gsap.set($("board"), { x: 1420, y: 540, opacity: 0 });
+      gsap.set(root.querySelectorAll("." + PX + "brow"), { opacity: 0, x: -16 });
+      gsap.set(root.querySelectorAll("." + PX + "bok"), { opacity: 0, scale: 0.3 });
+      gsap.set($("card"), { x: 1330, y: 330, opacity: 0, scale: 0.4 });
+      gsap.set($("panel"), { x: 1330, y: 560, opacity: 0 });
+      gsap.set($("key"), { x: 560, y: 480, opacity: 0, scale: 0.5 });
+      gsap.set($("shield"), { x: 960, y: 250, opacity: 0, scale: 0.5 });
+      gsap.set("#" + PX + "glow", { opacity: 0, scale: 1, svgOrigin: "150 160" });
+      gsap.set(root.querySelectorAll("." + PX + "badge"), { opacity: 0, scale: 0.3 });
+      gsap.set(root.querySelectorAll("." + PX + "tile"), { opacity: 0, y: 14 });
+      gsap.set(["#" + PX + "doc", "#" + PX + "pen", "#" + PX + "seal", "#" + PX + "role1", "#" + PX + "role2", "#" + PX + "take"], { opacity: 0 });
+      gsap.set(root.querySelectorAll("." + PX + "grin"), { opacity: 0 });
+      // IT carries the laptop: arms in "hold" pose
+      gsap.set(part("it", "armR"), { rotation: 26, svgOrigin: PIV.armR });
+      gsap.set(part("it", "armL"), { rotation: -26, svgOrigin: PIV.armL });
+
+      // ================= 1. Lan arrives on her first day =================
+      tl.fromTo("#" + PX + "world", cam(1, 960, 540, 960, 540), Object.assign(cam(1.04, 900, 560, 940, 560), { duration: CUE.read, ease: "sine.inOut" }), 0);
+      tl.fromTo("#" + PX + "cloud1", { x: 0 }, { x: 60, duration: DURATION, ease: "none" }, 0);
+      tl.fromTo("#" + PX + "plant", { rotation: 0 }, { rotation: 1.6, svgOrigin: "1822 790", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
+      walk("lan", 900, 0.1, 1.5);
+      tl.to(part("lan", "head"), { rotation: -4, svgOrigin: PIV.head, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.7);
+      grin("lan", true, CUE.lan);
+      blink("lan", 1.2);
+
+      // ================= 2. receives laptop + account =================
+      walk("it", 470, CUE.lan - 0.5, CUE.laptop - CUE.lan + 0.4);
+      tl.to($("laptop"), { x: 470, duration: CUE.laptop - CUE.lan + 0.4, ease: "power1.inOut" }, CUE.lan - 0.5);
+      look("lan", -7, CUE.lan);
+      var L = CUE.laptop + 0.05;
+      pose("it", "armR", -34, L, 0.35);
+      pose("it", "armL", -10, L, 0.35);
+      flyArc($("laptop"), 470, HOLD_Y, 900, HOLD_Y, 60, L, 0.55);
+      pose("lan", "armR", 26, L + 0.25, 0.35);
+      pose("lan", "armL", -26, L + 0.25, 0.35);
+      pose("it", "armR", 0, L + 0.6, 0.4);
+      pose("it", "armL", 0, L + 0.6, 0.4);
+      look("lan", 0, L + 0.4);
+      blink("it", L + 0.9);
+      // account card pops out of the laptop screen
+      var A = CUE.account;
+      tl.fromTo($("card"), { x: 900, y: 640, opacity: 0, scale: 0.3 }, { x: 1330, y: 330, opacity: 1, scale: 1, duration: 0.6, ease: "power3.out", immediateRender: false }, A);
+      look("lan", 7, A + 0.1);
+      hop($("lan"), A + 0.15, 10);
+
+      // ================= 3. IT grants "just enough" access =================
+      hop($("it"), CUE.it, 14);
+      look("lan", -7, CUE.it);
+      var G = CUE.grant;
+      pose("it", "armR", -125, G - 0.15, 0.35);
+      tl.to($("key"), { opacity: 1, scale: 1, duration: 0.25, ease: "power2.out" }, G);
+      tl.fromTo($("panel"), { opacity: 0, y: 590 }, { opacity: 1, y: 560, duration: 0.4, ease: "power2.out", immediateRender: false }, G + 0.25);
+      flyArc($("key"), 560, 480, 1330, 512, 70, G + 0.1, 0.6);
+      tl.fromTo($("key"), { rotation: -10 }, { rotation: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, G + 0.1);
+      pose("it", "armR", 0, G + 0.7, 0.45);
+      look("lan", 7, G + 0.4);
+      var tiles = root.querySelectorAll("." + PX + "tile");
+      var badges = root.querySelectorAll("." + PX + "badge");
+      var E = CUE.enough;
+      tl.to(tiles, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", stagger: 0.07 }, E - 0.15);
+      [0, 1].forEach(function (i) { tl.to(badges[i], { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, E + 0.15 + i * 0.12); });
+      [2, 3].forEach(function (i) {
+        tl.to(badges[i], { opacity: 1, scale: 1, duration: 0.25, ease: "power2.out" }, E + 0.45 + (i - 2) * 0.1);
+        tl.to(tiles[i], { keyframes: { x: [0, -5, 5, -3, 0] }, duration: 0.3, ease: "none" }, E + 0.6 + (i - 2) * 0.1);
+      });
+      blink("lan", E + 0.5);
+
+      // ================= 4. IT trains Lan on information security =================
+      var M = CUE.train;
+      tl.to([$("card"), $("panel"), $("key")], { opacity: 0, y: "-=24", duration: 0.35, ease: "power2.in" }, M - 0.4);
+      tl.fromTo($("board"), { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.6)", immediateRender: false }, M - 0.1);
+      tl.to($("laptop"), { y: HOLD_Y + 22, duration: 0.3, ease: "power2.out" }, M);
+      walk("it", 420, M - 0.2, 0.5);
+      hop($("it"), M + 0.35, 12);
+      pose("it", "armR", -125, M + 0.3, 0.4);
+      grin("it", true, M + 0.3);
+      look("lan", 7, M);
+      tl.to(part("lan", "head"), { rotation: 5, svgOrigin: PIV.head, duration: 0.3, ease: "power2.out" }, M + 0.1);
+      var rows = root.querySelectorAll("." + PX + "brow"), oks = root.querySelectorAll("." + PX + "bok");
+      var TP = CUE.topic;
+      [0, 1, 2].forEach(function (i) {
+        var at = TP - 0.3 + i * 0.4;
+        tl.to(rows[i], { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, at);
+        tl.to(oks[i], { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, at + 0.25);
+      });
+      // Lan nods along
+      tl.to(part("lan", "head"), { keyframes: { rotation: [5, 9, 4, 9, 5] }, svgOrigin: PIV.head, duration: 1.0, ease: "none" }, TP + 0.2);
+      pose("it", "armR", 0, TP + 1.4, 0.45);
+      blink("lan", TP + 1.5);
+
+      // ================= 5. Lan reads + signs the pledge (close-up) =================
+      var R = CUE.read;
+      tl.to("#" + PX + "world", Object.assign(cam(1.35, 900, 560, 560, 600), { duration: 0.9, ease: "power3.inOut" }), R);
+      tl.fromTo("#" + PX + "doc", { opacity: 0, x: 140 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, R + 0.2);
+      look("lan", 8, R + 0.3);
+      grin("lan", false, R + 0.3);
+      tl.to($("board"), { opacity: 0, x: "+=60", duration: 0.25, ease: "power2.in" }, R - 0.4);
+      grin("it", false, R);
+      tl.to(part("lan", "head"), { rotation: 6, svgOrigin: PIV.head, duration: 0.5, ease: "sine.inOut" }, R + 0.3);
+      var S = CUE.sign, SD = 0.95;
+      var sigp = "#" + PX + "sigp";
+      tl.to("#" + PX + "pen", { opacity: 1, duration: 0.15, ease: "none" }, S - 0.15);
+      tl.fromTo(sigp, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: SD, ease: "power1.inOut" }, S);
+      // pen tip follows the signature (sample points, deterministic)
+      var SIGX = 70, SIGY = 720 - 126 - 120; // sig svg top-left inside doc
+      var PTS = [[10, 92], [58, 34], [52, 98], [100, 52], [116, 92], [160, 62], [178, 90], [232, 64], [254, 92], [330, 70], [380, 74]];
+      PTS.forEach(function (p, i) {
+        var at = S + SD * (i / (PTS.length - 1));
+        var pos = { x: SIGX + p[0] - 10, y: SIGY + p[1] - 80 };
+        if (i === 0) tl.set("#" + PX + "pen", pos, S - 0.15);
+        else tl.to("#" + PX + "pen", Object.assign(pos, { duration: SD / (PTS.length - 1), ease: "none" }), at - SD / (PTS.length - 1));
+      });
+      tl.to(part("lan", "armR"), { keyframes: { rotation: [26, 34, 24, 34, 26] }, svgOrigin: PIV.armR, duration: SD, ease: "none" }, S);
+      tl.to("#" + PX + "pen", { opacity: 0, y: "-=30", duration: 0.3, ease: "power2.in" }, S + SD + 0.1);
+      var P = CUE.pledge + 0.45;
+      tl.fromTo("#" + PX + "seal", { opacity: 0, scale: 1.7, rotation: -18 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.3, ease: "power3.in" }, P);
+      tl.to("#" + PX + "doc", { keyframes: { y: [0, 6, -2, 0] }, duration: 0.25, ease: "none" }, P + 0.3);
+      grin("lan", true, P + 0.2);
+
+      // ================= 6. everyone, one shield =================
+      var V = CUE.roles;
+      tl.to("#" + PX + "doc", { opacity: 0, x: 160, duration: 0.45, ease: "power2.in" }, V - 0.3);
+      tl.to($("laptop"), { opacity: 0, scale: 0.6, duration: 0.35, ease: "power2.in" }, V - 0.2);
+      pose("lan", "armR", 0, V - 0.1, 0.4);
+      pose("lan", "armL", 0, V - 0.1, 0.4);
+      tl.to(part("lan", "head"), { rotation: 0, svgOrigin: PIV.head, duration: 0.4, ease: "power2.out" }, V - 0.1);
+      look("lan", 0, V);
+      var FIN = cam(0.82, 960, 600, 960, 520);
+      tl.to("#" + PX + "world", Object.assign(FIN, { duration: 1.0, ease: "power3.inOut" }), V - 0.1);
+      walk("it", 780, V, 0.9);
+      walk("lan", 1140, V + 0.05, 0.6);
+      grin("it", true, V + 0.6);
+      tl.to(["#" + PX + "role1", "#" + PX + "role2"], { opacity: 1, duration: 0.4, ease: "power2.out", stagger: 0.1 }, V + 0.9);
+      tl.fromTo("#" + PX + "take", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, V + 0.2);
+      // raise the shield together
+      var U = CUE.together;
+      pose("it", "armR", -150, U - 0.2, 0.5);
+      pose("lan", "armL", 150, U - 0.15, 0.5);
+      tl.fromTo($("shield"), { opacity: 0, scale: 0.4, y: 380 }, { opacity: 1, scale: 1, y: 245, duration: 0.6, ease: "back.out(1.6)", immediateRender: false }, U);
+      // keeping the system safe
+      var K = CUE.safe;
+      tl.to("#" + PX + "check", { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, K);
+      tl.fromTo("#" + PX + "glow", { opacity: 0.9, scale: 0.9 }, { opacity: 0, scale: 1.5, svgOrigin: "150 160", duration: 0.9, ease: "power2.out", immediateRender: false }, K + 0.2);
+      hop($("it"), K + 0.25, 12);
+      hop($("lan"), K + 0.35, 12);
+      // calm hold
+      blink("lan", K + 1.3);
+      blink("it", K + 1.6);
+      tl.fromTo($("shield"), { y: 245 }, { y: 237, duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, K + 1.0);
+
+      tl.set({}, {}, DURATION);
+      window.__timelines["v3-102-ex-roles"] = tl;
+    })();
+  </script>
+</template>

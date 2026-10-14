@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync, renameSync } from "node:fs";
 const metaPath = process.argv[2] ?? "audio_meta-v2.json";
 const only = process.argv[3]?.split(",").map(Number) ?? null;
 // seconds of silence per frame: section ends 2.0 · within a section 1.2 · closing 1.5
-const PAD = { 1: 2.0, 2: 2.0, 3: 2.0, 4: 1.2, 5: 1.2, 6: 2.0, 7: 1.2, 8: 1.2, 9: 2.0, 10: 2.0, 11: 1.5 };
+const PAD = { 0: 1.5, 1: 2.0, 2: 2.0, 3: 2.0, 4: 1.2, 5: 1.2, 6: 2.0, 7: 1.2, 8: 1.2, 9: 2.0, 10: 2.0, 11: 1.5, 102: 2.0, 103: 2.0, 104: 1.5, 105: 1.5, 106: 2.0, 109: 2.0, 110: 2.0 };
 
 const meta = JSON.parse(readFileSync(metaPath, "utf8"));
 for (const v of meta.voices) {
