@@ -1,0 +1,22 @@
+{
+  "title": "Tên video",
+  "width": 1920,
+  "height": 1080,
+  "voice": "Hải Đăng",
+  "say": [
+    ["\bSEMV\b", "S E M V"],
+    ["\bUSB\b", "U S B"]
+  ],
+  "tempo": 0.9,
+  "pauseDash": 0.4,
+  "pauseSentence": 0.65,
+  "overlap": 0.5,
+  "padDefault": 1.2,
+  "progressBar": true,
+  "frames": [
+    { "n": 1, "id": "f01-title", "pad": 1.5 },
+    { "n": 2, "id": "f02-slide", "tr": "crossfade", "pad": 2.0 },
+    { "n": 101, "id": "f101-story", "tr": "crossfade", "pad": 2.0 },
+    { "n": 99, "id": "f99-closing", "tr": "crossfade", "pad": 1.5 }
+  ]
+}

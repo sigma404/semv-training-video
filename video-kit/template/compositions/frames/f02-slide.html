@@ -1,0 +1,130 @@
+<!-- SLIDE + SPOTLIGHT template.
+     The whole slide is visible within ~2s; then, as the narrator reaches each item, that item lights up and the
+     others dim (cues/02.json: p1, p2, p3 → which phrase triggers each card; rest → all back to normal).
+     To make a new slide: copy this file, rename the prefix "f02-slide" everywhere (ids, classes, composition id,
+     window.__timelines key), add it to video.config.json → frames, and write cues/NN.json. -->
+<template>
+  <div id="root" data-composition-id="f02-slide" data-start="0" data-width="1920" data-height="1080" data-duration="14.9">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      #f02-slide-bg { position: absolute; inset: 0; background: #FFFFFF; }
+      #f02-slide-stage { position: absolute; inset: 0; transform-origin: 50% 40%; }
+
+      /* header: eyebrow + pill on one row, h2 below */
+      .f02-slide-head { position: absolute; left: 96px; right: 96px; top: 84px; display: flex; justify-content: space-between; align-items: center; }
+      #f02-slide-eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0A3D91; }
+      #f02-slide-pill { border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91; font-weight: 600; font-size: 28px; padding: 10px 30px; }
+      #f02-slide-h2 { position: absolute; left: 96px; top: 140px; font-size: 60px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; white-space: nowrap; }
+
+      /* three cards */
+      #f02-slide-grid { position: absolute; left: 96px; right: 96px; top: 330px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+      .f02-slide-card {
+        position: relative; transform-origin: 50% 50%; height: 440px;
+        background: rgba(10, 61, 145, 0.04); border: 1.5px solid rgba(10, 61, 145, 0.2); border-radius: 14px;
+        padding: 44px 44px; display: flex; flex-direction: column; justify-content: space-between;
+      }
+      .f02-slide-ico { width: 96px; height: 96px; color: #0A3D91; }
+      .f02-slide-ico svg { width: 100%; height: 100%; display: block; overflow: visible; }
+      .f02-slide-ico path, .f02-slide-ico circle, .f02-slide-ico rect { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .f02-slide-num { position: absolute; top: 44px; right: 44px; font-size: 28px; font-weight: 700; letter-spacing: 0.05em; color: #0A3D91; opacity: 0.55; }
+      .f02-slide-name { font-size: 44px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
+      .f02-slide-desc { margin-top: 14px; font-size: 30px; font-weight: 500; line-height: 1.4; color: #475569; }
+    </style>
+
+    <div id="f02-slide-bg" class="clip" data-start="0" data-duration="14.9" data-track-index="0"></div>
+
+    <div id="f02-slide-stage" class="clip" data-start="0" data-duration="14.9" data-track-index="1">
+      <div class="f02-slide-head">
+        <div id="f02-slide-eyebrow">PHẦN 1 · GHI NHỚ</div>
+        <span id="f02-slide-pill">3 điều</span>
+      </div>
+      <div id="f02-slide-h2">Ba điều cần nhớ</div>
+
+      <div id="f02-slide-grid">
+        <div class="f02-slide-card" id="f02-slide-card1">
+          <div class="f02-slide-num">01</div>
+          <div class="f02-slide-ico" id="f02-slide-ico1"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg></div>
+          <div><div class="f02-slide-name">Tài khoản của riêng bạn</div><div class="f02-slide-desc">Không chia sẻ, không cho mượn</div></div>
+        </div>
+        <div class="f02-slide-card" id="f02-slide-card2">
+          <div class="f02-slide-num">02</div>
+          <div class="f02-slide-ico" id="f02-slide-ico2"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 6.5 8.5-6.5" /></svg></div>
+          <div><div class="f02-slide-name">Cẩn thận email lạ</div><div class="f02-slide-desc">Kiểm tra người gửi trước khi bấm</div></div>
+        </div>
+        <div class="f02-slide-card" id="f02-slide-card3">
+          <div class="f02-slide-num">03</div>
+          <div class="f02-slide-ico" id="f02-slide-ico3"><svg viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19Z" /><path d="M12 10v4.5" /><path d="M12 17.4v.2" /></svg></div>
+          <div><div class="f02-slide-name">Bất thường? Báo IT</div><div class="f02-slide-desc">Báo sớm, xử lý nhanh</div></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var root = document.querySelector('[data-composition-id="f02-slide"]');
+        function $$(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+
+        // filled in by tools/timing.mjs — never hand-edit the values between the markers
+        var CUE = /*hf-cues:start*/{"p1":2.75,"p2":5.9,"p3":8.75,"rest":11.9}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/14.4/*hf-dur:end*/;
+        var tl = gsap.timeline({ paused: true });
+
+        // icon strokes draw in (measured lengths)
+        function prep(el) {
+          var len = 0;
+          try { len = el.getTotalLength(); } catch (e) { len = 0; }
+          if (!len || !isFinite(len)) len = 60;
+          len = len * 1.05 + 1;
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+        }
+        var ico = {};
+        [1, 2, 3].forEach(function (i) { ico[i] = $$("#f02-slide-ico" + i + " path, #f02-slide-ico" + i + " circle, #f02-slide-ico" + i + " rect"); ico[i].forEach(prep); });
+
+        // slow push-in across the whole frame
+        tl.fromTo("#f02-slide-stage", { scale: 1 }, { scale: 1.02, duration: DURATION, ease: "power1.inOut" }, 0);
+
+        // A. calm reveal: header by ~0.8s, whole slide by ~2s (plain seconds, not cues)
+        tl.fromTo("#f02-slide-eyebrow", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#f02-slide-pill", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
+        tl.fromTo("#f02-slide-h2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+        [1, 2, 3].forEach(function (i) {
+          var at = 0.8 + (i - 1) * 0.12;
+          tl.fromTo("#f02-slide-card" + i, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, at);
+          ico[i].forEach(function (p, k) { tl.to(p, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, at + 0.2 + k * 0.12); });
+        });
+
+        // B. spotlight synced to narration: active item rings + scales, the others dim to 0.4
+        var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+        var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 0px rgba(10,61,145,0)";
+        var BG = "rgba(10,61,145,0.04)", BG_ON = "rgba(10,61,145,0.08)";
+        var ITEMS = ["#f02-slide-card1", "#f02-slide-card2", "#f02-slide-card3"];
+        ITEMS.forEach(function (sel) { tl.set(sel, { boxShadow: RING_OFF, backgroundColor: BG }, 0); });
+        function spot(idx, at) { // idx = -1 → rest (all normal)
+          if (at == null) return; // cue missing (e.g. phrase not found) — skip rather than break the timeline
+          ITEMS.forEach(function (sel, i) {
+            var on = i === idx, rest = idx < 0;
+            tl.to(sel, { opacity: on || rest ? 1 : 0.4, scale: on ? 1.03 : 1, boxShadow: on ? RING_ON : RING_OFF,
+              backgroundColor: on ? BG_ON : BG, duration: 0.35, ease: "power2.out" }, at);
+          });
+        }
+        spot(0, CUE.p1);
+        spot(1, CUE.p2);
+        spot(2, CUE.p3);
+        spot(-1, CUE.rest);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f02-slide"] = tl;
+      })();
+    </script>
+  </div>
+</template>

@@ -1,0 +1,267 @@
+<!-- STORY template: a short animated example with a flat character ("chị An", fictional).
+     Beats (cues/101.json): walk (she walks in) → notice (strange pop-up on the monitor) → nope (she does not click)
+     → report (phone up, "Báo IT" bubble flies off) → take (takeaway card).
+     Reusable pieces: person() builds a front-facing character from options; walk/pose/look/grin/blink/hop
+     animate it on the one paused timeline. World coordinates are 1920x1080; feet stand on y≈930. -->
+<template>
+  <div id="root" data-composition-id="f101-story" data-start="0" data-width="1920" data-height="1080" data-duration="16.6">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; }
+      .f101-story-bg { position: absolute; inset: 0; background: #EEF3FB; }
+      .f101-story-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f101-story-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+      .f101-story-office { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+
+      /* people: 320x640 box, feet at y=930 world; x = centre (set by GSAP) */
+      .f101-story-person { position: absolute; left: -160px; top: 310px; width: 320px; height: 640px; }
+      .f101-story-person svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+      /* monitor screen content (world space) */
+      .f101-story-screen { position: absolute; left: 1046px; top: 372px; width: 448px; height: 268px; border-radius: 6px; background: #DCE7F8; overflow: hidden; }
+      .f101-story-pop {
+        position: absolute; left: 54px; top: 40px; width: 340px; height: 190px; border-radius: 12px; background: #FFFFFF;
+        box-shadow: 0 0 0 4px #F59E0B, 0 16px 30px rgba(15, 23, 42, 0.18); padding: 20px 22px;
+      }
+      .f101-story-pop-t { font-size: 26px; font-weight: 800; color: #B45309; line-height: 1.2; white-space: nowrap; }
+      .f101-story-pop-l { height: 12px; border-radius: 6px; background: #E2E8F0; margin-top: 14px; }
+      .f101-story-pop-btn { position: absolute; left: 22px; bottom: 20px; width: 170px; height: 44px; border-radius: 10px; background: #B45309; color: #FFFFFF; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+      .f101-story-nox { position: absolute; left: 70px; bottom: 6px; width: 74px; height: 74px; }
+
+      .f101-story-bubble {
+        position: absolute; left: 470px; top: 300px; height: 74px; padding: 0 28px 0 20px; border-radius: 37px;
+        background: #0A3D91; color: #FFFFFF; font-size: 34px; font-weight: 700; white-space: nowrap;
+        display: flex; align-items: center; gap: 14px; box-shadow: 0 12px 28px rgba(10, 61, 145, 0.3); transform-origin: 100% 100%;
+      }
+      .f101-story-bubble svg { width: 38px; height: 38px; display: block; }
+      .f101-story-plane { position: absolute; left: 690px; top: 310px; width: 56px; height: 56px; }
+      .f101-story-plane svg { width: 100%; height: 100%; display: block; }
+
+      /* screen-space overlays */
+      .f101-story-tag {
+        position: absolute; left: 56px; top: 44px; height: 56px; padding: 0 26px 0 20px; border-radius: 28px;
+        background: #0A3D91; color: #FFFFFF; font-size: 28px; font-weight: 700; display: flex; align-items: center; gap: 12px;
+        box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25); white-space: nowrap;
+      }
+      .f101-story-tag svg { width: 30px; height: 30px; display: block; }
+      .f101-story-takewrap { position: absolute; left: 0; right: 0; top: 890px; height: 120px; display: flex; justify-content: center; }
+      .f101-story-take {
+        height: 116px; padding: 0 52px 0 30px; border-radius: 18px; background: #FFFFFF;
+        box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2);
+        display: flex; align-items: center; gap: 24px; font-size: 48px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap;
+      }
+      .f101-story-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+      .f101-story-take-ico svg { width: 42px; height: 42px; display: block; }
+    </style>
+
+    <div class="f101-story-bg clip" id="f101-story-bg" data-start="0" data-duration="16.6" data-track-index="0"></div>
+
+    <div class="f101-story-scene" id="f101-story-scene">
+      <div class="f101-story-world" id="f101-story-world">
+        <svg class="f101-story-office" viewBox="0 0 1920 1080">
+          <!-- wall + floor (oversized so camera moves never show an edge) -->
+          <rect x="-800" y="-600" width="3520" height="2400" fill="#EEF3FB" />
+          <rect x="-800" y="860" width="3520" height="900" fill="#DCE5F3" />
+          <rect x="-800" y="852" width="3520" height="12" fill="#C9D5E8" />
+          <!-- window -->
+          <rect x="140" y="130" width="420" height="330" rx="14" fill="#FFFFFF" />
+          <rect x="162" y="152" width="376" height="286" rx="6" fill="#D4E5FB" />
+          <circle cx="470" cy="214" r="34" fill="#FDE68A" />
+          <g id="f101-story-cloud"><ellipse cx="250" cy="220" rx="56" ry="20" fill="#FFFFFF" /><ellipse cx="278" cy="206" rx="34" ry="20" fill="#FFFFFF" /></g>
+          <path d="M162 438 V370 H210 V340 H262 V384 H300 V320 H356 V360 H404 V350 H452 V392 H500 V362 H538 V438 Z" fill="#B9D0F0" />
+          <rect x="346" y="152" width="8" height="286" fill="#FFFFFF" />
+          <rect x="162" y="291" width="376" height="8" fill="#FFFFFF" />
+          <!-- clock -->
+          <circle cx="1680" cy="200" r="70" fill="#FFFFFF" stroke="#334155" stroke-width="8" />
+          <path d="M1680 200 L1650 216" stroke="#0F172A" stroke-width="8" stroke-linecap="round" />
+          <path d="M1680 200 L1680 150" stroke="#0F172A" stroke-width="6" stroke-linecap="round" />
+          <!-- desk + monitor -->
+          <rect x="900" y="760" width="900" height="26" rx="10" fill="#B8C6DB" />
+          <rect x="930" y="786" width="840" height="300" fill="#D7E0EE" />
+          <rect x="1240" y="660" width="60" height="100" fill="#94A3B8" />
+          <rect x="1180" y="742" width="180" height="20" rx="10" fill="#94A3B8" />
+          <rect x="1030" y="356" width="480" height="300" rx="18" fill="#1E293B" />
+          <rect x="1100" y="740" width="320" height="18" rx="7" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" />
+          <!-- plant -->
+          <path d="M1640 702 h76 l-8 58 h-60 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" />
+          <g id="f101-story-plant">
+            <path d="M1678 702 C1648 660 1628 640 1634 606 C1664 622 1676 660 1678 702 Z" fill="#34A57A" />
+            <path d="M1678 702 C1708 662 1730 646 1730 612 C1698 626 1682 664 1678 702 Z" fill="#2E8F6A" />
+          </g>
+        </svg>
+
+        <div class="f101-story-screen">
+          <div class="f101-story-pop" id="f101-story-pop">
+            <div class="f101-story-pop-t">Bạn đã trúng thưởng!</div>
+            <div class="f101-story-pop-l" style="width: 92%"></div>
+            <div class="f101-story-pop-l" style="width: 70%"></div>
+            <div class="f101-story-pop-btn">Nhận ngay</div>
+            <svg class="f101-story-nox" id="f101-story-nox" viewBox="0 0 74 74"><circle cx="37" cy="37" r="32" fill="rgba(255,255,255,0.7)" stroke="#dc2626" stroke-width="7" /><path d="M14 14 L60 60" stroke="#dc2626" stroke-width="7" stroke-linecap="round" /></svg>
+          </div>
+        </div>
+
+        <div class="f101-story-person" id="f101-story-an"></div>
+
+        <div class="f101-story-bubble" id="f101-story-bubble">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5A8 8 0 1 1 21 12z" /></svg>
+          <span>Báo IT</span>
+        </div>
+        <div class="f101-story-plane" id="f101-story-plane">
+          <svg viewBox="0 0 24 24" fill="#0A3D91" stroke="#FFFFFF" stroke-width="1.2" stroke-linejoin="round"><path d="M22 2 2 10.5l7.5 3L12 21z" /><path d="M22 2 9.5 13.5" fill="none" /></svg>
+        </div>
+      </div>
+
+      <div class="f101-story-takewrap">
+        <div class="f101-story-take" id="f101-story-take">
+          <div class="f101-story-take-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z" /><path d="m8.5 12 2.5 2.5 4.5-5" /></svg></div>
+          <span>Thấy lạ — đừng bấm, hãy báo IT</span>
+        </div>
+      </div>
+
+      <div class="f101-story-tag" id="f101-story-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+        <span>Ví dụ thực tế</span>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var root = document.querySelector('[data-composition-id="f101-story"]');
+        var PX = "f101-story-";
+        var $ = function (id) { return root.querySelector("#" + PX + id); };
+        var part = function (who, p) { return root.querySelector("#" + PX + who + " ." + PX + p); };
+        var CUE = /*hf-cues:start*/{"walk":1.3,"notice":3.7,"nope":6.3,"report":7.75,"take":10.05}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/16.1/*hf-dur:end*/;
+        var tl = gsap.timeline({ paused: true });
+        // fallbacks so the template still plays before cues are resolved
+        var C = Object.assign({ walk: 0.3, notice: 2.5, nope: 4.5, report: 6, take: 8 }, CUE);
+
+        // ---------- flat front-facing person ----------
+        // o: { shirt, arm, hair, hairStyle: "long" | "bun" | "m" | "short", skirt?, pants?, glasses?, lanyard?, tie? }
+        var SKIN = "#F6CDA8", SKIN2 = "#E8B48C";
+        function person(o) {
+          var s = '<svg viewBox="-160 -620 320 640">';
+          if (o.hairStyle === "long") s += '<path d="M-72 -520 C-82 -606 82 -606 72 -520 L82 -410 C46 -392 -46 -392 -82 -410 Z" fill="' + o.hair + '" />';
+          if (o.hairStyle === "bun") s += '<circle cx="0" cy="-592" r="32" fill="' + o.hair + '" />';
+          if (o.skirt) {
+            s += '<g class="' + PX + 'legL"><rect x="-40" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="-28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+            s += '<g class="' + PX + 'legR"><rect x="12" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+          } else {
+            s += '<g class="' + PX + 'legL"><rect x="-44" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="-30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+            s += '<g class="' + PX + 'legR"><rect x="8" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          }
+          s += '<rect x="-17" y="-458" width="34" height="52" rx="10" fill="' + SKIN2 + '" />';
+          s += '<path d="M-90 -214 C-96 -330 -86 -398 -34 -414 L34 -414 C86 -398 96 -330 90 -214 Z" fill="' + o.shirt + '" />';
+          if (o.skirt) s += '<path d="M-88 -236 L88 -236 L106 -132 L-106 -132 Z" fill="' + o.skirt + '" />';
+          s += '<path d="M-26 -413 L0 -378 L26 -413 Z" fill="' + (o.collar || "#FFFFFF") + '" />';
+          if (o.tie) s += '<path d="M0 -384 L-11 -368 L0 -300 L11 -368 Z" fill="' + o.tie + '" />';
+          if (o.lanyard) s += '<path d="M-22 -410 L-6 -330 M22 -410 L6 -330" stroke="#0A3D91" stroke-width="5" fill="none" /><rect x="-22" y="-334" width="44" height="54" rx="6" fill="#FFFFFF" stroke="#0A3D91" stroke-width="3" /><rect x="-12" y="-322" width="24" height="16" rx="3" fill="#0A3D91" />';
+          s += '<g class="' + PX + 'armL"><path d="M-74 -392 C-96 -350 -104 -300 -100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="-100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+          s += '<g class="' + PX + 'armR"><path d="M74 -392 C96 -350 104 -300 100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="100" cy="-226" r="18" fill="' + SKIN + '" />' + (o.phone ? '<g class="' + PX + 'phone"><rect x="84" y="-268" width="34" height="58" rx="7" fill="#0F172A" /><rect x="89" y="-262" width="24" height="42" rx="4" fill="#3B6CC4" /></g>' : '') + '</g>';
+          s += '<g class="' + PX + 'head">';
+          s += '<circle cx="-63" cy="-506" r="13" fill="' + SKIN2 + '" /><circle cx="63" cy="-506" r="13" fill="' + SKIN2 + '" />';
+          s += '<circle cx="0" cy="-512" r="64" fill="' + SKIN + '" />';
+          if (o.hairStyle === "m") s += '<path d="M-66 -510 C-74 -588 -18 -602 10 -596 C58 -590 76 -556 66 -508 C52 -538 22 -548 -8 -546 C-34 -544 -56 -534 -66 -510 Z" fill="' + o.hair + '" />';
+          else s += '<path d="M-68 -498 C-78 -594 74 -604 68 -500 C50 -536 10 -552 -24 -534 C-42 -524 -58 -512 -68 -498 Z" fill="' + o.hair + '" />';
+          s += '<path class="' + PX + 'brows" d="M-34 -538 Q-22 -546 -10 -538 M10 -538 Q22 -546 34 -538" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+          s += '<g class="' + PX + 'eyes"><ellipse cx="-22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /><ellipse cx="22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /></g>';
+          if (o.glasses) s += '<g fill="none" stroke="#0F172A" stroke-width="4"><circle cx="-22" cy="-510" r="17" /><circle cx="22" cy="-510" r="17" /><path d="M-5 -512 h10" /></g>';
+          s += '<circle cx="-38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" /><circle cx="38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" />';
+          s += '<path class="' + PX + 'mouth" d="M-13 -478 Q0 -466 13 -478" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" />';
+          s += '<path class="' + PX + 'grin" d="M-18 -480 Q0 -456 18 -480 Z" fill="#9A3412" />';
+          s += '</g></svg>';
+          return s;
+        }
+        $("an").innerHTML = person({ shirt: "#7C5CC4", arm: "#6A4BB0", hair: "#3B2416", hairStyle: "long", skirt: "#334155", phone: true });
+
+        // ---------- helpers ----------
+        function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; } // focus world (fx,fy) at screen (cx,cy)
+        var PIV = { armL: "-74 -392", armR: "74 -392", head: "0 -450", eyes: "0 -510" };
+        function pose(who, p, rot, at, dur, ease) { tl.to(part(who, p), { rotation: rot, svgOrigin: PIV[p], duration: dur || 0.4, ease: ease || "power2.out" }, at); }
+        function walk(who, toX, t0, dur) {
+          var w = $(who), steps = Math.max(2, Math.round(dur / 0.3)), h = dur / steps;
+          tl.to(w, { x: toX, duration: dur, ease: "power1.inOut" }, t0);
+          for (var i = 0; i < steps; i++) {
+            var t = t0 + i * h, leg = part(who, i % 2 ? "legR" : "legL");
+            tl.to(w, { y: -10, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(w, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+            tl.to(leg, { y: -20, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(leg, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+          }
+        }
+        function blink(who, t) {
+          tl.to(part(who, "eyes"), { scaleY: 0.12, svgOrigin: PIV.eyes, duration: 0.07, ease: "power1.in" }, t);
+          tl.to(part(who, "eyes"), { scaleY: 1, svgOrigin: PIV.eyes, duration: 0.1, ease: "power1.out" }, t + 0.08);
+        }
+        function look(who, dx, at) { tl.to(part(who, "eyes"), { x: dx, duration: 0.25, ease: "power2.out" }, at); }
+        function grin(who, on, at) {
+          tl.to(part(who, "grin"), { opacity: on ? 1 : 0, duration: 0.2, ease: "none" }, at);
+          tl.to(part(who, "mouth"), { opacity: on ? 0 : 1, duration: 0.2, ease: "none" }, at);
+        }
+        function hop(sel, at, h) {
+          tl.to(sel, { y: -(h || 16), duration: 0.16, ease: "power2.out" }, at);
+          tl.to(sel, { y: 0, duration: 0.22, ease: "power2.in" }, at + 0.16);
+        }
+
+        // ---------- initial state ----------
+        gsap.set($("an"), { x: -200, y: 0 });
+        gsap.set(["#" + PX + "pop", "#" + PX + "nox", "#" + PX + "bubble", "#" + PX + "plane", "#" + PX + "take"], { opacity: 0 });
+        gsap.set(part("an", "grin"), { opacity: 0 });
+        gsap.set(part("an", "phone"), { opacity: 0 });
+
+        // ================= 1. she walks in =================
+        tl.fromTo("#" + PX + "world", cam(1, 960, 540, 960, 540), Object.assign(cam(1.05, 900, 560, 940, 560), { duration: C.notice, ease: "sine.inOut" }), 0);
+        tl.fromTo("#" + PX + "cloud", { x: 0 }, { x: 60, duration: DURATION, ease: "none" }, 0);
+        tl.fromTo("#" + PX + "plant", { rotation: 0 }, { rotation: 1.6, svgOrigin: "1678 702", duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
+        walk("an", 820, Math.max(0, C.walk - 0.2), 1.6);
+        grin("an", true, C.walk + 0.4);
+        blink("an", C.walk + 1.8);
+
+        // ================= 2. a strange pop-up appears =================
+        var N = C.notice;
+        tl.to("#" + PX + "world", Object.assign(cam(1.5, 1150, 520, 1060, 520), { duration: 0.8, ease: "power3.inOut" }), N - 0.2);
+        tl.fromTo("#" + PX + "pop", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.8)" }, N + 0.1);
+        tl.to("#" + PX + "pop", { keyframes: { x: [0, -6, 6, -3, 0] }, duration: 0.3, ease: "none" }, N + 0.6);
+        look("an", 8, N + 0.1);
+        grin("an", false, N + 0.2);
+        tl.to(part("an", "brows"), { y: -6, duration: 0.2, ease: "power2.out" }, N + 0.2);
+
+        // ================= 3. she does NOT click =================
+        var NO = C.nope;
+        tl.fromTo("#" + PX + "nox", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, transformOrigin: "50% 50%", duration: 0.35, ease: "back.out(2)" }, NO);
+        tl.to(part("an", "head"), { keyframes: { rotation: [0, -6, 6, -4, 0] }, svgOrigin: PIV.head, duration: 0.7, ease: "none" }, NO);
+        tl.to(part("an", "brows"), { y: 0, duration: 0.2, ease: "power2.out" }, NO + 0.7);
+
+        // ================= 4. she reports to IT =================
+        var R = C.report;
+        tl.to("#" + PX + "world", Object.assign(cam(1.2, 900, 560, 960, 560), { duration: 0.8, ease: "power3.inOut" }), R - 0.4);
+        look("an", 0, R - 0.2);
+        pose("an", "armR", -150, R - 0.3, 0.4);
+        tl.to(part("an", "phone"), { opacity: 1, duration: 0.2, ease: "none" }, R - 0.1);
+        tl.fromTo("#" + PX + "bubble", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, R + 0.1);
+        tl.fromTo("#" + PX + "plane", { opacity: 0, x: 0, y: 0 }, { opacity: 1, duration: 0.15, ease: "none", immediateRender: false }, R + 0.6);
+        tl.to("#" + PX + "plane", { x: 900, y: -220, rotation: 10, duration: 0.8, ease: "power2.in" }, R + 0.6);
+        tl.to("#" + PX + "plane", { opacity: 0, duration: 0.15, ease: "none" }, R + 1.25);
+        grin("an", true, R + 0.8);
+
+        // ================= 5. takeaway + calm hold =================
+        var T = C.take;
+        tl.to("#" + PX + "bubble", { opacity: 0, duration: 0.3, ease: "none" }, T - 0.3);
+        pose("an", "armR", 0, T - 0.3, 0.45);
+        tl.to(part("an", "phone"), { opacity: 0, duration: 0.2, ease: "none" }, T - 0.1);
+        tl.to("#" + PX + "world", Object.assign(cam(0.95, 1000, 600, 960, 500), { duration: 1.0, ease: "power2.inOut" }), T - 0.3);
+        tl.fromTo("#" + PX + "take", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, T + 0.1);
+        hop($("an"), T + 0.5, 12);
+        blink("an", T + 1.4);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f101-story"] = tl;
+      })();
+    </script>
+  </div>
+</template>
