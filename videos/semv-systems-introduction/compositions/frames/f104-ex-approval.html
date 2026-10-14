@@ -1,0 +1,488 @@
+<!-- Frame 104 — example: IT Support Request, before (paper, desk to desk) vs now (Groupware e-approval).
+     Fictional: anh Nguyễn Văn Nam, document ITS-2024-0137.
+     cues/104.json: print (paper out of printer) → walk (Nam carries the form) → sign (1st signature, then an empty desk)
+     → now (wipe to BÂY GIỜ, Groupware form close-up) → form (fields fill) → send (click Gửi) → line (stamps along the
+     approval line) → it (lands in IT's inbox, status → Đã hoàn thành) → inbox (approval inbox tabs) → take (takeaway). -->
+<template>
+  <div data-hf-id="hf-8b8u" id="root" data-composition-id="f104-ex-approval" data-start="0" data-width="1920" data-height="1080" data-duration="18.115">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; }
+      .f104-ex-approval-bg { position: absolute; inset: 0; background: #EEF3FB; }
+      .f104-ex-approval-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f104-ex-approval-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+      .f104-ex-approval-layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+
+      /* ---------- A: TRƯỚC ĐÂY (grey) ---------- */
+      .f104-ex-approval-a { position: absolute; inset: 0; overflow: hidden; background: #F1F5F9; filter: grayscale(1); }
+      .f104-ex-approval-person { position: absolute; left: -160px; top: 310px; width: 320px; height: 640px; }
+      .f104-ex-approval-person > svg:first-child { width: 100%; height: 100%; display: block; overflow: visible; }
+      .f104-ex-approval-hpaper { position: absolute; left: 300px; top: 300px; width: 70px; height: 92px; border-radius: 6px; background: #F8FAFC; box-shadow: 0 0 0 3px #94A3B8; padding: 12px 10px; }
+      .f104-ex-approval-hpaper i { display: block; height: 6px; border-radius: 3px; background: #CBD5E1; margin-bottom: 8px; }
+      .f104-ex-approval-hsig { position: absolute; left: 8px; bottom: 6px; width: 54px; height: 26px; display: block; overflow: visible; }
+      .f104-ex-approval-sweat { position: absolute; left: 236px; top: 40px; width: 30px; height: 42px; display: block; }
+      .f104-ex-approval-badge {
+        position: absolute; left: -110px; top: 262px; width: 220px; height: 60px; border-radius: 30px; background: #FFFFFF;
+        box-shadow: 0 0 0 3px #64748B; color: #334155; font-size: 28px; font-weight: 700; white-space: nowrap;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+      }
+      .f104-ex-approval-badge svg { width: 28px; height: 28px; display: block; }
+      .f104-ex-approval-q {
+        position: absolute; left: 1196px; top: 470px; width: 88px; height: 88px; border-radius: 50%; background: #FFFFFF;
+        box-shadow: 0 0 0 4px #64748B; color: #475569; font-size: 56px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+      }
+
+      /* ---------- B: BÂY GIỜ (cobalt) ---------- */
+      .f104-ex-approval-b { position: absolute; inset: 0; overflow: hidden; background: #EEF3FB; }
+      .f104-ex-approval-edge { position: absolute; left: -10px; top: 0; width: 20px; height: 1080px; background: #0A3D91; box-shadow: 0 0 40px 12px rgba(59, 108, 196, 0.55); }
+      .f104-ex-approval-panel { position: absolute; border-radius: 18px; background: #FFFFFF; box-shadow: 0 0 0 2px #DCE4F0, 0 22px 50px rgba(15, 23, 42, 0.10); overflow: hidden; }
+      .f104-ex-approval-ph { position: absolute; left: 0; right: 0; top: 0; height: 72px; background: #0A3D91; color: #FFFFFF; display: flex; align-items: center; gap: 16px; padding: 0 28px; font-size: 28px; font-weight: 700; white-space: nowrap; }
+      .f104-ex-approval-ph svg { width: 34px; height: 34px; display: block; }
+      .f104-ex-approval-logo { height: 42px; padding: 0 12px; border-radius: 9px; background: #FFFFFF; color: #0A3D91; font-size: 24px; font-weight: 800; letter-spacing: 0.04em; display: flex; align-items: center; }
+      .f104-ex-approval-docno { margin-left: auto; font-size: 24px; font-weight: 600; opacity: 0.85; }
+
+      /* form */
+      .f104-ex-approval-ftitle { position: absolute; left: 32px; top: 94px; font-size: 38px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+      .f104-ex-approval-lbl { position: absolute; left: 32px; font-size: 24px; font-weight: 600; color: #64748B; white-space: nowrap; }
+      .f104-ex-approval-box { position: absolute; left: 32px; right: 32px; border-radius: 10px; background: #F4F7FC; box-shadow: inset 0 0 0 2px #DCE4F0; padding: 0 18px; display: flex; align-items: center; font-size: 26px; font-weight: 600; color: #0F172A; white-space: nowrap; overflow: hidden; }
+      .f104-ex-approval-val { display: block; }
+      .f104-ex-approval-file { position: absolute; left: 32px; height: 50px; padding: 0 20px 0 14px; border-radius: 25px; background: rgba(10, 61, 145, 0.08); color: #0A3D91; font-size: 24px; font-weight: 600; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+      .f104-ex-approval-file svg { width: 26px; height: 26px; display: block; }
+      .f104-ex-approval-sep { position: absolute; left: 32px; right: 32px; top: 552px; height: 2px; background: #E2E8F0; }
+      .f104-ex-approval-req { position: absolute; left: 32px; top: 580px; font-size: 24px; font-weight: 600; color: #475569; white-space: nowrap; }
+      .f104-ex-approval-btn { position: absolute; left: 558px; top: 568px; width: 170px; height: 56px; border-radius: 12px; background: #0A3D91; color: #FFFFFF; font-size: 28px; font-weight: 700; transform-origin: 50% 50%; }
+      .f104-ex-approval-btn span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; }
+      .f104-ex-approval-btn svg { width: 26px; height: 26px; display: block; }
+
+      .f104-ex-approval-cursor { position: absolute; left: 0; top: 0; width: 44px; height: 44px; }
+      .f104-ex-approval-cursor svg { width: 44px; height: 44px; display: block; overflow: visible; }
+      .f104-ex-approval-cname { position: absolute; left: 34px; top: 40px; height: 40px; padding: 0 16px; border-radius: 20px; background: #3B6CC4; color: #FFFFFF; font-size: 24px; font-weight: 700; display: flex; align-items: center; white-space: nowrap; }
+
+      /* approval line */
+      .f104-ex-approval-ltitle { position: absolute; left: 30px; top: 22px; font-size: 28px; font-weight: 700; color: #0F172A; white-space: nowrap; display: flex; align-items: center; gap: 12px; }
+      .f104-ex-approval-ltitle svg { width: 30px; height: 30px; display: block; }
+      .f104-ex-approval-lno { position: absolute; right: 30px; top: 26px; font-size: 24px; font-weight: 600; color: #64748B; white-space: nowrap; }
+      .f104-ex-approval-track { position: absolute; top: 128px; height: 6px; border-radius: 3px; background: #E2E8F0; }
+      .f104-ex-approval-fill { position: absolute; inset: 0; border-radius: 3px; background: #059669; transform-origin: 0 50%; }
+      .f104-ex-approval-node { position: absolute; top: 88px; width: 226px; height: 170px; margin-left: -113px; }
+      .f104-ex-approval-ava { position: absolute; left: 71px; top: 0; width: 84px; height: 84px; border-radius: 50%; background: rgba(10, 61, 145, 0.08); box-shadow: 0 0 0 3px rgba(10, 61, 145, 0.25); display: flex; align-items: center; justify-content: center; }
+      .f104-ex-approval-ava svg { width: 46px; height: 46px; display: block; }
+      .f104-ex-approval-nl { position: absolute; left: 0; right: 0; top: 96px; text-align: center; font-size: 24px; font-weight: 700; color: #0F172A; white-space: nowrap; }
+      .f104-ex-approval-ns { position: absolute; left: 0; right: 0; top: 130px; text-align: center; font-size: 24px; font-weight: 600; color: #059669; white-space: nowrap; }
+      .f104-ex-approval-stamp { position: absolute; left: 128px; top: 46px; width: 48px; height: 48px; border-radius: 50%; background: #059669; box-shadow: 0 0 0 4px #FFFFFF; display: flex; align-items: center; justify-content: center; }
+      .f104-ex-approval-stamp svg { width: 28px; height: 28px; display: block; }
+      .f104-ex-approval-token { position: absolute; left: -22px; top: -27px; width: 44px; height: 54px; border-radius: 6px; background: #FFFFFF; box-shadow: 0 0 0 3px #0A3D91, 0 8px 18px rgba(10, 61, 145, 0.3); padding: 10px 8px; }
+      .f104-ex-approval-token i { display: block; height: 5px; border-radius: 3px; background: #3B6CC4; margin-bottom: 6px; }
+      .f104-ex-approval-chip { position: absolute; left: -130px; top: -28px; width: 260px; height: 56px; border-radius: 28px; background: #0A3D91; color: #FFFFFF; font-size: 26px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap; box-shadow: 0 12px 26px rgba(10, 61, 145, 0.3); }
+      .f104-ex-approval-chip svg { width: 26px; height: 26px; display: block; }
+
+      /* inbox rows */
+      .f104-ex-approval-row { position: absolute; left: 24px; right: 24px; height: 96px; border-radius: 12px; background: #F4F7FC; box-shadow: inset 0 0 0 2px #E2E8F0; padding: 0 22px; }
+      .f104-ex-approval-r1 { position: absolute; left: 22px; top: 14px; font-size: 26px; font-weight: 700; color: #0F172A; white-space: nowrap; }
+      .f104-ex-approval-r2 { position: absolute; left: 22px; top: 52px; font-size: 24px; font-weight: 500; color: #475569; white-space: nowrap; }
+      .f104-ex-approval-st { position: absolute; right: 20px; top: 24px; height: 48px; padding: 0 22px; border-radius: 24px; font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+      .f104-ex-approval-st svg { width: 24px; height: 24px; display: block; }
+      .f104-ex-approval-tab { position: absolute; top: 90px; width: 232px; height: 92px; text-align: center; }
+      .f104-ex-approval-tl { position: absolute; left: 0; right: 0; top: 12px; font-size: 24px; font-weight: 600; color: #475569; white-space: nowrap; }
+      .f104-ex-approval-tc { position: absolute; left: 0; right: 0; top: 44px; font-size: 30px; font-weight: 800; color: #0F172A; }
+      .f104-ex-approval-tind { position: absolute; left: 32px; top: 182px; width: 232px; height: 6px; border-radius: 3px; background: #0A3D91; }
+      .f104-ex-approval-tline { position: absolute; left: 32px; right: 32px; top: 186px; height: 2px; background: #E2E8F0; }
+      .f104-ex-approval-steps { position: absolute; left: 24px; right: 24px; top: 344px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+      .f104-ex-approval-step { height: 56px; border-radius: 12px; background: rgba(5, 150, 105, 0.08); color: #047857; font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 10px; padding: 0 18px; white-space: nowrap; }
+      .f104-ex-approval-step svg { width: 26px; height: 26px; display: block; }
+
+      /* ---------- screen-space overlays ---------- */
+      .f104-ex-approval-tag {
+        position: absolute; left: 56px; top: 44px; height: 56px; padding: 0 26px 0 20px; border-radius: 28px;
+        background: #0A3D91; color: #FFFFFF; font-size: 28px; font-weight: 700; display: flex; align-items: center; gap: 12px;
+        box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25); white-space: nowrap;
+      }
+      .f104-ex-approval-tag svg { width: 30px; height: 30px; display: block; }
+      .f104-ex-approval-pill { position: absolute; left: 352px; top: 44px; height: 56px; padding: 0 26px 0 18px; border-radius: 28px; font-size: 28px; font-weight: 800; letter-spacing: 0.04em; display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+      .f104-ex-approval-pill svg { width: 30px; height: 30px; display: block; }
+      .f104-ex-approval-pbefore { background: #E2E8F0; color: #475569; box-shadow: 0 0 0 2px #CBD5E1; }
+      .f104-ex-approval-pnow { background: #3B6CC4; color: #FFFFFF; box-shadow: 0 8px 20px rgba(59, 108, 196, 0.3); }
+      .f104-ex-approval-takewrap { position: absolute; left: 0; right: 0; top: 890px; height: 120px; display: flex; justify-content: center; }
+      .f104-ex-approval-take {
+        height: 116px; padding: 0 52px 0 30px; border-radius: 18px; background: #FFFFFF;
+        box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2);
+        display: flex; align-items: center; gap: 24px; font-size: 48px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap;
+      }
+      .f104-ex-approval-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+      .f104-ex-approval-take-ico svg { width: 42px; height: 42px; display: block; }
+    </style>
+
+    <div data-hf-id="hf-qi38" class="f104-ex-approval-bg clip" id="f104-ex-approval-bg" data-start="0" data-duration="18.115" data-track-index="0"></div>
+
+    <div data-hf-id="hf-vb0i" class="f104-ex-approval-scene" id="f104-ex-approval-scene">
+
+      <!-- ================= A: TRƯỚC ĐÂY ================= -->
+      <div data-hf-id="hf-1r8i" class="f104-ex-approval-a" id="f104-ex-approval-a">
+        <div data-hf-id="hf-sh66" class="f104-ex-approval-world" id="f104-ex-approval-wa">
+          <svg data-hf-id="hf-m4i2" class="f104-ex-approval-layer" viewBox="0 0 1920 1080">
+            <rect data-hf-id="hf-fsbo" x="-800" y="-600" width="3520" height="2400" fill="#F1F5F9" />
+            <rect data-hf-id="hf-fg3f" x="-800" y="860" width="3520" height="900" fill="#E2E8F0" />
+            <rect data-hf-id="hf-w06i" x="-800" y="852" width="3520" height="12" fill="#CBD5E1" />
+            <!-- clock -->
+            <circle data-hf-id="hf-ap3u" cx="330" cy="230" r="66" fill="#FFFFFF" stroke="#475569" stroke-width="8" />
+            <g data-hf-id="hf-t00n" id="f104-ex-approval-hourH"><path data-hf-id="hf-c2ja" d="M330 230 L330 196" stroke="#0F172A" stroke-width="9" stroke-linecap="round" /></g>
+            <g data-hf-id="hf-3ajr" id="f104-ex-approval-minH"><path data-hf-id="hf-zre9" d="M330 230 L330 178" stroke="#334155" stroke-width="6" stroke-linecap="round" /></g>
+            <circle data-hf-id="hf-qary" cx="330" cy="230" r="7" fill="#0F172A" />
+            <!-- name plates -->
+            <rect data-hf-id="hf-mh10" x="765" y="196" width="230" height="60" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="3" />
+            <text data-hf-id="hf-047v" x="880" y="236" text-anchor="middle" font-size="26" font-weight="700" fill="#475569" font-family="Be Vietnam Pro, sans-serif">Part Leader</text>
+            <rect data-hf-id="hf-0sep" x="1125" y="196" width="230" height="60" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="3" />
+            <text data-hf-id="hf-sup8" x="1240" y="236" text-anchor="middle" font-size="26" font-weight="700" fill="#475569" font-family="Be Vietnam Pro, sans-serif">Team Leader</text>
+            <rect data-hf-id="hf-73kz" x="1505" y="196" width="230" height="60" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="3" />
+            <text data-hf-id="hf-uz6m" x="1620" y="236" text-anchor="middle" font-size="26" font-weight="700" fill="#475569" font-family="Be Vietnam Pro, sans-serif">IT Support</text>
+            <!-- empty chair behind the Team Leader desk -->
+            <rect data-hf-id="hf-fska" x="1170" y="590" width="140" height="180" rx="22" fill="#94A3B8" />
+            <!-- Nam's desk + printer (paper drawn first so the printer hides it) -->
+            <g data-hf-id="hf-9ofn" id="f104-ex-approval-pout">
+              <rect data-hf-id="hf-okdx" x="195" y="650" width="130" height="160" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="3" />
+              <rect data-hf-id="hf-3jz4" x="212" y="668" width="96" height="7" rx="3" fill="#CBD5E1" />
+              <rect data-hf-id="hf-nufp" x="212" y="686" width="80" height="7" rx="3" fill="#CBD5E1" />
+              <rect data-hf-id="hf-11vh" x="212" y="704" width="90" height="7" rx="3" fill="#CBD5E1" />
+            </g>
+            <rect data-hf-id="hf-6l5i" x="150" y="652" width="220" height="110" rx="14" fill="#CBD5E1" />
+            <rect data-hf-id="hf-sqlf" x="178" y="640" width="164" height="16" rx="6" fill="#64748B" />
+            <circle data-hf-id="hf-oacu" cx="338" cy="690" r="8" fill="#F8FAFC" />
+            <rect data-hf-id="hf-c1y4" x="80" y="760" width="360" height="26" rx="10" fill="#B8C2D0" />
+            <rect data-hf-id="hf-ku50" x="100" y="786" width="320" height="300" fill="#D5DCE6" />
+          </svg>
+
+          <div data-hf-id="hf-izbt" class="f104-ex-approval-person" id="f104-ex-approval-m1"></div>
+          <div data-hf-id="hf-qvjv" class="f104-ex-approval-person" id="f104-ex-approval-m3"></div>
+
+          <!-- manager desks (in front of the managers) -->
+          <svg data-hf-id="hf-6m8e" class="f104-ex-approval-layer" viewBox="0 0 1920 1080">
+            <rect data-hf-id="hf-pi76" x="730" y="760" width="300" height="26" rx="10" fill="#B8C2D0" />
+            <rect data-hf-id="hf-np7l" x="745" y="786" width="270" height="300" fill="#D5DCE6" />
+            <rect data-hf-id="hf-w13s" x="770" y="728" width="110" height="32" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="3" />
+            <rect data-hf-id="hf-k2v2" x="1090" y="760" width="300" height="26" rx="10" fill="#B8C2D0" />
+            <rect data-hf-id="hf-hbz0" x="1105" y="786" width="270" height="300" fill="#D5DCE6" />
+            <rect data-hf-id="hf-mi36" x="1290" y="716" width="80" height="44" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="3" />
+            <rect data-hf-id="hf-bc6o" x="1470" y="760" width="300" height="26" rx="10" fill="#B8C2D0" />
+            <rect data-hf-id="hf-drh1" x="1485" y="786" width="270" height="300" fill="#D5DCE6" />
+          </svg>
+
+          <div data-hf-id="hf-xm7b" class="f104-ex-approval-q" id="f104-ex-approval-q">?</div>
+          <div data-hf-id="hf-esz9" class="f104-ex-approval-person" id="f104-ex-approval-nam"></div>
+        </div>
+      </div>
+
+      <!-- ================= B: BÂY GIỜ ================= -->
+      <div data-hf-id="hf-bz5m" class="f104-ex-approval-b" id="f104-ex-approval-b">
+        <div data-hf-id="hf-oj25" class="f104-ex-approval-world" id="f104-ex-approval-wb">
+
+          <!-- Groupware form -->
+          <div data-hf-id="hf-w845" class="f104-ex-approval-panel" id="f104-ex-approval-form" style="left: 96px; top: 150px; width: 760px; height: 640px;">
+            <div data-hf-id="hf-of1a" class="f104-ex-approval-ph"><div data-hf-id="hf-73gs" class="f104-ex-approval-logo">SEMV</div><span data-hf-id="hf-h40i">Phê duyệt điện tử</span><span data-hf-id="hf-wypp" class="f104-ex-approval-docno">ITS-2024-0137</span></div>
+            <div data-hf-id="hf-0t6d" class="f104-ex-approval-ftitle">IT Support Request</div>
+            <div data-hf-id="hf-7x8b" class="f104-ex-approval-lbl" style="top: 160px;">Tiêu đề</div>
+            <div data-hf-id="hf-itao" class="f104-ex-approval-box" style="top: 196px; height: 56px;"><span data-hf-id="hf-88cu" class="f104-ex-approval-val" id="f104-ex-approval-v1">Laptop không kết nối được Wi-Fi</span></div>
+            <div data-hf-id="hf-bth3" class="f104-ex-approval-lbl" style="top: 272px;">Nội dung</div>
+            <div data-hf-id="hf-scp5" class="f104-ex-approval-box" style="top: 308px; height: 120px; align-items: flex-start; padding-top: 16px;"><span data-hf-id="hf-bp5h" class="f104-ex-approval-val" id="f104-ex-approval-v2">Nhờ IT kiểm tra giúp laptop của tôi.</span></div>
+            <div data-hf-id="hf-17vl" class="f104-ex-approval-lbl" style="top: 446px;">Tệp đính kèm</div>
+            <div data-hf-id="hf-o4mr" class="f104-ex-approval-file" id="f104-ex-approval-v3" style="top: 482px;"><svg data-hf-id="hf-txp5" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-clzv" d="m21 11-8.5 8.5a5 5 0 0 1-7-7L14 4a3.3 3.3 0 0 1 4.7 4.7L10.2 17a1.7 1.7 0 0 1-2.4-2.4L15.5 7" /></svg><span data-hf-id="hf-jywu">anh-loi-wifi.png</span></div>
+            <div data-hf-id="hf-hxh6" class="f104-ex-approval-sep"></div>
+            <div data-hf-id="hf-v6u6" class="f104-ex-approval-req">Người đề nghị: Nguyễn Văn Nam</div>
+            <div data-hf-id="hf-jajm" class="f104-ex-approval-btn" id="f104-ex-approval-btn">
+              <span data-hf-id="hf-9ku4" id="f104-ex-approval-btn1"><svg data-hf-id="hf-pzkb" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-nzn7" d="M22 2 11 13" /><path data-hf-id="hf-pfol" d="M22 2 15 22l-4-9-9-4z" /></svg>Gửi</span>
+              <span data-hf-id="hf-itr0" id="f104-ex-approval-btn2" style="background:#059669;border-radius:12px;"><svg data-hf-id="hf-z2in" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-lvfk" d="m5 12.5 4.5 4.5L19 7.5" /></svg>Đã gửi</span>
+            </div>
+          </div>
+
+          <!-- approval inbox (replaces the form at "hòm thư phê duyệt") -->
+          <div data-hf-id="hf-mg5j" class="f104-ex-approval-panel" id="f104-ex-approval-abox" style="left: 96px; top: 150px; width: 760px; height: 640px;">
+            <div data-hf-id="hf-u0aq" class="f104-ex-approval-ph"><svg data-hf-id="hf-ds8b" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-8bi7" d="M22 12h-6l-2 3h-4l-2-3H2" /><path data-hf-id="hf-oj6t" d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z" /></svg><span data-hf-id="hf-b031">Hòm thư phê duyệt</span></div>
+            <div data-hf-id="hf-4mlq" class="f104-ex-approval-tab" style="left: 32px;"><div data-hf-id="hf-2aao" class="f104-ex-approval-tl" id="f104-ex-approval-tl1">Chưa hoàn thành</div><div data-hf-id="hf-50qb" class="f104-ex-approval-tc">0</div></div>
+            <div data-hf-id="hf-7xqz" class="f104-ex-approval-tab" style="left: 264px;"><div data-hf-id="hf-xrx8" class="f104-ex-approval-tl" id="f104-ex-approval-tl2">Đang tiến hành</div><div data-hf-id="hf-xwlv" class="f104-ex-approval-tc">0</div></div>
+            <div data-hf-id="hf-u53g" class="f104-ex-approval-tab" style="left: 496px;"><div data-hf-id="hf-e105" class="f104-ex-approval-tl" id="f104-ex-approval-tl3">Đã hoàn thành</div><div data-hf-id="hf-0pq5" class="f104-ex-approval-tc" style="color:#059669">1</div></div>
+            <div data-hf-id="hf-f6js" class="f104-ex-approval-tline"></div>
+            <div data-hf-id="hf-nyw0" class="f104-ex-approval-tind" id="f104-ex-approval-tind"></div>
+            <div data-hf-id="hf-rx44" class="f104-ex-approval-row" id="f104-ex-approval-arow" style="top: 222px; height: 102px;">
+              <div data-hf-id="hf-b1fm" class="f104-ex-approval-r1">ITS-2024-0137</div>
+              <div data-hf-id="hf-dml8" class="f104-ex-approval-r2" style="top: 56px;">IT Support Request</div>
+              <div data-hf-id="hf-jbpk" class="f104-ex-approval-st" style="background:#D1FAE5;color:#047857;top:27px;"><svg data-hf-id="hf-ljgs" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-eh5k" d="m5 12.5 4.5 4.5L19 7.5" /></svg>Đã hoàn thành</div>
+            </div>
+            <div data-hf-id="hf-21pe" class="f104-ex-approval-steps" id="f104-ex-approval-steps">
+              <div data-hf-id="hf-hb0r" class="f104-ex-approval-step"><svg data-hf-id="hf-nilg" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-da8h" d="m5 12.5 4.5 4.5L19 7.5" /></svg>Người đề nghị</div>
+              <div data-hf-id="hf-axka" class="f104-ex-approval-step"><svg data-hf-id="hf-mbod" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-doji" d="m5 12.5 4.5 4.5L19 7.5" /></svg>Part Leader</div>
+              <div data-hf-id="hf-ziae" class="f104-ex-approval-step"><svg data-hf-id="hf-mpze" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-chmf" d="m5 12.5 4.5 4.5L19 7.5" /></svg>Team Leader</div>
+              <div data-hf-id="hf-hp9u" class="f104-ex-approval-step"><svg data-hf-id="hf-opij" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-cvxg" d="m5 12.5 4.5 4.5L19 7.5" /></svg>IT Support</div>
+            </div>
+          </div>
+
+          <!-- approval line -->
+          <div data-hf-id="hf-exs9" class="f104-ex-approval-panel" id="f104-ex-approval-line" style="left: 920px; top: 150px; width: 904px; height: 280px;">
+            <div data-hf-id="hf-oevp" class="f104-ex-approval-ltitle"><svg data-hf-id="hf-0yt5" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-hf-id="hf-jssf" cx="5" cy="12" r="2.5" /><circle data-hf-id="hf-ukgs" cx="19" cy="12" r="2.5" /><circle data-hf-id="hf-y1oj" cx="12" cy="12" r="2.5" /><path data-hf-id="hf-8t74" d="M7.5 12h2M14.5 12h2" /></svg>Line phê duyệt</div>
+            <div data-hf-id="hf-hxcs" class="f104-ex-approval-lno">ITS-2024-0137</div>
+            <div data-hf-id="hf-t04p" class="f104-ex-approval-track" style="left: 163px; width: 126px;"><div data-hf-id="hf-ff8g" class="f104-ex-approval-fill" id="f104-ex-approval-f1"></div></div>
+            <div data-hf-id="hf-zprf" class="f104-ex-approval-track" style="left: 389px; width: 126px;"><div data-hf-id="hf-qaq3" class="f104-ex-approval-fill" id="f104-ex-approval-f2"></div></div>
+            <div data-hf-id="hf-wug9" class="f104-ex-approval-track" style="left: 615px; width: 126px;"><div data-hf-id="hf-mcm2" class="f104-ex-approval-fill" id="f104-ex-approval-f3"></div></div>
+            <div data-hf-id="hf-2ptr" class="f104-ex-approval-node" style="left: 113px;"><div data-hf-id="hf-p2sk" class="f104-ex-approval-ava"><svg data-hf-id="hf-8dvd" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round"><circle data-hf-id="hf-jnj3" cx="12" cy="8" r="4" /><path data-hf-id="hf-i55g" d="M4.5 21c0-4.2 3.4-7 7.5-7s7.5 2.8 7.5 7" /></svg></div><div data-hf-id="hf-celf" class="f104-ex-approval-nl">Người đề nghị</div><div data-hf-id="hf-lm9b" class="f104-ex-approval-ns" id="f104-ex-approval-s1">Đã gửi</div><div data-hf-id="hf-dr5p" class="f104-ex-approval-stamp" id="f104-ex-approval-k1" data-layout-allow-overlap=""><svg data-hf-id="hf-cy3a" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-bp0d" d="m5 12.5 4.5 4.5L19 7.5" /></svg></div></div>
+            <div data-hf-id="hf-df7h" class="f104-ex-approval-node" style="left: 339px;"><div data-hf-id="hf-yn18" class="f104-ex-approval-ava"><svg data-hf-id="hf-dte5" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round"><circle data-hf-id="hf-xzdr" cx="12" cy="8" r="4" /><path data-hf-id="hf-wxpo" d="M4.5 21c0-4.2 3.4-7 7.5-7s7.5 2.8 7.5 7" /></svg></div><div data-hf-id="hf-6jki" class="f104-ex-approval-nl">Part Leader</div><div data-hf-id="hf-1fvq" class="f104-ex-approval-ns" id="f104-ex-approval-s2">Đã duyệt</div><div data-hf-id="hf-hp9q" class="f104-ex-approval-stamp" id="f104-ex-approval-k2" data-layout-allow-overlap=""><svg data-hf-id="hf-e8vu" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-c3be" d="m5 12.5 4.5 4.5L19 7.5" /></svg></div></div>
+            <div data-hf-id="hf-hjgm" class="f104-ex-approval-node" style="left: 565px;"><div data-hf-id="hf-xg45" class="f104-ex-approval-ava"><svg data-hf-id="hf-f0b8" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round"><circle data-hf-id="hf-xl2q" cx="12" cy="8" r="4" /><path data-hf-id="hf-vqsl" d="M4.5 21c0-4.2 3.4-7 7.5-7s7.5 2.8 7.5 7" /></svg></div><div data-hf-id="hf-6s6m" class="f104-ex-approval-nl">Team Leader</div><div data-hf-id="hf-jj2j" class="f104-ex-approval-ns" id="f104-ex-approval-s3">Đã duyệt</div><div data-hf-id="hf-lndr" class="f104-ex-approval-stamp" id="f104-ex-approval-k3" data-layout-allow-overlap=""><svg data-hf-id="hf-en6v" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-h9ar" d="m5 12.5 4.5 4.5L19 7.5" /></svg></div></div>
+            <div data-hf-id="hf-xj73" class="f104-ex-approval-node" style="left: 791px;"><div data-hf-id="hf-xuf6" class="f104-ex-approval-ava"><svg data-hf-id="hf-bgnh" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-lbj0" x="3" y="4" width="18" height="12" rx="2" /><path data-hf-id="hf-n6hi" d="M8 20h8M12 16v4" /></svg></div><div data-hf-id="hf-jgre" class="f104-ex-approval-nl">IT Support</div><div data-hf-id="hf-pgb6" class="f104-ex-approval-ns" id="f104-ex-approval-s4">Đã nhận</div><div data-hf-id="hf-plhs" class="f104-ex-approval-stamp" id="f104-ex-approval-k4" data-layout-allow-overlap=""><svg data-hf-id="hf-f1hw" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-hnls" d="m5 12.5 4.5 4.5L19 7.5" /></svg></div></div>
+          </div>
+
+          <!-- IT inbox -->
+          <div data-hf-id="hf-7uoc" class="f104-ex-approval-panel" id="f104-ex-approval-it" style="left: 920px; top: 460px; width: 904px; height: 330px;">
+            <div data-hf-id="hf-6424" class="f104-ex-approval-ph" style="background:#3B6CC4"><svg data-hf-id="hf-edjf" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-jfb3" d="M22 12h-6l-2 3h-4l-2-3H2" /><path data-hf-id="hf-b1q1" d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z" /></svg><span data-hf-id="hf-5ebz">IT — hòm thư công việc phụ trách</span></div>
+            <div data-hf-id="hf-a7l6" class="f104-ex-approval-row" id="f104-ex-approval-old" style="top: 96px; opacity: 0.55;">
+              <div data-hf-id="hf-h6ut" class="f104-ex-approval-r1">ITS-2024-0129</div>
+              <div data-hf-id="hf-rfwo" class="f104-ex-approval-r2">Cài đặt máy in phòng họp</div>
+              <div data-hf-id="hf-wqvn" class="f104-ex-approval-st" style="background:#E2E8F0;color:#475569">Đã hoàn thành</div>
+            </div>
+            <div data-hf-id="hf-bhvm" class="f104-ex-approval-row" id="f104-ex-approval-new" style="top: 96px; background:#FFFFFF; box-shadow: inset 0 0 0 3px #3B6CC4;">
+              <div data-hf-id="hf-q3ty" class="f104-ex-approval-r1">ITS-2024-0137 · IT Support Request</div>
+              <div data-hf-id="hf-4mpo" class="f104-ex-approval-r2">Nguyễn Văn Nam · Wi-Fi laptop</div>
+              <div data-hf-id="hf-hpto" class="f104-ex-approval-st" id="f104-ex-approval-st1" style="background:#FEF3C7;color:#B45309"><svg data-hf-id="hf-jlku" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2.4" stroke-linecap="round"><circle data-hf-id="hf-o1fd" cx="12" cy="12" r="8.5" /><path data-hf-id="hf-ge4w" d="M12 7.5V12l3 2" /></svg>Đang tiến hành</div>
+              <div data-hf-id="hf-lcaj" class="f104-ex-approval-st" id="f104-ex-approval-st2" style="background:#D1FAE5;color:#047857"><svg data-hf-id="hf-p3tk" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-luwo" d="m5 12.5 4.5 4.5L19 7.5" /></svg>Đã hoàn thành</div>
+            </div>
+          </div>
+
+          <!-- moving pieces -->
+          <div data-hf-id="hf-efxb" id="f104-ex-approval-chipw" style="position:absolute;left:0;top:0;"><div data-hf-id="hf-uy7b" class="f104-ex-approval-chip" id="f104-ex-approval-chip"><svg data-hf-id="hf-dz8e" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-igg3" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-4box" d="M14 3v5h5" /></svg>ITS-2024-0137</div></div>
+          <div data-hf-id="hf-qevt" id="f104-ex-approval-tokw" style="position:absolute;left:0;top:0;"><div data-hf-id="hf-ja46" class="f104-ex-approval-token" id="f104-ex-approval-token"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-j5vr" style="width:70%"></i><i data-hf-id="hf-zeb8"></i></div></div>
+          <div data-hf-id="hf-75ba" class="f104-ex-approval-cursor" id="f104-ex-approval-cursor">
+            <svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><path data-hf-id="hf-p4cs" d="M4 2.5 19.5 12l-7 1.4-3.6 6.6z" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round" /></svg>
+            <div data-hf-id="hf-ectt" class="f104-ex-approval-cname">anh Nam</div>
+          </div>
+        </div>
+      </div>
+      <div data-hf-id="hf-k4m0" class="f104-ex-approval-edge" id="f104-ex-approval-edge"></div>
+
+      <!-- screen-space overlays -->
+      <div data-hf-id="hf-7ekb" class="f104-ex-approval-takewrap">
+        <div data-hf-id="hf-7914" class="f104-ex-approval-take" id="f104-ex-approval-take">
+          <div data-hf-id="hf-0pub" class="f104-ex-approval-take-ico"><svg data-hf-id="hf-plrz" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-lgln" d="m5 12.5 4.5 4.5L19 7.5" /></svg></div>
+          <span data-hf-id="hf-pjuo">Không giấy tờ — mọi bước đều minh bạch</span>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-zqre" class="f104-ex-approval-tag" id="f104-ex-approval-tag">
+        <svg data-hf-id="hf-vhkb" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-xcgw" d="M9 18h6M10 21h4" /><path data-hf-id="hf-ex7t" d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+        <span data-hf-id="hf-c3mi">Ví dụ thực tế</span>
+      </div>
+      <div data-hf-id="hf-la40" class="f104-ex-approval-pill f104-ex-approval-pbefore" id="f104-ex-approval-pb">
+        <svg data-hf-id="hf-sjj9" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round"><circle data-hf-id="hf-18gd" cx="12" cy="12" r="8.5" /><path data-hf-id="hf-vluw" d="M12 7.5V12l3 2" /></svg>
+        <span data-hf-id="hf-3do2">TRƯỚC ĐÂY</span>
+      </div>
+      <div data-hf-id="hf-yktp" class="f104-ex-approval-pill f104-ex-approval-pnow" id="f104-ex-approval-pn">
+        <svg data-hf-id="hf-v39a" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle data-hf-id="hf-vdmm" cx="9" cy="8" r="3.4" /><path data-hf-id="hf-2bmn" d="M3 19.5c0-3.4 2.7-5.8 6-5.8s6 2.4 6 5.8" /><path data-hf-id="hf-ro05" d="m15.5 10.5 2.2 2.2 4.3-4.7" /></svg>
+        <span data-hf-id="hf-xg8r">BÂY GIỜ · Groupware</span>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var root = document.querySelector('[data-composition-id="f104-ex-approval"]');
+        var PX = "f104-ex-approval-";
+        var $ = function (id) { return root.querySelector("#" + PX + id); };
+        var part = function (who, p) { return root.querySelector("#" + PX + who + " ." + PX + p); };
+        var CUE = /*hf-cues:start*/{"before":0,"print":1.84,"walk":2.3,"sign":3.12,"now":4.42,"form":5.56,"send":7.4,"line":9.94,"it":12.04,"inbox":14.74,"take":15.84}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/17.615/*hf-dur:end*/;
+        var tl = gsap.timeline({ paused: true });
+        var C = Object.assign({ print: 1.8, walk: 2.3, sign: 3.1, now: 4.4, form: 5.6, send: 7.4, line: 9.9, it: 12.0, inbox: 14.7, take: 15.8 }, CUE);
+
+        // ---------- flat front-facing person (from the kit's story template) ----------
+        var SKIN = "#F6CDA8", SKIN2 = "#E8B48C";
+        function person(o) {
+          var s = '<svg viewBox="-160 -620 320 640">';
+          if (o.hairStyle === "long") s += '<path d="M-72 -520 C-82 -606 82 -606 72 -520 L82 -410 C46 -392 -46 -392 -82 -410 Z" fill="' + o.hair + '" />';
+          if (o.hairStyle === "bun") s += '<circle cx="0" cy="-592" r="32" fill="' + o.hair + '" />';
+          if (o.skirt) {
+            s += '<g class="' + PX + 'legL"><rect x="-40" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="-28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+            s += '<g class="' + PX + 'legR"><rect x="12" y="-210" width="28" height="200" rx="12" fill="' + SKIN + '" /><ellipse cx="28" cy="-8" rx="26" ry="11" fill="#1E293B" /></g>';
+          } else {
+            s += '<g class="' + PX + 'legL"><rect x="-44" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="-30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+            s += '<g class="' + PX + 'legR"><rect x="8" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          }
+          s += '<rect x="-17" y="-458" width="34" height="52" rx="10" fill="' + SKIN2 + '" />';
+          s += '<path d="M-90 -214 C-96 -330 -86 -398 -34 -414 L34 -414 C86 -398 96 -330 90 -214 Z" fill="' + o.shirt + '" />';
+          if (o.skirt) s += '<path d="M-88 -236 L88 -236 L106 -132 L-106 -132 Z" fill="' + o.skirt + '" />';
+          s += '<path d="M-26 -413 L0 -378 L26 -413 Z" fill="' + (o.collar || "#FFFFFF") + '" />';
+          if (o.tie) s += '<path d="M0 -384 L-11 -368 L0 -300 L11 -368 Z" fill="' + o.tie + '" />';
+          if (o.lanyard) s += '<path d="M-22 -410 L-6 -330 M22 -410 L6 -330" stroke="#0A3D91" stroke-width="5" fill="none" /><rect x="-22" y="-334" width="44" height="54" rx="6" fill="#FFFFFF" stroke="#0A3D91" stroke-width="3" /><rect x="-12" y="-322" width="24" height="16" rx="3" fill="#0A3D91" />';
+          s += '<g class="' + PX + 'armL"><path d="M-74 -392 C-96 -350 -104 -300 -100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="-100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+          s += '<g class="' + PX + 'armR"><path d="M74 -392 C96 -350 104 -300 100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+          s += '<g class="' + PX + 'head">';
+          s += '<circle cx="-63" cy="-506" r="13" fill="' + SKIN2 + '" /><circle cx="63" cy="-506" r="13" fill="' + SKIN2 + '" />';
+          s += '<circle cx="0" cy="-512" r="64" fill="' + SKIN + '" />';
+          if (o.hairStyle === "m") s += '<path d="M-66 -510 C-74 -588 -18 -602 10 -596 C58 -590 76 -556 66 -508 C52 -538 22 -548 -8 -546 C-34 -544 -56 -534 -66 -510 Z" fill="' + o.hair + '" />';
+          else s += '<path d="M-68 -498 C-78 -594 74 -604 68 -500 C50 -536 10 -552 -24 -534 C-42 -524 -58 -512 -68 -498 Z" fill="' + o.hair + '" />';
+          s += '<path class="' + PX + 'brows" d="M-34 -538 Q-22 -546 -10 -538 M10 -538 Q22 -546 34 -538" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+          s += '<g class="' + PX + 'eyes"><ellipse cx="-22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /><ellipse cx="22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /></g>';
+          if (o.glasses) s += '<g fill="none" stroke="#0F172A" stroke-width="4"><circle cx="-22" cy="-510" r="17" /><circle cx="22" cy="-510" r="17" /><path d="M-5 -512 h10" /></g>';
+          s += '<circle cx="-38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" /><circle cx="38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" />';
+          s += '<path class="' + PX + 'mouth" d="M-13 -478 Q0 -466 13 -478" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" />';
+          s += '<path class="' + PX + 'frown" d="M-13 -470 Q0 -480 13 -470" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" />';
+          s += '</g></svg>';
+          return s;
+        }
+        $("nam").innerHTML = person({ shirt: "#3B6CC4", arm: "#2F5BAA", hair: "#1E1B18", hairStyle: "m", pants: "#334155", lanyard: true }) +
+          '<div class="' + PX + 'hpaper" id="' + PX + 'hpaper"><i></i><i style="width:70%"></i><i></i>' +
+          '<svg class="' + PX + 'hsig" id="' + PX + 'hsig" viewBox="0 0 54 26"><path d="M3 18 C10 4 14 4 15 16 C16 24 22 6 27 12 C31 17 34 20 40 10 L51 14" stroke="#0F172A" stroke-width="3" fill="none" stroke-linecap="round" /></svg></div>' +
+          '<svg class="' + PX + 'sweat" id="' + PX + 'sweat" viewBox="0 0 30 42"><path d="M15 2 C22 14 28 22 28 29 A13 13 0 0 1 2 29 C2 22 8 14 15 2 Z" fill="#E2E8F0" stroke="#64748B" stroke-width="3" /></svg>' +
+          '<div class="' + PX + 'badge" id="' + PX + 'badge" style="left:50px;top:-40px;"><svg viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /></svg><span>Chữ ký 1/3</span></div>';
+        $("m1").innerHTML = person({ shirt: "#475569", arm: "#3A4757", hair: "#2B2420", hairStyle: "short", pants: "#1E293B", tie: "#0F172A", glasses: true });
+        $("m3").innerHTML = person({ shirt: "#64748B", arm: "#556274", hair: "#3B2416", hairStyle: "bun", skirt: "#334155" });
+
+        // ---------- helpers ----------
+        function cam(s, fx, fy, cx, cy) { return { scale: s, x: cx - fx * s, y: cy - fy * s }; }
+        var PIV = { armL: "-74 -392", armR: "74 -392", head: "0 -450", eyes: "0 -510" };
+        function pose(who, p, rot, at, dur) { tl.to(part(who, p), { rotation: rot, svgOrigin: PIV[p], duration: dur || 0.35, ease: "power2.out" }, at); }
+        function walk(who, toX, t0, dur) {
+          var w = $(who), steps = Math.max(2, Math.round(dur / 0.26)), h = dur / steps;
+          tl.to(w, { x: toX, duration: dur, ease: "power1.inOut" }, t0);
+          for (var i = 0; i < steps; i++) {
+            var t = t0 + i * h, leg = part(who, i % 2 ? "legR" : "legL");
+            tl.to(w, { y: -10, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(w, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+            tl.to(leg, { y: -20, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(leg, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+          }
+        }
+        function blink(who, t) {
+          tl.to(part(who, "eyes"), { scaleY: 0.12, svgOrigin: PIV.eyes, duration: 0.07, ease: "power1.in" }, t);
+          tl.to(part(who, "eyes"), { scaleY: 1, svgOrigin: PIV.eyes, duration: 0.1, ease: "power1.out" }, t + 0.08);
+        }
+        function look(who, dx, at) { tl.to(part(who, "eyes"), { x: dx, duration: 0.25, ease: "power2.out" }, at); }
+        function pop(sel, at, ease) { tl.fromTo(sel, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: ease || "back.out(2)", immediateRender: false }, at); }
+
+        // ---------- initial state ----------
+        gsap.set($("nam"), { x: 600, y: 0 });
+        gsap.set($("m1"), { x: 880, y: 0 });
+        gsap.set($("m3"), { x: 1620, y: 0 });
+        gsap.set(["#" + PX + "hpaper", "#" + PX + "hsig", "#" + PX + "sweat", "#" + PX + "badge", "#" + PX + "q"], { opacity: 0 });
+        gsap.set(part("nam", "frown"), { opacity: 0 });
+        gsap.set(part("m1", "frown"), { opacity: 0 });
+        gsap.set(part("m3", "frown"), { opacity: 0 });
+        gsap.set("#" + PX + "b", { clipPath: "inset(0px 1920px 0px 0px)" });
+        gsap.set("#" + PX + "edge", { x: 0, opacity: 0 });
+        gsap.set(["#" + PX + "pn", "#" + PX + "take", "#" + PX + "abox", "#" + PX + "line", "#" + PX + "it", "#" + PX + "new", "#" + PX + "st2",
+          "#" + PX + "chip", "#" + PX + "token", "#" + PX + "cursor", "#" + PX + "btn2", "#" + PX + "v1", "#" + PX + "v2", "#" + PX + "v3"], { opacity: 0 });
+        gsap.set(["#" + PX + "k1", "#" + PX + "k2", "#" + PX + "k3", "#" + PX + "k4", "#" + PX + "s1", "#" + PX + "s2", "#" + PX + "s3", "#" + PX + "s4"], { opacity: 0 });
+        gsap.set(["#" + PX + "f1", "#" + PX + "f2", "#" + PX + "f3"], { scaleX: 0 });
+        gsap.set("#" + PX + "wb", cam(1.3, 476, 470, 960, 560));
+        gsap.set("#" + PX + "cursor", { x: 560, y: 470 });
+
+        // ================= A. TRƯỚC ĐÂY =================
+        var NOW = C.now;
+        tl.fromTo("#" + PX + "wa", cam(1, 960, 540, 960, 540), Object.assign(cam(1.04, 900, 600, 940, 600), { duration: NOW, ease: "sine.inOut" }), 0);
+        // the clock hands race (time wasted)
+        tl.fromTo("#" + PX + "minH", { rotation: 0 }, { rotation: 1440, svgOrigin: "330 230", duration: NOW, ease: "none" }, 0);
+        tl.fromTo("#" + PX + "hourH", { rotation: 0 }, { rotation: 120, svgOrigin: "330 230", duration: NOW, ease: "none" }, 0);
+        // print the form
+        look("nam", -8, 0.3);
+        tl.fromTo("#" + PX + "pout", { y: 0 }, { y: -150, duration: 0.6, ease: "power2.out" }, C.print);
+        // he takes it and walks to the Part Leader
+        var W = C.walk;
+        tl.to("#" + PX + "pout", { opacity: 0, duration: 0.12, ease: "none" }, W - 0.05);
+        tl.to("#" + PX + "hpaper", { opacity: 1, duration: 0.12, ease: "none" }, W - 0.05);
+        pose("nam", "armR", -28, W - 0.1, 0.3);
+        look("nam", 8, W);
+        var S = Math.max(C.sign, W + 0.7);
+        walk("nam", 680, W, Math.max(0.5, S - W - 0.1));
+        // signature 1/3
+        tl.to(part("m1", "head"), { keyframes: { rotation: [0, 7, -2, 6, 0] }, svgOrigin: PIV.head, duration: 0.5, ease: "none" }, S);
+        tl.to("#" + PX + "hsig", { opacity: 1, duration: 0.2, ease: "none" }, S + 0.15);
+        pop("#" + PX + "badge", S + 0.15);
+        // on to the next desk — nobody there
+        var W2 = S + 0.5, END = NOW - 0.25;
+        walk("nam", 1070, W2, Math.max(0.5, END - W2 - 0.35));
+        tl.to("#" + PX + "badge", { opacity: 0, duration: 0.15, ease: "none" }, W2 + 0.2);
+        pop("#" + PX + "q", END - 0.45);
+        tl.to(part("nam", "mouth"), { opacity: 0, duration: 0.15, ease: "none" }, END - 0.4);
+        tl.to(part("nam", "frown"), { opacity: 1, duration: 0.15, ease: "none" }, END - 0.4);
+        tl.to(part("nam", "brows"), { y: -6, duration: 0.2, ease: "power2.out" }, END - 0.4);
+        tl.fromTo("#" + PX + "sweat", { opacity: 0, y: -6 }, { opacity: 1, y: 8, duration: 0.4, ease: "power1.in", immediateRender: false }, END - 0.35);
+        blink("m3", 1.6);
+        blink("m1", 2.0);
+
+        // ================= wipe → BÂY GIỜ =================
+        var WP = NOW - 0.1, WD = 0.7;
+        tl.to("#" + PX + "b", { clipPath: "inset(0px 0px 0px 0px)", duration: WD, ease: "power2.inOut" }, WP);
+        tl.to("#" + PX + "edge", { opacity: 1, duration: 0.1, ease: "none" }, WP);
+        tl.to("#" + PX + "edge", { x: 1940, duration: WD, ease: "power2.inOut" }, WP);
+        tl.to("#" + PX + "edge", { opacity: 0, duration: 0.15, ease: "none" }, WP + WD - 0.1);
+        tl.to("#" + PX + "pb", { opacity: 0, duration: 0.15, ease: "none" }, WP + 0.1);
+        tl.to("#" + PX + "a", { opacity: 0, duration: 0.05, ease: "none" }, WP + WD + 0.05); // world A fully covered by now
+        tl.fromTo("#" + PX + "pn", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, WP + 0.28);
+
+        // ================= form fills =================
+        var F = Math.max(C.form, WP + WD + 0.1);
+        tl.to("#" + PX + "v1", { opacity: 1, duration: 0.3, ease: "none" }, F);
+        tl.to("#" + PX + "v2", { opacity: 1, duration: 0.3, ease: "none" }, F + 0.35);
+        tl.fromTo("#" + PX + "v3", { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, F + 0.7);
+        tl.to("#" + PX + "cursor", { opacity: 1, duration: 0.2, ease: "none" }, F);
+
+        // ================= click Gửi =================
+        var SD = Math.max(C.send, F + 1.2);
+        tl.to("#" + PX + "cursor", { x: 726, y: 732, duration: 0.7, ease: "power2.inOut" }, SD - 0.75);
+        tl.to("#" + PX + "btn", { scale: 0.92, duration: 0.08, ease: "power1.in" }, SD);
+        tl.to("#" + PX + "btn", { scale: 1, duration: 0.18, ease: "back.out(2)" }, SD + 0.08);
+        tl.to("#" + PX + "btn2", { opacity: 1, duration: 0.2, ease: "none" }, SD + 0.05);
+        tl.to("#" + PX + "cursor", { opacity: 0, duration: 0.25, ease: "none" }, SD + 0.45);
+        // camera pulls back to show the whole flow
+        tl.to("#" + PX + "wb", Object.assign(cam(1, 960, 540, 960, 540), { duration: 0.9, ease: "power3.inOut" }), SD + 0.35);
+        tl.fromTo("#" + PX + "line", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, SD + 1.0);
+        tl.fromTo("#" + PX + "it", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, SD + 1.12);
+        // the request chip leaves the button and flies to the first node
+        var L = Math.max(C.line, SD + 1.7);
+        var CH0 = Math.max(SD + 0.6, L - 1.0);
+        tl.fromTo("#" + PX + "chipw", { x: 739, y: 746 }, { x: 1033, y: 236, duration: 0.85, ease: "power2.inOut", immediateRender: false }, CH0);
+        tl.fromTo("#" + PX + "chip", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)", immediateRender: false }, CH0);
+        tl.to("#" + PX + "chip", { opacity: 0, scale: 0.5, duration: 0.2, ease: "power2.in" }, CH0 + 0.8);
+
+        // ================= approval line: stamps in turn =================
+        var NX = [1033, 1259, 1485, 1711], NY = 280;
+        var IT = Math.max(C.it, L + 1.5), STEP = (IT - L) / 3;
+        var ST = [L, L + STEP, L + 2 * STEP, IT];
+        function stamp(i, at) {
+          tl.fromTo("#" + PX + "k" + (i + 1), { opacity: 0, scale: 2.2, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "back.out(1.6)", immediateRender: false }, at);
+          tl.to("#" + PX + "s" + (i + 1), { opacity: 1, duration: 0.25, ease: "none" }, at + 0.1);
+        }
+        stamp(0, ST[0]);
+        tl.fromTo("#" + PX + "tokw", { x: NX[0], y: NY }, { x: NX[0], y: NY, duration: 0.01, immediateRender: false }, ST[0]);
+        tl.to("#" + PX + "token", { opacity: 1, duration: 0.15, ease: "none" }, ST[0] + 0.05);
+        for (var k = 1; k < 4; k++) {
+          var t0 = ST[k - 1] + 0.15, dur = Math.max(0.3, ST[k] - t0 - 0.05);
+          tl.to("#" + PX + "tokw", { x: NX[k], duration: dur, ease: "power1.inOut" }, t0);
+          tl.to("#" + PX + "f" + k, { scaleX: 1, duration: dur, ease: "power1.inOut" }, t0);
+          stamp(k, ST[k]);
+        }
+        // ================= into IT's inbox =================
+        tl.to("#" + PX + "tokw", { x: 1180, y: 600, duration: 0.5, ease: "power2.in" }, IT + 0.15);
+        tl.to("#" + PX + "token", { opacity: 0, scale: 0.6, duration: 0.15, ease: "none" }, IT + 0.55);
+        tl.to("#" + PX + "old", { y: 106, duration: 0.4, ease: "power2.out" }, IT + 0.45);
+        tl.fromTo("#" + PX + "new", { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, IT + 0.55);
+        var DONE = Math.min(IT + 1.7, C.inbox - 0.6);
+        tl.to("#" + PX + "st1", { opacity: 0, duration: 0.15, ease: "none" }, DONE);
+        tl.fromTo("#" + PX + "st2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: false }, DONE + 0.15);
+
+        // ================= approval inbox =================
+        var IB = Math.max(C.inbox, DONE + 0.6);
+        tl.to("#" + PX + "form", { opacity: 0, y: -10, duration: 0.25, ease: "power2.in" }, IB - 0.1);
+        tl.fromTo("#" + PX + "abox", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, IB + 0.15);
+        tl.fromTo("#" + PX + "tind", { x: 0 }, { x: 464, duration: 0.8, ease: "power2.inOut", immediateRender: false }, IB + 0.45);
+        tl.fromTo("#" + PX + "tl3", { color: "#475569" }, { color: "#0A3D91", duration: 0.2, ease: "none", immediateRender: false }, IB + 1.1);
+
+        // ================= takeaway =================
+        var T = Math.max(C.take, IB + 0.8);
+        tl.fromTo("#" + PX + "take", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, T);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f104-ex-approval"] = tl;
+      })();
+    </script>
+  </div>
+</template>

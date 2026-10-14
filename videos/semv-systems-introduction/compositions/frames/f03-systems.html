@@ -1,0 +1,166 @@
+<!-- Frame 3 — overview of the four systems (slide + spotlight).
+     cues/3.json: gw, povis, sap, mes → spotlight each card on its name; rest → all normal + connector links show. -->
+<template>
+  <div data-hf-id="hf-qfsc" id="root" data-composition-id="f03-systems" data-start="0" data-width="1920" data-height="1080" data-duration="12.503">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      #f03-systems-bg { position: absolute; inset: 0; background: #FFFFFF; }
+      #f03-systems-stage { position: absolute; inset: 0; transform-origin: 50% 40%; }
+
+      .f03-systems-head { position: absolute; left: 96px; right: 96px; top: 84px; display: flex; justify-content: space-between; align-items: center; }
+      #f03-systems-eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0A3D91; }
+      #f03-systems-pill { border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91; font-weight: 600; font-size: 28px; padding: 10px 30px; }
+      #f03-systems-h2 { position: absolute; left: 96px; top: 140px; font-size: 60px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; white-space: nowrap; }
+
+      #f03-systems-grid { position: absolute; left: 96px; right: 96px; top: 310px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 28px; }
+      .f03-systems-card {
+        position: relative; transform-origin: 50% 50%; height: 500px;
+        background: rgba(10, 61, 145, 0.04); border: 1.5px solid rgba(10, 61, 145, 0.2); border-radius: 14px;
+        padding: 40px 38px; display: flex; flex-direction: column; justify-content: space-between;
+      }
+      .f03-systems-icowrap { width: 128px; height: 128px; border-radius: 28px; background: rgba(10, 61, 145, 0.08); display: flex; align-items: center; justify-content: center; }
+      .f03-systems-ico { width: 84px; height: 84px; color: #0A3D91; }
+      .f03-systems-ico svg { width: 100%; height: 100%; display: block; overflow: visible; }
+      .f03-systems-ico path, .f03-systems-ico circle, .f03-systems-ico rect, .f03-systems-ico ellipse { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .f03-systems-ico .f03-systems-acc { stroke: #3B6CC4; }
+      .f03-systems-num { position: absolute; top: 40px; right: 38px; font-size: 28px; font-weight: 700; letter-spacing: 0.05em; color: #0A3D91; opacity: 0.55; }
+      .f03-systems-name { font-size: 48px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; color: #0A3D91; }
+      .f03-systems-desc { margin-top: 12px; font-size: 30px; font-weight: 500; line-height: 1.4; color: #475569; min-height: 84px; }
+
+      /* faint connectors under the cards: POVIS ↔ Groupware, SAP ↔ MES */
+      #f03-systems-links { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+      .f03-systems-linklbl {
+        position: absolute; top: 892px; height: 52px; padding: 0 24px; border-radius: 100px; background: #FFFFFF;
+        border: 1.5px solid rgba(10, 61, 145, 0.25); color: #3B6CC4; font-size: 24px; font-weight: 600;
+        display: flex; align-items: center; gap: 10px; white-space: nowrap;
+      }
+      .f03-systems-linklbl svg { width: 28px; height: 28px; display: block; }
+    </style>
+
+    <div data-hf-id="hf-yq61" id="f03-systems-bg" class="clip" data-start="0" data-duration="12.503" data-track-index="0"></div>
+
+    <div data-hf-id="hf-l9xd" id="f03-systems-stage" class="clip" data-start="0" data-duration="12.503" data-track-index="1">
+      <div data-hf-id="hf-ckbf" class="f03-systems-head">
+        <div data-hf-id="hf-1p87" id="f03-systems-eyebrow">TỔNG QUAN</div>
+        <span data-hf-id="hf-kvcf" id="f03-systems-pill">4 hệ thống</span>
+      </div>
+      <div data-hf-id="hf-nnx8" id="f03-systems-h2">Bốn hệ thống chính</div>
+
+      <svg data-hf-id="hf-x2w8" id="f03-systems-links" viewBox="0 0 1920 1080">
+        <path data-hf-id="hf-wqfk" id="f03-systems-link1" d="M301 812 C301 918 400 918 521 918 C642 918 741 918 741 812" fill="none" stroke="#3B6CC4" stroke-width="3" stroke-dasharray="10 10" opacity="0.55" />
+        <path data-hf-id="hf-fnbw" id="f03-systems-link2" d="M1180 812 C1180 918 1279 918 1399 918 C1519 918 1619 918 1619 812" fill="none" stroke="#3B6CC4" stroke-width="3" stroke-dasharray="10 10" opacity="0.55" />
+      </svg>
+      <div data-hf-id="hf-12k0" class="f03-systems-linklbl" id="f03-systems-lbl1" style="left: 405px; width: 232px; justify-content: center;">
+        <svg data-hf-id="hf-coq8" viewBox="0 0 24 24" fill="none" stroke="#3B6CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-3q6f" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" /><path data-hf-id="hf-h39m" d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /></svg>
+        <span data-hf-id="hf-ar24">liên kết</span>
+      </div>
+      <div data-hf-id="hf-k7m2" class="f03-systems-linklbl" id="f03-systems-lbl2" style="left: 1283px; width: 232px; justify-content: center;">
+        <svg data-hf-id="hf-4cug" viewBox="0 0 24 24" fill="none" stroke="#3B6CC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-0qxz" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" /><path data-hf-id="hf-zi4u" d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /></svg>
+        <span data-hf-id="hf-a4tw">liên kết</span>
+      </div>
+
+      <div data-hf-id="hf-ur2s" id="f03-systems-grid">
+        <div data-hf-id="hf-muj3" class="f03-systems-card" id="f03-systems-card1">
+          <div data-hf-id="hf-v83c" class="f03-systems-num">01</div>
+          <div data-hf-id="hf-4iac" class="f03-systems-icowrap"><div data-hf-id="hf-4yez" class="f03-systems-ico" id="f03-systems-ico1"><svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><circle data-hf-id="hf-vdmm" cx="9" cy="8" r="3.4" /><path data-hf-id="hf-2bmn" d="M3 19.5c0-3.4 2.7-5.8 6-5.8s6 2.4 6 5.8" /><path data-hf-id="hf-ek3s" class="f03-systems-acc" d="m15.5 10.5 2.2 2.2 4.3-4.7" /></svg></div></div>
+          <div data-hf-id="hf-yeow"><div data-hf-id="hf-4qwu" class="f03-systems-name">Groupware</div><div data-hf-id="hf-45x9" class="f03-systems-desc">Điều hành công việc chung</div></div>
+        </div>
+        <div data-hf-id="hf-e6n8" class="f03-systems-card" id="f03-systems-card2">
+          <div data-hf-id="hf-u169" class="f03-systems-num">02</div>
+          <div data-hf-id="hf-lqcs" class="f03-systems-icowrap"><div data-hf-id="hf-waj4" class="f03-systems-ico" id="f03-systems-ico2"><svg data-hf-id="hf-1tol" viewBox="0 0 24 24"><rect data-hf-id="hf-cjio" x="8" y="2.5" width="12" height="15.5" rx="2" /><path data-hf-id="hf-zwcc" d="M5 6v13.5A2 2 0 0 0 7 21.5h10" /><path data-hf-id="hf-39mk" class="f03-systems-acc" d="M11 7.5h6M11 11h6M11 14.5h3.5" /></svg></div></div>
+          <div data-hf-id="hf-y7yw"><div data-hf-id="hf-jm9d" class="f03-systems-name">POVIS</div><div data-hf-id="hf-6fz6" class="f03-systems-desc">Quản lý tài liệu</div></div>
+        </div>
+        <div data-hf-id="hf-eyb1" class="f03-systems-card" id="f03-systems-card3">
+          <div data-hf-id="hf-ufha" class="f03-systems-num">03</div>
+          <div data-hf-id="hf-kjfp" class="f03-systems-icowrap"><div data-hf-id="hf-x26x" class="f03-systems-ico" id="f03-systems-ico3"><svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><ellipse data-hf-id="hf-peei" cx="12" cy="5" rx="6.5" ry="2.5" /><path data-hf-id="hf-jxk4" d="M5.5 5v7c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5V5" /><path data-hf-id="hf-frd4" d="M5.5 8.5c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5" /><path data-hf-id="hf-ub9p" class="f03-systems-acc" d="M12 14.5V18M12 18l-6.2 2.6M12 18l6.2 2.6" /><circle data-hf-id="hf-c8bc" class="f03-systems-acc" cx="4.5" cy="21" r="1.4" /><circle data-hf-id="hf-2whw" class="f03-systems-acc" cx="19.5" cy="21" r="1.4" /></svg></div></div>
+          <div data-hf-id="hf-x11t"><div data-hf-id="hf-vcxk" class="f03-systems-name">SAP</div><div data-hf-id="hf-83ni" class="f03-systems-desc">Quản trị nguồn lực doanh nghiệp</div></div>
+        </div>
+        <div data-hf-id="hf-xq0q" class="f03-systems-card" id="f03-systems-card4">
+          <div data-hf-id="hf-t8k7" class="f03-systems-num">04</div>
+          <div data-hf-id="hf-kxqq" class="f03-systems-icowrap"><div data-hf-id="hf-m6pa" class="f03-systems-ico" id="f03-systems-ico4"><svg data-hf-id="hf-2man" viewBox="0 0 24 24"><path data-hf-id="hf-3d6f" d="M2.5 21V11l5 3v-3l5 3V9h3.2l.8-6h2.2l.8 6V21Z" /><path data-hf-id="hf-kcf4" d="M2 21h20" /><path data-hf-id="hf-a1et" class="f03-systems-acc" d="M6 17.5h2M10.5 17.5h2M15 17.5h2" /></svg></div></div>
+          <div data-hf-id="hf-xfcu"><div data-hf-id="hf-5adb" class="f03-systems-name">MES</div><div data-hf-id="hf-u89z" class="f03-systems-desc">Điều hành sản xuất</div></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var root = document.querySelector('[data-composition-id="f03-systems"]');
+        function $$(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+
+        var CUE = /*hf-cues:start*/{"gw":1.28,"povis":3.84,"sap":6.12,"mes":8.88,"rest":10.28}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/12.003/*hf-dur:end*/;
+        var C = Object.assign({ gw: 1.3, povis: 3.8, sap: 6.1, mes: 8.9, rest: 10.3 }, CUE);
+        var tl = gsap.timeline({ paused: true });
+
+        function prep(el) {
+          var len = 0;
+          try { len = el.getTotalLength(); } catch (e) { len = 0; }
+          if (!len || !isFinite(len)) len = 60;
+          len = len * 1.05 + 1;
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+        }
+        var ico = {};
+        [1, 2, 3, 4].forEach(function (i) {
+          ico[i] = $$("#f03-systems-ico" + i + " path, #f03-systems-ico" + i + " circle, #f03-systems-ico" + i + " rect, #f03-systems-ico" + i + " ellipse");
+          ico[i].forEach(prep);
+        });
+
+        tl.fromTo("#f03-systems-stage", { scale: 1 }, { scale: 1.02, duration: DURATION, ease: "power1.inOut" }, 0);
+
+        // A. calm reveal
+        tl.fromTo("#f03-systems-eyebrow", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#f03-systems-pill", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
+        tl.fromTo("#f03-systems-h2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+        [1, 2, 3, 4].forEach(function (i) {
+          var at = 0.55 + (i - 1) * 0.06;
+          tl.fromTo("#f03-systems-card" + i, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, at);
+          ico[i].forEach(function (p, k) { tl.to(p, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, at + 0.2 + k * 0.08); });
+        });
+
+        // connectors: hidden until rest (they hint that the systems work together)
+        tl.set(["#f03-systems-link1", "#f03-systems-link2"], { opacity: 0 }, 0);
+        tl.set(["#f03-systems-lbl1", "#f03-systems-lbl2"], { opacity: 0 }, 0);
+
+        // B. spotlight
+        var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+        var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 0px rgba(10,61,145,0)";
+        var BG = "rgba(10,61,145,0.04)", BG_ON = "rgba(10,61,145,0.08)";
+        var ITEMS = ["#f03-systems-card1", "#f03-systems-card2", "#f03-systems-card3", "#f03-systems-card4"];
+        ITEMS.forEach(function (sel) { tl.set(sel, { boxShadow: RING_OFF, backgroundColor: BG }, 0); });
+        function spot(idx, at) {
+          if (at == null) return;
+          ITEMS.forEach(function (sel, i) {
+            var on = i === idx, rest = idx < 0;
+            tl.to(sel, { opacity: on || rest ? 1 : 0.4, scale: on ? 1.03 : 1, boxShadow: on ? RING_ON : RING_OFF,
+              backgroundColor: on ? BG_ON : BG, duration: 0.35, ease: "power2.out" }, at);
+          });
+        }
+        spot(0, Math.max(C.gw, 1.25));
+        spot(1, C.povis);
+        spot(2, C.sap);
+        spot(3, C.mes);
+        spot(-1, C.rest);
+
+        // C. at rest: the links between systems fade in
+        tl.fromTo("#f03-systems-link1", { opacity: 0, strokeDashoffset: 40 }, { opacity: 0.55, strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, C.rest + 0.15);
+        tl.fromTo("#f03-systems-link2", { opacity: 0, strokeDashoffset: 40 }, { opacity: 0.55, strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, C.rest + 0.3);
+        tl.fromTo("#f03-systems-lbl1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, C.rest + 0.3);
+        tl.fromTo("#f03-systems-lbl2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, C.rest + 0.45);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f03-systems"] = tl;
+      })();
+    </script>
+  </div>
+</template>

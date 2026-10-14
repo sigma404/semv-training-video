@@ -1,0 +1,400 @@
+<!-- f106-ex-order — "Một đơn hàng trên SAP". TRƯỚC ĐÂY (grey): four department islands, each on its own app, numbers
+     that do not match, a colleague running between them collecting printouts. BÂY GIỜ (cobalt): the islands slide
+     into a ring around one SAP hub; a new order entered by Bán hàng flows to Kho → Sản xuất → Kế toán; all pulse
+     together on the same order ID. Cues (cues/106.json): before, report, now, enter, stock, plan, cost, once, take. -->
+<template>
+  <div data-hf-id="hf-kfhh" id="root" data-composition-id="f106-ex-order" data-start="0" data-width="1920" data-height="1080" data-duration="19.226">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; }
+      .f106-ex-order-bg { position: absolute; inset: 0; background: #F1F5F9; }
+      .f106-ex-order-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f106-ex-order-full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+      .f106-ex-order-nowbg { position: absolute; inset: 0; background: #EEF3FB; }
+
+      /* department panels (positioned by GSAP x/y) */
+      .f106-ex-order-p { position: absolute; left: 0; top: 0; width: 380px; height: 290px; border-radius: 16px; background: #F8FAFC; border: 2px solid #CBD5E1; overflow: hidden; transform-origin: 50% 50%; }
+      .f106-ex-order-ph { height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 20px; background: #E2E8F0; color: #64748B; }
+      .f106-ex-order-ph svg { width: 36px; height: 36px; display: block; flex: 0 0 36px; }
+      .f106-ex-order-pn { font-size: 30px; font-weight: 700; white-space: nowrap; }
+      .f106-ex-order-dots { margin-left: auto; display: flex; gap: 7px; }
+      .f106-ex-order-dots i { width: 12px; height: 12px; border-radius: 50%; background: currentColor; opacity: 0.35; display: block; }
+      .f106-ex-order-pb { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; padding: 16px 22px; }
+      .f106-ex-order-app { font-size: 24px; font-weight: 600; color: #94A3B8; white-space: nowrap; }
+      .f106-ex-order-val { margin-top: 6px; font-size: 44px; font-weight: 800; color: #64748B; white-space: nowrap; }
+      .f106-ex-order-bar { height: 14px; border-radius: 7px; background: #E2E8F0; margin-top: 14px; }
+      .f106-ex-order-lab { font-size: 26px; font-weight: 600; color: #475569; white-space: nowrap; }
+      .f106-ex-order-big { font-size: 46px; font-weight: 800; color: #0F172A; white-space: nowrap; letter-spacing: -0.01em; }
+      .f106-ex-order-sub { font-size: 24px; font-weight: 700; color: #059669; white-space: nowrap; }
+      .f106-ex-order-chip { position: absolute; left: 22px; bottom: 16px; height: 40px; padding: 0 16px; border-radius: 20px; background: rgba(10, 61, 145, 0.08); color: #0A3D91; font-size: 24px; font-weight: 700; display: flex; align-items: center; white-space: nowrap; }
+      .f106-ex-order-field { height: 46px; border-radius: 10px; border: 2px dashed #B9C8E2; margin-top: 12px; }
+      .f106-ex-order-fill { position: absolute; inset: 0; background: #FFFFFF; padding: 16px 22px; }
+      .f106-ex-order-btn { position: absolute; right: 22px; bottom: 16px; height: 40px; padding: 0 22px; border-radius: 10px; background: #0A3D91; color: #FFFFFF; font-size: 24px; font-weight: 700; display: flex; align-items: center; }
+      .f106-ex-order-gantt { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+      .f106-ex-order-grow { display: flex; align-items: center; height: 28px; }
+      .f106-ex-order-gl { width: 120px; font-size: 24px; font-weight: 600; color: #475569; white-space: nowrap; }
+      .f106-ex-order-gt { position: relative; flex: 1; height: 22px; border-radius: 6px; background: #E8EEF8; }
+      .f106-ex-order-gb { position: absolute; top: 0; height: 22px; border-radius: 6px; background: #3B6CC4; transform-origin: 0 50%; }
+
+      .f106-ex-order-neq { position: absolute; left: -34px; top: -34px; width: 68px; height: 68px; border-radius: 50%; background: #FFFFFF; border: 4px solid #dc2626; color: #dc2626; font-size: 44px; font-weight: 800; display: flex; align-items: center; justify-content: center; line-height: 1; }
+
+      .f106-ex-order-person { position: absolute; left: -160px; top: 231px; width: 320px; height: 640px; }
+      .f106-ex-order-person svg { width: 100%; height: 100%; display: block; overflow: visible; }
+      .f106-ex-order-stack { position: absolute; left: 214px; top: 300px; width: 100px; height: 120px; }
+      .f106-ex-order-sh { position: absolute; width: 80px; height: 104px; border-radius: 6px; background: #FFFFFF; border: 4px solid #94A3B8; }
+      .f106-ex-order-fly { position: absolute; left: -22px; top: -28px; width: 44px; height: 56px; border-radius: 5px; background: #FFFFFF; border: 3px solid #94A3B8; }
+
+      .f106-ex-order-hub { position: absolute; left: 840px; top: 365px; width: 240px; height: 240px; border-radius: 50%; background: #0A3D91; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 18px 40px rgba(10, 61, 145, 0.3); }
+      .f106-ex-order-hub svg { width: 64px; height: 64px; display: block; }
+      .f106-ex-order-hubt { color: #FFFFFF; font-size: 54px; font-weight: 800; letter-spacing: 0.02em; line-height: 1; }
+      .f106-ex-order-ring { position: absolute; left: 840px; top: 365px; width: 240px; height: 240px; border-radius: 50%; border: 6px solid #3B6CC4; }
+      .f106-ex-order-hubcap { position: absolute; left: 0; right: 0; top: 632px; display: flex; justify-content: center; }
+      .f106-ex-order-hubcap span { height: 48px; padding: 0 24px; border-radius: 24px; background: #FFFFFF; border: 2px solid rgba(10, 61, 145, 0.25); color: #0A3D91; font-size: 26px; font-weight: 700; display: flex; align-items: center; white-space: nowrap; }
+      .f106-ex-order-tok { position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border-radius: 12px; background: #3B6CC4; box-shadow: 0 0 0 4px #FFFFFF, 0 8px 18px rgba(10, 61, 145, 0.35); display: flex; align-items: center; justify-content: center; }
+      .f106-ex-order-tok svg { width: 28px; height: 28px; display: block; }
+
+      /* screen overlays */
+      .f106-ex-order-tagrow { position: absolute; left: 56px; top: 44px; display: flex; gap: 16px; align-items: center; }
+      .f106-ex-order-tag { height: 56px; padding: 0 26px 0 20px; border-radius: 28px; background: #0A3D91; color: #FFFFFF; font-size: 28px; font-weight: 700; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25); white-space: nowrap; }
+      .f106-ex-order-tag svg { width: 30px; height: 30px; display: block; }
+      .f106-ex-order-pillw { position: relative; height: 56px; }
+      .f106-ex-order-pill { height: 56px; padding: 0 26px 0 18px; border-radius: 28px; font-size: 26px; font-weight: 800; letter-spacing: 0.06em; display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+      .f106-ex-order-pill svg { width: 30px; height: 30px; display: block; }
+      #f106-ex-order-pillB { background: #E2E8F0; color: #475569; border: 2px solid #CBD5E1; }
+      #f106-ex-order-pillA { position: absolute; left: 0; top: 0; background: #FFFFFF; color: #0A3D91; border: 3px solid #0A3D91; }
+      .f106-ex-order-takewrap { position: absolute; left: 0; right: 0; top: 890px; height: 120px; display: flex; justify-content: center; }
+      .f106-ex-order-take { height: 116px; padding: 0 52px 0 30px; border-radius: 18px; background: #FFFFFF; box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2); display: flex; align-items: center; gap: 24px; font-size: 48px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+      .f106-ex-order-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+      .f106-ex-order-take-ico svg { width: 42px; height: 42px; display: block; }
+    </style>
+
+    <div data-hf-id="hf-6qf2" class="f106-ex-order-bg clip" id="f106-ex-order-bg" data-start="0" data-duration="19.226" data-track-index="0"></div>
+
+    <div data-hf-id="hf-k7dk" class="f106-ex-order-scene" id="f106-ex-order-scene">
+      <!-- before: floor + island shadows -->
+      <svg data-hf-id="hf-lm50" class="f106-ex-order-full" id="f106-ex-order-floor" viewBox="0 0 1920 1080">
+        <rect data-hf-id="hf-t8th" x="0" y="860" width="1920" height="220" fill="#E2E8F0" />
+        <rect data-hf-id="hf-edjl" x="0" y="852" width="1920" height="10" fill="#CBD5E1" />
+        <g data-hf-id="hf-tuw9" id="f106-ex-order-isles" fill="#E2E8F0">
+          <ellipse data-hf-id="hf-zmk3" cx="285" cy="500" rx="210" ry="26" /><ellipse data-hf-id="hf-6scw" cx="735" cy="516" rx="210" ry="26" />
+          <ellipse data-hf-id="hf-qec5" cx="1185" cy="498" rx="210" ry="26" /><ellipse data-hf-id="hf-5524" cx="1635" cy="514" rx="210" ry="26" />
+        </g>
+      </svg>
+
+      <!-- now: cobalt world revealed by a circular wipe from the hub -->
+      <div data-hf-id="hf-iema" class="f106-ex-order-nowbg" id="f106-ex-order-nowbg">
+        <svg data-hf-id="hf-9tv3" class="f106-ex-order-full" viewBox="0 0 1920 1080">
+          <defs data-hf-id="hf-mh0t"><pattern data-hf-id="hf-y194" id="f106-ex-order-dotp" width="48" height="48" patternUnits="userSpaceOnUse"><circle data-hf-id="hf-vfn0" cx="24" cy="24" r="2.4" fill="#C9D7EE" /></pattern></defs>
+          <rect data-hf-id="hf-pxta" x="0" y="0" width="1920" height="1080" fill="url(#f106-ex-order-dotp)" />
+        </svg>
+      </div>
+
+      <svg data-hf-id="hf-o999" class="f106-ex-order-full" id="f106-ex-order-links" viewBox="0 0 1920 1080">
+        <g data-hf-id="hf-his6" stroke="#3B6CC4" stroke-width="6" stroke-linecap="round" fill="none">
+          <path data-hf-id="hf-3ndt" class="f106-ex-order-link" d="M550 275 L960 485" />
+          <path data-hf-id="hf-3pim" class="f106-ex-order-link" d="M1370 275 L960 485" />
+          <path data-hf-id="hf-1jbd" class="f106-ex-order-link" d="M1370 685 L960 485" />
+          <path data-hf-id="hf-z0pi" class="f106-ex-order-link" d="M550 685 L960 485" />
+        </g>
+      </svg>
+
+      <div data-hf-id="hf-z9vq" class="f106-ex-order-ring" id="f106-ex-order-ring"></div>
+      <div data-hf-id="hf-4enm" class="f106-ex-order-hub" id="f106-ex-order-hub">
+        <svg data-hf-id="hf-222q" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse data-hf-id="hf-5wuz" cx="12" cy="5.5" rx="7" ry="2.5" /><path data-hf-id="hf-x2ow" d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" /><path data-hf-id="hf-ve5y" d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5" /></svg>
+        <div data-hf-id="hf-wiq0" class="f106-ex-order-hubt">SAP</div>
+      </div>
+      <div data-hf-id="hf-emga" class="f106-ex-order-hubcap" id="f106-ex-order-hubcap"><span data-hf-id="hf-7k13">Một nguồn dữ liệu chung</span></div>
+
+      <!-- 1. Bán hàng -->
+      <div data-hf-id="hf-x7v1" class="f106-ex-order-p" id="f106-ex-order-p1">
+        <div data-hf-id="hf-zv3j" class="f106-ex-order-ph"><svg data-hf-id="hf-h0hq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-kgo6" d="M3 4h2.5l2.2 11h10.6L20.5 7H6.4" /><circle data-hf-id="hf-eosg" cx="9" cy="19.5" r="1.5" /><circle data-hf-id="hf-ieb1" cx="17" cy="19.5" r="1.5" /></svg><span data-hf-id="hf-5lts" class="f106-ex-order-pn">Bán hàng</span><span data-hf-id="hf-egu2" class="f106-ex-order-dots"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i></span></div>
+        <div data-hf-id="hf-450t" class="f106-ex-order-pb f106-ex-order-before"><div data-hf-id="hf-5ihn" class="f106-ex-order-app">Phần mềm A</div><div data-hf-id="hf-oxn0" class="f106-ex-order-val">Đơn: 500</div><div data-hf-id="hf-6q4d" class="f106-ex-order-bar" style="width:80%"></div><div data-hf-id="hf-135f" class="f106-ex-order-bar" style="width:55%"></div></div>
+        <div data-hf-id="hf-ruai" class="f106-ex-order-pb f106-ex-order-after">
+          <div data-hf-id="hf-ed5t" class="f106-ex-order-lab">Đơn hàng mới</div>
+          <div data-hf-id="hf-su99" class="f106-ex-order-field"></div><div data-hf-id="hf-9gfw" class="f106-ex-order-field" style="width:60%"></div>
+          <div data-hf-id="hf-gjvc" class="f106-ex-order-fill" id="f106-ex-order-sale" style="top:56px; padding-top:4px">
+            <div data-hf-id="hf-un3n" class="f106-ex-order-big" style="color:#0A3D91">500 cuộn</div>
+            <div data-hf-id="hf-h2r5" class="f106-ex-order-app" style="color:#475569">Khách hàng A</div>
+            <div data-hf-id="hf-znyv" class="f106-ex-order-chip">SO-2024-0158</div>
+          </div>
+          <div data-hf-id="hf-89dz" class="f106-ex-order-btn" id="f106-ex-order-btn">Nhập</div>
+        </div>
+      </div>
+      <!-- 2. Kho -->
+      <div data-hf-id="hf-15z2" class="f106-ex-order-p" id="f106-ex-order-p2">
+        <div data-hf-id="hf-jakv" class="f106-ex-order-ph"><svg data-hf-id="hf-pmle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-soh5" d="M3 9.5 12 4l9 5.5V20H3Z" /><path data-hf-id="hf-jitd" d="M7 20v-7h10v7M7 16.5h10" /></svg><span data-hf-id="hf-zxl8" class="f106-ex-order-pn">Kho</span><span data-hf-id="hf-8db2" class="f106-ex-order-dots"><i data-hf-id="hf-ylp6"></i><i data-hf-id="hf-0l8b"></i><i data-hf-id="hf-0zjc"></i></span></div>
+        <div data-hf-id="hf-hc0x" class="f106-ex-order-pb f106-ex-order-before"><div data-hf-id="hf-546m" class="f106-ex-order-app">Phần mềm B</div><div data-hf-id="hf-wwso" class="f106-ex-order-val">Tồn: 120</div><div data-hf-id="hf-ac96" class="f106-ex-order-bar" style="width:70%"></div><div data-hf-id="hf-my9u" class="f106-ex-order-bar" style="width:85%"></div></div>
+        <div data-hf-id="hf-q2pq" class="f106-ex-order-pb f106-ex-order-after">
+          <div data-hf-id="hf-8rrz" class="f106-ex-order-lab">Tồn kho khả dụng</div>
+          <div data-hf-id="hf-6udo" class="f106-ex-order-big" style="margin-top:4px"><span data-hf-id="hf-zzxq" id="f106-ex-order-kho">1.240</span> cuộn</div>
+          <div data-hf-id="hf-u2ay" class="f106-ex-order-sub" id="f106-ex-order-khosub">−500 · giữ cho đơn mới</div>
+          <div data-hf-id="hf-vw2e" class="f106-ex-order-chip" id="f106-ex-order-chip2">SO-2024-0158</div>
+        </div>
+      </div>
+      <!-- 3. Sản xuất -->
+      <div data-hf-id="hf-5433" class="f106-ex-order-p" id="f106-ex-order-p3">
+        <div data-hf-id="hf-iw9u" class="f106-ex-order-ph"><svg data-hf-id="hf-q0wf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-s2v9" d="M2.5 21V11l5 3v-3l5 3v-3l5 3V4h4v17Z" /><path data-hf-id="hf-4noz" d="M2.5 21h19" /></svg><span data-hf-id="hf-f2mu" class="f106-ex-order-pn">Sản xuất</span><span data-hf-id="hf-8rm3" class="f106-ex-order-dots"><i data-hf-id="hf-zsm9"></i><i data-hf-id="hf-06xa"></i><i data-hf-id="hf-26gf"></i></span></div>
+        <div data-hf-id="hf-iiy0" class="f106-ex-order-pb f106-ex-order-before"><div data-hf-id="hf-4pvl" class="f106-ex-order-app">Phần mềm C</div><div data-hf-id="hf-hb4f" class="f106-ex-order-val">Đơn: 480</div><div data-hf-id="hf-xnj7" class="f106-ex-order-bar" style="width:60%"></div><div data-hf-id="hf-zshx" class="f106-ex-order-bar" style="width:75%"></div></div>
+        <div data-hf-id="hf-qh0r" class="f106-ex-order-pb f106-ex-order-after">
+          <div data-hf-id="hf-w0j9" class="f106-ex-order-lab">Kế hoạch sản xuất</div>
+          <div data-hf-id="hf-a2sz" class="f106-ex-order-gantt">
+            <div data-hf-id="hf-y872" class="f106-ex-order-grow"><div data-hf-id="hf-k4y0" class="f106-ex-order-gl">Cắt</div><div data-hf-id="hf-4n82" class="f106-ex-order-gt"><div data-hf-id="hf-51qt" class="f106-ex-order-gb" style="left:0; width:42%"></div></div></div>
+            <div data-hf-id="hf-ein6" class="f106-ex-order-grow"><div data-hf-id="hf-z2wf" class="f106-ex-order-gl">Phủ</div><div data-hf-id="hf-24ly" class="f106-ex-order-gt"><div data-hf-id="hf-vted" class="f106-ex-order-gb" style="left:32%; width:42%"></div></div></div>
+            <div data-hf-id="hf-ewy7" class="f106-ex-order-grow"><div data-hf-id="hf-l4l9" class="f106-ex-order-gl">Đóng gói</div><div data-hf-id="hf-2iwz" class="f106-ex-order-gt"><div data-hf-id="hf-1j0z" class="f106-ex-order-gb" style="left:66%; width:34%"></div></div></div>
+          </div>
+          <div data-hf-id="hf-ekmv" class="f106-ex-order-chip" id="f106-ex-order-chip3">SO-2024-0158</div>
+        </div>
+      </div>
+      <!-- 4. Kế toán -->
+      <div data-hf-id="hf-9274" class="f106-ex-order-p" id="f106-ex-order-p4">
+        <div data-hf-id="hf-ihyt" class="f106-ex-order-ph"><svg data-hf-id="hf-qf7g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-9u78" x="5" y="2.5" width="14" height="19" rx="2" /><path data-hf-id="hf-5v0j" d="M8 6.5h8M8 11h2M12 11h2M16 11h0M8 14.5h2M12 14.5h2M8 18h2M12 18h4" /></svg><span data-hf-id="hf-zqko" class="f106-ex-order-pn">Kế toán</span><span data-hf-id="hf-95x4" class="f106-ex-order-dots"><i data-hf-id="hf-2krg"></i><i data-hf-id="hf-oz7w"></i><i data-hf-id="hf-okwv"></i></span></div>
+        <div data-hf-id="hf-i4mz" class="f106-ex-order-pb f106-ex-order-before"><div data-hf-id="hf-4bkk" class="f106-ex-order-app">Phần mềm D</div><div data-hf-id="hf-zs79" class="f106-ex-order-val">Tồn: 95</div><div data-hf-id="hf-7al5" class="f106-ex-order-bar" style="width:75%"></div><div data-hf-id="hf-pvpc" class="f106-ex-order-bar" style="width:50%"></div></div>
+        <div data-hf-id="hf-qvbs" class="f106-ex-order-pb f106-ex-order-after">
+          <div data-hf-id="hf-1gww" class="f106-ex-order-lab">Giá thành đơn hàng</div>
+          <div data-hf-id="hf-7zii" class="f106-ex-order-big" style="margin-top:4px; font-size:40px"><span data-hf-id="hf-zpl6" id="f106-ex-order-cost">0</span> ₫</div>
+          <div data-hf-id="hf-18pb" class="f106-ex-order-app" id="f106-ex-order-costsub" style="color:#475569">365.000 ₫ / cuộn</div>
+          <div data-hf-id="hf-z7pg" class="f106-ex-order-chip" id="f106-ex-order-chip4">SO-2024-0158</div>
+        </div>
+      </div>
+
+      <!-- before: mismatch marks -->
+      <div data-hf-id="hf-wjp7" class="f106-ex-order-neq" id="f106-ex-order-neq1" data-layout-allow-overlap="">≠</div>
+      <div data-hf-id="hf-5oym" class="f106-ex-order-neq" id="f106-ex-order-neq2" data-layout-allow-overlap="">≠</div>
+      <div data-hf-id="hf-lcn5" class="f106-ex-order-neq" id="f106-ex-order-neq3" data-layout-allow-overlap="">≠</div>
+
+      <div data-hf-id="hf-ij30" class="f106-ex-order-person" id="f106-ex-order-run"></div>
+      <div data-hf-id="hf-vmnb" class="f106-ex-order-fly" id="f106-ex-order-fly1"></div>
+      <div data-hf-id="hf-kr5o" class="f106-ex-order-fly" id="f106-ex-order-fly2"></div>
+      <div data-hf-id="hf-lith" class="f106-ex-order-fly" id="f106-ex-order-fly3"></div>
+      <div data-hf-id="hf-4aj6" class="f106-ex-order-fly" id="f106-ex-order-fly4"></div>
+
+      <!-- now: data tokens -->
+      <div data-hf-id="hf-6ppd" class="f106-ex-order-tok" id="f106-ex-order-tok1"><svg data-hf-id="hf-pzkb" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-9ldu" d="M6 3h9l4 4v14H6Z" /><path data-hf-id="hf-f34s" d="M9 12h7M9 16h5" /></svg></div>
+      <div data-hf-id="hf-ante" class="f106-ex-order-tok" id="f106-ex-order-tok2"><svg data-hf-id="hf-vhkb" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-t3vq" d="M6 3h9l4 4v14H6Z" /><path data-hf-id="hf-u3dg" d="M9 12h7M9 16h5" /></svg></div>
+      <div data-hf-id="hf-elxf" class="f106-ex-order-tok" id="f106-ex-order-tok3"><svg data-hf-id="hf-v39a" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-ti6r" d="M6 3h9l4 4v14H6Z" /><path data-hf-id="hf-swgd" d="M9 12h7M9 16h5" /></svg></div>
+      <div data-hf-id="hf-r4fw" class="f106-ex-order-tok" id="f106-ex-order-tok4"><svg data-hf-id="hf-uoy9" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-twhs" d="M6 3h9l4 4v14H6Z" /><path data-hf-id="hf-tare" d="M9 12h7M9 16h5" /></svg></div>
+
+      <div data-hf-id="hf-j3c6" class="f106-ex-order-takewrap">
+        <div data-hf-id="hf-fa3m" class="f106-ex-order-take" id="f106-ex-order-take">
+          <div data-hf-id="hf-8riu" class="f106-ex-order-take-ico"><svg data-hf-id="hf-uan8" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle data-hf-id="hf-2731" cx="12" cy="12" r="3" /><path data-hf-id="hf-fwvw" d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /></svg></div>
+          <span data-hf-id="hf-rbn3">Một lần nhập — cả công ty cùng thấy</span>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-rgvn" class="f106-ex-order-tagrow">
+        <div data-hf-id="hf-ln28" class="f106-ex-order-tag" id="f106-ex-order-tag">
+          <svg data-hf-id="hf-twc7" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-xcgw" d="M9 18h6M10 21h4" /><path data-hf-id="hf-ex7t" d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+          <span data-hf-id="hf-c3mi">Ví dụ thực tế</span>
+        </div>
+        <div data-hf-id="hf-k63x" class="f106-ex-order-pillw">
+          <div data-hf-id="hf-jq84" class="f106-ex-order-pill" id="f106-ex-order-pillB"><svg data-hf-id="hf-n58i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle data-hf-id="hf-1iwn" cx="12" cy="12" r="9" /><path data-hf-id="hf-zcgb" d="M12 7v5l3 2" /></svg><span data-hf-id="hf-3do2">TRƯỚC ĐÂY</span></div>
+          <div data-hf-id="hf-0sro" class="f106-ex-order-pill" id="f106-ex-order-pillA" data-layout-allow-overflow=""><svg data-hf-id="hf-tmee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse data-hf-id="hf-hm8r" cx="12" cy="5.5" rx="7" ry="2.5" /><path data-hf-id="hf-qnyw" d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" /><path data-hf-id="hf-iyu2" d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5" /></svg><span data-hf-id="hf-ct8d">BÂY GIỜ · SAP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var root = document.querySelector('[data-composition-id="f106-ex-order"]');
+        var PX = "f106-ex-order-";
+        var $ = function (id) { return root.querySelector("#" + PX + id); };
+        var $$ = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+        var part = function (who, p) { return root.querySelector("#" + PX + who + " ." + PX + p); };
+        var CUE = /*hf-cues:start*/{"before":0,"report":2.34,"now":5.78,"enter":7.2,"stock":8.7,"plan":10.14,"cost":11.96,"once":14.14,"take":15.04}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/18.726/*hf-dur:end*/;
+        var C = Object.assign({ before: 0, report: 2.34, now: 5.78, enter: 7.2, stock: 8.7, plan: 10.14, cost: 11.96, once: 14.14, take: 15.04 }, CUE);
+        var tl = gsap.timeline({ paused: true });
+
+        // ---------- flat front-facing person (from the reference rig) ----------
+        var SKIN = "#F6CDA8", SKIN2 = "#E8B48C";
+        function person(o) {
+          var s = '<svg viewBox="-160 -620 320 640">';
+          if (o.hairStyle === "long") s += '<path d="M-72 -520 C-82 -606 82 -606 72 -520 L82 -410 C46 -392 -46 -392 -82 -410 Z" fill="' + o.hair + '" />';
+          s += '<g class="' + PX + 'legL"><rect x="-44" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="-30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          s += '<g class="' + PX + 'legR"><rect x="8" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          s += '<rect x="-17" y="-458" width="34" height="52" rx="10" fill="' + SKIN2 + '" />';
+          s += '<path d="M-90 -214 C-96 -330 -86 -398 -34 -414 L34 -414 C86 -398 96 -330 90 -214 Z" fill="' + o.shirt + '" />';
+          s += '<path d="M-26 -413 L0 -378 L26 -413 Z" fill="#FFFFFF" />';
+          s += '<g class="' + PX + 'armL"><path d="M-74 -392 C-96 -350 -104 -300 -100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="-100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+          s += '<g class="' + PX + 'armR"><path d="M74 -392 C96 -350 104 -300 100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+          s += '<g class="' + PX + 'head">';
+          s += '<circle cx="-63" cy="-506" r="13" fill="' + SKIN2 + '" /><circle cx="63" cy="-506" r="13" fill="' + SKIN2 + '" />';
+          s += '<circle cx="0" cy="-512" r="64" fill="' + SKIN + '" />';
+          s += '<path d="M-66 -510 C-74 -588 -18 -602 10 -596 C58 -590 76 -556 66 -508 C52 -538 22 -548 -8 -546 C-34 -544 -56 -534 -66 -510 Z" fill="' + o.hair + '" />';
+          s += '<path class="' + PX + 'brows" d="M-34 -542 Q-22 -536 -10 -540 M10 -540 Q22 -536 34 -542" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+          s += '<g class="' + PX + 'eyes"><ellipse cx="-22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /><ellipse cx="22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /></g>';
+          s += '<circle cx="-38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" /><circle cx="38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" />';
+          s += '<path class="' + PX + 'mouth" d="M-12 -472 Q0 -480 12 -472" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" />';
+          s += '</g></svg>';
+          return s;
+        }
+        $("run").innerHTML = person({ shirt: "#64748B", arm: "#566375", hair: "#2B2B2B", hairStyle: "m", pants: "#334155" })
+          + '<div class="' + PX + 'stack"><div class="' + PX + 'sh" id="' + PX + 'sh1" style="left:0;top:8px"></div><div class="' + PX + 'sh" id="' + PX + 'sh2" style="left:5px;top:5px"></div><div class="' + PX + 'sh" id="' + PX + 'sh3" style="left:10px;top:2px"></div><div class="' + PX + 'sh" id="' + PX + 'sh4" style="left:14px;top:0"></div></div>';
+
+        var PIV = { armL: "-74 -392", armR: "74 -392", head: "0 -450", eyes: "0 -510" };
+        function pose(who, p, rot, at, dur) { tl.to(part(who, p), { rotation: rot, svgOrigin: PIV[p], duration: dur || 0.4, ease: "power2.out" }, at); }
+        function walk(who, toX, t0, dur) {
+          var w = $(who), steps = Math.max(2, Math.round(dur / 0.22)), h = dur / steps;
+          tl.to(w, { x: toX, duration: dur, ease: "power1.inOut" }, t0);
+          for (var i = 0; i < steps; i++) {
+            var t = t0 + i * h, leg = part(who, i % 2 ? "legR" : "legL");
+            tl.to(w, { y: -10, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(w, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+            tl.to(leg, { y: -22, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(leg, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+          }
+        }
+        function look(who, dx, at) { tl.to(part(who, "eyes"), { x: dx, duration: 0.2, ease: "power2.out" }, at); }
+
+        // ---------- layout constants ----------
+        var BEFORE = [[95, 170, -2], [545, 186, 1.5], [995, 168, -1.2], [1445, 184, 2]];
+        var AFTER = [[170, 130], [1370, 130], [1370, 540], [170, 540]];
+        var PANELS = [1, 2, 3, 4].map(function (i) { return $("p" + i); });
+        var HUB = [960, 485];
+        var EDGE = [[550, 275], [1370, 275], [1370, 685], [550, 685]];
+        var NEQ = [[510, 330], [960, 330], [1410, 330]];
+        var SPOT = [285, 735, 1185, 1635];             // runner x under each island
+        var HANDX = 55, HANDY = 736;                     // runner hand offset (scaled rig)
+
+        // ---------- initial state ----------
+        PANELS.forEach(function (p, i) { gsap.set(p, { x: BEFORE[i][0], y: BEFORE[i][1], rotation: BEFORE[i][2] }); });
+        NEQ.forEach(function (q, i) { gsap.set($("neq" + (i + 1)), { x: q[0], y: q[1] }); });
+        gsap.set($("run"), { x: -200, y: 0, scale: 0.55, transformOrigin: "50% 100%" });
+        $$("." + PX + "after").forEach(function (el) { gsap.set(el, { opacity: 0 }); });
+        gsap.set($("sale"), { clipPath: "inset(0% 100% 0% 0%)" });
+        gsap.set([$("khosub"), $("chip2"), $("chip3"), $("chip4"), $("costsub")], { opacity: 0 });
+        gsap.set($$("." + PX + "gb"), { scaleX: 0 });
+        gsap.set($$("." + PX + "sh"), { opacity: 0 });
+        gsap.set($$("." + PX + "fly"), { opacity: 0 });
+        gsap.set($$("." + PX + "tok"), { opacity: 0, x: HUB[0], y: HUB[1] });
+        gsap.set([$("pillA"), $("take"), $("hub"), $("ring"), $("hubcap")], { opacity: 0 });
+        gsap.set($("nowbg"), { clipPath: "circle(0% at 50% 45%)" });
+        var links = $$("." + PX + "link");
+        links.forEach(function (el) { var len = 470; el.style.strokeDasharray = String(len); el.style.strokeDashoffset = String(len); });
+
+        // ---------- counters computed from time (seek-safe) ----------
+        var easeO = gsap.parseEase("power2.out");
+        function vn(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+        var KHO0 = C.stock + 0.25, KHO1 = KHO0 + 1.0, COST0 = C.cost + 0.25, COST1 = COST0 + 1.1;
+        var proxy = { t: 0 }, khoEl = $("kho"), costEl = $("cost");
+        function prog(t, a, b) { return t <= a ? 0 : t >= b ? 1 : easeO((t - a) / (b - a)); }
+        function render() {
+          var t = proxy.t;
+          khoEl.textContent = vn(1240 - 500 * prog(t, KHO0, KHO1));
+          costEl.textContent = vn(182500000 * prog(t, COST0, COST1));
+        }
+        render();
+        tl.to(proxy, { t: DURATION, duration: DURATION, ease: "none", onUpdate: render }, 0);
+
+        // ================= TRƯỚC ĐÂY =================
+        PANELS.forEach(function (p, i) {
+          tl.fromTo(p, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, 0.15 + i * 0.15);
+        });
+        [1, 2, 3].forEach(function (i) {
+          tl.fromTo($("neq" + i), { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, 1.0 + (i - 1) * 0.2);
+        });
+        walk("run", SPOT[0], 0.3, 1.2);
+        look("run", -6, 1.6);
+        tl.to(part("run", "brows"), { y: -4, duration: 0.2, ease: "power2.out" }, 1.6);
+
+        // runner collects a printout from each island (timed to fit between "report" and "now")
+        var R = C.report, u = Math.max(0.3, (C.now - 0.6 - R) / 8), t = R;
+        for (var k = 0; k < 4; k++) {
+          var fl = $("fly" + (k + 1)), px = BEFORE[k][0] + 190, py = BEFORE[k][1] + 280;
+          tl.set(fl, { x: px, y: py, opacity: 1, rotation: 0 }, t);
+          tl.to(fl, { x: SPOT[k] + HANDX, y: HANDY, rotation: 14, duration: u * 0.85, ease: "power2.inOut" }, t);
+          tl.set(fl, { opacity: 0 }, t + u * 0.85);
+          tl.set($("sh" + (k + 1)), { opacity: 1 }, t + u * 0.85);
+          tl.to(PANELS[k], { keyframes: { y: [BEFORE[k][1], BEFORE[k][1] - 8, BEFORE[k][1]] }, duration: 0.3, ease: "none" }, t);
+          if (k > 0) tl.to($("neq" + k), { keyframes: { scale: [1, 1.25, 1] }, duration: 0.35, ease: "none" }, t + u * 0.5);
+          if (k === 0) pose("run", "armR", -20, t, 0.25);
+          look("run", k % 2 ? 6 : -6, t);
+          t += u;
+          if (k < 3) { walk("run", SPOT[k + 1], t, u * 1.33); t += u * 1.33; }
+        }
+
+        // ================= BÂY GIỜ =================
+        var N = C.now;
+        tl.to([$("run"), $("neq1"), $("neq2"), $("neq3"), $("isles")], { opacity: 0, duration: 0.3, ease: "power1.out" }, N - 0.15);
+        tl.to($("floor"), { opacity: 0, duration: 0.5, ease: "none" }, N);
+        tl.to($("pillB"), { opacity: 0, duration: 0.2, ease: "none" }, N);
+        tl.fromTo($("pillA"), { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, N + 0.2);
+        tl.to($("nowbg"), { clipPath: "circle(120% at 50% 45%)", duration: 1.0, ease: "power2.inOut" }, N);
+        $$("." + PX + "before").forEach(function (el) { tl.to(el, { opacity: 0, duration: 0.25, ease: "none" }, N); });
+        PANELS.forEach(function (p, i) {
+          tl.to(p, { x: AFTER[i][0], y: AFTER[i][1], rotation: 0, backgroundColor: "#FFFFFF", borderColor: "rgba(10,61,145,0.25)", duration: 0.9, ease: "power3.inOut" }, N + 0.1 + i * 0.05);
+          tl.to(p.querySelector("." + PX + "ph"), { backgroundColor: "rgba(10,61,145,0.08)", color: "#0A3D91", duration: 0.6, ease: "none" }, N + 0.2);
+          tl.to(p.querySelector("." + PX + "after"), { opacity: 1, duration: 0.35, ease: "power1.out" }, N + 1.05 + i * 0.05);
+        });
+        tl.fromTo($("hub"), { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)", immediateRender: false }, N + 0.6);
+        tl.fromTo($("hubcap"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, N + 1.0);
+        links.forEach(function (el, i) { tl.to(el, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, N + 0.95 + i * 0.06); });
+
+        function ringPulse(at) {
+          tl.fromTo($("ring"), { opacity: 0.8, scale: 1 }, { opacity: 0, scale: 1.45, duration: 0.7, ease: "power2.out", immediateRender: false }, at);
+        }
+        function token(k, from, to, at) {
+          var el = $("tok" + k);
+          tl.set(el, { x: from[0], y: from[1], opacity: 1, scale: 1 }, at);
+          tl.to(el, { x: to[0], y: to[1], duration: 0.5, ease: "power1.inOut" }, at);
+          tl.to(el, { opacity: 0, scale: 0.6, duration: 0.15, ease: "none" }, at + 0.5);
+        }
+
+        // order entered by Bán hàng → hub
+        var E = C.enter;
+        tl.to($("sale"), { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power2.out" }, E);
+        tl.to($("btn"), { keyframes: { scale: [1, 0.88, 1] }, duration: 0.3, ease: "none" }, E + 0.5);
+        token(1, EDGE[0], HUB, E + 0.7);
+        tl.to($("hub"), { keyframes: { scale: [1, 1.08, 1] }, duration: 0.35, ease: "none" }, E + 1.2);
+        ringPulse(E + 1.2);
+
+        // hub → Kho: live stock
+        var S = C.stock;
+        token(2, HUB, EDGE[1], S - 0.3);
+        tl.fromTo($("khosub"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, S + 0.4);
+        tl.fromTo($("chip2"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, S + 0.5);
+        tl.to(PANELS[1], { keyframes: { scale: [1, 1.03, 1] }, duration: 0.4, ease: "none" }, S + 0.2);
+
+        // hub → Sản xuất: plan bars
+        var P = C.plan;
+        token(3, HUB, EDGE[2], P - 0.3);
+        $$("#" + PX + "p3 ." + PX + "gb").forEach(function (b, i) { tl.to(b, { scaleX: 1, duration: 0.45, ease: "power2.out" }, P + 0.2 + i * 0.25); });
+        tl.fromTo($("chip3"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, P + 0.6);
+        tl.to(PANELS[2], { keyframes: { scale: [1, 1.03, 1] }, duration: 0.4, ease: "none" }, P + 0.2);
+
+        // hub → Kế toán: cost
+        var K = C.cost;
+        token(4, HUB, EDGE[3], K - 0.3);
+        tl.fromTo($("costsub"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, K + 0.9);
+        tl.fromTo($("chip4"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, K + 1.0);
+        tl.to(PANELS[3], { keyframes: { scale: [1, 1.03, 1] }, duration: 0.4, ease: "none" }, K + 0.2);
+
+        // "Một lần nhập" — everything pulses together, same order ID highlighted
+        var O = C.once;
+        var chips = $$("." + PX + "chip");
+        tl.to(chips, { backgroundColor: "#0A3D91", color: "#FFFFFF", duration: 0.3, ease: "power1.out" }, O);
+        PANELS.forEach(function (p) {
+          tl.to(p, { keyframes: { scale: [1, 1.04, 1] }, duration: 0.6, ease: "none" }, O);
+          tl.to(p, { boxShadow: "0 0 0 4px #0A3D91, 0 16px 36px rgba(10,61,145,0.22)", duration: 0.3, ease: "power2.out" }, O);
+        });
+        tl.to(links, { stroke: "#0A3D91", duration: 0.3, ease: "none" }, O);
+        tl.to($("hub"), { keyframes: { scale: [1, 1.1, 1] }, duration: 0.5, ease: "none" }, O);
+        ringPulse(O);
+        ringPulse(O + 0.45);
+
+        // takeaway
+        var T = C.take;
+        tl.fromTo($("take"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, T + 0.1);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f106-ex-order"] = tl;
+      })();
+    </script>
+  </div>
+</template>

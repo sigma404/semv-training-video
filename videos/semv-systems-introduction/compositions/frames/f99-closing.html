@@ -1,0 +1,146 @@
+<!-- f99-closing — end card. Cues (cues/99.json): paper, digital (paper → screen morph), gw, povis, sap, mes (tiles light),
+     link (tiles connect), contact (IT pill), welcome (big line), hope (small line). -->
+<template>
+  <div data-hf-id="hf-hsis" id="root" data-composition-id="f99-closing" data-start="0" data-width="1920" data-height="1080" data-duration="18.529">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #FFFFFF; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      #f99-closing-bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 38%, #1B54B5 0%, #0A3D91 55%, #072B68 100%); }
+      #f99-closing-stage { position: absolute; inset: 0; transform-origin: 50% 50%; }
+      #f99-closing-glow { position: absolute; left: 460px; top: 120px; width: 1000px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 70%); }
+
+      #f99-closing-logo { position: absolute; left: 0; right: 0; top: 84px; margin: 0 auto; width: 176px; height: 72px; border-radius: 14px; background: #FFFFFF; color: #0A3D91; font-size: 38px; font-weight: 800; letter-spacing: 0.06em; display: flex; align-items: center; justify-content: center; }
+
+      /* row: morph icon → four system tiles */
+      #f99-closing-row { position: absolute; left: 0; right: 0; top: 230px; height: 240px; display: flex; justify-content: center; align-items: center; gap: 28px; }
+      #f99-closing-morph { position: relative; width: 210px; height: 210px; flex: none; }
+      #f99-closing-morph svg { position: absolute; inset: 0; width: 210px; height: 210px; display: block; overflow: visible; }
+      #f99-closing-chev { width: 64px; height: 64px; flex: none; margin-right: 8px; }
+      #f99-closing-chev svg { width: 64px; height: 64px; display: block; }
+      #f99-closing-tiles { position: relative; display: flex; gap: 28px; }
+      #f99-closing-link { position: absolute; left: 110px; right: 110px; top: 109px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.85); transform-origin: left center; }
+      .f99-closing-tile { position: relative; width: 220px; height: 222px; border-radius: 20px; background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.28); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; transform-origin: 50% 50%; }
+      .f99-closing-tbg { position: absolute; inset: -1.5px; border-radius: 20px; background: #FFFFFF; box-shadow: 0 16px 40px rgba(3,20,60,0.35); }
+      .f99-closing-ico { position: relative; width: 88px; height: 88px; border-radius: 22px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.75); }
+      .f99-closing-ico svg { width: 56px; height: 56px; display: block; overflow: visible; }
+      .f99-closing-ico svg * { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+      .f99-closing-name { position: relative; font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: -0.01em; }
+
+      #f99-closing-pill { position: absolute; left: 0; right: 0; top: 530px; margin: 0 auto; width: 760px; height: 84px; border-radius: 42px; background: rgba(255,255,255,0.14); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.4); font-size: 36px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 18px; }
+      #f99-closing-pill svg { width: 42px; height: 42px; display: block; }
+
+      #f99-closing-h1 { position: absolute; left: 96px; right: 96px; top: 690px; font-size: 96px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; text-align: center; white-space: nowrap; }
+      #f99-closing-hope { position: absolute; left: 96px; right: 96px; top: 840px; font-size: 40px; font-weight: 500; line-height: 1.35; text-align: center; color: rgba(255,255,255,0.86); white-space: nowrap; }
+    </style>
+
+    <div data-hf-id="hf-dh4t" id="f99-closing-bg" class="clip" data-start="0" data-duration="18.529" data-track-index="0"></div>
+    <div data-hf-id="hf-0gkh" id="f99-closing-stage" class="clip" data-start="0" data-duration="18.529" data-track-index="1">
+      <div data-hf-id="hf-oy75" id="f99-closing-glow"></div>
+      <div data-hf-id="hf-vj1c" id="f99-closing-logo">SEMV</div>
+
+      <div data-hf-id="hf-u5ha" id="f99-closing-row">
+        <div data-hf-id="hf-k9ds" id="f99-closing-morph">
+          <svg data-hf-id="hf-q9ag" id="f99-closing-paper" viewBox="0 0 210 210">
+            <path data-hf-id="hf-e9fd" d="M58 22h66l32 32v134H58Z" fill="rgba(255,255,255,0.10)" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" />
+            <path data-hf-id="hf-szre" d="M124 22v32h32" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" />
+            <path data-hf-id="hf-gmd5" d="M78 84h58M78 106h58M78 128h58M78 150h34" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="4" stroke-linecap="round" />
+          </svg>
+          <svg data-hf-id="hf-8kxc" id="f99-closing-screen" viewBox="0 0 210 210">
+            <rect data-hf-id="hf-stbf" x="14" y="40" width="182" height="118" rx="12" fill="#FFFFFF" />
+            <rect data-hf-id="hf-lbq6" x="28" y="54" width="154" height="16" rx="4" fill="#0A3D91" />
+            <rect data-hf-id="hf-n1s9" x="28" y="80" width="70" height="62" rx="6" fill="rgba(10,61,145,0.15)" />
+            <rect data-hf-id="hf-2nt1" x="108" y="82" width="74" height="10" rx="5" fill="#3B6CC4" />
+            <rect data-hf-id="hf-p3cd" x="108" y="102" width="56" height="10" rx="5" fill="rgba(10,61,145,0.35)" />
+            <circle data-hf-id="hf-ob3c" cx="122" cy="130" r="9" fill="#059669" />
+            <path data-hf-id="hf-95mw" d="M117 130l4 4 6-7" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+            <path data-hf-id="hf-qgjo" d="M86 186h38M105 158v28" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div data-hf-id="hf-43n2" id="f99-closing-chev"><svg data-hf-id="hf-z3h1" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-m7n8" d="M5 12h14M13 6l6 6-6 6" /></svg></div>
+        <div data-hf-id="hf-tmgx" id="f99-closing-tiles">
+          <div data-hf-id="hf-y0re" id="f99-closing-link"></div>
+          <div data-hf-id="hf-5umz" class="f99-closing-tile" id="f99-closing-t1"><div data-hf-id="hf-rf2y" class="f99-closing-tbg" id="f99-closing-b1"></div>
+            <div data-hf-id="hf-3xvx" class="f99-closing-ico" id="f99-closing-i1"><svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><circle data-hf-id="hf-5hgg" cx="9" cy="8" r="3.2" /><path data-hf-id="hf-tbqx" d="M3.2 19.5a5.8 5.8 0 0 1 11.6 0" /><path data-hf-id="hf-47b9" d="m15.5 11.5 2.2 2.2 4.3-4.6" /></svg></div>
+            <div data-hf-id="hf-wfzq" class="f99-closing-name" id="f99-closing-n1">Groupware</div></div>
+          <div data-hf-id="hf-x6r4" class="f99-closing-tile" id="f99-closing-t2"><div data-hf-id="hf-ngyx" class="f99-closing-tbg" id="f99-closing-b2"></div>
+            <div data-hf-id="hf-7vzy" class="f99-closing-ico" id="f99-closing-i2"><svg data-hf-id="hf-1tol" viewBox="0 0 24 24"><rect data-hf-id="hf-y6ow" x="7.5" y="2.5" width="12" height="15.5" rx="2" /><path data-hf-id="hf-m20w" d="M4.5 6.5v12.5a2 2 0 0 0 2 2h9.5" /><path data-hf-id="hf-5sva" d="M10.5 7h6M10.5 10.3h6M10.5 13.6h3.5" /></svg></div>
+            <div data-hf-id="hf-hbgk" class="f99-closing-name" id="f99-closing-n2">POVIS</div></div>
+          <div data-hf-id="hf-xyex" class="f99-closing-tile" id="f99-closing-t3"><div data-hf-id="hf-mpb4" class="f99-closing-tbg" id="f99-closing-b3"></div>
+            <div data-hf-id="hf-e1pr" class="f99-closing-ico" id="f99-closing-i3"><svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><circle data-hf-id="hf-b2lq" cx="12" cy="4.8" r="2.3" /><circle data-hf-id="hf-9tjf" cx="4.8" cy="18.5" r="2.3" /><circle data-hf-id="hf-scgf" cx="19.2" cy="18.5" r="2.3" /><circle data-hf-id="hf-ss0l" cx="12" cy="12.6" r="2.3" /><path data-hf-id="hf-q74a" d="M12 7.1v3.2M10.2 14.1 6.6 17M13.8 14.1l3.6 2.9" /></svg></div>
+            <div data-hf-id="hf-njma" class="f99-closing-name" id="f99-closing-n3">SAP</div></div>
+          <div data-hf-id="hf-paj2" class="f99-closing-tile" id="f99-closing-t4"><div data-hf-id="hf-ir73" class="f99-closing-tbg" id="f99-closing-b4"></div>
+            <div data-hf-id="hf-hzts" class="f99-closing-ico" id="f99-closing-i4"><svg data-hf-id="hf-2man" viewBox="0 0 24 24"><path data-hf-id="hf-atfz" d="M2.5 21V11.5l5 3v-3l5 3V4.5h4.5V21Z" /><path data-hf-id="hf-kcf4" d="M2 21h20" /><circle data-hf-id="hf-c8aw" cx="19.2" cy="8.2" r="2.6" /><path data-hf-id="hf-n9uy" d="M19.2 4.6v1M19.2 10.8v1M15.6 8.2h1M21.8 8.2h1" /></svg></div>
+            <div data-hf-id="hf-lnjw" class="f99-closing-name" id="f99-closing-n4">MES</div></div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-2517" id="f99-closing-pill">
+        <svg data-hf-id="hf-ds8b" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-nx0i" d="M4 14v-2a8 8 0 0 1 16 0v2" /><rect data-hf-id="hf-b3l8" x="3" y="13" width="4" height="6" rx="1.5" /><rect data-hf-id="hf-50ef" x="17" y="13" width="4" height="6" rx="1.5" /><path data-hf-id="hf-r2wt" d="M19 19c0 1.5-1.5 2.5-4 2.5h-2" /></svg>
+        <span data-hf-id="hf-pxfp">Cần hỗ trợ? Liên hệ bộ phận IT</span>
+      </div>
+      <div data-hf-id="hf-66jk" id="f99-closing-h1">Chào mừng bạn gia nhập SEMV</div>
+      <div data-hf-id="hf-ymtu" id="f99-closing-hope">Hy vọng chúng ta sẽ cùng đồng hành trên chặng đường sắp tới</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var CUE = /*hf-cues:start*/{"paper":0,"digital":1.04,"gw":1.64,"povis":2.44,"sap":4.04,"mes":4.78,"link":5.1,"contact":9.18,"welcome":10.98,"hope":13.52}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/18.529/*hf-dur:end*/;
+        var C = Object.assign({ paper: 0, digital: 1.0, gw: 1.6, povis: 2.4, sap: 4.0, mes: 4.8, link: 5.1, contact: 9.2, welcome: 11.0, hope: 13.5 }, CUE);
+        var tl = gsap.timeline({ paused: true });
+
+        tl.fromTo("#f99-closing-stage", { scale: 1 }, { scale: 1.02, duration: DURATION, ease: "power1.inOut" }, 0);
+        tl.fromTo("#f99-closing-glow", { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power2.out" }, 0);
+        tl.fromTo("#f99-closing-logo", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+
+        // paper appears, then flips into a screen at "hệ thống số"
+        tl.fromTo("#f99-closing-paper", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, Math.max(0.15, C.paper + 0.1));
+        tl.set("#f99-closing-screen", { opacity: 0, scaleX: 0, transformOrigin: "50% 50%" }, 0);
+        var dg = Math.max(C.digital, 0.7);
+        tl.to("#f99-closing-paper", { scaleX: 0, transformOrigin: "50% 50%", duration: 0.25, ease: "power2.in" }, dg);
+        tl.to("#f99-closing-screen", { opacity: 1, scaleX: 1, duration: 0.3, ease: "back.out(1.6)" }, dg + 0.25);
+        tl.fromTo("#f99-closing-chev", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, dg + 0.3);
+
+        // tiles: present (dim) from the start, light up as each name is spoken
+        [1, 2, 3, 4].forEach(function (i) {
+          tl.fromTo("#f99-closing-t" + i, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.3 + i * 0.08);
+          tl.set("#f99-closing-b" + i, { opacity: 0 }, 0);
+        });
+        tl.set("#f99-closing-link", { scaleX: 0 }, 0);
+        var lit = [C.gw, C.povis, C.sap, C.mes];
+        lit.forEach(function (at, k) {
+          var i = k + 1;
+          if (at == null) return;
+          tl.to("#f99-closing-b" + i, { opacity: 1, duration: 0.35, ease: "power2.out" }, at);
+          tl.to("#f99-closing-i" + i, { color: "#0A3D91", backgroundColor: "rgba(10,61,145,0.08)", duration: 0.35, ease: "power2.out" }, at);
+          tl.to("#f99-closing-n" + i, { color: "#0F172A", duration: 0.35, ease: "power2.out" }, at);
+          tl.fromTo("#f99-closing-t" + i, { scale: 1 }, { scale: 1.06, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, at);
+        });
+        // link them together
+        var lk = Math.max(C.link, C.mes + 0.3);
+        tl.to("#f99-closing-link", { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, lk);
+        [1, 2, 3, 4].forEach(function (i, k) {
+          tl.to("#f99-closing-t" + i, { y: -8, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, lk + 0.15 + k * 0.12);
+        });
+
+        // contact pill
+        tl.fromTo("#f99-closing-pill", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, C.contact - 0.2);
+
+        // welcome: row and pill step back, big line arrives
+        tl.to("#f99-closing-row", { opacity: 0.7, duration: 0.6, ease: "power2.inOut" }, C.welcome - 0.1);
+        tl.fromTo("#f99-closing-h1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, C.welcome - 0.1);
+        tl.fromTo("#f99-closing-hope", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, C.hope - 0.1);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f99-closing"] = tl;
+      })();
+    </script>
+  </div>
+</template>

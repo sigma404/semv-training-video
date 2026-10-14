@@ -1,0 +1,12 @@
+{
+  "name": "semv-systems-introduction",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.156 preview",
+    "check": "npx --yes hyperframes@0.8.156 check",
+    "render": "npx --yes hyperframes@0.8.156 render -q delivery -o renders/semv-systems-introduction.mp4",
+    "timing": "node tools/timing.mjs",
+    "voice": "bash tools/voice.sh"
+  }
+}

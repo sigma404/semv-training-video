@@ -1,0 +1,159 @@
+<!-- f01-welcome — welcome title card. Cues (cues/1.json): title, smooth, sub ("làm quen"), systems. -->
+<template>
+  <div data-hf-id="hf-y39m" id="root" data-composition-id="f01-welcome" data-start="0" data-width="1920" data-height="1080" data-duration="9.468">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      #f01-welcome-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #FFFFFF 0%, #F4F7FC 45%, #E6EEFA 100%); }
+      #f01-welcome-deco { position: absolute; left: 1080px; top: 40px; width: 1000px; height: 1000px; border-radius: 50%; background: radial-gradient(circle, rgba(10,61,145,0.07) 0%, rgba(10,61,145,0.03) 45%, rgba(10,61,145,0) 70%); }
+      #f01-welcome-stage { position: absolute; inset: 0; transform-origin: 35% 50%; }
+
+      #f01-welcome-mark { position: absolute; left: 120px; top: 110px; display: flex; align-items: center; gap: 20px; }
+      #f01-welcome-logo { height: 64px; padding: 0 26px; border-radius: 12px; background: #0A3D91; color: #FFFFFF; font-size: 34px; font-weight: 800; letter-spacing: 0.06em; display: flex; align-items: center; }
+      #f01-welcome-org { font-size: 26px; font-weight: 600; color: #475569; letter-spacing: 0.02em; }
+
+      #f01-welcome-kicker { position: absolute; left: 120px; top: 340px; display: flex; align-items: center; gap: 18px; font-size: 28px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #0A3D91; }
+      #f01-welcome-rule { display: block; width: 60px; height: 4px; border-radius: 2px; background: #0A3D91; transform-origin: left center; }
+      #f01-welcome-h1 { position: absolute; left: 120px; top: 400px; width: 960px; font-size: 100px; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+      #f01-welcome-h1 b { color: #0A3D91; font-weight: 800; }
+      #f01-welcome-sub { position: absolute; left: 120px; top: 690px; font-size: 40px; font-weight: 500; color: #475569; line-height: 1.35; white-space: nowrap; }
+      #f01-welcome-subline { position: absolute; left: 0; bottom: -10px; width: 100%; height: 5px; border-radius: 3px; background: #0A3D91; transform-origin: left center; }
+
+      /* illustration: hub + four system tiles */
+      #f01-welcome-art { position: absolute; left: 1150px; top: 190px; width: 660px; height: 700px; }
+      #f01-welcome-lines { position: absolute; inset: 0; width: 660px; height: 700px; overflow: visible; }
+      .f01-welcome-line { fill: none; stroke: #3B6CC4; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 12; }
+      .f01-welcome-dot { fill: #0A3D91; }
+      #f01-welcome-hub { position: absolute; left: 230px; top: 250px; width: 200px; height: 200px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 3px #0A3D91, 0 18px 40px rgba(10,61,145,0.18); display: flex; align-items: center; justify-content: center; }
+      #f01-welcome-hubring { position: absolute; left: 190px; top: 210px; width: 280px; height: 280px; border-radius: 50%; border: 2px solid rgba(10,61,145,0.25); }
+      #f01-welcome-hublogo { height: 62px; padding: 0 22px; border-radius: 12px; background: #0A3D91; color: #FFFFFF; font-size: 32px; font-weight: 800; letter-spacing: 0.06em; display: flex; align-items: center; }
+      .f01-welcome-tile { position: absolute; width: 220px; height: 190px; border-radius: 18px; background: #FFFFFF; border: 1.5px solid rgba(10,61,145,0.2); box-shadow: 0 10px 28px rgba(10,61,145,0.10); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+      #f01-welcome-t1 { left: 0; top: 0; }
+      #f01-welcome-t2 { left: 440px; top: 0; }
+      #f01-welcome-t3 { left: 0; top: 510px; }
+      #f01-welcome-t4 { left: 440px; top: 510px; }
+      .f01-welcome-ico { width: 84px; height: 84px; border-radius: 20px; background: rgba(10,61,145,0.08); display: flex; align-items: center; justify-content: center; color: #0A3D91; }
+      .f01-welcome-ico svg { width: 54px; height: 54px; display: block; overflow: visible; }
+      .f01-welcome-ico svg * { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+      .f01-welcome-ico svg .f01-welcome-acc { stroke: #3B6CC4; }
+      .f01-welcome-name { font-size: 30px; font-weight: 700; color: #0F172A; letter-spacing: -0.01em; }
+    </style>
+
+    <div data-hf-id="hf-kc5l" id="f01-welcome-bg" class="clip" data-start="0" data-duration="9.468" data-track-index="0"></div>
+    <div data-hf-id="hf-3gpp" id="f01-welcome-stage" class="clip" data-start="0" data-duration="9.468" data-track-index="1">
+      <div data-hf-id="hf-739r" id="f01-welcome-deco"></div>
+      <div data-hf-id="hf-h4dn" id="f01-welcome-mark"><div data-hf-id="hf-5tia" id="f01-welcome-logo">SEMV</div><div data-hf-id="hf-gb94" id="f01-welcome-org">Sumika Electronic Materials Vietnam</div></div>
+      <div data-hf-id="hf-3ow3" id="f01-welcome-kicker"><span data-hf-id="hf-ejap" id="f01-welcome-rule"></span><span data-hf-id="hf-24gj" id="f01-welcome-kick">Dành cho nhân viên mới</span></div>
+      <div data-hf-id="hf-uvif" id="f01-welcome-h1">Chào mừng bạn đến với <b data-hf-id="hf-j68a">SEMV</b></div>
+      <div data-hf-id="hf-ayk6" id="f01-welcome-sub"><span data-hf-id="hf-hqid">Làm quen với các hệ thống đang vận hành</span><span data-hf-id="hf-6k05" id="f01-welcome-subline"></span></div>
+
+      <div data-hf-id="hf-sc1z" id="f01-welcome-art">
+        <svg data-hf-id="hf-lr5m" id="f01-welcome-lines" viewBox="0 0 660 700">
+          <path data-hf-id="hf-zp3h" class="f01-welcome-line" id="f01-welcome-l1" d="M110 95 L330 350" />
+          <path data-hf-id="hf-fowm" class="f01-welcome-line" id="f01-welcome-l2" d="M550 95 L330 350" />
+          <path data-hf-id="hf-m7tu" class="f01-welcome-line" id="f01-welcome-l3" d="M110 605 L330 350" />
+          <path data-hf-id="hf-mq4t" class="f01-welcome-line" id="f01-welcome-l4" d="M550 605 L330 350" />
+          <circle data-hf-id="hf-21h0" class="f01-welcome-dot" id="f01-welcome-d1" cx="110" cy="95" r="7" />
+          <circle data-hf-id="hf-yrcn" class="f01-welcome-dot" id="f01-welcome-d2" cx="550" cy="95" r="7" />
+          <circle data-hf-id="hf-62ub" class="f01-welcome-dot" id="f01-welcome-d3" cx="110" cy="605" r="7" />
+          <circle data-hf-id="hf-g58s" class="f01-welcome-dot" id="f01-welcome-d4" cx="550" cy="605" r="7" />
+        </svg>
+        <div data-hf-id="hf-pfeb" id="f01-welcome-hubring"></div>
+        <div data-hf-id="hf-84ut" id="f01-welcome-hub"><div data-hf-id="hf-0ox3" id="f01-welcome-hublogo">SEMV</div></div>
+        <div data-hf-id="hf-1mzb" class="f01-welcome-tile" id="f01-welcome-t1">
+          <div data-hf-id="hf-9i1s" class="f01-welcome-ico"><svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><circle data-hf-id="hf-5hgg" cx="9" cy="8" r="3.2" /><path data-hf-id="hf-tbqx" d="M3.2 19.5a5.8 5.8 0 0 1 11.6 0" /><path data-hf-id="hf-c42c" class="f01-welcome-acc" d="m15.5 11.5 2.2 2.2 4.3-4.6" /></svg></div>
+          <div data-hf-id="hf-d11y" class="f01-welcome-name">Groupware</div>
+        </div>
+        <div data-hf-id="hf-qrho" class="f01-welcome-tile" id="f01-welcome-t2">
+          <div data-hf-id="hf-bz4o" class="f01-welcome-ico"><svg data-hf-id="hf-1tol" viewBox="0 0 24 24"><rect data-hf-id="hf-y6ow" x="7.5" y="2.5" width="12" height="15.5" rx="2" /><path data-hf-id="hf-0dcb" class="f01-welcome-acc" d="M4.5 6.5v12.5a2 2 0 0 0 2 2h9.5" /><path data-hf-id="hf-5sva" d="M10.5 7h6M10.5 10.3h6M10.5 13.6h3.5" /></svg></div>
+          <div data-hf-id="hf-7e6x" class="f01-welcome-name">POVIS</div>
+        </div>
+        <div data-hf-id="hf-rj5h" class="f01-welcome-tile" id="f01-welcome-t3">
+          <div data-hf-id="hf-as7l" class="f01-welcome-ico"><svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><circle data-hf-id="hf-b2lq" cx="12" cy="4.8" r="2.3" /><circle data-hf-id="hf-9tjf" cx="4.8" cy="18.5" r="2.3" /><circle data-hf-id="hf-scgf" cx="19.2" cy="18.5" r="2.3" /><circle data-hf-id="hf-ss0l" cx="12" cy="12.6" r="2.3" /><path data-hf-id="hf-uwtz" class="f01-welcome-acc" d="M12 7.1v3.2M10.2 14.1 6.6 17M13.8 14.1l3.6 2.9" /></svg></div>
+          <div data-hf-id="hf-hkps" class="f01-welcome-name">SAP</div>
+        </div>
+        <div data-hf-id="hf-aav6" class="f01-welcome-tile" id="f01-welcome-t4">
+          <div data-hf-id="hf-b6im" class="f01-welcome-ico"><svg data-hf-id="hf-2man" viewBox="0 0 24 24"><path data-hf-id="hf-atfz" d="M2.5 21V11.5l5 3v-3l5 3V4.5h4.5V21Z" /><path data-hf-id="hf-kcf4" d="M2 21h20" /><circle data-hf-id="hf-ryqd" class="f01-welcome-acc" cx="19.2" cy="8.2" r="2.6" /><path data-hf-id="hf-v8x5" class="f01-welcome-acc" d="M19.2 4.6v1M19.2 10.8v1M15.6 8.2h1M21.8 8.2h1" /></svg></div>
+          <div data-hf-id="hf-iytz" class="f01-welcome-name">MES</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var CUE = /*hf-cues:start*/{"title":0,"smooth":2.74,"sub":5.08,"systems":5.76}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/8.968/*hf-dur:end*/;
+        var C = Object.assign({ title: 0.2, smooth: 2.8, sub: 6.3, systems: 7.2 }, CUE);
+        var tl = gsap.timeline({ paused: true });
+
+        // slow push-in
+        tl.fromTo("#f01-welcome-stage", { scale: 1 }, { scale: 1.02, duration: DURATION, ease: "power1.inOut" }, 0);
+
+        // left column
+        tl.fromTo("#f01-welcome-mark", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#f01-welcome-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 0.3);
+        tl.fromTo("#f01-welcome-kick", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.35);
+        tl.fromTo("#f01-welcome-h1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, Math.max(0.45, C.title + 0.2));
+        tl.fromTo("#f01-welcome-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.0);
+        tl.set("#f01-welcome-subline", { scaleX: 0 }, 0);
+
+        // illustration: hub, then tiles assemble from outside toward the hub
+        tl.fromTo("#f01-welcome-deco", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.4, ease: "power2.out" }, 0.2);
+        tl.fromTo("#f01-welcome-hub", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.6)" }, 0.6);
+        tl.fromTo("#f01-welcome-hubring", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }, 0.75);
+        var OUT = [[-70, -60], [70, -60], [-70, 60], [70, 60]];
+        [1, 2, 3, 4].forEach(function (i) {
+          var at = 0.95 + (i - 1) * 0.16;
+          tl.fromTo("#f01-welcome-t" + i, { opacity: 0, x: OUT[i - 1][0], y: OUT[i - 1][1], scale: 0.85 },
+            { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.8, ease: "power3.out" }, at);
+          tl.fromTo("#f01-welcome-l" + i, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, at + 0.5);
+          tl.set("#f01-welcome-d" + i, { opacity: 0 }, 0);
+        });
+
+        // gentle float of tiles (finite repeats), soft hub breathing
+        [1, 2, 3, 4].forEach(function (i) {
+          tl.to("#f01-welcome-t" + i, { y: (i % 2 ? -8 : 8), duration: 2.2, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((DURATION - 2.0 - i * 0.25) / 2.2) - 1) }, 2.0 + i * 0.25);
+        });
+        tl.to("#f01-welcome-hubring", { scale: 1.08, duration: 1.8, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((DURATION - 1.6) / 1.8) - 1) }, 1.6);
+
+        // "công việc trôi chảy": data dots flow from each system into the hub
+        function flow(at) {
+          [1, 2, 3, 4].forEach(function (i, k) {
+            var d = "#f01-welcome-d" + i, s = at + k * 0.12;
+            var p = [[110, 95], [550, 95], [110, 605], [550, 605]][k];
+            tl.fromTo(d, { attr: { cx: p[0], cy: p[1] }, opacity: 0 }, { attr: { cx: 330, cy: 350 }, opacity: 1, duration: 0.9, ease: "power1.in" }, s);
+            tl.to(d, { opacity: 0, duration: 0.15 }, s + 0.9);
+          });
+        }
+        flow(C.smooth);
+        flow(C.smooth + 1.4);
+
+        // "làm quen": subtitle emphasis
+        tl.to("#f01-welcome-sub", { color: "#0A3D91", duration: 0.4, ease: "power2.out" }, C.sub);
+        tl.to("#f01-welcome-subline", { scaleX: 1, duration: 0.6, ease: "power2.out" }, C.sub + 0.05);
+
+        // "các hệ thống": tiles glow one after another, lines turn solid
+        var RING_ON = "0 0 0 3px #0A3D91, 0 16px 34px rgba(10,61,145,0.22)";
+        var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 10px 28px rgba(10,61,145,0.10)";
+        [1, 2, 3, 4].forEach(function (i) { tl.set("#f01-welcome-t" + i, { boxShadow: RING_OFF }, 0); });
+        [1, 2, 3, 4].forEach(function (i) { tl.set("#f01-welcome-l" + i, { strokeDasharray: "2 12" }, 0); });
+        [1, 2, 3, 4].forEach(function (i, k) {
+          var at = C.systems + k * 0.3;
+          tl.to("#f01-welcome-t" + i, { boxShadow: RING_ON, duration: 0.35, ease: "power2.out" }, at);
+          tl.to("#f01-welcome-l" + i, { strokeDasharray: "600 0", stroke: "#0A3D91", duration: 0.4, ease: "power2.out" }, at);
+        });
+        flow(C.systems + 1.4);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f01-welcome"] = tl;
+      })();
+    </script>
+  </div>
+</template>

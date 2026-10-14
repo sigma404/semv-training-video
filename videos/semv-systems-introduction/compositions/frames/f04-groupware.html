@@ -1,0 +1,187 @@
+<!-- Frame 4 — Groupware slide: stylised portal mock-up (fictional data).
+     cues/4.json: c1..c5 → spotlight menu item i + feature card i together; rest → all normal. -->
+<template>
+  <div data-hf-id="hf-bx4p" id="root" data-composition-id="f04-groupware" data-start="0" data-width="1920" data-height="1080" data-duration="11.962">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      #f04-groupware-bg { position: absolute; inset: 0; background: #FFFFFF; }
+      #f04-groupware-stage { position: absolute; inset: 0; transform-origin: 50% 40%; }
+
+      .f04-groupware-head { position: absolute; left: 96px; right: 96px; top: 84px; display: flex; justify-content: space-between; align-items: center; }
+      #f04-groupware-eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0A3D91; display: flex; align-items: center; gap: 12px; }
+      #f04-groupware-eyebrow svg { width: 32px; height: 32px; display: block; }
+      #f04-groupware-pill { border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91; font-weight: 600; font-size: 28px; padding: 10px 30px; }
+      #f04-groupware-h2 { position: absolute; left: 96px; top: 140px; font-size: 60px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; white-space: nowrap; }
+
+      /* portal window */
+      #f04-groupware-win {
+        position: absolute; left: 96px; right: 96px; top: 262px; height: 760px; border-radius: 18px; background: #F4F7FC;
+        box-shadow: 0 0 0 2px #DCE4F0, 0 24px 60px rgba(15, 23, 42, 0.10); overflow: hidden;
+      }
+      .f04-groupware-chrome { height: 52px; background: #E7ECF4; display: flex; align-items: center; padding: 0 22px; gap: 10px; }
+      .f04-groupware-dot { width: 16px; height: 16px; border-radius: 50%; background: #CBD5E1; }
+      .f04-groupware-addr { margin-left: 24px; height: 34px; width: 520px; border-radius: 17px; background: #FFFFFF; display: flex; align-items: center; padding: 0 18px; gap: 10px; color: #64748B; font-size: 22px; font-weight: 500; white-space: nowrap; }
+      .f04-groupware-addr svg { width: 20px; height: 20px; display: block; }
+      .f04-groupware-app { height: 88px; background: #FFFFFF; display: flex; align-items: center; padding: 0 36px; gap: 22px; border-bottom: 1.5px solid #E2E8F0; }
+      .f04-groupware-logo { height: 54px; padding: 0 18px; border-radius: 12px; background: #0A3D91; color: #FFFFFF; font-size: 30px; font-weight: 800; letter-spacing: 0.04em; display: flex; align-items: center; }
+      .f04-groupware-appname { font-size: 34px; font-weight: 700; color: #0A3D91; }
+      .f04-groupware-user { margin-left: auto; display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 600; color: #334155; white-space: nowrap; }
+      .f04-groupware-ava { width: 50px; height: 50px; border-radius: 50%; background: #3B6CC4; color: #FFFFFF; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+      .f04-groupware-menu { height: 84px; background: #0A3D91; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 0 18px; }
+      .f04-groupware-mi { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; color: #FFFFFF; font-size: 27px; font-weight: 600; white-space: nowrap; border-radius: 12px; margin: 12px 6px; }
+      .f04-groupware-mi svg { width: 30px; height: 30px; display: block; }
+      .f04-groupware-mbar { position: absolute; left: 18%; right: 18%; bottom: -8px; height: 5px; border-radius: 3px; background: #FFFFFF; transform-origin: 50% 50%; }
+
+      .f04-groupware-cards { position: absolute; left: 36px; right: 36px; top: 260px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
+      .f04-groupware-card {
+        position: relative; transform-origin: 50% 50%; height: 448px; border-radius: 14px; background: #FFFFFF;
+        border: 1.5px solid rgba(10, 61, 145, 0.2); padding: 30px 28px; display: flex; flex-direction: column;
+      }
+      .f04-groupware-ci { width: 92px; height: 92px; border-radius: 22px; background: rgba(10, 61, 145, 0.08); display: flex; align-items: center; justify-content: center; }
+      .f04-groupware-ci svg { width: 56px; height: 56px; display: block; overflow: visible; }
+      .f04-groupware-ct { margin-top: 26px; font-size: 32px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; min-height: 84px; }
+      .f04-groupware-mock { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
+      .f04-groupware-row { height: 40px; border-radius: 10px; background: #F1F5F9; display: flex; align-items: center; padding: 0 14px; gap: 10px; font-size: 22px; font-weight: 600; color: #475569; white-space: nowrap; overflow: hidden; }
+      .f04-groupware-chip { margin-left: auto; height: 28px; padding: 0 12px; border-radius: 14px; font-size: 22px; font-weight: 700; display: flex; align-items: center; }
+      .f04-groupware-bar { height: 14px; border-radius: 7px; background: #E2E8F0; }
+    </style>
+
+    <div data-hf-id="hf-265w" id="f04-groupware-bg" class="clip" data-start="0" data-duration="11.962" data-track-index="0"></div>
+
+    <div data-hf-id="hf-h8tu" id="f04-groupware-stage" class="clip" data-start="0" data-duration="11.962" data-track-index="1">
+      <div data-hf-id="hf-b486" class="f04-groupware-head">
+        <div data-hf-id="hf-5cve" id="f04-groupware-eyebrow">
+          <svg data-hf-id="hf-0yt5" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-hf-id="hf-vdmm" cx="9" cy="8" r="3.4" /><path data-hf-id="hf-2bmn" d="M3 19.5c0-3.4 2.7-5.8 6-5.8s6 2.4 6 5.8" /><path data-hf-id="hf-j63m" stroke="#3B6CC4" d="m15.5 10.5 2.2 2.2 4.3-4.7" /></svg>
+          <span data-hf-id="hf-3c9n">HỆ THỐNG · GROUPWARE</span>
+        </div>
+        <span data-hf-id="hf-ujiz" id="f04-groupware-pill">5 chức năng</span>
+      </div>
+      <div data-hf-id="hf-bdkv" id="f04-groupware-h2">Groupware — điều hành công việc chung</div>
+
+      <div data-hf-id="hf-coux" id="f04-groupware-win">
+        <div data-hf-id="hf-8unq" class="f04-groupware-chrome">
+          <div data-hf-id="hf-l4el" class="f04-groupware-dot"></div><div data-hf-id="hf-7yrl" class="f04-groupware-dot"></div><div data-hf-id="hf-95oo" class="f04-groupware-dot"></div>
+          <div data-hf-id="hf-6aw9" class="f04-groupware-addr"><svg data-hf-id="hf-8pbq" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2.2" stroke-linecap="round"><rect data-hf-id="hf-sjyy" x="5" y="11" width="14" height="10" rx="2" /><path data-hf-id="hf-tdb4" d="M8 11V8a4 4 0 0 1 8 0v3" /></svg><span data-hf-id="hf-rh3j">Groupware · SEMV</span></div>
+        </div>
+        <div data-hf-id="hf-6sxl" class="f04-groupware-app">
+          <div data-hf-id="hf-3nky" class="f04-groupware-logo">SEMV</div>
+          <div data-hf-id="hf-e4fy" class="f04-groupware-appname">Groupware</div>
+          <div data-hf-id="hf-feop" class="f04-groupware-user"><div data-hf-id="hf-bdls" class="f04-groupware-ava">N</div><span data-hf-id="hf-92c8">Nguyễn Văn Nam</span></div>
+        </div>
+        <div data-hf-id="hf-ponx" class="f04-groupware-menu">
+          <div data-hf-id="hf-psyy" class="f04-groupware-mi" id="f04-groupware-m1"><svg data-hf-id="hf-ds8b" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-igg3" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-4box" d="M14 3v5h5" /><path data-hf-id="hf-v5qo" d="m9 14 2 2 4-4" /></svg><span data-hf-id="hf-h40i">Phê duyệt điện tử</span><div data-hf-id="hf-5jkg" class="f04-groupware-mbar"></div></div>
+          <div data-hf-id="hf-luux" class="f04-groupware-mi" id="f04-groupware-m2"><svg data-hf-id="hf-edjf" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-8t75" x="3" y="5" width="18" height="16" rx="2" /><path data-hf-id="hf-iemf" d="M3 10h18M8 3v4M16 3v4" /></svg><span data-hf-id="hf-stqu">Đặt phòng/Laptop</span><div data-hf-id="hf-9xd4" class="f04-groupware-mbar"></div></div>
+          <div data-hf-id="hf-l374" class="f04-groupware-mi" id="f04-groupware-m3"><svg data-hf-id="hf-dz8e" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-f3zv" d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg><span data-hf-id="hf-vyz6">Khảo sát điện tử</span><div data-hf-id="hf-8qg1" class="f04-groupware-mbar"></div></div>
+          <div data-hf-id="hf-h533" class="f04-groupware-mi" id="f04-groupware-m4"><svg data-hf-id="hf-dkxd" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-u5fg" d="M4 5h13v14a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z" /><path data-hf-id="hf-vrxb" d="M17 9h3v10a2 2 0 0 1-2 2" /><path data-hf-id="hf-f5k3" d="M8 9h5M8 13h5M8 17h3" /></svg><span data-hf-id="hf-awc2">Bảng tin</span><div data-hf-id="hf-94r2" class="f04-groupware-mbar"></div></div>
+          <div data-hf-id="hf-d6z2" class="f04-groupware-mi" id="f04-groupware-m5"><svg data-hf-id="hf-d6mc" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-yw9r" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span data-hf-id="hf-3lhz">Lưu trữ tài liệu</span><div data-hf-id="hf-7xtz" class="f04-groupware-mbar"></div></div>
+        </div>
+
+        <div data-hf-id="hf-7ad9" class="f04-groupware-cards">
+          <div data-hf-id="hf-rgxs" class="f04-groupware-card" id="f04-groupware-c1">
+            <div data-hf-id="hf-1wwg" class="f04-groupware-ci"><svg data-hf-id="hf-x10z" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-owub" d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path data-hf-id="hf-hyjp" d="M14 3v5h5" /><path data-hf-id="hf-yuyh" stroke="#059669" d="m9 14 2 2 4-4" /></svg></div>
+            <div data-hf-id="hf-czwm" class="f04-groupware-ct">Phê duyệt theo biểu mẫu</div>
+            <div data-hf-id="hf-ibz6" class="f04-groupware-mock">
+              <div data-hf-id="hf-qf2k" class="f04-groupware-row"><span data-hf-id="hf-o7tf">IT Support</span><span data-hf-id="hf-3zkk" class="f04-groupware-chip" style="background:#FEF3C7;color:#B45309">Chờ</span></div>
+              <div data-hf-id="hf-oezo" class="f04-groupware-row"><span data-hf-id="hf-1b69">Mua hàng</span><span data-hf-id="hf-tmmp" class="f04-groupware-chip" style="background:#D1FAE5;color:#047857">Duyệt</span></div>
+            </div>
+          </div>
+          <div data-hf-id="hf-2cff" class="f04-groupware-card" id="f04-groupware-c2">
+            <div data-hf-id="hf-d0vc" class="f04-groupware-ci"><svg data-hf-id="hf-vljn" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-bdj9" x="3" y="5" width="18" height="16" rx="2" /><path data-hf-id="hf-4n1j" d="M3 10h18M8 3v4M16 3v4" /><path data-hf-id="hf-qea3" stroke="#3B6CC4" d="M7.5 14h3M7.5 17.5h3M13.5 14h3" /></svg></div>
+            <div data-hf-id="hf-3j64" class="f04-groupware-ct">Đặt phòng họp, laptop</div>
+            <div data-hf-id="hf-5csm" class="f04-groupware-mock">
+              <div data-hf-id="hf-n82l" class="f04-groupware-row"><span data-hf-id="hf-mnyx">Phòng A</span><span data-hf-id="hf-arpl" class="f04-groupware-chip" style="background:#DBEAFE;color:#0A3D91">Đã đặt</span></div>
+              <div data-hf-id="hf-nmdm" class="f04-groupware-row"><span data-hf-id="hf-ry35">Laptop 02</span><span data-hf-id="hf-f0xe" class="f04-groupware-chip" style="background:#D1FAE5;color:#047857">Trống</span></div>
+            </div>
+          </div>
+          <div data-hf-id="hf-yebe" class="f04-groupware-card" id="f04-groupware-c3">
+            <div data-hf-id="hf-bty9" class="f04-groupware-ci"><svg data-hf-id="hf-v78m" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-twor" d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg></div>
+            <div data-hf-id="hf-3e0d" class="f04-groupware-ct">Trưng cầu ý kiến</div>
+            <div data-hf-id="hf-5r3n" class="f04-groupware-mock">
+              <div data-hf-id="hf-yydz" class="f04-groupware-bar" style="width: 86%; background:#3B6CC4"></div>
+              <div data-hf-id="hf-3a8k" class="f04-groupware-bar" style="width: 58%; background:#93B4E6"></div>
+              <div data-hf-id="hf-z5er" class="f04-groupware-bar" style="width: 34%; background:#C7D7F1"></div>
+              <div data-hf-id="hf-plwr" class="f04-groupware-row"><span data-hf-id="hf-y5aq">Khảo sát căng tin</span></div>
+            </div>
+          </div>
+          <div data-hf-id="hf-fmlp" class="f04-groupware-card" id="f04-groupware-c4">
+            <div data-hf-id="hf-c89a" class="f04-groupware-ci"><svg data-hf-id="hf-usxl" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-neyc" d="M4 5h13v14a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z" /><path data-hf-id="hf-hme7" d="M17 9h3v10a2 2 0 0 1-2 2" /><path data-hf-id="hf-dfzg" stroke="#3B6CC4" d="M8 9h5M8 13h5M8 17h3" /></svg></div>
+            <div data-hf-id="hf-5q2h" class="f04-groupware-ct">Tin tức, thông báo</div>
+            <div data-hf-id="hf-65eo" class="f04-groupware-mock">
+              <div data-hf-id="hf-q07s" class="f04-groupware-row"><span data-hf-id="hf-ktec">Lịch nghỉ lễ</span><span data-hf-id="hf-v9xk" class="f04-groupware-chip" style="background:#FEE2E2;color:#B91C1C">Mới</span></div>
+              <div data-hf-id="hf-otap" class="f04-groupware-row"><span data-hf-id="hf-58eo">Bản tin tháng 10</span></div>
+            </div>
+          </div>
+          <div data-hf-id="hf-euxw" class="f04-groupware-card" id="f04-groupware-c5">
+            <div data-hf-id="hf-b1c7" class="f04-groupware-ci"><svg data-hf-id="hf-uemk" viewBox="0 0 24 24" fill="none" stroke="#0A3D91" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-6zq7" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><rect data-hf-id="hf-am0o" stroke="#3B6CC4" x="9.5" y="12" width="5" height="4.5" rx="1" /><path data-hf-id="hf-68ff" stroke="#3B6CC4" d="M10.5 12v-1a1.5 1.5 0 0 1 3 0v1" /></svg></div>
+            <div data-hf-id="hf-7j8n" class="f04-groupware-ct">Tài liệu được mã hóa, tra cứu nhanh</div>
+            <div data-hf-id="hf-3d9h" class="f04-groupware-mock">
+              <div data-hf-id="hf-p7lq" class="f04-groupware-row"><svg data-hf-id="hf-yvdj" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#64748B" stroke-width="2.2" stroke-linecap="round"><circle data-hf-id="hf-mu0v" cx="11" cy="11" r="6.5" /><path data-hf-id="hf-se19" d="m20 20-4.2-4.2" /></svg><span data-hf-id="hf-vlmc">Quy trình...</span></div>
+              <div data-hf-id="hf-r74v" class="f04-groupware-row"><span data-hf-id="hf-50jw">QT-IT-005.pdf</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var CUE = /*hf-cues:start*/{"c1":1.16,"c2":2.88,"c3":5.02,"c4":6.62,"c5":8.72,"rest":10.5}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/11.462/*hf-dur:end*/;
+        var C = Object.assign({ c1: 1.2, c2: 2.9, c3: 5.0, c4: 6.6, c5: 8.7, rest: 10.5 }, CUE);
+        var tl = gsap.timeline({ paused: true });
+
+        tl.fromTo("#f04-groupware-stage", { scale: 1 }, { scale: 1.02, duration: DURATION, ease: "power1.inOut" }, 0);
+
+        // A. reveal: header ~0.8s, portal + cards by ~1.9s
+        tl.fromTo("#f04-groupware-eyebrow", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.05);
+        tl.fromTo("#f04-groupware-pill", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.15);
+        tl.fromTo("#f04-groupware-h2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.25);
+        tl.fromTo("#f04-groupware-win", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.4);
+        for (var i = 1; i <= 5; i++) {
+          tl.fromTo("#f04-groupware-m" + i, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.6 + (i - 1) * 0.05);
+          tl.fromTo("#f04-groupware-c" + i, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.55 + (i - 1) * 0.06);
+        }
+        tl.set(".f04-groupware-mbar", { scaleX: 0, opacity: 0 }, 0);
+
+        // B. spotlight: menu item + its card light up together
+        var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+        var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 0px rgba(10,61,145,0)";
+        var BG = "#FFFFFF", BG_ON = "#EEF3FB";
+        var MBG = "rgba(255,255,255,0)", MBG_ON = "rgba(255,255,255,0.18)";
+        for (var k = 1; k <= 5; k++) {
+          tl.set("#f04-groupware-c" + k, { boxShadow: RING_OFF, backgroundColor: BG }, 0);
+          tl.set("#f04-groupware-m" + k, { backgroundColor: MBG }, 0);
+        }
+        function spot(idx, at) {
+          if (at == null) return;
+          for (var j = 0; j < 5; j++) {
+            var on = j === idx, rest = idx < 0, n = j + 1;
+            tl.to("#f04-groupware-c" + n, { opacity: on || rest ? 1 : 0.4, scale: on ? 1.03 : 1, boxShadow: on ? RING_ON : RING_OFF,
+              backgroundColor: on ? BG_ON : BG, duration: 0.35, ease: "power2.out" }, at);
+            tl.to("#f04-groupware-m" + n, { opacity: on || rest ? 1 : 0.45, backgroundColor: on ? MBG_ON : MBG, duration: 0.35, ease: "power2.out" }, at);
+            tl.to("#f04-groupware-m" + n + " .f04-groupware-mbar", { scaleX: on ? 1 : 0, opacity: on ? 1 : 0, duration: 0.35, ease: "power2.out" }, at);
+          }
+        }
+        spot(0, Math.max(C.c1, 1.3));
+        spot(1, C.c2);
+        spot(2, C.c3);
+        spot(3, C.c4);
+        spot(4, C.c5);
+        spot(-1, C.rest);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f04-groupware"] = tl;
+      })();
+    </script>
+  </div>
+</template>

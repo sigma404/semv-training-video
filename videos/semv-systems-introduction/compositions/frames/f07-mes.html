@@ -1,0 +1,223 @@
+<!-- f07-mes — MES slide: production DATA flowing from raw material to finished goods (record chips gliding along a
+     flow strip, seamless deterministic loop) + three information cards spotlighted with the narration
+     (cues/7.json: flow, p1..p3, rest). At SEMV, MES only records/aggregates production data — no machine state. -->
+<template>
+  <div data-hf-id="hf-sh1k" id="root" data-composition-id="f07-mes" data-start="0" data-width="1920" data-height="1080" data-duration="10.866">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-400-normal.ttf") format("truetype"); font-weight: 400; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      #f07-mes-bg { position: absolute; inset: 0; background: #FFFFFF; }
+      #f07-mes-stage { position: absolute; inset: 0; transform-origin: 50% 40%; }
+
+      .f07-mes-head { position: absolute; left: 96px; right: 96px; top: 84px; display: flex; justify-content: space-between; align-items: center; }
+      #f07-mes-eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0A3D91; }
+      #f07-mes-pill { border-radius: 100px; background: rgba(10, 61, 145, 0.08); color: #0A3D91; font-weight: 600; font-size: 28px; padding: 10px 30px 10px 22px; display: flex; align-items: center; gap: 12px; }
+      #f07-mes-pill svg { width: 30px; height: 30px; display: block; }
+      #f07-mes-h2 { position: absolute; left: 96px; top: 136px; display: flex; align-items: center; gap: 24px; font-size: 60px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; white-space: nowrap; }
+      .f07-mes-sysico { width: 76px; height: 76px; border-radius: 18px; background: #0A3D91; display: flex; align-items: center; justify-content: center; flex: 0 0 76px; }
+      .f07-mes-sysico svg { width: 48px; height: 48px; display: block; }
+
+      /* flow strip */
+      #f07-mes-flow {
+        position: absolute; left: 96px; top: 270px; width: 1728px; height: 250px; transform-origin: 50% 50%;
+        background: rgba(10, 61, 145, 0.04); border: 1.5px solid rgba(10, 61, 145, 0.2); border-radius: 14px; overflow: hidden;
+      }
+      .f07-mes-st { position: absolute; top: 26px; width: 432px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+      .f07-mes-st-ico { width: 64px; height: 64px; color: #0A3D91; }
+      .f07-mes-st-ico svg { width: 100%; height: 100%; display: block; overflow: visible; }
+      .f07-mes-st-ico path, .f07-mes-st-ico circle, .f07-mes-st-ico rect { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+      .f07-mes-st-name { font-size: 32px; font-weight: 700; white-space: nowrap; }
+      .f07-mes-chev { position: absolute; top: 58px; width: 40px; height: 40px; margin-left: -20px; color: #3B6CC4; }
+      .f07-mes-chev svg { width: 100%; height: 100%; display: block; }
+      #f07-mes-track { position: absolute; left: 40px; top: 186px; width: 1648px; height: 6px; border-radius: 3px; background: #D5E0F2; }
+      .f07-mes-node { position: absolute; top: 178px; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: #FFFFFF; border: 4px solid #3B6CC4; }
+      /* data record chips: a tiny "table row" icon + a count */
+      .f07-mes-item { position: absolute; left: 0; top: 166px; width: 112px; height: 46px; border-radius: 10px; background: #94A3B8; color: #FFFFFF;
+        display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 24px; font-weight: 700; white-space: nowrap; box-shadow: 0 0 0 3px #FFFFFF; }
+      .f07-mes-item svg { width: 22px; height: 22px; display: block; flex: 0 0 22px; }
+
+      /* information cards */
+      #f07-mes-grid { position: absolute; left: 96px; right: 96px; top: 570px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+      .f07-mes-card {
+        position: relative; transform-origin: 50% 50%; height: 380px;
+        background: rgba(10, 61, 145, 0.04); border: 1.5px solid rgba(10, 61, 145, 0.2); border-radius: 14px;
+        padding: 40px 40px; display: flex; flex-direction: column; justify-content: space-between;
+      }
+      .f07-mes-ico { width: 88px; height: 88px; color: #0A3D91; }
+      .f07-mes-ico svg { width: 100%; height: 100%; display: block; overflow: visible; }
+      .f07-mes-ico path, .f07-mes-ico circle, .f07-mes-ico rect { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .f07-mes-num { position: absolute; top: 40px; right: 40px; font-size: 28px; font-weight: 700; letter-spacing: 0.05em; color: #0A3D91; opacity: 0.55; }
+      .f07-mes-name { font-size: 40px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; text-wrap: balance; }
+      .f07-mes-desc { margin-top: 12px; font-size: 30px; font-weight: 500; line-height: 1.35; color: #475569; text-wrap: balance; }
+    </style>
+
+    <div data-hf-id="hf-dxap" id="f07-mes-bg" class="clip" data-start="0" data-duration="10.866" data-track-index="0"></div>
+
+    <div data-hf-id="hf-eyc1" id="f07-mes-stage" class="clip" data-start="0" data-duration="10.866" data-track-index="1">
+      <div data-hf-id="hf-v64y" class="f07-mes-head">
+        <div data-hf-id="hf-4s1h" id="f07-mes-eyebrow">HỆ THỐNG · MES</div>
+        <span data-hf-id="hf-ol2o" id="f07-mes-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3" /></svg>Số liệu sản xuất</span>
+      </div>
+      <div data-hf-id="hf-a8fv" id="f07-mes-h2">
+        <div data-hf-id="hf-xnuq" class="f07-mes-sysico"><svg data-hf-id="hf-222q" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-s2v9" d="M2.5 21V11l5 3v-3l5 3v-3l5 3V4h4v17Z" /><path data-hf-id="hf-4noz" d="M2.5 21h19" /><path data-hf-id="hf-s6om" d="M6 17.5h2M10.5 17.5h2M15 17.5h2" /></svg></div>
+        <span data-hf-id="hf-804w">MES — điều hành sản xuất</span>
+      </div>
+
+      <div data-hf-id="hf-q8qt" id="f07-mes-flow">
+        <div data-hf-id="hf-td3e" class="f07-mes-st" style="left:0">
+          <div data-hf-id="hf-4211" class="f07-mes-st-ico f07-mes-sico"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="8" height="8" rx="1" /><rect x="13" y="12" width="8" height="8" rx="1" /><rect x="8" y="4" width="8" height="8" rx="1" /></svg></div>
+          <div data-hf-id="hf-4lk9" class="f07-mes-st-name">Nguyên liệu đầu vào</div>
+        </div>
+        <div data-hf-id="hf-lho1" class="f07-mes-st" style="left:432px">
+          <div data-hf-id="hf-p2mx" class="f07-mes-st-ico f07-mes-sico"><svg viewBox="0 0 24 24"><path d="M12 3 21 7.5 12 12 3 7.5Z" /><path d="m3 12 9 4.5 9-4.5" /><path d="m3 16.5 9 4.5 9-4.5" /></svg></div>
+          <div data-hf-id="hf-26ha" class="f07-mes-st-name">Gia công</div>
+        </div>
+        <div data-hf-id="hf-y5u4" class="f07-mes-st" style="left:864px">
+          <div data-hf-id="hf-q9k0" class="f07-mes-st-ico f07-mes-sico"><svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><circle data-hf-id="hf-obyv" cx="10.5" cy="10.5" r="6.5" /><path data-hf-id="hf-pv5z" d="m15.5 15.5 5 5" /><path data-hf-id="hf-u2a6" d="m7.8 10.6 2 2 3.6-3.8" /></svg></div>
+          <div data-hf-id="hf-rb0e" class="f07-mes-st-name">Kiểm tra</div>
+        </div>
+        <div data-hf-id="hf-u8o6" class="f07-mes-st" style="left:1296px">
+          <div data-hf-id="hf-pv8z" class="f07-mes-st-ico f07-mes-sico"><svg data-hf-id="hf-2man" viewBox="0 0 24 24"><path data-hf-id="hf-9dew" d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5Z" /><path data-hf-id="hf-0ygu" d="M3.5 7.5 12 12l8.5-4.5M12 12v9" /></svg></div>
+          <div data-hf-id="hf-qiuv" class="f07-mes-st-name">Thành phẩm</div>
+        </div>
+        <div data-hf-id="hf-rfv6" class="f07-mes-chev" style="left:432px"><svg data-hf-id="hf-12oc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-1dkx" d="M5 12h13M13 6l6 6-6 6" /></svg></div>
+        <div data-hf-id="hf-wwr3" class="f07-mes-chev" style="left:864px"><svg data-hf-id="hf-8nvo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-pjx1" d="M5 12h13M13 6l6 6-6 6" /></svg></div>
+        <div data-hf-id="hf-rosn" class="f07-mes-chev" style="left:1296px"><svg data-hf-id="hf-7gyl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-qqu4" d="M5 12h13M13 6l6 6-6 6" /></svg></div>
+        <div data-hf-id="hf-8w3a" id="f07-mes-track"></div>
+        <div data-hf-id="hf-erdm" class="f07-mes-node" style="left:216px"></div>
+        <div data-hf-id="hf-p0tj" class="f07-mes-node" style="left:648px"></div>
+        <div data-hf-id="hf-b5n8" class="f07-mes-node" style="left:1080px"></div>
+        <div data-hf-id="hf-49qs" class="f07-mes-node" style="left:1512px"></div>
+        <div data-hf-id="hf-vbo7" id="f07-mes-items" data-layout-allow-overlap=""></div>
+      </div>
+
+      <div data-hf-id="hf-lzi5" id="f07-mes-grid">
+        <div data-hf-id="hf-0hsf" class="f07-mes-card" id="f07-mes-card1">
+          <div data-hf-id="hf-41a7" class="f07-mes-num">01</div>
+          <div data-hf-id="hf-1z01" class="f07-mes-ico" id="f07-mes-ico1"><svg data-hf-id="hf-3t7q" viewBox="0 0 24 24"><rect data-hf-id="hf-81jc" x="3" y="4" width="18" height="16" rx="2" /><path data-hf-id="hf-aagn" d="M7 15v-3M11 15V9M15 15v-5" /><path data-hf-id="hf-ej57" d="M6.5 17.5h11" /></svg></div>
+          <div data-hf-id="hf-yeow"><div data-hf-id="hf-azpg" class="f07-mes-name">Hoạt động sản xuất</div><div data-hf-id="hf-x5jr" class="f07-mes-desc">Sản lượng, tiến độ từng công đoạn</div></div>
+        </div>
+        <div data-hf-id="hf-rtwk" class="f07-mes-card" id="f07-mes-card2">
+          <div data-hf-id="hf-3mz6" class="f07-mes-num">02</div>
+          <div data-hf-id="hf-5x42" class="f07-mes-ico" id="f07-mes-ico2"><svg data-hf-id="hf-3ewp" viewBox="0 0 24 24"><circle data-hf-id="hf-e6wn" cx="8" cy="8" r="3" /><path data-hf-id="hf-mypv" d="M2.5 19c.6-3.4 2.8-5.2 5.5-5.2s4.9 1.8 5.5 5.2" /><rect data-hf-id="hf-nmjz" x="14.5" y="11" width="7" height="8" rx="1" /><path data-hf-id="hf-c765" d="M14.5 14h7" /></svg></div>
+          <div data-hf-id="hf-y7yw"><div data-hf-id="hf-1xxi" class="f07-mes-name">Nguồn lực sản xuất</div><div data-hf-id="hf-zozy" class="f07-mes-desc">Nguyên vật liệu, bán thành phẩm, nhân lực</div></div>
+        </div>
+        <div data-hf-id="hf-slkd" class="f07-mes-card" id="f07-mes-card3">
+          <div data-hf-id="hf-38o5" class="f07-mes-num">03</div>
+          <div data-hf-id="hf-9v83" class="f07-mes-ico" id="f07-mes-ico3"><svg data-hf-id="hf-4lts" viewBox="0 0 24 24"><path data-hf-id="hf-y6c2" d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z" /><path data-hf-id="hf-9q82" d="m8.5 12 2.5 2.5 4.5-5" /></svg></div>
+          <div data-hf-id="hf-x11t"><div data-hf-id="hf-2jc9" class="f07-mes-name">Thông tin &amp; chất lượng sản phẩm</div><div data-hf-id="hf-lt6u" class="f07-mes-desc">Kết quả kiểm tra, truy xuất lô</div></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var root = document.querySelector('[data-composition-id="f07-mes"]');
+        function $$(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+
+        var CUE = /*hf-cues:start*/{"flow":2.48,"p1":4.44,"p2":5.9,"p3":7.5,"rest":9.066}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/10.366/*hf-dur:end*/;
+        var C = Object.assign({ flow: 2.48, p1: 4.44, p2: 5.9, p3: 7.5, rest: 8.87 }, CUE);
+        var tl = gsap.timeline({ paused: true });
+
+        function prep(el) {
+          var len = 0;
+          try { len = el.getTotalLength(); } catch (e) { len = 0; }
+          if (!len || !isFinite(len)) len = 60;
+          len = len * 1.05 + 1;
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+        }
+        var ico = {};
+        [1, 2, 3].forEach(function (i) { ico[i] = $$("#f07-mes-ico" + i + " path, #f07-mes-ico" + i + " circle, #f07-mes-ico" + i + " rect"); ico[i].forEach(prep); });
+
+        // ---- flow-strip data chips: a seamless loop computed from time (seek-safe, no randomness) ----
+        var NI = 7, L = 1648, X0 = 40, SP = L / NI, V = 140, CW = 112;
+        var VALS = ["120", "96", "240", "88", "150", "64", "200"];
+        var ROW = '<svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2" /><path d="M3.5 10h17M3.5 15h17M9.5 10v9.5" /></svg>';
+        var host = root.querySelector("#f07-mes-items"), items = [];
+        for (var i = 0; i < NI; i++) {
+          var d = document.createElement("div");
+          d.className = "f07-mes-item";
+          d.innerHTML = ROW + "<span>" + VALS[i] + "</span>";
+          host.appendChild(d);
+          items.push(d);
+        }
+        var STAGE = [ // [until x (centre, strip coords), colour]
+          [648, "#94A3B8"],
+          [1080, "#3B6CC4"],
+          [1512, "#0A3D91"],
+          [99999, "#059669"]
+        ];
+        var proxy = { t: 0 };
+        function renderItems() {
+          var t = proxy.t;
+          for (var k = 0; k < NI; k++) {
+            var s = (t * V + k * SP) % L;
+            var cx = X0 + s;
+            var a = Math.min(1, s / 80, (L - s) / 80);
+            var st = STAGE[0];
+            for (var j = 0; j < STAGE.length; j++) { if (cx < STAGE[j][0]) { st = STAGE[j]; break; } }
+            var el = items[k];
+            el.style.transform = "translate(" + (cx - CW / 2).toFixed(1) + "px,0px)";
+            el.style.opacity = String(Math.max(0, a));
+            el.style.backgroundColor = st[1];
+          }
+        }
+        renderItems();
+        tl.to(proxy, { t: DURATION, duration: DURATION, ease: "none", onUpdate: renderItems }, 0);
+
+        // slow push-in
+        tl.fromTo("#f07-mes-stage", { scale: 1 }, { scale: 1.02, duration: DURATION, ease: "power1.inOut" }, 0);
+
+        // A. calm reveal
+        tl.fromTo("#f07-mes-eyebrow", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.1);
+        tl.fromTo("#f07-mes-pill", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
+        tl.fromTo("#f07-mes-h2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+        tl.fromTo("#f07-mes-flow", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 0.6);
+        [1, 2, 3].forEach(function (i) {
+          var at = 0.9 + (i - 1) * 0.14;
+          tl.fromTo("#f07-mes-card" + i, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, at);
+          ico[i].forEach(function (p, k) { tl.to(p, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, at + 0.2 + k * 0.1); });
+        });
+
+        // B. spotlight
+        var RING_ON = "0 0 0 3px #0A3D91, 0 14px 32px rgba(10,61,145,0.18)";
+        var RING_OFF = "0 0 0 0px rgba(10,61,145,0), 0 0 0 0px rgba(10,61,145,0)";
+        var BG = "rgba(10,61,145,0.04)", BG_ON = "rgba(10,61,145,0.08)";
+        var ITEMS = ["#f07-mes-flow", "#f07-mes-card1", "#f07-mes-card2", "#f07-mes-card3"];
+        ITEMS.forEach(function (sel) { tl.set(sel, { boxShadow: RING_OFF, backgroundColor: BG }, 0); });
+        function spot(idx, at) {
+          if (at == null) return;
+          ITEMS.forEach(function (sel, i) {
+            var on = i === idx, rest = idx < 0;
+            var sc = on ? (i === 0 ? 1.015 : 1.03) : 1; // the strip is very wide: a smaller scale keeps it inside the margins
+            tl.to(sel, { opacity: on || rest ? 1 : 0.4, scale: sc, boxShadow: on ? RING_ON : RING_OFF,
+              backgroundColor: on ? BG_ON : BG, duration: 0.35, ease: "power2.out" }, at);
+          });
+        }
+        spot(0, C.flow);
+        // station icons pulse in sequence while the strip is spotlighted
+        $$(".f07-mes-sico").forEach(function (el, i) {
+          tl.to(el, { scale: 1.18, duration: 0.22, ease: "power2.out" }, C.flow + 0.2 + i * 0.32);
+          tl.to(el, { scale: 1, duration: 0.3, ease: "power2.inOut" }, C.flow + 0.42 + i * 0.32);
+        });
+        spot(1, C.p1);
+        spot(2, C.p2);
+        spot(3, C.p3);
+        spot(-1, C.rest);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f07-mes"] = tl;
+      })();
+    </script>
+  </div>
+</template>

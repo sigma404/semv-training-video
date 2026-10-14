@@ -1,0 +1,8 @@
+renders/
+snapshots/
+.hyperframes/
+.thumbnails/
+.waveform-cache/
+.media/
+.ref/
+.voice.log

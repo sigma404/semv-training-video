@@ -1,0 +1,571 @@
+<!-- f107-ex-alert — "Nắm tình hình sản xuất" (id kept for the timeline). TRƯỚC ĐÂY (grey): a paper production log fills
+     with handwritten rows; at end of shift the clock jumps and the team lead sums numbers on a calculator; then he
+     walks from station to station (Gia công · Kiểm tra · Đóng gói) asking about progress ("?" bubbles).
+     BÂY GIỜ (cobalt, wipe): record chips flow from each station into a mock MES Report window — shift output counter,
+     lot progress bars (one lot behind, amber), quality rate. A manager opens the report, the late lot is spotlighted,
+     he presses "Điều chỉnh kế hoạch" and the lot turns green "Đúng tiến độ". Production DATA only: no machines,
+     sensors or temperatures. Fictional data, deterministic.
+     Cues (cues/107.json): before, paper, shift, ask, now, output, lots, quality, open, grasp, adjust, take. -->
+<template>
+  <div data-hf-id="hf-703n" id="root" data-composition-id="f107-ex-alert" data-start="0" data-width="1920" data-height="1080" data-duration="20.24">
+    <style>
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-500-normal.ttf") format("truetype"); font-weight: 500; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-600-normal.ttf") format("truetype"); font-weight: 600; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-700-normal.ttf") format("truetype"); font-weight: 700; }
+      @font-face { font-family: "Be Vietnam Pro"; src: url("assets/fonts/be-vietnam-pro-800-normal.ttf") format("truetype"); font-weight: 800; }
+
+      #root { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; font-family: "Be Vietnam Pro", sans-serif; color: #0F172A; }
+      #root *, #root *::before, #root *::after { box-sizing: border-box; }
+      .f107-ex-alert-bg { position: absolute; inset: 0; background: #F1F5F9; }
+      .f107-ex-alert-scene { position: absolute; inset: 0; overflow: hidden; }
+      .f107-ex-alert-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; }
+      .f107-ex-alert-full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; overflow: visible; }
+      .f107-ex-alert-person { position: absolute; left: -160px; top: 231px; width: 320px; height: 640px; }
+      .f107-ex-alert-person svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+      /* ---------- TRƯỚC ĐÂY ---------- */
+      .f107-ex-alert-log { position: absolute; left: 96px; top: 128px; width: 520px; height: 392px; border-radius: 10px; background: #F8FAFC; border: 2px solid #CBD5E1; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08); padding: 18px 26px; }
+      .f107-ex-alert-log-t { font-size: 30px; font-weight: 700; color: #475569; white-space: nowrap; display: flex; align-items: center; gap: 12px; height: 52px; }
+      .f107-ex-alert-log-t svg { width: 34px; height: 34px; display: block; }
+      .f107-ex-alert-log-r { position: relative; height: 54px; border-bottom: 2px solid #E2E8F0; display: flex; align-items: center; gap: 18px; }
+      .f107-ex-alert-log-r b { font-size: 24px; font-weight: 600; color: #94A3B8; width: 80px; flex: 0 0 80px; }
+      .f107-ex-alert-log-r svg { width: 300px; height: 30px; display: block; overflow: visible; }
+      .f107-ex-alert-log-sum { height: 58px; display: flex; align-items: center; gap: 18px; font-size: 28px; font-weight: 700; color: #64748B; white-space: nowrap; }
+      .f107-ex-alert-log-sum span { font-size: 32px; font-weight: 800; color: #475569; }
+
+      .f107-ex-alert-clock { position: absolute; left: 690px; top: 140px; width: 160px; height: 160px; }
+      .f107-ex-alert-clock svg { width: 160px; height: 160px; display: block; overflow: visible; }
+      .f107-ex-alert-clab { position: absolute; left: 630px; top: 318px; width: 280px; height: 44px; }
+      .f107-ex-alert-clab span { position: absolute; left: 0; top: 0; width: 280px; text-align: center; font-size: 28px; font-weight: 700; color: #64748B; white-space: nowrap; }
+
+      .f107-ex-alert-calc { position: absolute; left: 474px; top: 600px; width: 128px; height: 100px; border-radius: 12px; background: #64748B; padding: 8px; }
+      .f107-ex-alert-calc-d { height: 36px; border-radius: 6px; background: #E2E8F0; color: #334155; font-size: 24px; font-weight: 800; text-align: right; padding: 0 8px; line-height: 36px; white-space: nowrap; }
+      .f107-ex-alert-calc-k { margin-top: 6px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+      .f107-ex-alert-calc-k i { display: block; height: 19px; border-radius: 4px; background: #CBD5E1; }
+
+      .f107-ex-alert-q { position: absolute; left: 0; top: 392px; width: 100px; height: 88px; }
+      .f107-ex-alert-q div { position: absolute; left: 0; top: 0; width: 100px; height: 76px; border-radius: 22px; background: #FFFFFF; border: 3px solid #94A3B8; color: #64748B; font-size: 52px; font-weight: 800; display: flex; align-items: center; justify-content: center; line-height: 1; }
+      .f107-ex-alert-q i { position: absolute; left: 40px; top: 70px; width: 20px; height: 20px; background: #FFFFFF; border-right: 3px solid #94A3B8; border-bottom: 3px solid #94A3B8; transform: rotate(45deg); display: block; }
+
+      /* ---------- BÂY GIỜ ---------- */
+      .f107-ex-alert-b { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #EEF3FB; }
+      .f107-ex-alert-edge { position: absolute; left: -10px; top: 0; width: 20px; height: 1080px; background: #0A3D91; box-shadow: 0 0 40px 12px rgba(59, 108, 196, 0.55); }
+
+      .f107-ex-alert-st { position: absolute; left: 96px; width: 400px; height: 124px; border-radius: 16px; background: #FFFFFF; border: 2px solid rgba(10, 61, 145, 0.22); box-shadow: 0 10px 24px rgba(10, 61, 145, 0.1); display: flex; align-items: center; gap: 20px; padding: 0 22px; }
+      .f107-ex-alert-st-ico { width: 72px; height: 72px; border-radius: 16px; background: #0A3D91; display: flex; align-items: center; justify-content: center; flex: 0 0 72px; }
+      .f107-ex-alert-st-ico svg { width: 42px; height: 42px; display: block; }
+      .f107-ex-alert-st-n { font-size: 32px; font-weight: 700; white-space: nowrap; }
+      .f107-ex-alert-st-s { margin-top: 2px; font-size: 24px; font-weight: 700; color: #059669; white-space: nowrap; }
+
+      .f107-ex-alert-chip { position: absolute; left: -28px; top: -20px; width: 56px; height: 40px; border-radius: 10px; background: #3B6CC4; box-shadow: 0 0 0 3px #FFFFFF, 0 8px 18px rgba(10, 61, 145, 0.3); display: flex; align-items: center; justify-content: center; }
+      .f107-ex-alert-chip svg { width: 26px; height: 26px; display: block; }
+
+      .f107-ex-alert-win { position: absolute; left: 620px; top: 110px; width: 1204px; height: 680px; border-radius: 16px; background: #FFFFFF; border: 2px solid rgba(10, 61, 145, 0.25); overflow: hidden; box-shadow: 0 20px 44px rgba(10, 61, 145, 0.16); }
+      .f107-ex-alert-wh { position: absolute; left: 0; right: 0; top: 0; height: 64px; background: #0A3D91; color: #FFFFFF; display: flex; align-items: center; gap: 14px; padding: 0 20px; }
+      .f107-ex-alert-wh svg { width: 34px; height: 34px; display: block; }
+      .f107-ex-alert-wt { font-size: 30px; font-weight: 800; white-space: nowrap; }
+      .f107-ex-alert-wd { height: 40px; padding: 0 16px; border-radius: 20px; background: rgba(255, 255, 255, 0.16); font-size: 24px; font-weight: 600; display: flex; align-items: center; white-space: nowrap; }
+      .f107-ex-alert-btn { position: absolute; right: 14px; top: 10px; height: 44px; padding: 0 22px; border-radius: 10px; background: #FFFFFF; color: #0A3D91; font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 10px; white-space: nowrap; transform-origin: 50% 50%; }
+      .f107-ex-alert-btn svg { width: 26px; height: 26px; display: block; }
+
+      .f107-ex-alert-kpi { position: absolute; top: 84px; height: 170px; border-radius: 14px; background: #F4F7FC; border: 2px solid rgba(10, 61, 145, 0.14); padding: 18px 24px; transform-origin: 50% 50%; }
+      .f107-ex-alert-klab { font-size: 26px; font-weight: 700; color: #475569; white-space: nowrap; }
+      .f107-ex-alert-kval { margin-top: 2px; font-size: 56px; font-weight: 800; letter-spacing: -0.01em; color: #0A3D91; white-space: nowrap; line-height: 1.2; }
+      .f107-ex-alert-kval small { font-size: 32px; font-weight: 700; color: #64748B; }
+      .f107-ex-alert-kbar { position: relative; margin-top: 8px; height: 16px; border-radius: 8px; background: #E1E8F4; overflow: hidden; }
+      .f107-ex-alert-kbar i { position: absolute; left: 0; top: 0; width: 100%; height: 16px; border-radius: 8px; background: #3B6CC4; display: block; transform-origin: 0 50%; }
+      .f107-ex-alert-ring { position: absolute; left: 22px; top: 14px; width: 140px; height: 140px; }
+      .f107-ex-alert-ring svg { width: 140px; height: 140px; display: block; }
+      .f107-ex-alert-k2t { position: absolute; left: 186px; top: 26px; }
+
+      .f107-ex-alert-sec { position: absolute; left: 24px; top: 270px; font-size: 26px; font-weight: 700; color: #475569; white-space: nowrap; }
+      .f107-ex-alert-row { position: absolute; left: 12px; width: 1176px; height: 72px; border-radius: 12px; display: flex; align-items: center; gap: 18px; padding: 0 14px; background: #FFFFFF; transform-origin: 50% 50%; }
+      .f107-ex-alert-lot { width: 200px; flex: 0 0 200px; font-size: 26px; font-weight: 700; white-space: nowrap; }
+      .f107-ex-alert-trk { position: relative; flex: 1; height: 22px; border-radius: 11px; background: #E1E8F4; overflow: hidden; }
+      .f107-ex-alert-trk i { position: absolute; left: 0; top: 0; width: 100%; height: 22px; border-radius: 11px; display: block; transform-origin: 0 50%; }
+      .f107-ex-alert-pct { width: 80px; flex: 0 0 80px; text-align: right; font-size: 26px; font-weight: 800; white-space: nowrap; }
+      .f107-ex-alert-eta { position: relative; width: 150px; flex: 0 0 150px; height: 40px; }
+      .f107-ex-alert-eta span { position: absolute; left: 0; top: 0; width: 150px; height: 40px; line-height: 40px; font-size: 24px; font-weight: 600; color: #475569; white-space: nowrap; }
+      .f107-ex-alert-stw { position: relative; width: 236px; flex: 0 0 236px; height: 44px; }
+      .f107-ex-alert-sc { position: absolute; left: 0; top: 0; height: 44px; padding: 0 16px; border-radius: 22px; font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+      .f107-ex-alert-sc i { width: 12px; height: 12px; border-radius: 50%; background: currentColor; display: block; flex: 0 0 12px; }
+      .f107-ex-alert-ok { background: rgba(5, 150, 105, 0.12); color: #047857; }
+      .f107-ex-alert-on { background: rgba(10, 61, 145, 0.08); color: #0A3D91; }
+      .f107-ex-alert-late { background: rgba(245, 158, 11, 0.16); color: #B45309; }
+
+      .f107-ex-alert-cursor { position: absolute; left: 0; top: 0; width: 44px; height: 44px; }
+      .f107-ex-alert-cursor svg { width: 44px; height: 44px; display: block; overflow: visible; }
+
+      /* screen overlays */
+      .f107-ex-alert-tagrow { position: absolute; left: 56px; top: 44px; display: flex; gap: 16px; align-items: center; }
+      .f107-ex-alert-tag { height: 56px; padding: 0 26px 0 20px; border-radius: 28px; background: #0A3D91; color: #FFFFFF; font-size: 28px; font-weight: 700; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 20px rgba(10, 61, 145, 0.25); white-space: nowrap; }
+      .f107-ex-alert-tag svg { width: 30px; height: 30px; display: block; }
+      .f107-ex-alert-pillw { position: relative; height: 56px; }
+      .f107-ex-alert-pill { height: 56px; padding: 0 26px 0 18px; border-radius: 28px; font-size: 26px; font-weight: 800; letter-spacing: 0.06em; display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+      .f107-ex-alert-pill svg { width: 30px; height: 30px; display: block; }
+      #f107-ex-alert-pillB { background: #E2E8F0; color: #475569; border: 2px solid #CBD5E1; }
+      #f107-ex-alert-pillA { position: absolute; left: 0; top: 0; background: #FFFFFF; color: #0A3D91; border: 3px solid #0A3D91; }
+      .f107-ex-alert-takewrap { position: absolute; left: 0; right: 0; top: 890px; height: 120px; display: flex; justify-content: center; }
+      .f107-ex-alert-take { height: 116px; padding: 0 52px 0 30px; border-radius: 18px; background: #FFFFFF; box-shadow: 0 0 0 3px #0A3D91, 0 20px 44px rgba(10, 61, 145, 0.2); display: flex; align-items: center; gap: 24px; font-size: 48px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+      .f107-ex-alert-take-ico { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; }
+      .f107-ex-alert-take-ico svg { width: 42px; height: 42px; display: block; }
+    </style>
+
+    <div data-hf-id="hf-rud5" class="f107-ex-alert-bg clip" id="f107-ex-alert-bg" data-start="0" data-duration="20.24" data-track-index="0"></div>
+
+    <div data-hf-id="hf-254i" class="f107-ex-alert-scene" id="f107-ex-alert-scene">
+      <!-- ================= TRƯỚC ĐÂY (grey world) ================= -->
+      <div class="f107-ex-alert-world" id="f107-ex-alert-a">
+        <svg class="f107-ex-alert-full" viewBox="0 0 1920 1080">
+          <rect x="0" y="0" width="1920" height="1080" fill="#F1F5F9" />
+          <rect x="0" y="860" width="1920" height="220" fill="#E2E8F0" />
+          <rect x="0" y="852" width="1920" height="10" fill="#CBD5E1" />
+        </svg>
+
+        <div class="f107-ex-alert-log" id="f107-ex-alert-log">
+          <div class="f107-ex-alert-log-t"><svg viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="18" rx="2" /><path d="M9 3.5h6v3H9Z" /><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4" /></svg><span>Sổ ghi chép sản xuất</span></div>
+          <div class="f107-ex-alert-log-r"><b>08:00</b><svg viewBox="0 0 300 30"><path class="f107-ex-alert-scrib" d="M2 18 c14 -14 22 10 36 -2 s20 -12 32 2 s18 6 30 -6 s24 10 36 0 s20 -8 34 4" stroke="#64748B" stroke-width="3.5" fill="none" stroke-linecap="round" /></svg></div>
+          <div class="f107-ex-alert-log-r"><b>10:00</b><svg viewBox="0 0 300 30"><path class="f107-ex-alert-scrib" d="M2 16 c12 -10 24 8 34 -4 s22 -6 30 6 s20 -10 32 0 s18 8 32 -4" stroke="#64748B" stroke-width="3.5" fill="none" stroke-linecap="round" /></svg></div>
+          <div class="f107-ex-alert-log-r"><b>13:00</b><svg viewBox="0 0 300 30"><path class="f107-ex-alert-scrib" d="M2 18 c16 -12 22 8 36 -2 s18 -10 30 2 s22 8 34 -6 s20 8 30 0 s24 -6 36 2 s16 4 26 -4" stroke="#64748B" stroke-width="3.5" fill="none" stroke-linecap="round" /></svg></div>
+          <div class="f107-ex-alert-log-r"><b>15:00</b><svg viewBox="0 0 300 30"><path class="f107-ex-alert-scrib" d="M2 16 c14 -10 20 10 32 -2 s22 -8 32 4 s18 -6 30 2" stroke="#64748B" stroke-width="3.5" fill="none" stroke-linecap="round" /></svg></div>
+          <div class="f107-ex-alert-log-sum">Tổng ca:<span id="f107-ex-alert-sum">12.480</span></div>
+        </div>
+
+        <div class="f107-ex-alert-clock" id="f107-ex-alert-clock">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="#F8FAFC" stroke="#94A3B8" stroke-width="5" />
+            <path d="M50 10v7M50 83v7M10 50h7M83 50h7" stroke="#94A3B8" stroke-width="3.5" stroke-linecap="round" />
+            <line id="f107-ex-alert-hh" x1="50" y1="50" x2="50" y2="28" stroke="#475569" stroke-width="6" stroke-linecap="round" />
+            <line id="f107-ex-alert-mh" x1="50" y1="50" x2="50" y2="18" stroke="#64748B" stroke-width="4" stroke-linecap="round" />
+            <circle cx="50" cy="50" r="5" fill="#475569" />
+          </svg>
+        </div>
+        <div class="f107-ex-alert-clab"><span id="f107-ex-alert-cl1">08:00</span><span id="f107-ex-alert-cl2">17:00 · Cuối ca</span></div>
+
+        <div class="f107-ex-alert-person" id="f107-ex-alert-lead"></div>
+
+        <svg class="f107-ex-alert-full" viewBox="0 0 1920 1080">
+          <!-- desk -->
+          <rect x="110" y="700" width="540" height="22" rx="6" fill="#94A3B8" />
+          <rect x="130" y="722" width="16" height="138" fill="#94A3B8" /><rect x="614" y="722" width="16" height="138" fill="#94A3B8" />
+          <rect x="120" y="722" width="520" height="58" rx="6" fill="#CBD5E1" />
+          <!-- work stations: simple tables with materials -->
+          <g id="f107-ex-alert-tables">
+            <rect x="940" y="716" width="240" height="20" rx="6" fill="#94A3B8" /><rect x="950" y="736" width="220" height="60" rx="6" fill="#CBD5E1" />
+            <rect x="958" y="796" width="14" height="64" fill="#94A3B8" /><rect x="1148" y="796" width="14" height="64" fill="#94A3B8" />
+            <rect x="975" y="676" width="70" height="40" rx="8" fill="#CBD5E1" stroke="#94A3B8" stroke-width="3" /><rect x="1055" y="684" width="90" height="32" rx="8" fill="#CBD5E1" stroke="#94A3B8" stroke-width="3" />
+            <text x="1060" y="778" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="700" font-size="28" fill="#475569">Gia công</text>
+
+            <rect x="1270" y="716" width="240" height="20" rx="6" fill="#94A3B8" /><rect x="1280" y="736" width="220" height="60" rx="6" fill="#CBD5E1" />
+            <rect x="1288" y="796" width="14" height="64" fill="#94A3B8" /><rect x="1478" y="796" width="14" height="64" fill="#94A3B8" />
+            <rect x="1300" y="670" width="80" height="46" rx="6" fill="#E2E8F0" stroke="#94A3B8" stroke-width="3" />
+            <path d="M1300 686 h80" stroke="#94A3B8" stroke-width="3" />
+            <path d="M1418 668 h56 v48 h-56 Z M1428 682 h36 M1428 694 h36 M1428 706 h24" fill="#F8FAFC" stroke="#94A3B8" stroke-width="3" stroke-linejoin="round" />
+            <text x="1390" y="778" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="700" font-size="28" fill="#475569">Kiểm tra</text>
+
+            <rect x="1600" y="716" width="240" height="20" rx="6" fill="#94A3B8" /><rect x="1610" y="736" width="220" height="60" rx="6" fill="#CBD5E1" />
+            <rect x="1618" y="796" width="14" height="64" fill="#94A3B8" /><rect x="1808" y="796" width="14" height="64" fill="#94A3B8" />
+            <rect x="1626" y="660" width="84" height="56" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="3" /><path d="M1668 660 v56" stroke="#94A3B8" stroke-width="3" />
+            <rect x="1724" y="672" width="84" height="44" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="3" /><path d="M1766 672 v44" stroke="#94A3B8" stroke-width="3" />
+            <text x="1720" y="778" text-anchor="middle" font-family="Be Vietnam Pro" font-weight="700" font-size="28" fill="#475569">Đóng gói</text>
+          </g>
+        </svg>
+
+        <div class="f107-ex-alert-calc" id="f107-ex-alert-calc">
+          <div class="f107-ex-alert-calc-d" id="f107-ex-alert-calcd">0</div>
+          <div class="f107-ex-alert-calc-k"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <div class="f107-ex-alert-q" id="f107-ex-alert-q1" style="left:1010px" data-layout-allow-overlap=""><div>?</div><i></i></div>
+        <div class="f107-ex-alert-q" id="f107-ex-alert-q2" style="left:1340px" data-layout-allow-overlap=""><div>?</div><i></i></div>
+        <div class="f107-ex-alert-q" id="f107-ex-alert-q3" style="left:1670px" data-layout-allow-overlap=""><div>?</div><i></i></div>
+      </div>
+
+      <!-- ================= BÂY GIỜ (cobalt world, wiped in) ================= -->
+      <div class="f107-ex-alert-b" id="f107-ex-alert-b">
+        <svg class="f107-ex-alert-full" viewBox="0 0 1920 1080">
+          <defs><pattern id="f107-ex-alert-dotp" width="48" height="48" patternUnits="userSpaceOnUse"><circle cx="24" cy="24" r="2.4" fill="#C9D7EE" /></pattern></defs>
+          <rect x="0" y="0" width="1920" height="1080" fill="url(#f107-ex-alert-dotp)" />
+          <!-- monitor stand -->
+          <rect x="1188" y="788" width="68" height="34" fill="#9FB3D6" />
+          <rect x="1110" y="810" width="224" height="12" rx="6" fill="#9FB3D6" />
+        </svg>
+
+        <!-- MES Report window -->
+        <div class="f107-ex-alert-win" id="f107-ex-alert-win">
+          <div class="f107-ex-alert-wh">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 21V11l5 3v-3l5 3v-3l5 3V4h4v17Z" /><path d="M2.5 21h19" /></svg>
+            <span class="f107-ex-alert-wt">MES Report</span>
+            <span class="f107-ex-alert-wd">Ca A · 14/10</span>
+            <div class="f107-ex-alert-btn" id="f107-ex-alert-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" /><circle cx="16" cy="7" r="2.2" /><circle cx="10" cy="17" r="2.2" /></svg><span>Điều chỉnh kế hoạch</span></div>
+          </div>
+
+          <div class="f107-ex-alert-kpi" id="f107-ex-alert-k1" style="left:24px; width:560px">
+            <div class="f107-ex-alert-klab">Sản lượng ca A</div>
+            <div class="f107-ex-alert-kval"><span id="f107-ex-alert-out">0</span><small> / 13.000</small></div>
+            <div class="f107-ex-alert-kbar"><i id="f107-ex-alert-outbar"></i></div>
+          </div>
+          <div class="f107-ex-alert-kpi" id="f107-ex-alert-k2" style="left:608px; width:572px">
+            <div class="f107-ex-alert-ring">
+              <svg viewBox="0 0 140 140">
+                <circle cx="70" cy="70" r="56" fill="none" stroke="#E1E8F4" stroke-width="16" />
+                <circle id="f107-ex-alert-arc" cx="70" cy="70" r="56" fill="none" stroke="#059669" stroke-width="16" stroke-linecap="round" transform="rotate(-90 70 70)" stroke-dasharray="351.9" stroke-dashoffset="351.9" />
+                <path d="m52 71 12 12 24-26" fill="none" stroke="#059669" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="f107-ex-alert-k2t">
+              <div class="f107-ex-alert-klab">Tỷ lệ đạt chất lượng</div>
+              <div class="f107-ex-alert-kval" style="color:#047857"><span id="f107-ex-alert-qr">0,0</span> %</div>
+            </div>
+          </div>
+
+          <div class="f107-ex-alert-sec">Tiến độ từng lô</div>
+          <div class="f107-ex-alert-row" id="f107-ex-alert-row1" style="top:316px">
+            <div class="f107-ex-alert-lot">LOT-2410-01</div>
+            <div class="f107-ex-alert-trk"><i class="f107-ex-alert-fill" style="background:#059669"></i></div>
+            <div class="f107-ex-alert-pct">100%</div>
+            <div class="f107-ex-alert-eta"><span>Xong 11:40</span></div>
+            <div class="f107-ex-alert-stw"><div class="f107-ex-alert-sc f107-ex-alert-ok"><i></i>Hoàn thành</div></div>
+          </div>
+          <div class="f107-ex-alert-row" id="f107-ex-alert-row2" style="top:400px">
+            <div class="f107-ex-alert-lot">LOT-2410-02</div>
+            <div class="f107-ex-alert-trk"><i class="f107-ex-alert-fill" style="background:#3B6CC4"></i></div>
+            <div class="f107-ex-alert-pct">76%</div>
+            <div class="f107-ex-alert-eta"><span>ETA 15:30</span></div>
+            <div class="f107-ex-alert-stw"><div class="f107-ex-alert-sc f107-ex-alert-on"><i></i>Đúng tiến độ</div></div>
+          </div>
+          <div class="f107-ex-alert-row" id="f107-ex-alert-row3" style="top:484px">
+            <div class="f107-ex-alert-lot">LOT-2410-03</div>
+            <div class="f107-ex-alert-trk"><i class="f107-ex-alert-fill" id="f107-ex-alert-fill3" style="background:#F59E0B"></i></div>
+            <div class="f107-ex-alert-pct" id="f107-ex-alert-pct3" style="color:#B45309">38%</div>
+            <div class="f107-ex-alert-eta"><span id="f107-ex-alert-eta3a" style="color:#B45309">ETA 19:30</span><span id="f107-ex-alert-eta3b" style="color:#047857">ETA 17:00</span></div>
+            <div class="f107-ex-alert-stw"><div class="f107-ex-alert-sc f107-ex-alert-late" id="f107-ex-alert-st3a"><i></i>Chậm tiến độ</div><div class="f107-ex-alert-sc f107-ex-alert-ok" id="f107-ex-alert-st3b"><i></i>Đúng tiến độ</div></div>
+          </div>
+          <div class="f107-ex-alert-row" id="f107-ex-alert-row4" style="top:568px">
+            <div class="f107-ex-alert-lot">LOT-2410-04</div>
+            <div class="f107-ex-alert-trk"><i class="f107-ex-alert-fill" style="background:#3B6CC4"></i></div>
+            <div class="f107-ex-alert-pct">24%</div>
+            <div class="f107-ex-alert-eta"><span>ETA 20:00</span></div>
+            <div class="f107-ex-alert-stw"><div class="f107-ex-alert-sc f107-ex-alert-on"><i></i>Đúng tiến độ</div></div>
+          </div>
+        </div>
+
+        <div class="f107-ex-alert-person" id="f107-ex-alert-mgr" style="top:277px"></div>
+
+        <svg class="f107-ex-alert-full" viewBox="0 0 1920 1080">
+          <!-- manager's desk (front panel hides his legs) -->
+          <rect x="140" y="816" width="1740" height="20" rx="6" fill="#9FB3D6" />
+          <rect x="160" y="836" width="1700" height="244" fill="#D6E0F0" />
+          <rect x="160" y="836" width="1700" height="6" fill="#C2D1EA" />
+        </svg>
+
+        <!-- stations recording data -->
+        <div class="f107-ex-alert-st" id="f107-ex-alert-s1" style="top:176px">
+          <div class="f107-ex-alert-st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 21 7.5 12 12 3 7.5Z" /><path d="m3 12 9 4.5 9-4.5" /><path d="m3 16.5 9 4.5 9-4.5" /></svg></div>
+          <div><div class="f107-ex-alert-st-n">Gia công</div><div class="f107-ex-alert-st-s">Đã ghi nhận ✓</div></div>
+        </div>
+        <div class="f107-ex-alert-st" id="f107-ex-alert-s2" style="top:338px">
+          <div class="f107-ex-alert-st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /><path d="m7.8 10.6 2 2 3.6-3.8" /></svg></div>
+          <div><div class="f107-ex-alert-st-n">Kiểm tra</div><div class="f107-ex-alert-st-s">Đã ghi nhận ✓</div></div>
+        </div>
+        <div class="f107-ex-alert-st" id="f107-ex-alert-s3" style="top:500px">
+          <div class="f107-ex-alert-st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5Z" /><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9" /></svg></div>
+          <div><div class="f107-ex-alert-st-n">Đóng gói</div><div class="f107-ex-alert-st-s">Đã ghi nhận ✓</div></div>
+        </div>
+
+        <div id="f107-ex-alert-chips" data-layout-allow-overlap=""></div>
+
+        <div class="f107-ex-alert-cursor" id="f107-ex-alert-cursor" data-layout-allow-overlap=""><svg viewBox="0 0 24 24"><path d="M4 2.5 4 19.5 8.6 15.4 11.6 22 14.6 20.7 11.7 14.2 18 14.2Z" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round" /></svg></div>
+      </div>
+
+      <div class="f107-ex-alert-edge" id="f107-ex-alert-edge"></div>
+
+      <div class="f107-ex-alert-takewrap">
+        <div class="f107-ex-alert-take" id="f107-ex-alert-take">
+          <div class="f107-ex-alert-take-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3" /></svg></div>
+          <span>Số liệu tức thời — quyết định kịp thời</span>
+        </div>
+      </div>
+
+      <div class="f107-ex-alert-tagrow">
+        <div class="f107-ex-alert-tag" id="f107-ex-alert-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z" /></svg>
+          <span>Ví dụ thực tế</span>
+        </div>
+        <div class="f107-ex-alert-pillw">
+          <div class="f107-ex-alert-pill" id="f107-ex-alert-pillB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg><span>TRƯỚC ĐÂY</span></div>
+          <div class="f107-ex-alert-pill" id="f107-ex-alert-pillA" data-layout-allow-overflow=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 21V11l5 3v-3l5 3v-3l5 3V4h4v17Z" /><path d="M2.5 21h19" /></svg><span>BÂY GIỜ · MES</span></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var root = document.querySelector('[data-composition-id="f107-ex-alert"]');
+        var PX = "f107-ex-alert-";
+        var $ = function (id) { return root.querySelector("#" + PX + id); };
+        var $$ = function (sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); };
+        var part = function (who, p) { return root.querySelector("#" + PX + who + " ." + PX + p); };
+        var CUE = /*hf-cues:start*/{"before":0,"paper":1.5,"shift":2.28,"ask":3.78,"now":6.32,"output":8.54,"lots":9.66,"quality":10.76,"open":12.3,"grasp":15.08,"adjust":16.52,"take":17.78}/*hf-cues:end*/;
+        var DURATION = /*hf-dur:start*/19.74/*hf-dur:end*/;
+        var C = Object.assign({ before: 0, paper: 1.5, shift: 2.28, ask: 3.78, now: 6.32, output: 8.54, lots: 9.66, quality: 10.76,
+          open: 12.3, grasp: 15.08, adjust: 16.52, take: 17.92 }, CUE);
+        var tl = gsap.timeline({ paused: true });
+
+        // ---------- flat front-facing person (reference rig) ----------
+        var SKIN = "#F6CDA8", SKIN2 = "#E8B48C";
+        function person(o) {
+          var s = '<svg viewBox="-160 -620 320 640">';
+          s += '<g class="' + PX + 'legL"><rect x="-44" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="-30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          s += '<g class="' + PX + 'legR"><rect x="8" y="-232" width="36" height="222" rx="16" fill="' + o.pants + '" /><ellipse cx="30" cy="-8" rx="30" ry="12" fill="#1E293B" /></g>';
+          s += '<rect x="-17" y="-458" width="34" height="52" rx="10" fill="' + SKIN2 + '" />';
+          s += '<path d="M-90 -214 C-96 -330 -86 -398 -34 -414 L34 -414 C86 -398 96 -330 90 -214 Z" fill="' + o.shirt + '" />';
+          s += '<path d="M-26 -413 L0 -378 L26 -413 Z" fill="#FFFFFF" />';
+          if (o.tie) s += '<path d="M0 -384 L-11 -368 L0 -300 L11 -368 Z" fill="' + o.tie + '" />';
+          s += '<g class="' + PX + 'armL"><path d="M-74 -392 C-96 -350 -104 -300 -100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="-100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+          s += '<g class="' + PX + 'armR"><path d="M74 -392 C96 -350 104 -300 100 -238" stroke="' + o.arm + '" stroke-width="34" fill="none" stroke-linecap="round" /><circle cx="100" cy="-226" r="18" fill="' + SKIN + '" /></g>';
+          s += '<g class="' + PX + 'head">';
+          s += '<circle cx="-63" cy="-506" r="13" fill="' + SKIN2 + '" /><circle cx="63" cy="-506" r="13" fill="' + SKIN2 + '" />';
+          s += '<circle cx="0" cy="-512" r="64" fill="' + SKIN + '" />';
+          if (o.hairStyle === "m") s += '<path d="M-66 -510 C-74 -588 -18 -602 10 -596 C58 -590 76 -556 66 -508 C52 -538 22 -548 -8 -546 C-34 -544 -56 -534 -66 -510 Z" fill="' + o.hair + '" />';
+          else s += '<path d="M-68 -498 C-78 -594 74 -604 68 -500 C50 -536 10 -552 -24 -534 C-42 -524 -58 -512 -68 -498 Z" fill="' + o.hair + '" />';
+          s += '<path class="' + PX + 'brows" d="M-34 -538 Q-22 -546 -10 -538 M10 -538 Q22 -546 34 -538" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />';
+          s += '<g class="' + PX + 'eyes"><ellipse cx="-22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /><ellipse cx="22" cy="-510" rx="6.5" ry="9" fill="#0F172A" /></g>';
+          if (o.glasses) s += '<g fill="none" stroke="#0F172A" stroke-width="4"><circle cx="-22" cy="-510" r="17" /><circle cx="22" cy="-510" r="17" /><path d="M-5 -512 h10" /></g>';
+          s += '<circle cx="-38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" /><circle cx="38" cy="-486" r="10" fill="#F59E9E" opacity="0.45" />';
+          s += '<path class="' + PX + 'mouth" d="M-13 -478 Q0 -466 13 -478" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" />';
+          s += '<path class="' + PX + 'frown" d="M-13 -470 Q0 -480 13 -470" stroke="#9A3412" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0" />';
+          s += '<path class="' + PX + 'grin" d="M-18 -480 Q0 -456 18 -480 Z" fill="#9A3412" opacity="0" />';
+          s += '</g></svg>';
+          return s;
+        }
+        $("lead").innerHTML = person({ shirt: "#64748B", arm: "#566375", hair: "#2B2B2B", hairStyle: "m", pants: "#334155" });
+        $("mgr").innerHTML = person({ shirt: "#1E3A6E", arm: "#18305C", hair: "#3B2416", hairStyle: "s", pants: "#334155", tie: "#3B6CC4", glasses: true });
+
+        var PIV = { armL: "-74 -392", armR: "74 -392", head: "0 -450", eyes: "0 -510" };
+        function pose(who, p, rot, at, dur) { tl.to(part(who, p), { rotation: rot, svgOrigin: PIV[p], duration: dur || 0.4, ease: "power2.out" }, at); }
+        function walk(who, toX, t0, dur) {
+          var w = $(who), steps = Math.max(2, Math.round(dur / 0.22)), h = dur / steps;
+          tl.to(w, { x: toX, duration: dur, ease: "power1.inOut" }, t0);
+          for (var i = 0; i < steps; i++) {
+            var t = t0 + i * h, leg = part(who, i % 2 ? "legR" : "legL");
+            tl.to(w, { y: -8, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(w, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+            tl.to(leg, { y: -22, duration: h / 2, ease: "sine.out" }, t);
+            tl.to(leg, { y: 0, duration: h / 2, ease: "sine.in" }, t + h / 2);
+          }
+        }
+        function look(who, dx, at) { tl.to(part(who, "eyes"), { x: dx, duration: 0.2, ease: "power2.out" }, at); }
+        function blink(who, t) {
+          tl.to(part(who, "eyes"), { scaleY: 0.12, svgOrigin: PIV.eyes, duration: 0.07, ease: "power1.in" }, t);
+          tl.to(part(who, "eyes"), { scaleY: 1, svgOrigin: PIV.eyes, duration: 0.1, ease: "power1.out" }, t + 0.08);
+        }
+        function face(who, mood, at) { // "neutral" | "frown" | "grin"
+          tl.to(part(who, "mouth"), { opacity: mood === "neutral" ? 1 : 0, duration: 0.15, ease: "none" }, at);
+          tl.to(part(who, "frown"), { opacity: mood === "frown" ? 1 : 0, duration: 0.15, ease: "none" }, at);
+          tl.to(part(who, "grin"), { opacity: mood === "grin" ? 1 : 0, duration: 0.15, ease: "none" }, at);
+        }
+        function hop(sel, at, h) {
+          tl.to(sel, { y: -(h || 14), duration: 0.16, ease: "power2.out" }, at);
+          tl.to(sel, { y: 0, duration: 0.22, ease: "power2.in" }, at + 0.16);
+        }
+        function pop(el, at) { tl.fromTo(el, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)", immediateRender: false }, at); }
+
+        // ---------- layout constants ----------
+        var LEAD_X = 300, STOPS = [1060, 1390, 1720];      // the lead stands behind each work table
+        var MGR_X = 330;
+        var STAT_OUT = [[496, 238], [496, 400], [496, 562]]; // right edge of the station cards (BÂY GIỜ)
+        var INTO = [[700, 300], [700, 470], [700, 640]];     // where the chips land inside the MES Report window
+        var BTN = [1660, 146], ROW3 = [1000, 640], CUR0 = [470, 720];
+
+        // ---------- initial state ----------
+        gsap.set($("lead"), { x: LEAD_X, y: 0, scale: 0.55, transformOrigin: "50% 100%" });
+        gsap.set($("mgr"), { x: -220, y: 0, scale: 0.62, transformOrigin: "50% 100%" }); // top:277 → feet at y≈905, hidden behind the desk front
+        gsap.set($("b"), { clipPath: "inset(0px 1920px 0px 0px)" });
+        gsap.set($("edge"), { x: 0, opacity: 0 });
+        gsap.set([$("pillA"), $("take"), $("cursor"), $("cl2"), $("sum"), $("st3b"), $("eta3b")], { opacity: 0 });
+        gsap.set([$("q1"), $("q2"), $("q3")], { opacity: 0, transformOrigin: "50% 100%" });
+        gsap.set($("cursor"), { x: CUR0[0], y: CUR0[1] });
+        gsap.set($("mh"), { rotation: 0, svgOrigin: "50 50" });
+        gsap.set($("hh"), { rotation: 240, svgOrigin: "50 50" });
+        gsap.set($$("." + PX + "fill"), { scaleX: 0 });
+        gsap.set($("outbar"), { scaleX: 0 });
+        gsap.set($$("." + PX + "row ." + PX + "pct, ." + PX + "row ." + PX + "eta, ." + PX + "row ." + PX + "stw"), { opacity: 0 });
+        var scribs = $$("." + PX + "scrib");
+        scribs.forEach(function (el) {
+          var len = 0;
+          try { len = el.getTotalLength(); } catch (e) { len = 0; }
+          if (!len || !isFinite(len)) len = 300;
+          len = len * 1.05 + 2;
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+        });
+
+        // record chips (created once, deterministic)
+        var NCH = 12, chips = [];
+        var CHIP = '<svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2" /><path d="M3.5 10h17M3.5 15h17M9.5 10v9.5" /></svg>';
+        for (var c = 0; c < NCH; c++) {
+          var d = document.createElement("div");
+          d.className = PX + "chip";
+          d.innerHTML = CHIP;
+          $("chips").appendChild(d);
+          chips.push(d);
+          gsap.set(d, { x: STAT_OUT[c % 3][0], y: STAT_OUT[c % 3][1], opacity: 0 });
+        }
+
+        // ---------- counters computed from time (seek-safe) ----------
+        var easeO = gsap.parseEase("power2.out");
+        function vn(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+        function prog(t, a, b) { return t <= a ? 0 : t >= b ? 1 : easeO((t - a) / (b - a)); }
+        var CALC0 = C.shift + 0.5, CALC1 = Math.max(CALC0 + 0.6, C.ask - 0.3);
+        var OUT0 = C.output + 0.1, OUT1 = OUT0 + 1.2, QR0 = C.quality + 0.1, QR1 = QR0 + 1.1;
+        var proxy = { t: 0 }, calcEl = $("calcd"), outEl = $("out"), qrEl = $("qr");
+        function render() {
+          var t = proxy.t;
+          calcEl.textContent = vn(12480 * prog(t, CALC0, CALC1));
+          outEl.textContent = vn(12480 * prog(t, OUT0, OUT1));
+          qrEl.textContent = (98.6 * prog(t, QR0, QR1)).toFixed(1).replace(".", ",");
+        }
+        render();
+        tl.to(proxy, { t: DURATION, duration: DURATION, ease: "none", onUpdate: render }, 0);
+
+        // ================= TRƯỚC ĐÂY =================
+        tl.fromTo($("log"), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.1);
+        tl.fromTo($("clock"), { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.8)" }, 0.25);
+        // handwritten rows fill in one by one ("ghi trên giấy")
+        var R0 = Math.min(0.5, C.paper - 0.6), RS = Math.max(0.25, (C.shift - 0.1 - R0) / scribs.length);
+        scribs.forEach(function (el, i) { tl.to(el, { strokeDashoffset: 0, duration: RS * 0.85, ease: "power1.inOut" }, R0 + i * RS); });
+        look("lead", -7, 0.3);
+        pose("lead", "armL", 28, 0.4, 0.35);
+        tl.to(part("lead", "armL"), { keyframes: { rotation: [28, 20, 28, 20, 28] }, svgOrigin: PIV.armL, duration: 1.2, ease: "none" }, 0.8);
+        blink("lead", 1.2);
+
+        // "cuối ca mới tổng hợp": clock jumps to end of shift, the lead sums on a calculator
+        var S = C.shift;
+        tl.to($("mh"), { rotation: 9 * 360, svgOrigin: "50 50", duration: 0.7, ease: "power2.inOut" }, S);
+        tl.to($("hh"), { rotation: 510, svgOrigin: "50 50", duration: 0.7, ease: "power2.inOut" }, S);
+        tl.to($("cl1"), { opacity: 0, duration: 0.15, ease: "none" }, S + 0.3);
+        tl.to($("cl2"), { opacity: 1, duration: 0.2, ease: "none" }, S + 0.4);
+        tl.to($("clock"), { keyframes: { scale: [1, 1.08, 1] }, duration: 0.35, ease: "none" }, S + 0.65);
+        pose("lead", "armL", 0, S, 0.3);
+        look("lead", 7, S + 0.25);
+        pose("lead", "armR", -32, S + 0.3, 0.3);
+        var keys = $$("#" + PX + "calc ." + PX + "calc-k i");
+        for (var k = 0; k < 8; k++) {
+          var kt = CALC0 + k * ((CALC1 - CALC0) / 8);
+          tl.to(keys[(k * 5) % 8], { keyframes: { backgroundColor: ["#CBD5E1", "#F8FAFC", "#CBD5E1"] }, duration: 0.16, ease: "none" }, kt);
+          tl.to(part("lead", "armR"), { keyframes: { rotation: [-32, -26, -32] }, svgOrigin: PIV.armR, duration: 0.16, ease: "none" }, kt);
+        }
+        tl.to(part("lead", "brows"), { y: -4, duration: 0.2, ease: "power2.out" }, S + 0.6);
+        tl.fromTo($("sum"), { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, CALC1);
+
+        // "muốn biết tiến độ phải hỏi từng khâu": walk from station to station, a "?" at each
+        var A = Math.max(C.ask, CALC1 + 0.05), end = C.now - 0.25;
+        var u = Math.max(0.3, (end - A) / 2.4);
+        pose("lead", "armR", 0, A, 0.25);
+        look("lead", 0, A);
+        walk("lead", STOPS[0], A, 0.8 * u);
+        pop($("q1"), A + 0.82 * u);
+        walk("lead", STOPS[1], A + 1.0 * u, 0.5 * u);
+        pop($("q2"), A + 1.52 * u);
+        walk("lead", STOPS[2], A + 1.7 * u, 0.5 * u);
+        pop($("q3"), A + 2.22 * u);
+        face("lead", "frown", A + 1.6 * u);
+        look("lead", -7, A + 2.25 * u);
+
+        // ================= wipe → BÂY GIỜ =================
+        var W = C.now - 0.1, WD = 0.7;
+        tl.to($("b"), { clipPath: "inset(0px 0px 0px 0px)", duration: WD, ease: "power2.inOut" }, W);
+        tl.to($("edge"), { opacity: 1, duration: 0.1, ease: "none" }, W);
+        tl.to($("edge"), { x: 1940, duration: WD, ease: "power2.inOut" }, W);
+        tl.to($("edge"), { opacity: 0, duration: 0.15, ease: "none" }, W + WD - 0.1);
+        tl.to($("pillB"), { opacity: 0, duration: 0.15, ease: "none" }, W + 0.1);
+        tl.fromTo($("pillA"), { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, W + 0.28);
+        tl.to($("a"), { opacity: 0, duration: 0.05, ease: "none" }, W + WD + 0.05);
+
+        [1, 2, 3].forEach(function (i) {
+          tl.fromTo($("s" + i), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, W + 0.45 + i * 0.1);
+        });
+        tl.fromTo($("win"), { scale: 0.97 }, { scale: 1, duration: 0.6, ease: "power2.out", immediateRender: false }, W + 0.3);
+
+        // record chips: each station → the report ("số liệu được ghi nhận vào MES")
+        var CH0 = W + 0.95, CHS = Math.max(0.2, (C.open - 0.6 - CH0) / NCH);
+        chips.forEach(function (el, i) {
+          var s = i % 3, at = CH0 + i * CHS;
+          tl.set(el, { x: STAT_OUT[s][0], y: STAT_OUT[s][1], opacity: 1, scale: 1 }, at);
+          tl.to(el, { x: INTO[s][0], y: INTO[s][1], duration: 0.5, ease: "power1.inOut" }, at);
+          tl.to(el, { opacity: 0, scale: 0.6, duration: 0.15, ease: "none" }, at + 0.5);
+          tl.to($("s" + (s + 1)), { keyframes: { scale: [1, 1.03, 1] }, duration: 0.3, ease: "none" }, at);
+        });
+
+        // "sản lượng"
+        var O = C.output;
+        tl.to($("k1"), { keyframes: { scale: [1, 1.03, 1] }, duration: 0.45, ease: "none" }, O);
+        tl.to($("outbar"), { scaleX: 0.96, duration: 1.2, ease: "power2.out" }, OUT0);
+
+        // "tiến độ từng lô"
+        var LT = C.lots, PCTS = [1, 0.76, 0.38, 0.24];
+        [1, 2, 3, 4].forEach(function (i) {
+          var row = $("row" + i), at = LT + (i - 1) * 0.18;
+          tl.to(row.querySelector("." + PX + "fill"), { scaleX: PCTS[i - 1], duration: 0.6, ease: "power2.out" }, at);
+          tl.to(row.querySelectorAll("." + PX + "pct, ." + PX + "eta, ." + PX + "stw"), { opacity: 1, duration: 0.3, ease: "none" }, at + 0.35);
+        });
+        tl.to($("row3"), { backgroundColor: "rgba(245,158,11,0.08)", duration: 0.3, ease: "none" }, LT + 0.8);
+
+        // "tỷ lệ đạt chất lượng"
+        var Q = C.quality;
+        tl.to($("k2"), { keyframes: { scale: [1, 1.03, 1] }, duration: 0.45, ease: "none" }, Q);
+        tl.to($("arc"), { strokeDashoffset: 351.9 * (1 - 0.986), duration: 1.1, ease: "power2.out" }, QR0);
+
+        // "Quản lý chỉ cần mở MES Report": stations step aside, the manager comes to his desk
+        var P = C.open;
+        [1, 2, 3].forEach(function (i) { tl.to($("s" + i), { opacity: 0, x: -40, duration: 0.35, ease: "power2.in" }, P - 0.3 + (i - 1) * 0.06); });
+        walk("mgr", MGR_X, P, 1.0);
+        look("mgr", 7, P + 1.0);
+        tl.to($("win"), { keyframes: { scale: [1, 1.012, 1] }, duration: 0.4, ease: "none" }, P + 1.1);
+        blink("mgr", P + 1.6);
+
+        // "nắm được tình hình": the late lot is spotlighted
+        var G = C.grasp;
+        var DIM = [$("k1"), $("k2"), $("row1"), $("row2"), $("row4")];
+        tl.to($("cursor"), { opacity: 1, duration: 0.2, ease: "none" }, G - 0.4);
+        tl.to($("cursor"), { x: ROW3[0], y: ROW3[1], duration: 0.6, ease: "power2.inOut" }, G - 0.3);
+        tl.to(DIM, { opacity: 0.4, duration: 0.35, ease: "power2.out" }, G);
+        tl.to($("row3"), { scale: 1.02, boxShadow: "0 0 0 3px #F59E0B, 0 12px 28px rgba(245,158,11,0.25)", backgroundColor: "rgba(245,158,11,0.12)", duration: 0.35, ease: "power2.out" }, G);
+        tl.to(part("mgr", "brows"), { y: -4, duration: 0.2, ease: "power2.out" }, G + 0.1);
+        tl.to(part("mgr", "head"), { rotation: 5, svgOrigin: PIV.head, duration: 0.3, ease: "power2.out" }, G + 0.1);
+
+        // "điều chỉnh kế hoạch kịp thời": press the button, the lot is back on schedule
+        var J = C.adjust;
+        tl.to($("cursor"), { x: BTN[0], y: BTN[1], duration: 0.55, ease: "power2.inOut" }, J - 0.1);
+        pose("mgr", "armR", -24, J, 0.3);
+        tl.to($("btn"), { scale: 0.9, backgroundColor: "#DCE7F8", duration: 0.08, ease: "power1.in" }, J + 0.5);
+        tl.to($("btn"), { scale: 1, backgroundColor: "#FFFFFF", duration: 0.2, ease: "back.out(2)" }, J + 0.58);
+        tl.to($("cursor"), { opacity: 0, duration: 0.25, ease: "none" }, J + 0.9);
+        var R3 = J + 0.75;
+        tl.to($("fill3"), { backgroundColor: "#059669", duration: 0.35, ease: "none" }, R3);
+        tl.to($("pct3"), { color: "#047857", duration: 0.35, ease: "none" }, R3);
+        tl.to($("eta3a"), { opacity: 0, y: -8, duration: 0.2, ease: "power1.in" }, R3);
+        tl.fromTo($("eta3b"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out", immediateRender: false }, R3 + 0.15);
+        tl.to($("st3a"), { opacity: 0, duration: 0.2, ease: "none" }, R3);
+        tl.fromTo($("st3b"), { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)", immediateRender: false }, R3 + 0.1);
+        tl.to($("row3"), { boxShadow: "0 0 0 3px #059669, 0 12px 28px rgba(5,150,105,0.2)", backgroundColor: "rgba(5,150,105,0.08)", duration: 0.35, ease: "power2.out" }, R3);
+        pose("mgr", "armR", 0, R3 + 0.3, 0.35);
+        tl.to(part("mgr", "head"), { rotation: 0, svgOrigin: PIV.head, duration: 0.3, ease: "power2.out" }, R3 + 0.2);
+        tl.to(part("mgr", "brows"), { y: 0, duration: 0.2, ease: "power2.out" }, R3 + 0.2);
+        face("mgr", "grin", R3 + 0.25);
+        hop($("mgr"), R3 + 0.35, 10);
+        tl.to(DIM, { opacity: 1, duration: 0.4, ease: "power2.out" }, R3 + 0.9);
+        tl.to($("row3"), { scale: 1, duration: 0.4, ease: "power2.out" }, R3 + 0.9);
+
+        // takeaway
+        var T = Math.max(C.take, R3 + 0.6);
+        tl.fromTo($("take"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, T);
+
+        tl.set({}, {}, DURATION);
+        window.__timelines["f107-ex-alert"] = tl;
+      })();
+    </script>
+  </div>
+</template>

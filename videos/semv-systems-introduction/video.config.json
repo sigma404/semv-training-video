@@ -1,0 +1,31 @@
+{
+  "title": "Giới thiệu hệ thống SEMV",
+  "width": 1920,
+  "height": 1080,
+  "voice": "Hải Đăng",
+  "say": [
+    ["\bSEMV\b", "S E M V"],
+    ["\bSAP\b", "S A P"],
+    ["\bMES\b", "M E S"]
+  ],
+  "tempo": 0.9,
+  "pauseDash": 0.4,
+  "pauseSentence": 0.65,
+  "overlap": 0.5,
+  "padDefault": 1.2,
+  "progressBar": true,
+  "frames": [
+    { "n": 1, "id": "f01-welcome", "pad": 1.2 },
+    { "n": 2, "id": "f02-before-after", "tr": "crossfade", "pad": 1.5 },
+    { "n": 3, "id": "f03-systems", "tr": "crossfade", "pad": 1.2 },
+    { "n": 4, "id": "f04-groupware", "tr": "push", "pad": 1.0 },
+    { "n": 104, "id": "f104-ex-approval", "tr": "crossfade", "pad": 1.8 },
+    { "n": 5, "id": "f05-povis", "tr": "push", "pad": 1.0 },
+    { "n": 105, "id": "f105-ex-document", "tr": "crossfade", "pad": 1.8 },
+    { "n": 6, "id": "f06-sap", "tr": "push", "pad": 1.0 },
+    { "n": 106, "id": "f106-ex-order", "tr": "crossfade", "pad": 1.8 },
+    { "n": 7, "id": "f07-mes", "tr": "push", "pad": 1.0 },
+    { "n": 107, "id": "f107-ex-alert", "tr": "crossfade", "pad": 1.8 },
+    { "n": 99, "id": "f99-closing", "tr": "crossfade", "pad": 1.5 }
+  ]
+}
